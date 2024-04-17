@@ -1,0 +1,37 @@
+HELP.md
+IntegradoraTomcat/.gradle
+IntegradoraTomcat/build/
+IntegradoraTomcat/!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+IntegradoraTomcat/.apt_generated
+IntegradoraTomcat/.classpath
+IntegradoraTomcat/.factorypath
+IntegradoraTomcat/.project
+IntegradoraTomcat/.settings
+IntegradoraTomcat/.springBeans
+IntegradoraTomcat/.sts4-cache
+IntegradoraTomcat/bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+IntegradoraTomcat/.idea
+IntegradoraTomcat/*.iws
+IntegradoraTomcat/*.iml
+IntegradoraTomcat/*.ipr
+IntegradoraTomcat/out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
