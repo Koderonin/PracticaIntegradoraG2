@@ -1,0 +1,59 @@
+services:
+  tomcat:
+    container_name: co_tomcat
+    image: tomcat:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - mongo
+    volumes:
+      - ./IntegradoraTomcat/build/libs:/usr/local/tomcat/webapps
+  mysql:
+    container_name: co_mysql
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: root
+  mongo:
+    container_name: co_mongo
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+  #dns:  #TODO: Investigar
+  #  container_name: co_bind9
+  #  image: ubuntu/bind9
+  #  restart: always
+  #  ports:
+  #    - "53:53/tcp"
+  #    - "53:53/udp"
+  #    - "953:953/tcp"
+  #    - "953:953/udp"
+  #    - "853:853/tcp"
+  #    - "853:853/udp"
+  apache:
+    container_name: co_apache
+    image: httpd:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+    #  - dns
+      - tomcat
+  node:
+    container_name: co_node
+    image: node:latest
+    #restart: always
+    ports:
+      - "3000:3000"
+    #depends_on:
+     # - dns
