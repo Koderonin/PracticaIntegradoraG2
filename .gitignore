@@ -4,6 +4,7 @@ IntegradoraTomcat/build/
 IntegradoraTomcat/!gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+/documentos
 
 ### STS ###
 IntegradoraTomcat/.apt_generated
