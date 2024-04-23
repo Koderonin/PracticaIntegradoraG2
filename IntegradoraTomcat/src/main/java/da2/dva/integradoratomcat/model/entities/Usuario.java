@@ -1,26 +1,40 @@
 package da2.dva.integradoratomcat.model.entities;
 
+import da2.dva.integradoratomcat.utils.CheckClave;
+import da2.dva.integradoratomcat.utils.CheckColeccion;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
+@CheckClave
+public abstract class Usuario {
 
+    @NotBlank
+    @Pattern(regexp = "^\\w+@([\\w-]+\\.)+[\\w-]{2,4}$")
+    //COMPROBAR QUE EXISTE
     private String email;
+    @NotBlank
     private String clave;
-    private LocalDate fechaUltimaConexion;
-    private Integer numAccesos;
-    private LocalDate fechaBloqueo; //Si es null no esta bloqueado
-    private byte preguntaRecuperacion; //TODO: Implementar preguntas
+    @NotBlank
+    private String confirmClave;
+//????????????????????????????????????
+    @NotBlank
+    @CheckColeccion(coleccion = "listapreguntas")
+    private byte preguntaRecuperacion;
+    @NotBlank
     private String respuestaRecuperacion;
-    //private Auditoria //TODO: Implementar auditoria
 
+    private LocalDate fechaUltimaConexion;
 
+    private LocalDate fechaBloqueo; //Si es null no esta bloqueado
+
+    private Integer numAccesos;
 
 }
