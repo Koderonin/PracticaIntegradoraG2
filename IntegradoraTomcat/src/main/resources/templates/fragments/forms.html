@@ -39,7 +39,7 @@
             <label th:id="'lab_r' + ${i.index}" th:for="'r' + ${i.index}">[[${tipo.value}]]</label>
             <input th:id="'r' + ${i.index}" type="radio" th:field="*{tipoDocumento}" th:value="${tipo.key}" th:checked="${tipoDocumento == tipo.key}"/>
         </th:block>
-        <div class="error" th:if="${#fields.hasErrors('tipoDocumento')}" th:errors="*{sexo}"></div>
+        <div class="error" th:if="${#fields.hasErrors('tipoDocumento')}" th:errors="*{tipoDocumento}"></div>
         <input type="button" id="btn_deseleccionar_tipoDocumento" value="Deseleccionar tipo de documento" onclick="deseleccionarTipoDocumento()"/>
         <span class="required">* </span><label for="documento">Documento</label>
         <input type="text" th:field="*{documento}"/>
@@ -47,16 +47,83 @@
     </div>
 </fieldset>
 
-<fieldset th:fragment="registroPaso(2)">
+<fieldset th:fragment="registroPaso(2)" xmlns:th="http://www.w3.org/1999/xhtml">
     <legend>Datos de Contacto</legend>
-
+    <div id="div_telefono">
+        <span class="required">* </span><label for="telefono">Teléfono Móvil</label>
+        <input type="text" th:field="*{telefonoMovil}"/>
+        <div class="error" th:if="${#fields.hasErrors('telefonoMovil')}" th:errors="*{telefonoMovil}"></div>
+    </div>
+    <div id="div_direccion_entrega">
+       <div id="div_tipo_via">
+           <span class="required">* </span><label for="tipo_via">Tipo de vía</label>
+           <select th:field="*{direccionEntrega.tipo_via}">
+               <option th:each="tipoVia: ${listaTiposVias}" th:value="${tipoVia.key}">[[${tipoVia.value}]]</option>
+           </select>
+           <div class="error" th:if="${#fields.hasErrors('direccionEntrega.tipo_via')}" th:errors="*{direccionEntrega.tipo_via}"></div>
+       </div>
+       <div id="div_nombre_via">
+           <span class="required">* </span><label for="nombre_via">Nombre de vía</label>
+           <input type="text" th:field="*{direccionEntrega.nombre_via}"/>
+           <div class="error" th:if="${#fields.hasErrors('direccionEntrega.nombre_via')}" th:errors="*{direccionEntrega.nombre_via}"></div>
+       </div>
+       <div id="div_numero_via">
+           <span class="required">* </span><label for="numero_via">Número de vía</label>
+           <input type="text" th:field="*{direccionEntrega.numero_via}"/>
+           <div class="error" th:if="${#fields.hasErrors('direccionEntrega.numero_via')}" th:errors="*{direccionEntrega.numero_via}"></div>
+       </div>
+       <div id="div_planta">
+           <label for="planta">Planta</label>
+           <input type="text" th:field="*{direccionEntrega.planta}"/>
+           <div class="error" th:if="${#fields.hasErrors('direccionEntrega.planta')}" th:errors="*{direccionEntrega.planta}"></div>
+       </div>
+        <div id="div_portal">
+            <label for="piso">Portal</label>
+            <input type="text" th:field="*{direccionEntrega.piso}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.piso')}" th:errors="*{direccionEntrega.piso}"></div>
+        </div>
+        <div id="div_puerta">
+            <label for="puerta">Puerta</label>
+            <input type="text" th:field="*{direccionEntrega.puerta}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.puerta')}" th:errors="*{direccionEntrega.puerta}"></div>
+        </div>
+        <div id="div_localidad">
+            <span class="required">* </span><label for="localidad">Localidad</label>
+            <input type="text" th:field="*{direccionEntrega.localidad}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.localidad')}" th:errors="*{direccionEntrega.localidad}"></div>
+        </div>
+        <div id="div_region">
+            <span class="required">* </span><label for="region">Región/Comunidad Autónoma/Estado</label>
+            <input type="text" th:field="*{direccionEntrega.region}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.region')}" th:errors="*{direccionEntrega.region}"></div>
+        </div>
+        <div id="div_cp">
+            <span class="required">* </span><label for="cp">Código Postal</label>
+            <input type="text" th:field="*{direccionEntrega.cp}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.cp')}" th:errors="*{direccionEntrega.cp}"></div>
+        </div>
+        <div id="div_pais">
+            <span class="required">* </span><label for="pais">País</label>
+            <input type="text" th:field="*{direccionEntrega.pais}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.pais')}" th:errors="*{direccionEntrega.pais}"></div>
+        </div>
+    </div>
 </fieldset>
 
-<fieldset th:fragment="registroPaso(3)">
+<fieldset th:fragment="registroPaso(3)" xmlns:th="http://www.w3.org/1999/xhtml">
     <legend>Datos de Cliente</legend>
+    <div id="div_comentarios">
+        <label for="comentarios">Comentarios</label>
+        <textarea th:field="*{comentarios}"></textarea>
+    </div>
+    <div id="div_licencia">
+        <span class="required">* </span><label for="aceptacionLicenicia">Licencia</label>
+        <input type="checkbox" th:field="*{aceptacionLicenicia}"/>
+        <div class="error" th:if="${#fields.hasErrors('aceptacionLicenicia')}" th:errors="*{aceptacionLicenicia}"></div>
+    </div>
 </fieldset>
 
-<fieldset th:fragment="registroPaso(4)">
+<fieldset th:fragment="registroPaso(4)" xmlns:th="http://www.w3.org/1999/xhtml">
     <legend>Revisión de datos</legend>
     <fieldset th:replace="~{fragments/forms :: revisarPaso(1)}"></fieldset>
     <fieldset th:replace="~{fragments/forms :: revisarPaso(2)}"></fieldset>
