@@ -32,15 +32,32 @@ public class RegistroUsuarioController {
     @GetMapping("administrador")//TODO:INVESTIGAR PARA PONER LA IP Y EL REGISTRO
     public ModelAndView registroUsuairo() {
         mv.addObject("titulo","Registro de usuario");
+        mv.addObject("tipoUsuario","administrador");
         return mv;
     }
-    @PostMapping("empleado")
+    @PostMapping("administrador")
     public ModelAndView registrar(@Valid @ModelAttribute("usuario") Usuario usuario
                                   //,BindingResult resultado
     ) {
        // mv.addObject("usuario", usuario);
         return mv;
     }
+
+    @GetMapping("empleado")
+    public ModelAndView registroUsuairoEmpleado() {
+        mv.addObject("titulo","Registro de usuario");
+        mv.addObject("tipoUsuario","empleado");
+
+        return mv;
+    }
+    @PostMapping("empleado")
+    public ModelAndView registrarEmpleado(@Valid @ModelAttribute("usuario") Usuario usuario
+                                  //,BindingResult resultado
+    ) {
+        // mv.addObject("usuario", usuario);
+        return mv;
+    }
+
 
 }
 
