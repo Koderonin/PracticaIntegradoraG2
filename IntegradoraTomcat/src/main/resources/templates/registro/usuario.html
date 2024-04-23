@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:replace="~{fragments/head :: cabeza(${titulo})}"/>
+    <body>
+        <nav th:replace="~{fragments/nav :: barra_navegacion}"></nav>
+        <form action="#" method="post" th:object="${usuario}"> <!-- TODO: Implementar acción -->
+            <div th:if="${#fields.hasErrors('global')}" class="error">
+                <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
+            </div>
+            <div id="div_usuario">
+                <label for="usuario">Usuario</label>
+                <input type="text" id="usuario" th:field="*{email}"/>
+                <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            </div>
+            <div id="div_claves">
+                <label for="clave">Clave</label>
+                <input type="password" id="clave" th:field="*{clave}"/>
+                <div class="error" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
+                <label for="confirmarClave">Confirmar Clave</label>
+                <input type="password" id="confirmarClave" th:field="*{confirmarClave}"/>
+                <div class="error" th:if="${#fields.hasErrors('confirmarClave')}" th:errors="*{confirmarClave}"></div>
+                <input type="button" id="btn_mostrar_claves" value="Mostrar Claves" onclick="mostrarClaves()"/>
+            </div>
+            <div id="div_preguntas">
+                <label for="preguntaRecuperacion">Pregunta de recuperación</label>
+                <select id="preguntaRecuperacion" th:field="*{preguntaRecuperacion}">
+                    <!--                    TODO: Implementar preguntas-->
+                </select>
+                <div class="error" th:if="${#fields.hasErrors('preguntaRecuperacion')}" th:errors="*{preguntaRecuperacion}"></div>
+                <label for="respuestaRecuperacion">Respuesta de recuperación</label>
+                <input type="text" id="respuestaRecuperacion" th:field="*{respuestaRecuperacion}"/>
+                <div class="error" th:if="${#fields.hasErrors('respuestaRecuperacion')}" th:errors="*{respuestaRecuperacion}"></div>
+            </div>
+            <input type="submit" value="Enviar"/>
+            <input type="reset" value="Restablecer"/>
+            <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
+        </form>
+        <footer th:replace="~{fragments/footer :: barra_navegacion}"/>
+    </body>
+</html>

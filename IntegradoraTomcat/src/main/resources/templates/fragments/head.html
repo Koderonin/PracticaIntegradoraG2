@@ -1,0 +1,11 @@
+<head th:fragment="cabeza(titulo)"> <!-- TODO: Implementar CSS y JS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo}"/>
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}"/>
+    <!-- JS -->
+    <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+</head>

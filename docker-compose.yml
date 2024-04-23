@@ -1,6 +1,7 @@
 services:
   tomcat:
-    container_name: co_tomcat
+    container_name: contiene_tomcat
+    hostname: tomcat
     image: tomcat:latest
     restart: always
     ports:
@@ -11,7 +12,8 @@ services:
     volumes:
       - ./IntegradoraTomcat/build/libs:/usr/local/tomcat/webapps
   mysql:
-    container_name: co_mysql
+    container_name: contiene_mysql
+    hostname: mysql
     image: mysql:latest
     restart: always
     ports:
@@ -29,7 +31,8 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
   #dns:  #TODO: Investigar
-  #  container_name: co_bind9
+  #  container_name: contiene_bind9
+  #  hostname: bind
   #  image: ubuntu/bind9
   #  restart: always
   #  ports:
@@ -40,7 +43,8 @@ services:
   #    - "853:853/tcp"
   #    - "853:853/udp"
   apache:
-    container_name: co_apache
+    container_name: coniene_apache
+    hostname: apache
     image: httpd:latest
     restart: always
     ports:
@@ -50,7 +54,8 @@ services:
     #  - dns
       - tomcat
   node:
-    container_name: co_node
+    container_name: contiene_vue
+    hostname: vue
     image: node:latest
     #restart: always
     ports:
