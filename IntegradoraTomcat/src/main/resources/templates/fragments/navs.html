@@ -1,0 +1,25 @@
+<nav th:fragment="barra_navegacion">    <!-- TODO: Implementar barra de navegación -->
+    <ul>
+        <li><a href="#">Catálogo de Productos</a></li>
+        <li><a href="#">Comprar</a></li>
+        <li><a href="#">Cuenta de usuario</a></li>
+        <li><a href="#">Desconexión</a></li>
+    </ul>
+</nav>
+
+<nav th:fragment="navegacion_pasos (paso)">    <!-- TODO: Implementar barra de navegación -->
+    <ul>
+        <a href="#" title="Paso 1 (Datos Personales)" class="enlace_img">
+            <img alt="imagen paso 1" th:src="@{/imgs/paso1.png}" width="75" height="75" />
+        </a>
+        <a href="#" title="Paso 2 (Datos de Contacto)" class="enlace_img visitando">
+            <img alt="imagen paso 1" th:src="@{/imgs/paso2.png}" width="75" height="75" />
+        </a>
+        <a href="#" title="Paso 3 (Datos de Cliente)" class="enlace_img">
+            <img alt="imagen paso 1" th:src="@{/imgs/paso3.png}" width="75" height="75" />
+        </a>
+        <a href="#" title="Paso 4 (Resumen Final)" class="enlace_img">
+            <img alt="imagen paso 1" th:src="@{/imgs/paso4.png}" width="75" height="75" />
+        </a>
+    </ul>
+</nav>

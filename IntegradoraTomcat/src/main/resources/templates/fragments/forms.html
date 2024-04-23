@@ -1,0 +1,64 @@
+<fieldset th:fragment="registroPaso(1)" xmlns:th="http://www.w3.org/1999/xhtml">
+    <legend>Datos Personales</legend>
+    <div id="div_nombre">
+        <span class="required">* </span><label for="nombre">Nombre</label>
+        <input type="text" th:field="*{nombre}"/>
+        <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+    </div>
+    <div id="div_apellidos">
+        <span class="required">* </span><label for="apellidos">Apellidos</label>
+        <input type="text" th:field="*{apellidos}"/>
+        <div class="error" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></div>
+    </div>
+    <div id="div_genero">
+        <span class="required">* </span><span id="lab_genero"  class="label">Género </span>
+        <th:block th:each="genero, i: ${listaGeneros}">
+            <label th:id="'lab_r' + ${i.index}" th:for="'r' + ${i.index}">[[${genero.value}]]</label>
+            <input th:id="'r' + ${i.index}" type="radio" th:field="*{genero}" th:value="${genero.key}" th:checked="${genero == genero.key}"/>
+        </th:block>
+        <div class="error" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+        <input type="button" id="btn_deseleccionar_genero" value="Deseleccionar género" onclick="deseleccionarGenero()"/>
+        <input type="button" id="btn_seleccionar_primer_genero" value="Selecciona el primer género" onclick="seleccionarPrimerGenero()"/>
+    </div>
+    <div id="div_fecha_nacimiento">
+        <span class="required">* </span><label for="fechaNacimiento">Fecha de Nacimiento</label>
+        <input type="text" th:field="*{fechaNacimiento}"/>
+        <div class="error" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
+    </div>
+    <div id="div_pais_nacimiento">
+        <span class="required">* </span><label for="pais">Pais de Nacimiento</label>
+        <select th:field="*{pais}">
+            <option th:each="pais: ${listaPaises}" th:value="${pais.key}">[[${pais.value}]]</option>
+        </select>
+        <div class="error" th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+        <input type="button" id="btn_deseleccionar_pais" value="Deseleccionar país" onclick="deseleccionarPais()"/>
+    </div>
+    <div id="div_documento_id">
+        <span class="required">* </span><span id="lab_tipo_documento"  class="label">Tipo de Documento </span>
+        <th:block th:each="tipo, i: ${listaTiposDocumentos}">
+            <label th:id="'lab_r' + ${i.index}" th:for="'r' + ${i.index}">[[${tipo.value}]]</label>
+            <input th:id="'r' + ${i.index}" type="radio" th:field="*{tipoDocumento}" th:value="${tipo.key}" th:checked="${tipoDocumento == tipo.key}"/>
+        </th:block>
+        <div class="error" th:if="${#fields.hasErrors('tipoDocumento')}" th:errors="*{sexo}"></div>
+        <input type="button" id="btn_deseleccionar_tipoDocumento" value="Deseleccionar tipo de documento" onclick="deseleccionarTipoDocumento()"/>
+        <span class="required">* </span><label for="documento">Documento</label>
+        <input type="text" th:field="*{documento}"/>
+        <div class="error" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}"></div>
+    </div>
+</fieldset>
+
+<fieldset th:fragment="registroPaso(2)">
+    <legend>Datos de Contacto</legend>
+
+</fieldset>
+
+<fieldset th:fragment="registroPaso(3)">
+    <legend>Datos de Cliente</legend>
+</fieldset>
+
+<fieldset th:fragment="registroPaso(4)">
+    <legend>Revisión de datos</legend>
+    <fieldset th:replace="~{fragments/forms :: revisarPaso(1)}"></fieldset>
+    <fieldset th:replace="~{fragments/forms :: revisarPaso(2)}"></fieldset>
+    <fieldset th:replace="~{fragments/forms :: revisarPaso(3)}"></fieldset>
+</fieldset>

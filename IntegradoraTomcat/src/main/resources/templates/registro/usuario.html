@@ -8,27 +8,27 @@
                 <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
             </div>
             <div id="div_usuario">
-                <label for="usuario">Usuario</label>
-                <input type="text" id="usuario" th:field="*{email}"/>
+                <span class="required">* </span><label for="usuario">Usuario</label>
+                <input type="text" th:field="*{email}"/>
                 <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
             <div id="div_claves">
-                <label for="clave">Clave</label>
-                <input type="password" id="clave" th:field="*{clave}"/>
+                <span class="required">* </span><label for="clave">Clave</label>
+                <input type="password" th:field="*{clave}"/>
                 <div class="error" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
-                <label for="confirmarClave">Confirmar Clave</label>
-                <input type="password" id="confirmarClave" th:field="*{confirmarClave}"/>
+                <span class="required">* </span><label for="confirmarClave">Confirmar Clave</label>
+                <input type="password" th:field="*{confirmarClave}"/>
                 <div class="error" th:if="${#fields.hasErrors('confirmarClave')}" th:errors="*{confirmarClave}"></div>
                 <input type="button" id="btn_mostrar_claves" value="Mostrar Claves" onclick="mostrarClaves()"/>
             </div>
             <div id="div_preguntas">
-                <label for="preguntaRecuperacion">Pregunta de recuperación</label>
-                <select id="preguntaRecuperacion" th:field="*{preguntaRecuperacion}">
+                <span class="required">* </span><label for="preguntaRecuperacion">Pregunta de recuperación</label>
+                <select th:field="*{preguntaRecuperacion}">
                     <!--                    TODO: Implementar preguntas-->
                 </select>
                 <div class="error" th:if="${#fields.hasErrors('preguntaRecuperacion')}" th:errors="*{preguntaRecuperacion}"></div>
-                <label for="respuestaRecuperacion">Respuesta de recuperación</label>
-                <input type="text" id="respuestaRecuperacion" th:field="*{respuestaRecuperacion}"/>
+                <span class="required">* </span><label for="respuestaRecuperacion">Respuesta de recuperación</label>
+                <input type="text" th:field="*{respuestaRecuperacion}"/>
                 <div class="error" th:if="${#fields.hasErrors('respuestaRecuperacion')}" th:errors="*{respuestaRecuperacion}"></div>
             </div>
             <input type="submit" value="Enviar"/>
