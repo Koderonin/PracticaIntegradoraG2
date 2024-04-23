@@ -1,4 +1,4 @@
-<fieldset th:fragment="registroPaso(1)" xmlns:th="http://www.w3.org/1999/xhtml">
+<fieldset th:fragment="registroPaso(1)">
     <legend>Datos Personales</legend>
     <div id="div_nombre">
         <span class="required">* </span><label for="nombre">Nombre</label>
@@ -47,7 +47,7 @@
     </div>
 </fieldset>
 
-<fieldset th:fragment="registroPaso(2)" xmlns:th="http://www.w3.org/1999/xhtml">
+<fieldset th:fragment="registroPaso(2)">
     <legend>Datos de Contacto</legend>
     <div id="div_telefono">
         <span class="required">* </span><label for="telefono">Teléfono Móvil</label>
@@ -110,7 +110,7 @@
     </div>
 </fieldset>
 
-<fieldset th:fragment="registroPaso(3)" xmlns:th="http://www.w3.org/1999/xhtml">
+<fieldset th:fragment="registroPaso(3)">
     <legend>Datos de Cliente</legend>
     <div id="div_comentarios">
         <label for="comentarios">Comentarios</label>
@@ -123,9 +123,28 @@
     </div>
 </fieldset>
 
-<fieldset th:fragment="registroPaso(4)" xmlns:th="http://www.w3.org/1999/xhtml">
+<fieldset th:fragment="registroPaso(4)">
     <legend>Revisión de datos</legend>
     <fieldset th:replace="~{fragments/forms :: revisarPaso(1)}"></fieldset>
     <fieldset th:replace="~{fragments/forms :: revisarPaso(2)}"></fieldset>
     <fieldset th:replace="~{fragments/forms :: revisarPaso(3)}"></fieldset>
 </fieldset>
+
+<div th:fragment="login(1)">
+    <div id="div_usuario">
+        <span class="required">* </span><label for="usuario">Usuario</label>
+        <input type="text" id="usuario" name="usuario"/>
+        <span th:if="${error != null}" th:text="${error}" class="error"/><br th:if="${error != null}">
+    </div>
+</div>
+
+<div th:fragment="login(2)">    <!-- TODO: comprobar los errores -->
+    <div id="div_pass" th:if="${fechaBloqueo} != null">
+        <span class="required">* </span><label for="clave">Contraseña</label>
+        <input type="password" id="clave" name="clave"/>
+        <span th:if="${error != null}" th:text="${error}" class="error"/><br th:if="${error != null}">
+    </div>
+    <div id="div_pass" th:if="${fechaBloqueo} == null">
+        <h1 class="error" th:text="${mensajeBloqueo}"></h1>
+    </div>
+</div>

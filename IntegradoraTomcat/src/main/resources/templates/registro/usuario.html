@@ -3,7 +3,7 @@
     <head th:replace="~{fragments/head :: cabeza(${titulo})}"/>
     <body>
         <nav th:replace="~{fragments/nav :: barra_navegacion}"></nav>
-        <form action="#" method="post" th:object="${usuario}"> <!-- TODO: Implementar acción -->
+        <form action="${tipoUsuario}" method="post" th:object="${usuario}"> <!-- TODO: Implementar acción -->
             <div th:if="${#fields.hasErrors('global')}" class="error">
                 <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
             </div>
@@ -35,6 +35,6 @@
             <input type="reset" value="Restablecer"/>
             <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
         </form>
-        <footer th:replace="~{fragments/footer :: barra_navegacion}"/>
+        <footer th:replace="~{fragments/footer :: pie_pagina}"/>
     </body>
 </html>

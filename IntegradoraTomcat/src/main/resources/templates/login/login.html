@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head th:replace="~{fragments/head :: cabeza(titulo='${titulo}')"/>
+    <body>
+        <nav th:replace="~{fragments/nav :: barra_navegacion}"></nav>
+        <form action="paso${paso}" method="post">
+            <div th:replace="~{fragments/forms :: login(${paso})}"></div>
+            <input type="submit" value="Enviar"/>
+            <input type="reset" value="Restablecer"/>
+            <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
+        </form>
+        <footer th:replace="~{fragments/footer :: pie_pagina}"/>
+    </body>
+</html>
