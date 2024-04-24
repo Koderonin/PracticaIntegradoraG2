@@ -1,9 +1,6 @@
 package da2.dva.integradoratomcat.model.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +20,10 @@ public class Pedido {
     private LocalDate fechaRealizacionPedido;
     private BigDecimal precioTotal;
     private String estado;
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cliente", foreignKey = @ForeignKey(name = "FK_CLIENTE_PEDIDO"))
+    private Cliente cliente;
 
 }
 

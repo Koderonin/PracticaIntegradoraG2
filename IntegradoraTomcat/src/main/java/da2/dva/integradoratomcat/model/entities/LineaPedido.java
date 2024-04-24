@@ -16,14 +16,21 @@ public class LineaPedido {
     @Id
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "pedido_id", foreignKey = @ForeignKey(name = "FK_PEDIDO_LINEA_PEDIDO_ID_PEDIDO"))
-    private Pedido pedido_id;
+    private Pedido pedido;
 
     @Id
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "producto_id", foreignKey = @ForeignKey(name = "FK_PRODUCTO_LINEA_PEDIDO_ID_PRODUCTO"))
-    private Producto producto_id;
+    private Producto producto;
 
     private Integer unidades;
+
+    private BigDecimal precioUnitario;
+
+    public void setPrecioUnitario(Producto producto) {
+        this.precioUnitario = producto.getPrecio();
+    }
+
 
 }
 

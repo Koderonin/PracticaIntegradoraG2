@@ -19,24 +19,33 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 public class Cliente {
-/*ojo que esto no funciona*/
-    @Id
-    private UUID id_user_cliente;
+/*ojo que esto no funciona BIEN
+* se persiste el cliente a la vez que el usuario.
+* Si se busca un usuario que persistir, no importa lo que haga,
+* el usuario persistido está "detached"*/
 
+    @Id
+    private UUID id;
+
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_user_cliente", foreignKey = @ForeignKey(name = "FK_USUARIO_CLIENTE"))
     @MapsId
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id_user_cliente", foreignKey = @ForeignKey(name = "FK_USUARIO_CLIENTE"))
     private UsuarioCliente usuarioCliente;
 
     private String genero;
     private LocalDate fechaNacimiento;
     @OneToOne
-    @JoinColumn(name = "pais", referencedColumnName = "siglasPais", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO"))
+    @JoinColumn(name = "pais", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO"))
     private Pais paisNacimiento;
+    @Column(name = "tipo_documento", length = 3)
     private String tipoDocumento;
+    @Column(name = "num_documento", length = 10)
     private String documento;
+    @Column(name = "telefono_movil", length = 9)
     private String telefonoMovil;
+    @Column(name = "nombre", length = 20)
     private String nombre;
+    @Column(name = "apellidos", length = 30)
     private String apellidos;
     private BigDecimal gastoAcumuladoCliente;
     @OneToOne
@@ -55,6 +64,7 @@ public class Cliente {
 
     private LocalDate fechaBajaEntidad; // si null, no se ha dado de baja; es para borrado lógico
 
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private Set<Pedido> pedidos = new HashSet<>();
 }
 

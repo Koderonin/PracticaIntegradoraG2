@@ -21,7 +21,7 @@ import java.util.Set;
 })
 public class UsuarioAdministrador extends Usuario {
 /*
-    @OneToMany
+    @ManyToMany
     private Set<Auditoria> auditorias = new HashSet<>();
 */
 }

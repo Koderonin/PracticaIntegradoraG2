@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 })
 public class UsuarioCliente extends Usuario {
 
-    @OneToOne(mappedBy = "usuarioCliente", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "usuarioCliente", cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.LAZY)
     private Cliente cliente;
+
 }
