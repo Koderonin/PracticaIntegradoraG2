@@ -1,5 +1,6 @@
 package da2.dva.integradoratomcat.controller;
 
+import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.services.Servicio;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,14 @@ public class LoginController {
 
     @Autowired
     Servicio servicio;
-    @Bean
-    public void conseguirColeccionesL(){
-        mv.addObject("listaUsuarios",servicio.devuelveUsuarios());
-    }
+
 
     @GetMapping("paso1")
     public ModelAndView login(HttpSession sesion) {
         mv.addObject("titulo","Login de usuario");
         mv.addObject("paso" ,"1");
+        System.out.println(sesion.getAttribute("email"));
+        sesion.removeAttribute("email");
         if(sesion.getAttribute("email")!=null){
             mv.setViewName("redirect:/area-cliente");
         }
@@ -33,10 +33,20 @@ public class LoginController {
 
     @PostMapping("paso1")
     public ModelAndView login(@RequestParam("usuario") String email, HttpSession sesion) {
-        if(servicio.devuelveUsuarios().containsKey(email)){
+        for(Usuario usuario : servicio.devuelveUsuarios())  {
+            if(email.equals(usuario.getEmail())){
+                sesion.setAttribute("OBJusuario", usuario); //TODO: REVISAR
+                sesion.setAttribute("email",email);
+                break;
+            }
+        }
+        if(sesion.getAttribute("OBJusuario")!=null){
             sesion.setAttribute("email", email);
-            mv.addObject("paso" ,"2");
+            //mv.addObject("paso" ,"2");
+            mv.setViewName("redirect:/login/paso2");
+
         }else{
+            sesion.removeAttribute("email");
             mv.addObject("error","El usuario no existe");
         }
         return mv;
@@ -45,16 +55,19 @@ public class LoginController {
     @GetMapping("paso2")
     public ModelAndView clave() {
         mv.addObject("titulo","Login de usuario");
+        mv.setViewName("login/login");
         mv.addObject("paso" ,"2");
         return mv;
     }
 
     @PostMapping("paso2")
-    public ModelAndView clave(@RequestAttribute("clave") String clave,HttpSession sesion) {
+    public ModelAndView clave(@RequestParam("clave") String clave,HttpSession sesion) {
         String email = (String) sesion.getAttribute("usuario");
-        if(servicio.devuelveUsuarios().get(email).getClave().equals(clave)){
+        Usuario usuario = (Usuario) sesion.getAttribute("OBJusuario");
+        if(usuario.getClave().equals(clave)){
             sesion.setAttribute("usuario",email);
             mv.setViewName("redirect:/area-cliente");
+            //TODO: METER EN LA BBD
         }else{
             mv.addObject("error","La clave no es correcta");
         }

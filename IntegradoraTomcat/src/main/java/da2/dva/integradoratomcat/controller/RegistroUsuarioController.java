@@ -2,6 +2,7 @@ package da2.dva.integradoratomcat.controller;
 
 import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioAdministrador;
+import da2.dva.integradoratomcat.model.entities.UsuarioEmpleado;
 import da2.dva.integradoratomcat.services.Servicio;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,16 +46,25 @@ public class RegistroUsuarioController {
     }
 
     @GetMapping("empleado")
-    public ModelAndView registroUsuarioEmpleado() {
+    public ModelAndView registroUsuarioEmpleado(@ModelAttribute("usuario") UsuarioEmpleado usuario) {
         mv.addObject("titulo","Registro de usuario");
         mv.addObject("tipoUsuario","empleado");
 
         return mv;
     }
     @PostMapping("empleado")
-    public ModelAndView registrarEmpleado(@Valid @ModelAttribute("usuario") Usuario usuario
-                                  //,BindingResult resultado
+    public ModelAndView registrarEmpleado(@Valid @ModelAttribute("usuario") UsuarioEmpleado usuario,
+                                  BindingResult resultado
     ) {
+        if (resultado.hasErrors()) {
+            mv.addObject("error", "Por favor, rellene los campos obligatorios");
+            System.out.println(usuario.getEmail());
+            return mv;
+        }else{
+            mv.setViewName("redirect:/login/paso1");
+
+            //TODO: METER EN LA BBD
+        }
         // mv.addObject("usuario", usuario);
         return mv;
     }

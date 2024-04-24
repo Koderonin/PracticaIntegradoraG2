@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @CheckClave
-public abstract class Usuario {
+public  class Usuario {
 
     @NotBlank
     @Pattern(regexp = "^\\w+@([\\w-]+\\.)+[\\w-]{2,4}$")
@@ -43,5 +43,7 @@ public abstract class Usuario {
     private LocalDate fechaBloqueo; //Si es null no esta bloqueado
 
     private Integer numAccesos;
+
+    //TODO: IMPLEMENTAR BLOQUEOS
 
 }

@@ -141,12 +141,13 @@
 </div>
 
 <div th:fragment="login2">    <!-- TODO: comprobar los errores -->
-    <div id="div_pass" th:if="${fechaBloqueo} != null">
+
+    <div id="div_pass" th:if="${fechaBloqueo} == null">
         <span class="required">* </span><label for="clave">Contraseña</label>
         <input type="password" id="clave" name="clave"/>
         <span th:if="${error != null}" th:text="${error}" class="error"/><br th:if="${error != null}">
     </div>
-    <div id="div_pass" th:if="${fechaBloqueo} == null">
+    <div id="div_pass" th:if="${fechaBloqueo} != null">
         <h1 class="error" th:text="${mensajeBloqueo}"></h1>
     </div>
 </div>

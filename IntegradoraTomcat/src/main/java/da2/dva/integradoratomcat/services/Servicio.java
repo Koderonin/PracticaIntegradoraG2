@@ -2,6 +2,7 @@ package da2.dva.integradoratomcat.services;
 
 import da2.dva.integradoratomcat.model.entities.Usuario;
 
+import java.util.List;
 import java.util.Map;
 
 public interface Servicio {
@@ -15,6 +16,6 @@ public interface Servicio {
 
      Map<String,String> devuelveTiposVia();
 
-     Map<String, Usuario> devuelveUsuarios();
+     List<Usuario> devuelveUsuarios();
 
 }
