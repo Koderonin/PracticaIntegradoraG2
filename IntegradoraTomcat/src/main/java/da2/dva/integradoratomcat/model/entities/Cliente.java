@@ -2,9 +2,7 @@ package da2.dva.integradoratomcat.model.entities;
 
 import da2.dva.integradoratomcat.model.embeddables.Direccion;
 import da2.dva.integradoratomcat.utils.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
@@ -29,7 +27,7 @@ public class Cliente {
     @CheckColeccion(coleccion = "listageneros")
     private String genero;
 
-    @NotBlank(groups = DatosPersonales.class)
+    @NotNull(groups = DatosPersonales.class)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @CheckMayor18(groups = DatosPersonales.class)
     private LocalDate fechaNacimiento;
@@ -52,10 +50,10 @@ public class Cliente {
     @NotNull(groups = DatosContacto.class)
     private Direccion direccionEntrega;
 
-    @NotBlank(groups = DatosCliente.class)
     private String comentarios;
 
-    @CheckLicencia
+    @NotNull
+    @AssertTrue
     private Boolean aceptacionLicencia;
 
 

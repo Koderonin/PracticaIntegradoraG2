@@ -4,7 +4,7 @@
     <body>
         <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
         <form th:action="paso__${paso}__" method="post">
-            <div th:replace="~{fragments/forms :: login(${paso})}"></div>
+            <div th:replace="~{fragments/forms :: login__${paso}__}"></div>
             <input type="submit" value="Enviar"/>
             <input type="reset" value="Restablecer"/>
             <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>

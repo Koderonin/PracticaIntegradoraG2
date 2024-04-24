@@ -9,7 +9,7 @@
             <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
         </div>
         <input type="hidden" id="iteraciones" name="iteraciones" th:value="${iteraciones}"/>
-        <fieldset th:replace="~{fragments/forms :: registroPaso(${paso})}"></fieldset>
+        <fieldset th:replace="~{fragments/forms :: registroPaso__${paso}__}"></fieldset>
         <input type="submit" value="Enviar"/>
         <input type="reset" value="Restablecer"/>
         <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>

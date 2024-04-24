@@ -1,4 +1,4 @@
-<fieldset th:fragment='registroPaso("1")'>
+<fieldset th:fragment="registroPaso1">
     <legend>Datos Personales</legend>
     <div id="div_nombre">
         <span class="required">* </span><label for="nombre">Nombre</label>
@@ -47,7 +47,7 @@
     </div>
 </fieldset>
 
-<fieldset th:fragment="registroPaso(2)">
+<fieldset th:fragment="registroPaso2">
     <legend>Datos de Contacto</legend>
     <div id="div_telefono">
         <span class="required">* </span><label for="telefono">Teléfono Móvil</label>
@@ -106,11 +106,12 @@
             <span class="required">* </span><label for="pais">País</label>
             <input type="text" th:field="*{direccionEntrega.pais}"/>
             <div class="error" th:if="${#fields.hasErrors('direccionEntrega.pais')}" th:errors="*{direccionEntrega.pais}"></div>
+            <div class="error" th:text="${pais}"></div>
         </div>
     </div>
 </fieldset>
 
-<fieldset th:fragment="registroPaso(3)">
+<fieldset th:fragment="registroPaso3">
     <legend>Datos de Cliente</legend>
     <div id="div_comentarios">
         <label for="comentarios">Comentarios</label>
@@ -120,17 +121,18 @@
         <span class="required">* </span><label for="aceptacionLicencia">Licencia</label>
         <input type="checkbox" th:field="*{aceptacionLicencia}"/>
         <div class="error" th:if="${#fields.hasErrors('aceptacionLicencia')}" th:errors="*{aceptacionLicencia}"></div>
+        <div class="error" th:text="${aceptacionLicencia}"></div>
     </div>
 </fieldset>
 
-<!--//<fieldset th:fragment="registroPaso(4)">
+<fieldset th:fragment="registroPaso4">
     <legend>Revisión de datos</legend>
-    <fieldset th:replace="~{fragments/forms :: registroPaso(1)}"></fieldset>
-    <fieldset th:replace="~{fragments/forms :: registroPaso(2)}"></fieldset>
-    <fieldset th:replace="~{fragments/forms :: registroPaso(3)}"></fieldset>
-</fieldset>-->
+    <fieldset th:replace="~{fragments/forms :: registroPaso1}"></fieldset>
+    <fieldset th:replace="~{fragments/forms :: registroPaso2}"></fieldset>
+    <fieldset th:replace="~{fragments/forms :: registroPaso3}"></fieldset>
+</fieldset>
 
-<div th:fragment='login("1")'>
+<div th:fragment="login1">
     <div id="div_usuario">
         <span class="required">* </span><label for="usuario">Usuario</label>
         <input type="text" id="usuario" name="usuario"/>
@@ -138,7 +140,7 @@
     </div>
 </div>
 
-<div th:fragment="login(2)">    <!-- TODO: comprobar los errores -->
+<div th:fragment="login2">    <!-- TODO: comprobar los errores -->
     <div id="div_pass" th:if="${fechaBloqueo} != null">
         <span class="required">* </span><label for="clave">Contraseña</label>
         <input type="password" id="clave" name="clave"/>
