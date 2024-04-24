@@ -21,7 +21,7 @@ public class Usuario {
     private LocalDate fechaUltimaConexion;
     private Integer numAccesos;
     private LocalDate fechaBloqueo; //Si es null no esta bloqueado
-    private byte preguntaRecuperacion; //TODO: Implementar preguntas
+    private String preguntaRecuperacion; //TODO: Implementar preguntas
     private String respuestaRecuperacion;
 
 }

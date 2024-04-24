@@ -14,10 +14,10 @@ public class Direccion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id_direccion;
-    String tipo_via;
+    Long tipo_via;
     String nombre_via;
     Integer numero_via;
-    String piso;
+    String planta;
     String puerta;
     String localidad;
     Integer cp;

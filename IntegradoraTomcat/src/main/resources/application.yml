@@ -20,4 +20,4 @@ spring:
       mode: always # para que se cree la db al iniciar la aplicación
   data:
     mongodb:
-      uri: mongodb://192.168.7.10:27017/tienda?createDatabaseIfNotExist=true
+      uri: mongodb://192.168.7.10:27017/tienda

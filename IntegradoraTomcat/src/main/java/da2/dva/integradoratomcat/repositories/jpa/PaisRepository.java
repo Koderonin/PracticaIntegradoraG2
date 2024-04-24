@@ -1,4 +1,4 @@
-package da2.dva.integradoratomcat.repository;
+package da2.dva.integradoratomcat.repositories.jpa;
 
 import da2.dva.integradoratomcat.model.auxiliar.Pais;
 import org.springframework.data.jpa.repository.JpaRepository;

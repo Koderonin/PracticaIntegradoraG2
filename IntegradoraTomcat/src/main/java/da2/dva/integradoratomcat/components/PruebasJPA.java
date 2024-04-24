@@ -2,16 +2,14 @@ package da2.dva.integradoratomcat.components;
 
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.auxiliar.Pais;
-import da2.dva.integradoratomcat.model.entities.Cliente;
-import da2.dva.integradoratomcat.model.entities.Usuario;
-import da2.dva.integradoratomcat.model.entities.UsuarioAdministrador;
-import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
-import da2.dva.integradoratomcat.repository.*;
-import jakarta.transaction.Transactional;
+import da2.dva.integradoratomcat.model.entities.*;
+import da2.dva.integradoratomcat.repositories.jpa.*;
+import da2.dva.integradoratomcat.repositories.mongo.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.UUID;
@@ -35,7 +33,7 @@ public class PruebasJPA {
         usuarioCliente.setEmail("admin@integradora.jpa");
         usuarioCliente.setNumAccesos(2);
         usuarioCliente.setClave("admin");
-//        UCRepository.save(usuarioCliente); esto hace que quede detached, por lo que sea
+        UCRepository.save(usuarioCliente); // esto hace que quede detached, por lo que sea
         /*Dirección asignada*/
         Direccion direccion = getDireccion();
         direccionRepository.save(direccion);
@@ -70,16 +68,64 @@ public class PruebasJPA {
 */
     }
 
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private LineaPedidoRepository lineaPedidoRepository;
+    @Bean
+    public void pruebitasPedidos() {
+        Producto producto = new Producto();
+        producto.setCodigo("1234");
+        producto.setPrecio(new BigDecimal("12.5"));
+        producto.setDescripcion("Muy bonita");
+        producto.setModelo("Cosa guayyyyyyyyyyy");
+        productoRepository.save(producto);
+
+        UsuarioCliente usuarioCliente = new UsuarioCliente();
+        usuarioCliente.setEmail("admin@integradora2.jpa");
+        usuarioCliente.setNumAccesos(2);
+        usuarioCliente.setClave("admin");
+        UCRepository.save(usuarioCliente);
+
+        Cliente cliente = new Cliente();
+        cliente.setUsuarioCliente(usuarioCliente);
+        cliente.setNombre("Pepo");
+        cliente.setApellidos("Compro Cosas");
+        cliente.setGenero("Hombre");
+        cliente.setFechaNacimiento(LocalDate.of(1978, 2, 14));
+        cliente.setTipoDocumento("DNI");
+        cliente.setDocumento("12345678C");
+        cliente.setTelefonoMovil("642344842");
+        clienteRepository.save(cliente);
+
+        Pedido pedido = new Pedido();
+        pedido.setCliente(cliente);
+        pedido.setEstado("Pendiente");
+        pedidoRepository.save(pedido);
+
+        LineaPedido linea = new LineaPedido();
+        linea.setUnidades(2);
+        linea.setPrecioUnitario(producto);
+        linea.setProducto_id(producto.getId());
+        linea.setPedido(pedido);
+        lineaPedidoRepository.save(linea);
+
+    }
+
     private static Direccion getDireccion() {
         Direccion direccion = new Direccion();
         direccion.setCp(28024);
         direccion.setLocalidad("Madrid");
         direccion.setNombre_via("Escalona");
         direccion.setPais("ES");
-        direccion.setPiso("4");
+        direccion.setPlanta("4");
         direccion.setPuerta("1");
         direccion.setRegion("Madrid");
-        direccion.setTipo_via("Calle");
+        direccion.setTipo_via(1L);
         direccion.setNumero_via(1);
         return direccion;
     }

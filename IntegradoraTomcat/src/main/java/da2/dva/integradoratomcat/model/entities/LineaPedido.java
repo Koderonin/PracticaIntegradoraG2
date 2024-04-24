@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 import java.math.BigDecimal;
 
@@ -19,9 +20,7 @@ public class LineaPedido {
     private Pedido pedido;
 
     @Id
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto_id", foreignKey = @ForeignKey(name = "FK_PRODUCTO_LINEA_PEDIDO_ID_PRODUCTO"))
-    private Producto producto;
+    private ObjectId producto_id;
 
     private Integer unidades;
 

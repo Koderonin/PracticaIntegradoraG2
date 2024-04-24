@@ -25,11 +25,12 @@ public class Cliente {
 * el usuario persistido está "detached"*/
 
     @Id
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id_cliente;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_user_cliente", foreignKey = @ForeignKey(name = "FK_USUARIO_CLIENTE"))
-    @MapsId
+    @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_USUARIO_CLIENTE"))
+   // @MapsId
     private UsuarioCliente usuarioCliente;
 
     private String genero;
