@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
-    <head th:replace="~{fragments/head :: cabeza(titulo='${titulo}')"/>
+<head th:replace="~{fragments/head :: cabeza(${titulo})}"/>
     <body>
-        <nav th:replace="~{fragments/nav :: barra_navegacion}"></nav>
-        <form action="paso${paso}" method="post">
+        <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
+        <form th:action="paso__${paso}__" method="post">
             <div th:replace="~{fragments/forms :: login(${paso})}"></div>
             <input type="submit" value="Enviar"/>
             <input type="reset" value="Restablecer"/>

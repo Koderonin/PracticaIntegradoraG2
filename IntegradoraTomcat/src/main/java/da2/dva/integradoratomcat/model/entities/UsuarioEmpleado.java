@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 
 //TODO:ConfirmCLave
 public class UsuarioEmpleado extends Usuario {

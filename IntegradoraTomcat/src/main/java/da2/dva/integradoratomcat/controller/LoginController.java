@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("login")
 public class LoginController {
     ModelAndView mv = new ModelAndView("/login/login");
 
     @Autowired
     Servicio servicio;
     @Bean
-    public void conseguirColecciones(){
+    public void conseguirColeccionesL(){
         mv.addObject("listaUsuarios",servicio.devuelveUsuarios());
     }
 
@@ -24,7 +24,7 @@ public class LoginController {
     public ModelAndView login(HttpSession sesion) {
         mv.addObject("titulo","Login de usuario");
         mv.addObject("paso" ,"1");
-        if(!sesion.isNew()){
+        if(sesion.getAttribute("email")!=null){
             mv.setViewName("redirect:/area-cliente");
         }
         return mv;
@@ -32,9 +32,9 @@ public class LoginController {
 
 
     @PostMapping("paso1")
-    public ModelAndView login(@RequestAttribute("usario") String email,HttpSession sesion) {
+    public ModelAndView login(@RequestParam("usuario") String email, HttpSession sesion) {
         if(servicio.devuelveUsuarios().containsKey(email)){
-            sesion.setAttribute("email",email);
+            sesion.setAttribute("email", email);
             mv.addObject("paso" ,"2");
         }else{
             mv.addObject("error","El usuario no existe");

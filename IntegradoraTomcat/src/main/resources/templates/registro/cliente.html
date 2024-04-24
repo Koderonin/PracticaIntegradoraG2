@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
-    <head th:replace="~{fragments/head :: cabeza(titulo='${titulo}')"/>
+<head th:replace="~{fragments/head :: cabeza(${titulo})}"/>
     <body>
-    <nav th:replace="~{fragments/nav :: barra_navegacion}"></nav>
-    <nav th:replace="~{fragments/nav :: navegacion_pasos(paso='${paso}')}"></nav>
-    <form action="#" method="post" th:object="${cliente}">  <!-- TODO: Implementar acción -->
+    <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
+    <nav th:replace="~{fragments/navs :: navegacion_pasos(${paso})}"></nav>
+    <form th:action="paso__${paso}__" method="post" th:object="${cliente}">  <!-- TODO: Implementar acción -->
         <div th:if="${#fields.hasErrors('global')}" class="error">
             <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
         </div>
         <input type="hidden" id="iteraciones" name="iteraciones" th:value="${iteraciones}"/>
-        <fieldset th:replace="~{fragments/forms :: formularioPaso(${paso})}"></fieldset>
+        <fieldset th:replace="~{fragments/forms :: registroPaso(${paso})}"></fieldset>
         <input type="submit" value="Enviar"/>
         <input type="reset" value="Restablecer"/>
         <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>

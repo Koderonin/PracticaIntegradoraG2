@@ -1,6 +1,7 @@
 package da2.dva.integradoratomcat.controller;
 
 import da2.dva.integradoratomcat.model.entities.Usuario;
+import da2.dva.integradoratomcat.model.entities.UsuarioAdministrador;
 import da2.dva.integradoratomcat.services.Servicio;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,32 +20,32 @@ import java.util.Map;
 @Controller
 @RequestMapping("registro/usuario")
 public class RegistroUsuarioController {
-    ModelAndView mv = new ModelAndView("/registro/usaurio");
+    ModelAndView mv = new ModelAndView("/registro/usuario");
 
     @Autowired
     Servicio servicio;
 
     @Bean
-    public void conseguirColecciones(){
+    public void conseguirColeccionesRU(){
         mv.addObject("listaUsuarios",servicio.devuelveUsuarios());
     }
 
     @GetMapping("administrador")//TODO:INVESTIGAR PARA PONER LA IP Y EL REGISTRO
-    public ModelAndView registroUsuairo() {
+    public ModelAndView registroUsuario(@ModelAttribute("usuario") UsuarioAdministrador usuario) {
         mv.addObject("titulo","Registro de usuario");
         mv.addObject("tipoUsuario","administrador");
         return mv;
     }
     @PostMapping("administrador")
-    public ModelAndView registrar(@Valid @ModelAttribute("usuario") Usuario usuario
-                                  //,BindingResult resultado
+    public ModelAndView registrar(@Valid @ModelAttribute("usuario") UsuarioAdministrador usuario
+                                  ,BindingResult resultado
     ) {
        // mv.addObject("usuario", usuario);
         return mv;
     }
 
     @GetMapping("empleado")
-    public ModelAndView registroUsuairoEmpleado() {
+    public ModelAndView registroUsuarioEmpleado() {
         mv.addObject("titulo","Registro de usuario");
         mv.addObject("tipoUsuario","empleado");
 

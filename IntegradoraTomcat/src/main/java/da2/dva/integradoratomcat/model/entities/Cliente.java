@@ -56,7 +56,7 @@ public class Cliente {
     private String comentarios;
 
     @CheckLicencia
-    private Boolean aceptacionLicenicia;
+    private Boolean aceptacionLicencia;
 
 
     private String tipoCliente;

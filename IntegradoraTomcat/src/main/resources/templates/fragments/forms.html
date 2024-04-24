@@ -1,4 +1,4 @@
-<fieldset th:fragment="registroPaso(1)">
+<fieldset th:fragment='registroPaso("1")'>
     <legend>Datos Personales</legend>
     <div id="div_nombre">
         <span class="required">* </span><label for="nombre">Nombre</label>
@@ -78,9 +78,9 @@
            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.planta')}" th:errors="*{direccionEntrega.planta}"></div>
        </div>
         <div id="div_portal">
-            <label for="piso">Portal</label>
-            <input type="text" th:field="*{direccionEntrega.piso}"/>
-            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.piso')}" th:errors="*{direccionEntrega.piso}"></div>
+            <label for="portal">Portal</label>
+            <input type="text" th:field="*{direccionEntrega.portal}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.portal')}" th:errors="*{direccionEntrega.portal}"></div>
         </div>
         <div id="div_puerta">
             <label for="puerta">Puerta</label>
@@ -117,20 +117,20 @@
         <textarea th:field="*{comentarios}"></textarea>
     </div>
     <div id="div_licencia">
-        <span class="required">* </span><label for="aceptacionLicenicia">Licencia</label>
-        <input type="checkbox" th:field="*{aceptacionLicenicia}"/>
-        <div class="error" th:if="${#fields.hasErrors('aceptacionLicenicia')}" th:errors="*{aceptacionLicenicia}"></div>
+        <span class="required">* </span><label for="aceptacionLicencia">Licencia</label>
+        <input type="checkbox" th:field="*{aceptacionLicencia}"/>
+        <div class="error" th:if="${#fields.hasErrors('aceptacionLicencia')}" th:errors="*{aceptacionLicencia}"></div>
     </div>
 </fieldset>
 
-<fieldset th:fragment="registroPaso(4)">
+<!--//<fieldset th:fragment="registroPaso(4)">
     <legend>Revisión de datos</legend>
-    <fieldset th:replace="~{fragments/forms :: revisarPaso(1)}"></fieldset>
-    <fieldset th:replace="~{fragments/forms :: revisarPaso(2)}"></fieldset>
-    <fieldset th:replace="~{fragments/forms :: revisarPaso(3)}"></fieldset>
-</fieldset>
+    <fieldset th:replace="~{fragments/forms :: registroPaso(1)}"></fieldset>
+    <fieldset th:replace="~{fragments/forms :: registroPaso(2)}"></fieldset>
+    <fieldset th:replace="~{fragments/forms :: registroPaso(3)}"></fieldset>
+</fieldset>-->
 
-<div th:fragment="login(1)">
+<div th:fragment='login("1")'>
     <div id="div_usuario">
         <span class="required">* </span><label for="usuario">Usuario</label>
         <input type="text" id="usuario" name="usuario"/>
