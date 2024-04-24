@@ -1,17 +1,25 @@
-package da2.dva.integradoratomcat.model.embeddables;
+package da2.dva.integradoratomcat.model.auxiliar;
 
 import da2.dva.integradoratomcat.utils.CheckColeccion;
-//import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-//@Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@Entity
 public class Direccion {
-    @NotNull
-    @CheckColeccion(coleccion = "listavias")
-    Long tipo_via;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_direccion;
+
+    //@NotNull
+    //@CheckColeccion(coleccion = "listavias")
+    //Long tipo_via;
     @NotBlank
     String nombre_via;
     @NotNull

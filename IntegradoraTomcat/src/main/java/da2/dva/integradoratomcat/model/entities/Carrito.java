@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//persistimos en mySQL
 public class Carrito {
 
     private BigDecimal precio;

@@ -1,6 +1,6 @@
 package da2.dva.integradoratomcat.controller;
 
-import da2.dva.integradoratomcat.model.embeddables.Direccion;
+import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.services.Servicio;
 import da2.dva.integradoratomcat.utils.DatosCliente;
@@ -92,18 +92,19 @@ public class RegistroClienteController {
         }
 
         Direccion direccion = new Direccion();
-        direccion.setTipo_via(cliente.getDireccionEntrega().getTipo_via());
-        direccion.setNombre_via(cliente.getDireccionEntrega().getNombre_via());
-        direccion.setNumero_via(cliente.getDireccionEntrega().getNumero_via());
-        direccion.setPlanta(cliente.getDireccionEntrega().getPlanta());
-        direccion.setPuerta(cliente.getDireccionEntrega().getPuerta());
-        direccion.setPortal(cliente.getDireccionEntrega().getPortal());
-        direccion.setLocalidad(cliente.getDireccionEntrega().getLocalidad());
-        direccion.setCp(cliente.getDireccionEntrega().getCp());
-        direccion.setRegion(cliente.getDireccionEntrega().getRegion());
-        direccion.setPais(cliente.getDireccionEntrega().getPais());
+        //direccion.setTipo_via(cliente.getDireccion().getTipo_via());
+        direccion.setNombre_via(cliente.getDireccion().getNombre_via());
+        direccion.setNumero_via(cliente.getDireccion().getNumero_via());
+        direccion.setPlanta(cliente.getDireccion().getPlanta());
+        direccion.setPuerta(cliente.getDireccion().getPuerta());
+        direccion.setPortal(cliente.getDireccion().getPortal());
+        direccion.setLocalidad(cliente.getDireccion().getLocalidad());
+        direccion.setCp(cliente.getDireccion().getCp());
+        direccion.setRegion(cliente.getDireccion().getRegion());
+        direccion.setPais(cliente.getDireccion().getPais());
 
-        clienteSesion.setDireccionEntrega(direccion);
+        clienteSesion.setDireccion(direccion);
+        clienteSesion.getDireccionEntrega().add(direccion);
         clienteSesion.setTelefonoMovil(cliente.getTelefonoMovil());
         mv.addObject("paso" ,"3");
         return mv;

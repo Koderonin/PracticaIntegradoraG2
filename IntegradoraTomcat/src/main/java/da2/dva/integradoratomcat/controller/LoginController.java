@@ -17,7 +17,6 @@ public class LoginController {
     @Autowired
     Servicio servicio;
 
-
     @GetMapping("paso1")
     public ModelAndView login(HttpSession sesion) {
         mv.addObject("titulo","Login de usuario");
