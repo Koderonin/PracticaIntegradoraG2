@@ -29,7 +29,7 @@ services:
         ipv4_address: 192.168.100.2
   mongo:
     container_name: contiene_mongo
-    image: mongo:latest
+    image: mongo:4.4.6
     restart: always
     ports:
       - "27017:27017"

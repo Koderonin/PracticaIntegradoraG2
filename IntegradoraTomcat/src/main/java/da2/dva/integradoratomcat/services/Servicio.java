@@ -14,8 +14,8 @@ public interface Servicio {
 
      Map<String,String> devuelvePreguntas();
 
-     Map<String,String> devuelveTiposVia();
+     Map<String, String> devuelveTiposVia();
 
-     List<Usuario> devuelveUsuarios();
+     Map<String, Usuario> devuelveUsuarios();
 
 }

@@ -26,11 +26,11 @@
         <div class="error" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
     </div>
     <div id="div_pais_nacimiento">
-        <span class="required">* </span><label for="pais">Pais de Nacimiento</label>
-        <select th:field="*{pais}">
+        <span class="required">* </span><label for="pais">País de Nacimiento</label>
+        <select th:field="*{paisNacimiento}">
             <option th:each="pais: ${listaPaises}" th:value="${pais.key}">[[${pais.value}]]</option>
         </select>
-        <div class="error" th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+        <div class="error" th:if="${#fields.hasErrors('paisNacimiento')}" th:errors="*{paisNacimiento}"></div>
         <input type="button" id="btn_deseleccionar_pais" value="Deseleccionar país" onclick="deseleccionarPais()"/>
     </div>
     <div id="div_documento_id">
@@ -57,55 +57,55 @@
     <div id="div_direccion_entrega">
        <div id="div_tipo_via">
            <span class="required">* </span><label for="tipo_via">Tipo de vía</label>
-           <select th:field="*{direccionEntrega.tipo_via}">
-               <option th:each="tipoVia: ${listaTiposVias}" th:value="${tipoVia.key}">[[${tipoVia.value}]]</option>
+           <select th:field="*{direccion.tipo_via}">
+               <option th:each="tipoVia: ${listaTiposVia}" th:value="${tipoVia.key}">[[${tipoVia.value}]]</option>
            </select>
-           <div class="error" th:if="${#fields.hasErrors('direccionEntrega.tipo_via')}" th:errors="*{direccionEntrega.tipo_via}"></div>
+           <div class="error" th:if="${#fields.hasErrors('direccion.tipo_via')}" th:errors="*{direccion.tipo_via}"></div>
        </div>
        <div id="div_nombre_via">
            <span class="required">* </span><label for="nombre_via">Nombre de vía</label>
-           <input type="text" th:field="*{direccionEntrega.nombre_via}"/>
-           <div class="error" th:if="${#fields.hasErrors('direccionEntrega.nombre_via')}" th:errors="*{direccionEntrega.nombre_via}"></div>
+           <input type="text" th:field="*{direccion.nombre_via}"/>
+           <div class="error" th:if="${#fields.hasErrors('direccion.nombre_via')}" th:errors="*{direccion.nombre_via}"></div>
        </div>
        <div id="div_numero_via">
            <span class="required">* </span><label for="numero_via">Número de vía</label>
-           <input type="text" th:field="*{direccionEntrega.numero_via}"/>
-           <div class="error" th:if="${#fields.hasErrors('direccionEntrega.numero_via')}" th:errors="*{direccionEntrega.numero_via}"></div>
+           <input type="text" th:field="*{direccion.numero_via}"/>
+           <div class="error" th:if="${#fields.hasErrors('direccion.numero_via')}" th:errors="*{direccion.numero_via}"></div>
        </div>
        <div id="div_planta">
            <label for="planta">Planta</label>
-           <input type="text" th:field="*{direccionEntrega.planta}"/>
-           <div class="error" th:if="${#fields.hasErrors('direccionEntrega.planta')}" th:errors="*{direccionEntrega.planta}"></div>
+           <input type="text" th:field="*{direccion.planta}"/>
+           <div class="error" th:if="${#fields.hasErrors('direccion.planta')}" th:errors="*{direccion.planta}"></div>
        </div>
         <div id="div_portal">
             <label for="portal">Portal</label>
-            <input type="text" th:field="*{direccionEntrega.portal}"/>
-            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.portal')}" th:errors="*{direccionEntrega.portal}"></div>
+            <input type="text" th:field="*{direccion.portal}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccion.portal')}" th:errors="*{direccion.portal}"></div>
         </div>
         <div id="div_puerta">
             <label for="puerta">Puerta</label>
-            <input type="text" th:field="*{direccionEntrega.puerta}"/>
-            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.puerta')}" th:errors="*{direccionEntrega.puerta}"></div>
+            <input type="text" th:field="*{direccion.puerta}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccion.puerta')}" th:errors="*{direccion.puerta}"></div>
         </div>
         <div id="div_localidad">
             <span class="required">* </span><label for="localidad">Localidad</label>
-            <input type="text" th:field="*{direccionEntrega.localidad}"/>
-            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.localidad')}" th:errors="*{direccionEntrega.localidad}"></div>
+            <input type="text" th:field="*{direccion.localidad}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccion.localidad')}" th:errors="*{direccion.localidad}"></div>
         </div>
         <div id="div_region">
             <span class="required">* </span><label for="region">Región/Comunidad Autónoma/Estado</label>
-            <input type="text" th:field="*{direccionEntrega.region}"/>
-            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.region')}" th:errors="*{direccionEntrega.region}"></div>
+            <input type="text" th:field="*{direccion.region}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccion.region')}" th:errors="*{direccion.region}"></div>
         </div>
         <div id="div_cp">
             <span class="required">* </span><label for="cp">Código Postal</label>
-            <input type="text" th:field="*{direccionEntrega.cp}"/>
-            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.cp')}" th:errors="*{direccionEntrega.cp}"></div>
+            <input type="text" th:field="*{direccion.cp}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccion.cp')}" th:errors="*{direccion.cp}"></div>
         </div>
         <div id="div_pais">
             <span class="required">* </span><label for="pais">País</label>
-            <input type="text" th:field="*{direccionEntrega.pais}"/>
-            <div class="error" th:if="${#fields.hasErrors('direccionEntrega.pais')}" th:errors="*{direccionEntrega.pais}"></div>
+            <input type="text" th:field="*{direccion.pais}"/>
+            <div class="error" th:if="${#fields.hasErrors('direccion.pais')}" th:errors="*{direccion.pais}"></div>
             <div class="error" th:text="${pais}"></div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 package da2.dva.integradoratomcat.model.entities;
 
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
-import da2.dva.integradoratomcat.model.auxiliar.Pais;
+import da2.dva.integradoratomcat.model.collections.Pais;
 import da2.dva.integradoratomcat.model.auxiliar.TarjetaCredito;
 import da2.dva.integradoratomcat.utils.CheckColeccion;
 import da2.dva.integradoratomcat.utils.CheckMayor18;
@@ -55,7 +55,7 @@ public class Cliente {
    // @CheckColeccion(coleccion = "listapaises")
     @OneToOne
     @JoinColumn(name = "pais", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO"))
-    private Pais pais;
+    private Pais paisNacimiento;
     @NotNull(groups = DatosPersonales.class)
     @CheckColeccion(coleccion = "listatiposDocumentos")
     @Column(name = "tipo_documento", length = 3)

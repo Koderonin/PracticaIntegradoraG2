@@ -1,18 +1,9 @@
 package da2.dva.integradoratomcat.components;
 
-import da2.dva.integradoratomcat.model.auxiliar.Direccion;
-import da2.dva.integradoratomcat.model.auxiliar.Pais;
-import da2.dva.integradoratomcat.model.entities.*;
 import da2.dva.integradoratomcat.repositories.jpa.*;
 import da2.dva.integradoratomcat.repositories.mongo.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Scanner;
-import java.util.UUID;
 
 @Controller
 public class PruebasJPA {
@@ -25,7 +16,7 @@ public class PruebasJPA {
     @Autowired
     private PaisRepository paisRepository;
 
-    @Bean
+    /*@Bean
     //@Transactional // esto hace que no falle la transacción porque la hace toda de una; no es lo que quiero
     public void pruebitas() {
 
@@ -37,10 +28,10 @@ public class PruebasJPA {
         usuarioCliente.setRespuestaRecuperacion("Croquetas");
         usuarioCliente.setConfirmClave("Admin123!");
         UCRepository.save(usuarioCliente); // esto hace que quede detached, por lo que sea
-        /*Dirección asignada*/
+        /*Dirección asignada
         Direccion direccion = getDireccion();
         direccionRepository.save(direccion);
-        /**/
+
 //        Cliente cliente = new Cliente();
 
         Pais pais = new Pais();
@@ -68,8 +59,8 @@ public class PruebasJPA {
         cliente.setAceptacionLicencia(true);
         cliente.setDocumento("12345678B");
         clienteRepository.save(cliente);
-*/
-    }
+
+    }*/
 
     @Autowired
     private ProductoRepository productoRepository;
@@ -79,7 +70,7 @@ public class PruebasJPA {
 
     @Autowired
     private LineaPedidoRepository lineaPedidoRepository;
-    @Bean
+    /*@Bean
     public void pruebitasPedidos() {
         Producto producto = new Producto();
         producto.setCodigo("1234");
@@ -108,7 +99,7 @@ public class PruebasJPA {
         cliente.setApellidos("Compro Cosas");
         cliente.setGenero("M");
         cliente.setFechaNacimiento(LocalDate.of(1978, 2, 14));
-        cliente.setPais(pais);
+        cliente.setPaisNacimiento(pais);
         cliente.setTipoDocumento("D");
         cliente.setDocumento("12345678C");
         cliente.setTelefonoMovil("642344842");
@@ -131,6 +122,7 @@ public class PruebasJPA {
 
     private static Direccion getDireccion() {
         Direccion direccion = new Direccion();
+        direccion.setTipo_via(1L);
         direccion.setCp("28024");
         direccion.setLocalidad("Madrid");
         direccion.setNombre_via("Escalona");
@@ -138,8 +130,7 @@ public class PruebasJPA {
         direccion.setPlanta("4");
         direccion.setPuerta("1");
         direccion.setRegion("Madrid");
-//        direccion.setTipo_via(1L);
         direccion.setNumero_via(1);
         return direccion;
-    }
+    }*/
 }

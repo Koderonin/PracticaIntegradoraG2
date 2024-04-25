@@ -2,7 +2,7 @@ package da2.dva.integradoratomcat.controller;
 
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.entities.Cliente;
-import da2.dva.integradoratomcat.services.Servicio;
+import da2.dva.integradoratomcat.services.ServicioColecciones;
 import da2.dva.integradoratomcat.utils.DatosCliente;
 import da2.dva.integradoratomcat.utils.DatosContacto;
 import da2.dva.integradoratomcat.utils.DatosPersonales;
@@ -28,7 +28,7 @@ import java.util.Set;
 @RequestMapping("registro/cliente")
 public class RegistroClienteController {
     @Autowired
-    Servicio servicio;
+    ServicioColecciones servicio;
     ModelAndView mv = new ModelAndView("/registro/cliente");
 
     @Bean
@@ -65,7 +65,7 @@ public class RegistroClienteController {
         clienteSesion.setApellidos(cliente.getApellidos());
         clienteSesion.setGenero(cliente.getGenero());
         clienteSesion.setFechaNacimiento(cliente.getFechaNacimiento());
-        clienteSesion.setPais(cliente.getPais());
+        clienteSesion.setPaisNacimiento(cliente.getPaisNacimiento());
         clienteSesion.setTipoDocumento(cliente.getTipoDocumento());
         clienteSesion.setDocumento(cliente.getDocumento());
         mv.addObject("paso" ,"2");

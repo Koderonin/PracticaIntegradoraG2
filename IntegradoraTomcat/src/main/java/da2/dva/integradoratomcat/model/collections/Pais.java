@@ -1,4 +1,4 @@
-package da2.dva.integradoratomcat.model.auxiliar;
+package da2.dva.integradoratomcat.model.collections;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

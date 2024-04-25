@@ -6,11 +6,12 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    name: integradoraJPA # este es el nombre de la base de datos
+  messages:
+    basename: lang/messages
   jpa:
     hibernate:
-#      ddl-auto: update #cuando persistamos definitivamente y dejemos de hacer pruebas
-      ddl-auto: create-drop #para que elimine la db al parar la aplicación
+     # ddl-auto: update #cuando persistamos definitivamente y dejemos de hacer pruebas
+      ddl-auto: create #para que elimine la db al parar la aplicación
     database: mysql
     show-sql: true
     generate-ddl: true # esto hace que se creen las tablas
@@ -21,3 +22,5 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:root@192.168.100.3:27017/tienda?authSource=admin
+      username: root
+      password: root
