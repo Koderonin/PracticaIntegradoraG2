@@ -25,28 +25,30 @@ public class PruebasJPA {
     @Autowired
     private PaisRepository paisRepository;
 
-    @Bean
-    //@Transactional // esto hace que no falle la transacción porque la hace toda de una; no es lo que quiero
-    public void pruebitas() {
 
-        UsuarioCliente usuarioCliente = new UsuarioCliente();
-        usuarioCliente.setEmail("admin@integradora.jpa");
-        usuarioCliente.setNumAccesos(2);
-        usuarioCliente.setClave("Admin123!");
-        usuarioCliente.setPreguntaRecuperacion("1");
-        usuarioCliente.setRespuestaRecuperacion("Croquetas");
-        usuarioCliente.setConfirmClave("Admin123!");
-        UCRepository.save(usuarioCliente); // esto hace que quede detached, por lo que sea
+
+    //@Bean
+    //@Transactional // esto hace que no falle la transacción porque la hace toda de una; no es lo que quiero
+    //public void pruebitas() {
+
+    //    UsuarioCliente usuarioCliente = new UsuarioCliente();
+    //    usuarioCliente.setEmail("admin@integradora.jpa");
+    //    usuarioCliente.setNumAccesos(2);
+    //    usuarioCliente.setClave("Admin123!");
+    //    usuarioCliente.setPreguntaRecuperacion("1");
+    //    usuarioCliente.setRespuestaRecuperacion("Croquetas");
+    //   usuarioCliente.setConfirmClave("Admin123!");
+    //    UCRepository.save(usuarioCliente); // esto hace que quede detached, por lo que sea
         /*Dirección asignada*/
-        Direccion direccion = getDireccion();
-        direccionRepository.save(direccion);
+    //    Direccion direccion = getDireccion();
+    //    direccionRepository.save(direccion);
         /**/
 //        Cliente cliente = new Cliente();
 
-        Pais pais = new Pais();
-        pais.setNombrePais("España");
-        pais.setSiglasPais("ES");
-        paisRepository.save(pais);
+     //   Pais pais = new Pais();
+    //    pais.setNombrePais("España");
+    //    pais.setSiglasPais("ES");
+    //    paisRepository.save(pais);
 
 //        if (usuarioCliente != null) {
 //            cliente.setUsuarioCliente(usuarioCliente);
@@ -69,7 +71,7 @@ public class PruebasJPA {
         cliente.setDocumento("12345678B");
         clienteRepository.save(cliente);
 */
-    }
+ //   }
 
     @Autowired
     private ProductoRepository productoRepository;
@@ -108,7 +110,7 @@ public class PruebasJPA {
         cliente.setApellidos("Compro Cosas");
         cliente.setGenero("M");
         cliente.setFechaNacimiento(LocalDate.of(1978, 2, 14));
-        cliente.setPais(pais);
+//        cliente.setPais(pais);
         cliente.setTipoDocumento("D");
         cliente.setDocumento("12345678C");
         cliente.setTelefonoMovil("642344842");

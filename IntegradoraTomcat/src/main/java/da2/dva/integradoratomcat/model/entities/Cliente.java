@@ -3,10 +3,7 @@ package da2.dva.integradoratomcat.model.entities;
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.auxiliar.Pais;
 import da2.dva.integradoratomcat.model.auxiliar.TarjetaCredito;
-import da2.dva.integradoratomcat.utils.CheckColeccion;
-import da2.dva.integradoratomcat.utils.CheckMayor18;
-import da2.dva.integradoratomcat.utils.DatosContacto;
-import da2.dva.integradoratomcat.utils.DatosPersonales;
+import da2.dva.integradoratomcat.utils.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
@@ -53,9 +50,9 @@ public class Cliente {
     private LocalDate fechaNacimiento;
     @NotBlank(groups = DatosPersonales.class)
    // @CheckColeccion(coleccion = "listapaises")
-    @OneToOne
-    @JoinColumn(name = "pais", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO"))
-    private Pais pais;
+    //@OneToOne
+    //@JoinColumn(name = "pais", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO"))
+    private String pais;
     @NotNull(groups = DatosPersonales.class)
     @CheckColeccion(coleccion = "listatiposDocumentos")
     @Column(name = "tipo_documento", length = 3)
@@ -81,8 +78,8 @@ public class Cliente {
     private String tipoCliente;
     private String comentarios;
 
-    @NotNull
-    @AssertTrue
+    @NotNull(groups = DatosCliente.class)
+    @CheckLicencia(groups = DatosCliente.class)
     private Boolean aceptacionLicencia;
 
 

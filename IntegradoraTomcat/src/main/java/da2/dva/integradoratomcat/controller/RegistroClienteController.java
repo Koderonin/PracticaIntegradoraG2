@@ -44,6 +44,7 @@ public class RegistroClienteController {
 
     @GetMapping("paso1")
     public ModelAndView registroCliente(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
+        mv = new ModelAndView("/registro/cliente");
         mv.addObject("titulo","Registro de cliente");
         mv.addObject("paso" ,"1");
         cliente = (Cliente) sesion.getAttribute("cliente");
@@ -55,6 +56,7 @@ public class RegistroClienteController {
     public ModelAndView registrar(@Validated(DatosPersonales.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
+            System.out.println(resultado.getAllErrors().toString());
             return mv;
         }
         Cliente clienteSesion = (Cliente) sesion.getAttribute("cliente");
@@ -68,12 +70,15 @@ public class RegistroClienteController {
         clienteSesion.setPais(cliente.getPais());
         clienteSesion.setTipoDocumento(cliente.getTipoDocumento());
         clienteSesion.setDocumento(cliente.getDocumento());
+
+        sesion.setAttribute("cliente", clienteSesion);
         mv.addObject("paso" ,"2");
         return mv;
     }
 
     @GetMapping("paso2")
     public ModelAndView paso2(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
+        mv = new ModelAndView("/registro/cliente");
         cliente = (Cliente) sesion.getAttribute("cliente");
         if (cliente != null) mv.addObject("cliente", cliente);
         mv.addObject("paso" ,"2");
@@ -106,12 +111,17 @@ public class RegistroClienteController {
         clienteSesion.setDireccion(direccion);
         clienteSesion.getDireccionEntrega().add(direccion);
         clienteSesion.setTelefonoMovil(cliente.getTelefonoMovil());
+
+        //Guardar cliente en la sesion
+        sesion.setAttribute("cliente", clienteSesion);
+
         mv.addObject("paso" ,"3");
         return mv;
     }
 
     @GetMapping("paso3")
     public ModelAndView paso3(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
+        mv = new ModelAndView("/registro/cliente");
         cliente = (Cliente) sesion.getAttribute("cliente");
         if (cliente != null) mv.addObject("cliente", cliente);
         mv.addObject("paso" ,"3");
@@ -131,9 +141,11 @@ public class RegistroClienteController {
 
         clienteSesion.setComentarios(cliente.getComentarios());
         clienteSesion.setAceptacionLicencia(cliente.getAceptacionLicencia());
+        System.out.println(cliente.getAceptacionLicencia());
 
-        mv.addObject("paso" ,"4");
-        return mv;
+        sesion.setAttribute("cliente", clienteSesion);
+
+        return new ModelAndView("redirect:/registro/cliente/paso4");
     }
 
     @GetMapping("paso4")
@@ -155,15 +167,17 @@ public class RegistroClienteController {
             System.out.println(name);
             // sesion.setAttribute("error", error);
         }
+        mv.addObject("paso" ,"4");
 
         mv.addObject("cliente", cliente);
+
+
         //paso al modelo los errores para guardarlo en un hidden y ver si se puede registrar en el siguiente paso
         if(!violations.isEmpty()){
             mv.addObject("error", "Hay errores");
         }else{
             mv.addObject("error", "No hay errores");
         }
-        mv.addObject("paso" ,"4");
         return mv;
     }
 
@@ -174,4 +188,6 @@ public class RegistroClienteController {
         }
         return mv;
     }
+
+
 }
