@@ -52,7 +52,7 @@ public class Cliente {
     @CheckMayor18(groups = DatosPersonales.class)
     private LocalDate fechaNacimiento;
     @NotBlank(groups = DatosPersonales.class)
-    @CheckColeccion(coleccion = "listapaises")
+   // @CheckColeccion(coleccion = "listapaises")
     @OneToOne
     @JoinColumn(name = "pais", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO"))
     private Pais pais;

@@ -19,25 +19,43 @@ public class ServicioColecciones implements Servicio {
 
     @Override
     public Map<String, String> devuelveGeneros() {
-        return null;
+        Map<String, String> generos = new HashMap<>();
+        generos.put("M", "Masculino");
+        generos.put("F", "Femenino");
+        generos.put("O", "Otro");
+        generos.put("N", "No binario");
+        return generos;
     }
 
     @Override
     public Map<String, String> devuelveTiposDocumentos() {
-        return null;
+        Map<String, String> tiposDocumentos = new HashMap<>();
+        tiposDocumentos.put("D", "DNI");
+        tiposDocumentos.put("N", "NIE");
+        tiposDocumentos.put("P", "Pasaporte");
+        return tiposDocumentos;
     }
 
     @Override
     public Map<String, String> devuelvePreguntas() {
         Map<String, String> preguntas = new HashMap<>();
         preguntas.put("1", "¿Cómo se llamaba tu primera mascota?");
-        preguntas.put("2", "¿?");
+        preguntas.put("2", "¿Qué tal tu madre?");
+        preguntas.put("3", "¿Quién es tu mejor amigo?");
+        preguntas.put("4", "¿Cuál es tu opinión sobre la insoportable levedad del ser?");
         return preguntas;
     }
 
     @Override
     public Map<String, String> devuelveTiposVia() {
-        return null;
+        Map<String, String> tiposVia = new HashMap<>();
+        tiposVia.put("CL", "Calle");
+        tiposVia.put("PZ", "Plaza");
+        tiposVia.put("AV", "Avenida");
+        tiposVia.put("TR", "Travesia");
+        tiposVia.put("PS", "Paseo");
+        tiposVia.put("GL", "Glorieta");
+        return tiposVia;
     }
 
     @Override

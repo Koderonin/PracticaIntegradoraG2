@@ -29,11 +29,14 @@ public class PruebasJPA {
     //@Transactional // esto hace que no falle la transacción porque la hace toda de una; no es lo que quiero
     public void pruebitas() {
 
-//        UsuarioCliente usuarioCliente = new UsuarioCliente();
-//        usuarioCliente.setEmail("admin@integradora.jpa");
-//        usuarioCliente.setNumAccesos(2);
-//        usuarioCliente.setClave("admin");
-//        UCRepository.save(usuarioCliente); // esto hace que quede detached, por lo que sea
+        UsuarioCliente usuarioCliente = new UsuarioCliente();
+        usuarioCliente.setEmail("admin@integradora.jpa");
+        usuarioCliente.setNumAccesos(2);
+        usuarioCliente.setClave("Admin123!");
+        usuarioCliente.setPreguntaRecuperacion("1");
+        usuarioCliente.setRespuestaRecuperacion("Croquetas");
+        usuarioCliente.setConfirmClave("Admin123!");
+        UCRepository.save(usuarioCliente); // esto hace que quede detached, por lo que sea
         /*Dirección asignada*/
         Direccion direccion = getDireccion();
         direccionRepository.save(direccion);
@@ -86,20 +89,30 @@ public class PruebasJPA {
         productoRepository.save(producto);
 
         UsuarioCliente usuarioCliente = new UsuarioCliente();
-        usuarioCliente.setEmail("admin@integradora2.jpa");
-        usuarioCliente.setNumAccesos(2);
-        usuarioCliente.setClave("admin");
+        usuarioCliente.setEmail("admin2@integradora.jpa");
+        usuarioCliente.setNumAccesos(1);
+        usuarioCliente.setClave("Admin123!");
+        usuarioCliente.setPreguntaRecuperacion("2");
+        usuarioCliente.setRespuestaRecuperacion("Croquetas");
+        usuarioCliente.setConfirmClave("Admin123!");
         UCRepository.save(usuarioCliente);
+
+        Pais pais = new Pais();
+        pais.setNombrePais("España");
+        pais.setSiglasPais("ES");
+        paisRepository.save(pais);
 
         Cliente cliente = new Cliente();
         cliente.setUsuarioCliente(usuarioCliente);
         cliente.setNombre("Pepo");
         cliente.setApellidos("Compro Cosas");
-        cliente.setGenero("Hombre");
+        cliente.setGenero("M");
         cliente.setFechaNacimiento(LocalDate.of(1978, 2, 14));
-        cliente.setTipoDocumento("DNI");
+        cliente.setPais(pais);
+        cliente.setTipoDocumento("D");
         cliente.setDocumento("12345678C");
         cliente.setTelefonoMovil("642344842");
+        cliente.setAceptacionLicencia(true);
         clienteRepository.save(cliente);
 
         Pedido pedido = new Pedido();
@@ -128,65 +141,5 @@ public class PruebasJPA {
 //        direccion.setTipo_via(1L);
         direccion.setNumero_via(1);
         return direccion;
-    }
-
-    public static void pruebas_consola() {
-        Scanner sc = new Scanner(System.in);
-        boolean flag = true;
-        while (flag) {
-            System.out.println("1- Insertar cliente");
-            System.out.println("2- Insertar usuario administrador");
-            System.out.println("3- Insertar usuario cliente");
-            System.out.println("4- Insertar pais");
-            System.out.println("5- Insertar direccion");
-            System.out.println("6- Insertar tarjeta credito");
-            System.out.println("0- Salir");
-
-            int opt = sc.nextInt();
-
-            switch (opt) {
-                case 1:
-                    insertarCliente();
-                    break;
-                case 2:
-                    insertarUsuarioAdministrador();
-                    break;
-                case 3:
-                    insertarUsuarioCliente();
-                    break;
-                case 4:
-                    insertarPais();
-                    break;
-                case 5:
-                    insertarDireccion();
-                    break;
-                case 6:
-                    insertarTarjetaCredito();
-                    break;
-                case 0:
-                    flag = false;
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    private static void insertarTarjetaCredito() {
-    }
-
-    private static void insertarDireccion() {
-    }
-
-    private static void insertarPais() {
-    }
-
-    private static void insertarUsuarioCliente() {
-    }
-
-    private static void insertarUsuarioAdministrador() {
-    }
-
-    private static void insertarCliente() {
     }
 }
