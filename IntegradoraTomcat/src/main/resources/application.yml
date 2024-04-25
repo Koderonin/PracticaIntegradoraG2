@@ -2,9 +2,9 @@ spring:
   application:
     name: IntegradoraTomcat
   datasource:
-    url: jdbc:mysql://192.168.7.10:5580/integradoraJPA?createDatabaseIfNotExist=true
+    url: jdbc:mysql://192.168.100.2:3306/integradoraJPA?createDatabaseIfNotExist=true
     username: root
-    password: admin
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    name: integradoraJPA # este es el nombre de la base de datos
   jpa:
@@ -20,4 +20,4 @@ spring:
       mode: always # para que se cree la db al iniciar la aplicación
   data:
     mongodb:
-      uri: mongodb://192.168.7.10:27017/tienda
+      uri: mongodb://root:root@192.168.100.3:27017/tienda?authSource=admin

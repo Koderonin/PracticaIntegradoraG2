@@ -11,6 +11,9 @@ services:
       - mongo
     volumes:
       - ./IntegradoraTomcat/build/libs:/usr/local/tomcat/webapps
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.4
   mysql:
     container_name: contiene_mysql
     hostname: mysql
@@ -21,8 +24,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: root
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.2
   mongo:
-    container_name: co_mongo
+    container_name: contiene_mongo
     image: mongo:latest
     restart: always
     ports:
@@ -30,6 +36,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.3
   #dns:  #TODO: Investigar
   #  container_name: contiene_bind9
   #  hostname: bind
@@ -42,8 +51,11 @@ services:
   #    - "953:953/udp"
   #    - "853:853/tcp"
   #    - "853:853/udp"
+#  networks:
+#    red_integradora:
+#      ipv4_address: 192.168.100.1
   apache:
-    container_name: coniene_apache
+    container_name: contiene_apache
     hostname: apache
     image: httpd:latest
     restart: always
@@ -53,6 +65,9 @@ services:
     depends_on:
     #  - dns
       - tomcat
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.5
   node:
     container_name: contiene_vue
     hostname: vue
@@ -62,3 +77,11 @@ services:
       - "3000:3000"
     #depends_on:
      # - dns
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.6
+networks:
+  red_integradora:
+    ipam:
+       config:
+         - subnet: 192.168.100.0/24
