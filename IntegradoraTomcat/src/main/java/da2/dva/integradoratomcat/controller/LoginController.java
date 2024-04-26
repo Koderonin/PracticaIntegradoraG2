@@ -32,13 +32,13 @@ public class LoginController {
 
     @PostMapping("paso1")
     public ModelAndView login(@RequestParam("usuario") String email, HttpSession sesion) {
-        for(Usuario usuario : servicio.devuelveUsuarios())  {
+        /*for(Usuario usuario : servicio.devuelveUsuarios())  {
             if(email.equals(usuario.getEmail())){
                 sesion.setAttribute("OBJusuario", usuario); //TODO: REVISAR
                 sesion.setAttribute("email",email);
                 break;
             }
-        }
+        }*/
         if(sesion.getAttribute("OBJusuario")!=null){
             sesion.setAttribute("email", email);
             //mv.addObject("paso" ,"2");
