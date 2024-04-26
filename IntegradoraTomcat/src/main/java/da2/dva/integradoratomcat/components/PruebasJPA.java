@@ -1,9 +1,18 @@
 package da2.dva.integradoratomcat.components;
 
+import da2.dva.integradoratomcat.model.auxiliar.Direccion;
+import da2.dva.integradoratomcat.model.collections.Pais;
+import da2.dva.integradoratomcat.model.entities.*;
 import da2.dva.integradoratomcat.repositories.jpa.*;
 import da2.dva.integradoratomcat.repositories.mongo.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Scanner;
+import java.util.UUID;
 
 @Controller
 public class PruebasJPA {
@@ -130,6 +139,7 @@ public class PruebasJPA {
         direccion.setPlanta("4");
         direccion.setPuerta("1");
         direccion.setRegion("Madrid");
+//        direccion.setTipo_via(1L);
         direccion.setNumero_via(1);
         return direccion;
     }*/

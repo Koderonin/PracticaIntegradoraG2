@@ -3,10 +3,8 @@ package da2.dva.integradoratomcat.model.entities;
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.collections.Pais;
 import da2.dva.integradoratomcat.model.auxiliar.TarjetaCredito;
-import da2.dva.integradoratomcat.utils.CheckColeccion;
-import da2.dva.integradoratomcat.utils.CheckMayor18;
-import da2.dva.integradoratomcat.utils.DatosContacto;
-import da2.dva.integradoratomcat.utils.DatosPersonales;
+import da2.dva.integradoratomcat.model.collections.Pais;
+import da2.dva.integradoratomcat.utils.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
@@ -51,7 +49,7 @@ public class Cliente {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @CheckMayor18(groups = DatosPersonales.class)
     private LocalDate fechaNacimiento;
-    @NotBlank(groups = DatosPersonales.class)
+    @NotNull(groups = DatosPersonales.class)
    // @CheckColeccion(coleccion = "listapaises")
     @OneToOne
     @JoinColumn(name = "pais", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO"))
@@ -81,8 +79,8 @@ public class Cliente {
     private String tipoCliente;
     private String comentarios;
 
-    @NotNull
-    @AssertTrue
+    @NotNull(groups = DatosCliente.class)
+    @CheckLicencia(groups = DatosCliente.class)
     private Boolean aceptacionLicencia;
 
 
@@ -91,3 +89,4 @@ public class Cliente {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private Set<Pedido> pedidos = new HashSet<>();
 }
+

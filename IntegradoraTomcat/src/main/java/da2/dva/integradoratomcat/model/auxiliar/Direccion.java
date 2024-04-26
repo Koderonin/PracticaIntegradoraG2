@@ -23,7 +23,6 @@ public class Direccion {
     @NotBlank
     String nombre_via;
     @NotNull
-    //que sea entero
     Integer numero_via;
     String planta;
     String puerta;
