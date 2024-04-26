@@ -2,7 +2,7 @@ package da2.dva.integradoratomcat.controller;
 
 import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioAdministrador;
-import da2.dva.integradoratomcat.model.entities.UsuarioEmpleado;
+import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.services.Servicio;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +29,7 @@ public class RegistroUsuarioController {
     @Bean
     public void conseguirColeccionesRU(){
         mv.addObject("listaUsuarios",servicio.devuelveUsuarios());
+        mv.addObject("listaPreguntas",servicio.devuelvePreguntas());
     }
 
     @GetMapping("administrador")//TODO:INVESTIGAR PARA PONER LA IP Y EL REGISTRO
@@ -46,14 +47,14 @@ public class RegistroUsuarioController {
     }
 
     @GetMapping("empleado")
-    public ModelAndView registroUsuarioEmpleado(@ModelAttribute("usuario") UsuarioEmpleado usuario) {
+    public ModelAndView registrousuarioCliente(@ModelAttribute("usuario") UsuarioCliente usuario) {
         mv.addObject("titulo","Registro de usuario");
         mv.addObject("tipoUsuario","empleado");
 
         return mv;
     }
     @PostMapping("empleado")
-    public ModelAndView registrarEmpleado(@Valid @ModelAttribute("usuario") UsuarioEmpleado usuario,
+    public ModelAndView registrarEmpleado(@Valid @ModelAttribute("usuario") UsuarioCliente usuario,
                                   BindingResult resultado
     ) {
         if (resultado.hasErrors()) {
@@ -61,9 +62,10 @@ public class RegistroUsuarioController {
             System.out.println(usuario.getEmail());
             return mv;
         }else{
+
             mv.setViewName("redirect:/login/paso1");
 
-            //TODO: METER EN LA BBD
+            servicio.insertarUsuarioEmpleado(usuario);
         }
         // mv.addObject("usuario", usuario);
         return mv;

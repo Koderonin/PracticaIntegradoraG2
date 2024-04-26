@@ -30,9 +30,12 @@ public class ValidadorColecciones implements ConstraintValidator<CheckColeccion,
             case "listapreguntas":
                 this.coleccion = (Map<String, String>) servicioColecciones.devuelvePreguntas();
                 break;
+                /*
             case "listatiposVia":
-                this.coleccion = (Map<String, String>) servicioColecciones.devuelveTiposVia();
+                this.coleccion = (Map<Long, String>) servicioColecciones.devuelveTiposVia();
                 break;
+
+                 */
 
                 /* TODO: VER COMO VALIDAR USUARIO REPETIDO
             case "usuarios":

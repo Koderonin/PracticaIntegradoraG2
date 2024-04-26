@@ -39,10 +39,12 @@ public class LoginController {
                 break;
             }
         }*/
-        if(sesion.getAttribute("OBJusuario")!=null){
+
+
+        if(servicio.devuelveUsuarios().containsKey(email)){
             sesion.setAttribute("email", email);
-            //mv.addObject("paso" ,"2");
-            mv.setViewName("redirect:/login/paso2");
+            mv.addObject("paso" ,"2");
+          //  mv.setViewName("redirect:/login/paso2");
 
         }else{
             sesion.removeAttribute("email");
@@ -61,9 +63,9 @@ public class LoginController {
 
     @PostMapping("paso2")
     public ModelAndView clave(@RequestParam("clave") String clave,HttpSession sesion) {
-        String email = (String) sesion.getAttribute("usuario");
-        Usuario usuario = (Usuario) sesion.getAttribute("OBJusuario");
-        if(usuario.getClave().equals(clave)){
+        String email = (String) sesion.getAttribute("email");
+        System.out.println("CLAVE CORRECTA: " + servicio.devuelveUsuarios().get(email).getClave().equals(clave));
+        if(servicio.devuelveUsuarios().get(email).getClave().equals(clave)){
             sesion.setAttribute("usuario",email);
             mv.setViewName("redirect:/area-cliente");
             //TODO: METER EN LA BBD

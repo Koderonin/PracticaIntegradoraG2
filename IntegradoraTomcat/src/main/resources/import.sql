@@ -1,4 +1,4 @@
-REPLACE INTO tipo_via (siglas, tipo_via) VALUES ('cl', 'Calle'), ('av', 'Avenida'), ('pz', 'Plaza'), ('gl', 'Glorieta'), ('ps', 'Paseo');
+REPLACE INTO tipo_via (id, tipo_via) VALUES (1, 'Calle'), (2, 'Avenida'), (3, 'Plaza'), (4, 'Glorieta'), (5, 'Paseo');
 REPLACE INTO pais (siglas, nombre_pais) VALUES ('es', 'España'), ('fr', 'Francia'), ('it', 'Italia'), ('uk', 'Reino Unido'), ('us', 'Estados Unidos');
 REPLACE INTO genero (siglas, genero) VALUES ('m', 'Masculino'), ('f', 'Femenino'), ('n', 'No Binario'), ('o', 'Otro');
 REPLACE INTO tipo_documento (siglas, tipo_documento) VALUES ('dni', 'DNI'), ('nie', 'NIE'), ('pas', 'Nº Pasaporte'), ('ss', 'Nº Seguridad Social');

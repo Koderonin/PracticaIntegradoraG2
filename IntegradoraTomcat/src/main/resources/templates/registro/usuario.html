@@ -24,7 +24,7 @@
             <div id="div_preguntas">
                 <span class="required">* </span><label for="preguntaRecuperacion">Pregunta de recuperación</label>
                 <select th:field="*{preguntaRecuperacion}">
-                    <!--                    TODO: Implementar preguntas-->
+                    <option th:each="pregunta : ${listaPreguntas}" th:value="${pregunta.key}" th:text="${pregunta.value}"></option>
                 </select>
                 <div class="error" th:if="${#fields.hasErrors('preguntaRecuperacion')}" th:errors="*{preguntaRecuperacion}"></div>
                 <span class="required">* </span><label for="respuestaRecuperacion">Respuesta de recuperación</label>

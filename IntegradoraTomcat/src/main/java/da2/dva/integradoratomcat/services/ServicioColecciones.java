@@ -1,6 +1,8 @@
 package da2.dva.integradoratomcat.services;
 
+import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Usuario;
+import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,12 @@ public class ServicioColecciones implements Servicio {
     private PreguntaRepository preguntaRepository;
     @Autowired
     private UsuarioAdministradorRepository usuarioAdministradorRepository;
+    @Autowired
+    private UsuarioClienteRepository usuarioClienteRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private DireccionRepository direccionRepository;
 
     @Override
     public Map<String, String> devuelvePaises() {
@@ -59,10 +67,10 @@ public class ServicioColecciones implements Servicio {
     }
 
     @Override
-    public Map<String, String> devuelveTiposVia() {
-        Map<String, String> tiposVia = new HashMap<>();
+    public Map<Long, String> devuelveTiposVia() {
+        Map<Long, String> tiposVia = new HashMap<>();
         tipoViaRepository.findAll().forEach(
-                tipoVia -> tiposVia.put(tipoVia.getSiglas(), tipoVia.getTipoVia())
+                tipoVia -> tiposVia.put(tipoVia.getId(), tipoVia.getTipoVia())
         );
         return tiposVia;
     }
@@ -74,6 +82,18 @@ public class ServicioColecciones implements Servicio {
         usuarioAdministradorRepository.findAll().forEach(
                 usuario -> usuarios.put(usuario.getEmail(), usuario)
         );
+        usuarioClienteRepository.findAll().forEach(
+                usuario -> usuarios.put(usuario.getEmail(), usuario)
+        );
         return usuarios;
     }
+    @Override
+    public void insertarUsuarioEmpleado(UsuarioCliente usuario){
+        usuarioClienteRepository.save(usuario);
+    }
+
+    @Override
+    public void insertarCliente (Cliente cliente){
+        direccionRepository.save(cliente.getDireccion());
+        clienteRepository.save(cliente);}
 }

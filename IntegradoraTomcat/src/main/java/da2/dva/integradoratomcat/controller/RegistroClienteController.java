@@ -7,19 +7,13 @@ import da2.dva.integradoratomcat.utils.DatosCliente;
 import da2.dva.integradoratomcat.utils.DatosContacto;
 import da2.dva.integradoratomcat.utils.DatosPersonales;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.ValidatorFactory;
-import jakarta.validation.Validator;
+import jakarta.validation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Set;
@@ -35,6 +29,7 @@ public class RegistroClienteController {
     public void conseguirColeccionesRC(){
 
         mv.addObject("listaPaises",servicio.devuelvePaises());
+        System.out.println(servicio.devuelvePaises());
         mv.addObject("listaGeneros",servicio.devuelveGeneros());
         mv.addObject("listaTiposDocumentos",servicio.devuelveTiposDocumentos());
         mv.addObject("listaPreguntas",servicio.devuelvePreguntas());
@@ -184,8 +179,9 @@ public class RegistroClienteController {
     }
 
     @PostMapping("paso4")
-    public ModelAndView paso4(HttpSession sesion){
+    public ModelAndView paso4(HttpSession sesion, @ModelAttribute("cliente") Cliente cliente) {
         if (mv.getModel().get("error").equals("No hay errores")) {
+            servicio.insertarCliente(cliente);
             mv.setViewName("redirect:/area-cliente");
         }
         return mv;
