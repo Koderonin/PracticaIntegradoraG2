@@ -167,6 +167,7 @@ public class RegistroClienteController {
             System.out.println(name);
             // sesion.setAttribute("error", error);
         }
+
         mv.addObject("paso" ,"4");
 
         mv.addObject("cliente", cliente);

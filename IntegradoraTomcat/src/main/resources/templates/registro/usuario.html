@@ -31,9 +31,9 @@
                 <input type="text" th:field="*{respuestaRecuperacion}"/>
                 <div class="error" th:if="${#fields.hasErrors('respuestaRecuperacion')}" th:errors="*{respuestaRecuperacion}"></div>
             </div>
-            <input type="submit" value="Enviar"/>
-            <input type="reset" value="Restablecer"/>
-            <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
+            <input type="submit" class="btn" value="Enviar"/>
+            <input type="reset" class="btn" value="Restablecer"/>
+            <input type="button" class="btn" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
         </form>
         <footer th:replace="~{fragments/footer :: pie_pagina}"/>
         <script type="text/javascript" th:src="@{/js/script.js}"></script>

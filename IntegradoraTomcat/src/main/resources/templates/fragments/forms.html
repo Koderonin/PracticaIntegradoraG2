@@ -17,8 +17,8 @@
             <input th:id="'r' + ${i.index}" type="radio" th:field="*{genero}" th:value="${genero.key}" th:checked="${genero == genero.key}"/>
         </th:block>
         <div class="error" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
-        <input type="button" id="btn_deseleccionar_genero" value="Deseleccionar género" onclick="deseleccionarGenero()"/>
-        <input type="button" id="btn_seleccionar_primer_genero" value="Selecciona el primer género" onclick="seleccionarPrimerGenero()"/>
+        <input type="button" class="btn seleccionar" id="btn_deseleccionar_genero" value="Deseleccionar género" onclick="deseleccionarGenero()"/>
+        <input type="button" class="btn seleccionar" id="btn_seleccionar_primer_genero" value="Selecciona el primer género" onclick="seleccionarPrimerGenero()"/>
     </div>
     <div id="div_fecha_nacimiento">
         <span class="required">* </span><label for="fechaNacimiento">Fecha de Nacimiento</label>
@@ -31,7 +31,7 @@
             <option th:each="pais: ${listaPaises}" th:value="${pais.key}">[[${pais.value}]]</option>
         </select>
         <div class="error" th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
-        <input type="button" id="btn_deseleccionar_pais" value="Deseleccionar país" onclick="deseleccionarPais()"/>
+        <input type="button" class="btn seleccionar" id="btn_deseleccionar_pais" value="Deseleccionar país" onclick="deseleccionarPais()"/>
     </div>
     <div id="div_documento_id">
         <span class="required">* </span><span id="lab_tipo_documento"  class="label">Tipo de Documento </span>
@@ -40,7 +40,7 @@
             <input th:id="'r' + ${i.index}" type="radio" th:field="*{tipoDocumento}" th:value="${tipo.key}" th:checked="${tipoDocumento == tipo.key}"/>
         </th:block>
         <div class="error" th:if="${#fields.hasErrors('tipoDocumento')}" th:errors="*{tipoDocumento}"></div>
-        <input type="button" id="btn_deseleccionar_tipoDocumento" value="Deseleccionar tipo de documento" onclick="deseleccionarTipoDocumento()"/>
+        <input type="button" class="btn seleccionar" id="btn_deseleccionar_tipoDocumento" value="Deseleccionar tipo de documento" onclick="deseleccionarTipoDocumento()"/>
         <span class="required">* </span><label for="documento">Documento</label>
         <input type="text" th:field="*{documento}"/>
         <div class="error" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}"></div>

@@ -3,12 +3,16 @@
 <head th:replace="~{fragments/head :: cabeza(${titulo})}"/>
     <body>
         <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
-        <form th:action="paso__${paso}__" method="post">
-            <div th:replace="~{fragments/forms :: login__${paso}__}"></div>
-            <input type="submit" value="Enviar"/>
-            <input type="reset" value="Restablecer"/>
-            <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
-        </form>
+        <div class="container" id="container">
+            <div class="form-container">
+                <form id="form" th:action="paso__${paso}__" method="post">
+                    <div th:replace="~{fragments/forms :: login__${paso}__}"></div>
+                    <input type="submit" class="btn" value="Enviar"/>
+                    <input type="reset" class="btn" value="Restablecer"/>
+                    <input type="button" class="btn" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
+                </form>
+            </div>
+        </div>
         <footer th:replace="~{fragments/footer :: pie_pagina}"/>
         <script type="text/javascript" th:src="@{/js/script.js}"></script>
     </body>
