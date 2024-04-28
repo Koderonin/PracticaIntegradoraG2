@@ -9,6 +9,7 @@ services:
     depends_on:
       - mysql
       - mongo
+      - dns
     volumes:
       - ./IntegradoraTomcat/build/libs:/usr/local/tomcat/webapps
     networks:
@@ -24,6 +25,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: root
+    depends_on:
+      - dns
     networks:
       red_integradora:
         ipv4_address: 192.168.100.2
@@ -36,24 +39,19 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+    depends_on:
+      - dns
     networks:
       red_integradora:
         ipv4_address: 192.168.100.3
-  #dns:  #TODO: Investigar
-  #  container_name: contiene_bind9
-  #  hostname: bind
-  #  image: ubuntu/bind9
-  #  restart: always
-  #  ports:
-  #    - "53:53/tcp"
-  #    - "53:53/udp"
-  #    - "953:953/tcp"
-  #    - "953:953/udp"
-  #    - "853:853/tcp"
-  #    - "853:853/udp"
-#  networks:
-#    red_integradora:
-#      ipv4_address: 192.168.100.1
+  dns:  #TODO: Investigar
+    container_name: contiene_bind9
+    hostname: bind
+    image: drecioa/bind9
+    restart: always
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.254
   apache:
     container_name: contiene_apache
     hostname: apache
@@ -63,8 +61,10 @@ services:
       - "80:80"
       - "443:443"
     depends_on:
-    #  - dns
+      - dns
       - tomcat
+    volumes:
+      - ./IntegradoraApache:/usr/local/apache2/htdocs/
     networks:
       red_integradora:
         ipv4_address: 192.168.100.5
@@ -75,8 +75,8 @@ services:
     #restart: always
     ports:
       - "3000:3000"
-    #depends_on:
-     # - dns
+    depends_on:
+      - dns
     networks:
       red_integradora:
         ipv4_address: 192.168.100.6
