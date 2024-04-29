@@ -7,9 +7,9 @@ Práctica integradora de los módulos DAW, DWES, AD y DIW
 
 [<img src="https://avatars.githubusercontent.com/u/134518981?v=4" style="display:inline; border-radius: 100%" width=50><a style="text-decoration:none;"> Vicente Álvarez (@Koderonin)</a>](https://github.com/Koderonin)
 
-[<img src="https://avatars.githubusercontent.com/u/60486521?v=4" style="display:inline; border-radius: 100%" width=50 border-radius=3><a style="text-decoration:none;"> Diego Recio (@drecioa)</a>](https://www.github.com/drecioa)</span>
+[<img src="https://avatars.githubusercontent.com/u/60486521?v=4" style="display:inline; border-radius: 100%" width=50><a style="text-decoration:none;"> Diego Recio (@drecioa)</a>](https://www.github.com/drecioa)</span>
 
-[<img src="https://avatars.githubusercontent.com/u/132434651?v=4" style="display:inline; border-radius: 100%" width=50> <a style="text-decoration:none;"> Alicia San Julián (@AliciaSJF)</a>](https://github.com/AliciaSJF)
+[<img src="https://avatars.githubusercontent.com/u/132434651?v=4" style="display:inline; border-radius: 100%" width=50><a style="text-decoration:none;"> Alicia San Julián (@AliciaSJF)</a>](https://github.com/AliciaSJF)
 
 ## 📦 Entregas
 
@@ -35,31 +35,31 @@ Práctica integradora de los módulos DAW, DWES, AD y DIW
 - Nombre de Dominio: da2.dva
 #### Servidor DNS
   - IP: 192.168.100.254
-  - Nombre de dominio: dns.da2.dva
+  - Nombre de dominio: dns
   - Nombre de host: bind
   - Nombre del Contenedor: contiene_bind
 #### Servidor MySQL
   - IP: 192.168.100.2
-  - Nombre de dominio: mysql.da2.dva
+  - Nombre de dominio: mysql
   - Nombre de host: mysql
   - Nombre del Contenedor: contiene_mysql
 #### Servidor MongoDB
   - IP: 192.168.100.3
-  - Nombre de dominio: mongo.da2.dva
+  - Nombre de dominio: mongo
   - Nombre de host: mongo
   - Nombre del Contenedor: contiene_mongo
 #### Servidor Apache Tomcat
   - IP: 192.168.100.4
-  - Nombre de dominio: tomcat.da2.dva
+  - Nombre de dominio: tomcat
   - Nombre de host: tomcat
   - Nombre del Contenedor: contiene_tomcat
 #### Servidor Apache HTTP
   - IP: 192.168.100.5
-  - Nombre de dominio: apache.da2.dva
+  - Nombre de dominio: apache
   - Nombre de host: apache
   - Nombre del Contenedor: contiene_apache
 #### Servidor Node.js
   - IP: 192.168.100.6
-  - Nombre de dominio: node.da2.dva
+  - Nombre de dominio: vue
   - Nombre de host: vue
   - Nombre del Contenedor: contiene_vue

@@ -47,7 +47,7 @@ services:
   dns:  #TODO: Investigar
     container_name: contiene_bind9
     hostname: bind
-    image: drecioa/bind9
+    image: drecioa/bind9:latest
     restart: always
     networks:
       red_integradora:
@@ -55,11 +55,8 @@ services:
   apache:
     container_name: contiene_apache
     hostname: apache
-    image: httpd:latest
+    image: drecioa/httpd:latest
     restart: always
-    ports:
-      - "80:80"
-      - "443:443"
     depends_on:
       - dns
       - tomcat
