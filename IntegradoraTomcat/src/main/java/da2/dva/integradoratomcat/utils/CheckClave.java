@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface CheckClave {
 
-    String message() default "Las contraseñas no son iguales";
+    String message() default "{password.invalidConfirmation}";
 
     Class<?>[] groups() default { };
 

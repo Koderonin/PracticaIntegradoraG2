@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface CheckLicencia {
 
-    String message() default "El valor de licencia no es válido";
+    String message() default "{aceptarLicencia.invalidaAceptacion}";
 
     Class<?>[] groups() default { };
 

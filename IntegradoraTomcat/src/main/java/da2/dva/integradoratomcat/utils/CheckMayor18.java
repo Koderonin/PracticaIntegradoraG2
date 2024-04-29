@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = ValidadorMayor18.class)
 @Documented
 public @interface CheckMayor18 {
-    String message() default "Debe ser mayor de 18 años";
+    String message() default "{fechaNacimiento.invalidaAntiguedad}";
 
     Class<?>[] groups() default { };
 

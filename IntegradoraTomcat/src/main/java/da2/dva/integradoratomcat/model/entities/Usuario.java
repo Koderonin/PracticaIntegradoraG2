@@ -26,12 +26,12 @@ public class Usuario {
     //COMPROBAR QUE EXISTE
     private String email;
     @NotBlank
-    @Size(min = 6, max = 12, message = "La contraseña debe tener entre 6 y 12 caracteres")
+    @Size(min = 6, max = 12, message = "{password.invalidSize}")
     @Pattern.List({
-            @Pattern(regexp = ".*[a-z].*", message = "La contraseña debe contener al menos una letra minúscula"),
-            @Pattern(regexp = ".*[A-Z].*", message = "La contraseña debe contener al menos una letra mayúscula"),
-            @Pattern(regexp = ".*\\d.*", message = "La contraseña debe contener al menos un dígito"),
-            @Pattern(regexp = ".*[!#$%&].*", message = "La contraseña debe contener al menos un caracter especial: !, #, $, %, &")
+            @Pattern(regexp = ".*[a-z].*", message="{password.invalidPattern.minuscula}"),
+            @Pattern(regexp = ".*[A-Z].*", message = "{password.invalidPattern.mayuscula}"),
+            @Pattern(regexp = ".*\\d.*", message = "{password.invalidPattern.numero}"),
+            @Pattern(regexp = ".*[!#$%&].*", message = "{password.invalidPattern.simbolo}")
     })
     private String clave;
     @Transient

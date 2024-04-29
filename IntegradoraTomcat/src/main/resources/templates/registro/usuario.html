@@ -3,31 +3,31 @@
     <head th:replace="~{fragments/head :: cabeza(${titulo})}"/>
     <body>
         <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
-        <form id="form" th:action="${tipoUsuario}" method="post" th:object="${usuario}"> <!-- TODO: Implementar acción -->
+        <form id="form" th:action="${tipoUsuario}" method="post" th:object="${usuario}">
             <div th:if="${#fields.hasErrors('global')}" class="error">
                 <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
             </div>
             <div id="div_usuario">
-                <span class="required">* </span><label for="email">Usuario</label>
+                <span class="required">* </span><label for="email" th:text="#{etiqueta.email}"/>
                 <input type="text" th:field="*{email}"/>
                 <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
             <div id="div_claves">
-                <span class="required">* </span><label for="clave">Clave</label>
+                <span class="required">* </span><label for="clave" th:text="#{etiqueta.clave}"/>
                 <input type="password" th:field="*{clave}"/>
                 <div class="error" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
-                <span class="required">* </span><label for="confirmClave">Confirmar Clave</label>
+                <span class="required">* </span><label for="confirmClave" th:text="#{etiqueta.confirmarClave}"/>
                 <input type="password" th:field="*{confirmClave}"/>
                 <div class="error" th:if="${#fields.hasErrors('confirmClave')}" th:errors="*{confirmClave}"></div>
                 <input type="button" id="btn_mostrar_claves" value="Mostrar Claves" onmousedown="mostrarClaves()" onmouseup="ocultarClaves()"/>
             </div>
             <div id="div_preguntas">
-                <span class="required">* </span><label for="preguntaRecuperacion">Pregunta de recuperación</label>
+                <span class="required">* </span><label for="preguntaRecuperacion" th:text="#{etiqueta.preguntaSeguridad}"/>
                 <select th:field="*{preguntaRecuperacion}">
                     <option th:each="pregunta : ${listaPreguntas}" th:value="${pregunta.key}" th:text="${pregunta.value}"></option>
                 </select>
                 <div class="error" th:if="${#fields.hasErrors('preguntaRecuperacion')}" th:errors="*{preguntaRecuperacion}"></div>
-                <span class="required">* </span><label for="respuestaRecuperacion">Respuesta de recuperación</label>
+                <span class="required">* </span><label for="respuestaRecuperacion" th:text="#{etiqueta.respuestaSeguridad}"/>
                 <input type="text" th:field="*{respuestaRecuperacion}"/>
                 <div class="error" th:if="${#fields.hasErrors('respuestaRecuperacion')}" th:errors="*{respuestaRecuperacion}"></div>
             </div>
