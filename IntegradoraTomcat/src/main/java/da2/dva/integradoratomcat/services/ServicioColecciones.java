@@ -4,13 +4,23 @@ import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.*;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@Getter
 public class ServicioColecciones implements Servicio {
+
+    private Map<String, String> paises;
+    private Map<String, String> generos;
+    private Map<String, String> tiposDocumentos;
+    private Map<String, String> preguntas;
+    private Map<Long, String> tiposVia;
+    private Map<String, Usuario> usuarios;
+
     @Autowired
     private PaisRepository paisRepository;
     @Autowired
@@ -31,53 +41,54 @@ public class ServicioColecciones implements Servicio {
     private DireccionRepository direccionRepository;
 
     @Override
-    public Map<String, String> devuelvePaises() {
+    public void cargarPaises() {
         Map<String, String> paises = new HashMap<>();
         paisRepository.findAll().forEach(
                 pais -> paises.put(pais.getSiglasPais(), pais.getNombrePais())
         );
-        return paises;
+        this.paises = paises;
     }
 
     @Override
-    public Map<String, String> devuelveGeneros() {
+    public void cargarGeneros() {
         Map<String, String> generos = new HashMap<>();
         generoRepository.findAll().forEach(
                 genero -> generos.put(genero.getSiglas(), genero.getGenero())
         );
-        return generos;
+        this.generos = generos;
     }
 
     @Override
-    public Map<String, String> devuelveTiposDocumentos() {
+    public void cargarTiposDocumentos() {
         Map<String, String> tiposDocumentos = new HashMap<>();
         tipoDocumentoRepository.findAll().forEach(
                 tipoDocumentos -> tiposDocumentos.put(tipoDocumentos.getSiglas(), tipoDocumentos.getTipoDocumento())
         );
-        return tiposDocumentos;
+        this.tiposDocumentos = tiposDocumentos;
     }
 
     @Override
-    public Map<String, String> devuelvePreguntas() {
+    public void cargarPreguntas() {
         Map<String, String> preguntas = new HashMap<>();
         preguntaRepository.findAll().forEach(
                 pregunta -> preguntas.put(String.valueOf(pregunta.getId()), pregunta.getPregunta())
         );
-        return preguntas;
+        this.preguntas = preguntas;
     }
 
     @Override
-    public Map<Long, String> devuelveTiposVia() {
+    public void cargarTiposVia() {
         Map<Long, String> tiposVia = new HashMap<>();
         tipoViaRepository.findAll().forEach(
                 tipoVia -> tiposVia.put(tipoVia.getId(), tipoVia.getTipoVia())
         );
-        return tiposVia;
+        this.tiposVia = tiposVia;
     }
 
     @Override
-    public Map<String, Usuario> devuelveUsuarios() {
+    public void cargarUsuarios() {
         Map<String, Usuario> usuarios = new HashMap<>();
+        // TODO: Eliminar la inserción en este método
         usuarios.put("admin@gmail.com", new Usuario(UUID.randomUUID(),"admin@gmail.com", "aA1111111?", "aA1111111?", "Como se llama tu perro?", "Manolo", null, null, null));
         usuarioAdministradorRepository.findAll().forEach(
                 usuario -> usuarios.put(usuario.getEmail(), usuario)
@@ -85,8 +96,9 @@ public class ServicioColecciones implements Servicio {
         usuarioClienteRepository.findAll().forEach(
                 usuario -> usuarios.put(usuario.getEmail(), usuario)
         );
-        return usuarios;
+        this.usuarios = usuarios;
     }
+
     @Override
     public void insertarUsuarioEmpleado(UsuarioCliente usuario){
         usuarioClienteRepository.save(usuario);

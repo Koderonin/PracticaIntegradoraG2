@@ -19,16 +19,16 @@ public class ValidadorColecciones implements ConstraintValidator<CheckColeccion,
 
         switch (constraintAnnotation.coleccion()) {
             case "listapaises":
-                this.coleccion = (Map<String, String>) servicioColecciones.devuelvePaises();
+                this.coleccion = (Map<String, String>) servicioColecciones.getPaises();
                 break;
             case "listageneros":
-                this.coleccion = (Map<String, String>) servicioColecciones.devuelveGeneros();
+                this.coleccion = (Map<String, String>) servicioColecciones.getGeneros();
                 break;
             case "listatiposDocumentos":
-                this.coleccion = (Map<String, String>) servicioColecciones.devuelveTiposDocumentos();
+                this.coleccion = (Map<String, String>) servicioColecciones.getTiposDocumentos();
                 break;
             case "listapreguntas":
-                this.coleccion = (Map<String, String>) servicioColecciones.devuelvePreguntas();
+                this.coleccion = (Map<String, String>) servicioColecciones.getPreguntas();
                 break;
                 /*
             case "listatiposVia":

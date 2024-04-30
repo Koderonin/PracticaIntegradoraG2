@@ -51,7 +51,7 @@ public class Cliente {
     private LocalDate fechaNacimiento;
     @NotNull(groups = DatosPersonales.class)
    // @CheckColeccion(coleccion = "listapaises")
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "pais", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO"))
     private Pais paisNacimiento;
     @NotNull(groups = DatosPersonales.class)

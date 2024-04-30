@@ -23,42 +23,51 @@ import java.util.Set;
 public class RegistroClienteController {
     @Autowired
     ServicioColecciones servicio;
-    ModelAndView mv = new ModelAndView("/registro/cliente");
 
     @Bean
-    public void conseguirColeccionesRC(){
-
-        mv.addObject("listaPaises",servicio.devuelvePaises());
-        System.out.println(servicio.devuelvePaises());
-        mv.addObject("listaGeneros",servicio.devuelveGeneros());
-        mv.addObject("listaTiposDocumentos",servicio.devuelveTiposDocumentos());
-        mv.addObject("listaPreguntas",servicio.devuelvePreguntas());
-        mv.addObject("listaTiposVia",servicio.devuelveTiposVia());
-        mv.addObject("listaUsuarios",servicio.devuelveUsuarios());
+    public void descargarColeccionesRC(){
+        servicio.cargarPaises();
+        servicio.cargarGeneros();
+        servicio.cargarUsuarios();
+        servicio.cargarTiposVia();
+        servicio.cargarTiposDocumentos();
     }
 
     @GetMapping("paso1")
     public ModelAndView registroCliente(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
-        //mv = new ModelAndView("/registro/cliente");
-
+        ModelAndView mv = new ModelAndView("/registro/cliente");
+        //Paso de parámetros para resolución de la vista
         mv.addObject("titulo","Registro de cliente");
         mv.addObject("paso" ,"1");
+        //Paso de colecciones necesarias
+        mv.addObject("listaGeneros", servicio.getGeneros());
+        mv.addObject("listaPaises", servicio.getPaises());
+        mv.addObject("listaTiposDocumentos", servicio.getTiposDocumentos());
+        //Recuperación de datos de otros pasos
         cliente = (Cliente) sesion.getAttribute("cliente");
         if (cliente != null) mv.addObject("cliente", cliente);
+
         return mv;
     }
 
     @PostMapping("paso1")
     public ModelAndView registrar(@Validated(DatosPersonales.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
+        ModelAndView mv = new ModelAndView("/registro/cliente");
+        //Validación de los datos ingresados
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
-            System.out.println(resultado.getAllErrors().toString());
+            mv.addObject("paso" ,"1");
+            //Paso de colecciones necesarias
+            mv.addObject("listaGeneros", servicio.getGeneros());
+            mv.addObject("listaPaises", servicio.getPaises());
+            mv.addObject("listaTiposDocumentos", servicio.getTiposDocumentos());
+
             return mv;
         }
+        //Recuperación de datos de otros pasos
         Cliente clienteSesion = (Cliente) sesion.getAttribute("cliente");
-        if (clienteSesion == null) {
-            clienteSesion = new Cliente();
-        }
+        if (clienteSesion == null) clienteSesion = new Cliente();
+        //Guardado de los datos ingresados
         clienteSesion.setNombre(cliente.getNombre());
         clienteSesion.setApellidos(cliente.getApellidos());
         clienteSesion.setGenero(cliente.getGenero());
@@ -68,32 +77,44 @@ public class RegistroClienteController {
         clienteSesion.setDocumento(cliente.getDocumento());
 
         sesion.setAttribute("cliente", clienteSesion);
+        //Paso de parámetros para resolución de la vista
         mv.addObject("paso" ,"2");
+        mv.setViewName("redirect:/registro/cliente/paso2");
         return mv;
     }
 
     @GetMapping("paso2")
     public ModelAndView paso2(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
-      //  mv = new ModelAndView("/registro/cliente");
+        ModelAndView mv = new ModelAndView("/registro/cliente");
+        //Paso de parámetros para resolución de la vista
+        mv.addObject("paso" ,"2");
+        //Paso de colecciones necesarias
+        mv.addObject("listaTiposVia", servicio.getTiposVia());
+        //Recuperación de datos de otros pasos
         cliente = (Cliente) sesion.getAttribute("cliente");
         if (cliente != null) mv.addObject("cliente", cliente);
-        mv.addObject("paso" ,"2");
+
         return mv;
     }
 
     @PostMapping("paso2")
     public ModelAndView registrar2(@Validated(DatosContacto.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
+        ModelAndView mv = new ModelAndView("/registro/cliente");
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
+            mv.addObject("paso" ,"2");
+            //Paso de colecciones necesarias
+            mv.addObject("listaTiposVia", servicio.getTiposVia());
+
             return mv;
         }
+        //Recuperación de datos de otros pasos
         Cliente clienteSesion = (Cliente) sesion.getAttribute("cliente");
-        if (clienteSesion == null) {
-            clienteSesion = new Cliente();
-        }
+        if (clienteSesion == null) clienteSesion = new Cliente();
 
+        //Guardado de los datos ingresados
         Direccion direccion = new Direccion();
-        //direccion.setTipo_via(cliente.getDireccion().getTipo_via());
+        direccion.setTipo_via(cliente.getDireccion().getTipo_via());
         direccion.setNombre_via(cliente.getDireccion().getNombre_via());
         direccion.setNumero_via(cliente.getDireccion().getNumero_via());
         direccion.setPlanta(cliente.getDireccion().getPlanta());
@@ -108,51 +129,64 @@ public class RegistroClienteController {
         clienteSesion.getDireccionEntrega().add(direccion);
         clienteSesion.setTelefonoMovil(cliente.getTelefonoMovil());
 
-        //Guardar cliente en la sesion
         sesion.setAttribute("cliente", clienteSesion);
-
+        //Paso de parámetros para resolución de la vista
         mv.addObject("paso" ,"3");
+        mv.setViewName("redirect:/registro/cliente/paso3");
         return mv;
     }
 
     @GetMapping("paso3")
     public ModelAndView paso3(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
-        mv = new ModelAndView("/registro/cliente");
+        ModelAndView mv = new ModelAndView("/registro/cliente");
+        //Paso de parámetros para resolución de la vista
+        mv.addObject("paso" ,"3");
+        //Recuperación de datos de otros pasos
         cliente = (Cliente) sesion.getAttribute("cliente");
         if (cliente != null) mv.addObject("cliente", cliente);
-        mv.addObject("paso" ,"3");
+
         return mv;
     }
 
     @PostMapping("paso3")
     public ModelAndView registrar3(@Validated(DatosCliente.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
+        ModelAndView mv = new ModelAndView("/registro/cliente");
+        //Validación de los datos ingresados
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
+            mv.addObject("paso" ,"3");
+
             return mv;
         }
+        //Recuperación de datos de otros pasos
         Cliente clienteSesion = (Cliente) sesion.getAttribute("cliente");
-        if (clienteSesion == null) {
-            clienteSesion = new Cliente();
-        }
+        if (clienteSesion == null) clienteSesion = new Cliente();
 
+        //Guardado de los datos ingresados
         clienteSesion.setComentarios(cliente.getComentarios());
         clienteSesion.setAceptacionLicencia(cliente.getAceptacionLicencia());
-        System.out.println(cliente.getAceptacionLicencia());
 
         sesion.setAttribute("cliente", clienteSesion);
-
-        return new ModelAndView("redirect:/registro/cliente/paso4");
+        //Paso de parámetros para resolución de la vista
+        mv.addObject("paso" ,"4");
+        mv.setViewName("redirect:/registro/cliente/paso4");
+        return mv;
     }
 
     @GetMapping("paso4")
     public ModelAndView resumen(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
-
+        ModelAndView mv = new ModelAndView("/registro/cliente");
+        //Paso de colecciones necesarias
+        mv.addObject("listaGeneros", servicio.getGeneros());
+        mv.addObject("listaPaises", servicio.getPaises());
+        mv.addObject("listaTiposDocumentos", servicio.getTiposDocumentos());
+        mv.addObject("listaTiposVia", servicio.getTiposVia());
+        //Recuperación de datos de otros pasos
         cliente = (Cliente) sesion.getAttribute("cliente");
-        if (cliente == null) {
-            cliente = new Cliente();
-        }
+        if (cliente == null) cliente = new Cliente();
+        mv.addObject("cliente", cliente);
 
-        //Validar el usaurio para que aparezcan los errores en la vista
+        //Validación de los datos ingresados hasta el momento
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Cliente>> violations = validator.validate(cliente, DatosPersonales.class, DatosContacto.class, DatosCliente.class);
@@ -160,14 +194,9 @@ public class RegistroClienteController {
             String error = violation.getMessage();
             String name = violation.getPropertyPath().toString();
             mv.addObject(name, error);
-            System.out.println(name);
-            // sesion.setAttribute("error", error);
         }
-
+        //Paso de parámetros para resolución de la vista
         mv.addObject("paso" ,"4");
-
-        mv.addObject("cliente", cliente);
-
 
         //paso al modelo los errores para guardarlo en un hidden y ver si se puede registrar en el siguiente paso
         if(!violations.isEmpty()){
@@ -175,17 +204,27 @@ public class RegistroClienteController {
         }else{
             mv.addObject("error", "No hay errores");
         }
+
         return mv;
     }
 
     @PostMapping("paso4")
-    public ModelAndView paso4(HttpSession sesion, @ModelAttribute("cliente") Cliente cliente) {
-        if (mv.getModel().get("error").equals("No hay errores")) {
+    public ModelAndView paso4(@ModelAttribute("cliente") Cliente cliente) {
+        ModelAndView mv = new ModelAndView("/registro/cliente");
+        //Paso de colecciones necesarias
+        mv.addObject("listaGeneros", servicio.getGeneros());
+        mv.addObject("listaPaises", servicio.getPaises());
+        mv.addObject("listaTiposDocumentos", servicio.getTiposDocumentos());
+        mv.addObject("listaTiposVia", servicio.getTiposVia());
+
+        if (mv.getModel().get("error") == null || mv.getModel().get("error").equals("No hay errores")) {
             servicio.insertarCliente(cliente);
             mv.setViewName("redirect:/area-cliente");
+        } else {
+            //Paso de parámetros para resolución de la vista
+            mv.addObject("paso" ,"4");
         }
+
         return mv;
     }
-
-
 }
