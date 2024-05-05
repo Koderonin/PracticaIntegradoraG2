@@ -133,19 +133,22 @@
 </fieldset>
 
 <div th:fragment="login1">
-    <div id="div_usuario">
-        <span class="required">* </span><label for="usuario"   th:text="#{etiqueta.usuario}"/>
-        <input type="text" id="usuario" name="usuario"/>
+    <div id="div_usuario" class="input-container">
+        <input type="text" id="usuario" name="usuario" class="input email-input" placeholder=" "/>
+        <div class="cut"></div>
         <span th:if="${error != null}" th:text="${error}" class="error"/><br th:if="${error != null}">
+        <label for="usuario" class="placeholder"   th:text="#{etiqueta.usuario}"/>
     </div>
 </div>
 
 <div th:fragment="login2">
 
-    <div id="div_pass" th:if="${fechaBloqueo} == null">
-        <span class="required">* </span><label for="clave"   th:text="#{etiqueta.clave}"/>
-        <input type="password" id="clave" name="clave"/>
+    <div id="div_pass" class="input-container"  th:if="${fechaBloqueo} == null">
+
+        <input type="password" id="clave" name="clave" class="input password-input" placeholder=" "/>
+        <div class="cut"></div>
         <span th:if="${error != null}" th:text="${error}" class="error"/><br th:if="${error != null}">
+        <label for="clave"  class="placeholder" th:text="#{etiqueta.clave}"/>
     </div>
     <div id="div_pass" th:if="${fechaBloqueo} != null">
         <h1 class="error" th:text="${mensajeBloqueo}"></h1>

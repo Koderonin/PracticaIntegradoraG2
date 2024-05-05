@@ -44,6 +44,7 @@ public class LoginController {
         if(servicio.devuelveUsuarios().containsKey(email)){
             sesion.setAttribute("email", email);
             mv.addObject("paso" ,"2");
+            mv.addObject("error", null);
           //  mv.setViewName("redirect:/login/paso2");
 
         }else{

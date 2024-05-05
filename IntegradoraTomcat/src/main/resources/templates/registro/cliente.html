@@ -5,18 +5,19 @@
     <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
     <nav th:replace="~{fragments/navs :: navegacion_pasos(${paso})}"></nav>
     <div class="container">
-        <div class="form-container"></div>
-        <form id="form" th:action="paso__${paso}__" method="post" th:object="${cliente}">  <!-- TODO: Implementar acción -->
-            <div th:if="${#fields.hasErrors('global')}" class="error">
-                <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
-            </div>
-            <input type="hidden" id="iteraciones" name="iteraciones" th:value="${iteraciones}"/>
-            <p th:text="${error}"></p>
-            <fieldset th:replace="~{fragments/forms :: registroPaso__${paso}__}"></fieldset>
-            <input type="submit" value="Enviar"/>
-            <input type="reset" value="Restablecer"/>
-            <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
-        </form>
+        <div class="form-container">
+            <form id="form" th:action="paso__${paso}__" method="post" th:object="${cliente}">  <!-- TODO: Implementar acción -->
+                <div th:if="${#fields.hasErrors('global')}" class="error">
+                    <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
+                </div>
+                <input type="hidden" id="iteraciones" name="iteraciones" th:value="${iteraciones}"/>
+                <p th:text="${error}"></p>
+                <fieldset th:replace="~{fragments/forms :: registroPaso__${paso}__}"></fieldset>
+                <input type="submit" value="Enviar"/>
+                <input type="reset" value="Restablecer"/>
+                <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
+            </form>
+        </div>
     </div>
 
 

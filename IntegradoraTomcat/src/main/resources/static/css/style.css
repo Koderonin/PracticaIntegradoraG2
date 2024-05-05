@@ -7,6 +7,10 @@
 body{
     margin: 0;
     background:#edf2f8;
+
+}
+.error{
+    color: red;
 }
 /* HEADER MENú*/
 .menu_container{
@@ -120,13 +124,12 @@ a {
 
 /* FOOTER*/
 .footer-container {
-    background-color: #48556A; /* Rojo */
-    color: white; /* Texto en color blanco */
+    background-color: #48556A;
+    color: white;
     width: 100%;
-    height: 100px; /* Altura de 200px */
-    position: absolute;
-    bottom: 0;
+    height: 100px;
     left: 0;
+    bottom:0;
 }
 
 .footer-nav {
@@ -164,27 +167,183 @@ a {
     width: 100%; /* Al pasar el cursor, la línea se hace tan ancha como el enlace */
 }
 
-/*FORMS*/
-.container{
-    height: 70vh;
+/*FORMS*//*FORMS*/
+
+.container {
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .form-container {
     background-color: white;
-    height: 400px;
-    width: 400px;
     border-radius: 10px;
     display: flex;
-    margin-top: 50px;
-    padding: 20px;
+    padding: 80px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+    0 10px 10px rgba(0,0,0,0.22);
 }
 
-/*RESPONSIVE
-PARA QUE SE VEA EN MÓVILES*/
+/*LOGIN*/
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 700px;
+    padding: 40px;
+}
 
-@media (min-width: 50em) {
+.img-container {
+    background-image: url("../img/login-email.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex:1;
+    height: 100%;
+    min-width: 300px;
+
+}
+
+.login-container form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+    margin:0;
+    gap:30px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+
+    justify-content: center;
+
+}
+
+
+
+
+.btn {
+    border-radius: 20px;
+    border: 1px solid #FF4B2B;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    font-size: 12px 30px;
+    font-weight: bold;
+    padding: 15px;
+    width: 140px;
+    letter-spacing: 1px;
+    transition: transform 80ms ease-in;
+}
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+
+
+.btn.ghost {
+    background-color: transparent;
+    border-color: #FFFFFF;
+}
+
+/*Animacion inputs*/
+
+.input-container  {
+    height: 50px;
+    position: relative;
+    width: 100%;
+}
+
+.input {
+    background-color: #abaec4;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #252323;
+    font-size: 18px;
+    height: 100%;
+    outline: 0;
+    padding: 4px 20px ;
+    width: 100%;
+}
+.input.email-input {
+    background-image: url("../img/email.webp");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 60px;
+}
+.input.password-input {
+    background-image: url("../img/pass-icon.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 60px;
+}
+
+
+.input.email-input::placeholder {
+    padding-left: 70px;
+}
+
+.cut {
+    background-color: #ffffff;
+    border-radius: 10px;
+    height: 20px;
+    left: 20px;
+    position: absolute;
+    top: -20px;
+    transform: translateY(0);
+    transition: transform 200ms;
+    width: 100px;
+}
+
+.cut-short {
+    width: 50px;
+}
+/*Bajo el cut cuando el input tiene el foco*/
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+    transform: translateY(8px);
+}
+/*Muevo el placeholder al lado de los inputs*/
+.placeholder {
+    color: #65657b;
+    left: 50px;
+    line-height: 14px;
+    pointer-events: none;
+    position: absolute;
+    transform-origin: 0 50%;
+    transition: transform 200ms, color 200ms;
+    top: 20px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+    transform: translateY(-30px) translateX(-15px) scale(0.75);
+}
+
+
+
+.input:focus ~ .placeholder {
+    color: #111212;
+
+}
+
+
+/*RESPONSIVE
+PARA QUE SE VEA EN Tablets*/
+
+
+@media (min-width: 51em) {
     .header li {
         float: left;
     }
@@ -200,5 +359,22 @@ PARA QUE SE VEA EN MÓVILES*/
         display: none;
     }
 
+    .container {
+        height: 80vh;
+    }
+    .footer-container{
+        position: absolute;
+    }
+
+    /*LOGIN*/
+    .login-container {
+        flex-direction: row;
+        gap: 1em;
+        height: 500px;
+        width: 100%;
+        max-width: 55%;
+        min-width: 710px;
+    }
 
 }
+
