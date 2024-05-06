@@ -9,6 +9,31 @@ const form = document.getElementById("form");
 const claveInput = document.querySelector('input[name="clave"]');
 const confirmarClaveInput = document.querySelector('input[name="confirmClave"]');
 
+
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Inicializa todas las imágenes a su versión inactiva
+    const pasos = ['numero-1', 'numero-2', 'numero-3', 'numero-4'];
+    pasos.forEach(paso => document.getElementById(paso).src = `/img/numeros/${paso}-deselec.png`);
+
+    // Obtiene la ruta de la página actual
+    let rutaActual = window.location.pathname;
+
+    // Determina qué imagen debe ser activa basándose en la ruta actual
+    if(rutaActual.includes('paso1')) {
+        document.getElementById('numero-1').src = '/img/numeros/numero-1.png';
+    } else if(rutaActual.includes('paso2')) {
+        document.getElementById('numero-2').src = '/img/numeros/numero-2.png';
+    } else if(rutaActual.includes('paso3')) {
+        document.getElementById('numero-3').src = '/img/numeros/numero-3.png';
+    } else if(rutaActual.includes('paso4')) {
+        document.getElementById('numero-4').src = '/img/numeros/numero-4.png';
+    }
+    // Repite para otros pasos si es necesario
+});
+
+
 asignarEventos();
 function asignarEventos(){
 
@@ -19,6 +44,7 @@ function asignarEventos(){
 
 
 }
+
 function deseleccionarGenero() {
     // Encuentra todos los elementos de entrada de radio con el nombre 'genero'
     let generoRadios = document.querySelectorAll('input[name="genero"]');

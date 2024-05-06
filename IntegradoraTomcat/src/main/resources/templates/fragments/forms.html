@@ -11,14 +11,18 @@
         <div class="error" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></div>
     </div>
     <div id="div_genero">
-        <span class="required">* </span><span id="lab_genero"  class="label"  th:text="#{etiqueta.genero}"/>
-        <th:block th:each="genero, i: ${listaGeneros}">
-            <label th:id="'lab_r' + ${i.index}" th:for="'rg' + ${i.index}">[[${genero.value}]]</label>
-            <input th:id="'rg' + ${i.index}" type="radio" th:field="*{genero}" th:value="${genero.key}" th:checked="${genero == genero.key}"/>
-        </th:block>
+        <div><span class="required">* </span><span id="lab_genero"  class="label"  th:text="#{etiqueta.genero}"/></div>
+
+            <th:block th:each="genero, i: ${listaGeneros}">
+                <div class="inputs-genero">
+                    <input th:id="'rg' + ${i.index}" type="radio" th:field="*{genero}" th:value="${genero.key}" th:checked="${genero == genero.key}"/>
+                    <label th:id="'lab_r' + ${i.index}" th:for="'rg' + ${i.index}">[[${genero.value}]]</label>
+                </div>
+            </th:block>
+
         <div class="error" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
-        <input type="button" class="btn seleccionar" id="btn_deseleccionar_genero" value="Deseleccionar género" onclick="deseleccionarGenero()"/>
-        <input type="button" class="btn seleccionar" id="btn_seleccionar_primer_genero" value="Selecciona el primer género" onclick="seleccionarPrimerGenero()"/>
+        <input type="button" class="btn form" id="btn_deseleccionar_genero" value="Deseleccionar género" onclick="deseleccionarGenero()"/>
+        <input type="button" class="btn form" id="btn_seleccionar_primer_genero" value="Selecciona el primer género" onclick="seleccionarPrimerGenero()"/>
     </div>
     <div id="div_fecha_nacimiento">
         <span class="required">* </span><label for="fechaNacimiento"  th:text="#{etiqueta.fechaNacimiento}"/>
@@ -31,17 +35,21 @@
             <option th:each="pais: ${listaPaises}" th:value="${pais.key}">[[${pais.value}]]</option>
         </select>
         <div class="error" th:if="${#fields.hasErrors('paisNacimiento')}" th:errors="*{paisNacimiento}"></div>
-        <input type="button" class="btn seleccionar" id="btn_deseleccionar_pais" value="Deseleccionar país" onclick="deseleccionarPais()"/>
+        <input type="button" class="btn form" id="btn_deseleccionar_pais" value="Deseleccionar país" onclick="deseleccionarPais()"/>
     </div>
     <div id="div_documento_id">
-        <span class="required">* </span><span id="lab_tipo_documento"  class="label"   th:text="#{etiqueta.tipoDocumento}"/>
-        <th:block th:each="tipo, i: ${listaTiposDocumentos}">
-            <label th:id="'lab_r' + ${i.index}" th:for="'rd' + ${i.index}">[[${tipo.value}]]</label>
-            <input th:id="'rd' + ${i.index}" type="radio" th:field="*{tipoDocumento}" th:value="${tipo.key}" th:checked="${tipoDocumento == tipo.key}"/>
-        </th:block>
+        <div><span class="required">* </span><span id="lab_tipo_documento"  class="label"   th:text="#{etiqueta.tipoDocumento}"/></div>
+        <div>
+            <th:block th:each="tipo, i: ${listaTiposDocumentos}">
+                <div class="inputs-tipo-documento">
+                    <input th:id="'rd' + ${i.index}" type="radio" th:field="*{tipoDocumento}" th:value="${tipo.key}" th:checked="${tipoDocumento == tipo.key}"/>
+                    <label th:id="'lab_r' + ${i.index}" th:for="'rd' + ${i.index}">[[${tipo.value}]]</label>
+                </div>
+            </th:block>
+        </div>
         <div class="error" th:if="${#fields.hasErrors('tipoDocumento')}" th:errors="*{tipoDocumento}"></div>
-        <input type="button" class="btn seleccionar" id="btn_deseleccionar_tipoDocumento" value="Deseleccionar tipo de documento" onclick="deseleccionarTipoDocumento()"/>
-        <span class="required">* </span><label for="documento"   th:text="#{etiqueta.documento}"/>
+        <input type="button" class="btn form" id="btn_deseleccionar_tipoDocumento" value="Deseleccionar tipo de documento" onclick="deseleccionarTipoDocumento()"/>
+        <div><span class="required">* </span><label for="documento"   th:text="#{etiqueta.documento}"/></div>
         <input type="text" th:field="*{documento}"/>
         <div class="error" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}"></div>
     </div>
@@ -50,7 +58,7 @@
 <fieldset th:fragment="registroPaso2">
     <legend th:text="#{leyenda.datosContacto}"/>
     <div id="div_telefono">
-        <span class="required">* </span><label for="telefono"   th:text="#{etiqueta.telefono}"/>
+        <span class="required">*</span><label for="telefono"   th:text="#{etiqueta.telefono}"/>
         <input type="text" th:field="*{telefonoMovil}"/>
         <div class="error" th:if="${#fields.hasErrors('telefonoMovil')}" th:errors="*{telefonoMovil}"></div>
     </div>
@@ -133,19 +141,22 @@
 </fieldset>
 
 <div th:fragment="login1">
-    <div id="div_usuario">
-        <span class="required">* </span><label for="usuario"   th:text="#{etiqueta.usuario}"/>
-        <input type="text" id="usuario" name="usuario"/>
+    <div id="div_usuario" class="input-container">
+        <input type="text" id="usuario" name="usuario" class="input email-input" placeholder=" "/>
+        <div class="cut"></div>
         <span th:if="${error != null}" th:text="${error}" class="error"/><br th:if="${error != null}">
+        <label for="usuario" class="placeholder"   th:text="#{etiqueta.usuario}"/>
     </div>
 </div>
 
 <div th:fragment="login2">
 
-    <div id="div_pass" th:if="${fechaBloqueo} == null">
-        <span class="required">* </span><label for="clave"   th:text="#{etiqueta.clave}"/>
-        <input type="password" id="clave" name="clave"/>
+    <div id="div_pass" class="input-container"  th:if="${fechaBloqueo} == null">
+
+        <input type="password" id="clave" name="clave" class="input password-input" placeholder=" "/>
+        <div class="cut"></div>
         <span th:if="${error != null}" th:text="${error}" class="error"/><br th:if="${error != null}">
+        <label for="clave"  class="placeholder" th:text="#{etiqueta.clave}"/>
     </div>
     <div id="div_pass" th:if="${fechaBloqueo} != null">
         <h1 class="error" th:text="${mensajeBloqueo}"></h1>
