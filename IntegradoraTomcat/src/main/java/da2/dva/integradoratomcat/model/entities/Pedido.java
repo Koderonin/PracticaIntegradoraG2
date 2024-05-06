@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +25,10 @@ public class Pedido {
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente", foreignKey = @ForeignKey(name = "FK_CLIENTE_PEDIDO"))
     private Cliente cliente;
+
+    @OneToMany
+    @JoinColumn(name = "pedido_id", foreignKey = @ForeignKey(name = "FK_PEDIDO_LINEA_PEDIDO_ID_PEDIDO"))
+    private Set<LineaPedido> lineasPedido;
 
 }
 

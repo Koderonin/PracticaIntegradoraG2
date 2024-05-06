@@ -7,8 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
+import java.util.UUID;
+
 @Data @AllArgsConstructor @NoArgsConstructor
 public class LineaPedidoKey implements java.io.Serializable {
-    private ObjectId producto_id;
+    private String producto_id;
     private Pedido pedido;
 }

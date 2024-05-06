@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Table(name = "linea_pedido")
 @Entity
@@ -20,7 +21,7 @@ public class LineaPedido {
     private Pedido pedido;
 
     @Id
-    private ObjectId producto_id;
+    private String producto_id;
 
     private Integer unidades;
 

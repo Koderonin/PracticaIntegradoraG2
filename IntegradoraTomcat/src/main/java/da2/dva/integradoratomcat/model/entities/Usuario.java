@@ -39,7 +39,7 @@ public class Usuario {
     private String confirmClave;
     @NotNull
     @Size(min = 1)
-    @CheckColeccion(coleccion = "listapreguntas")
+    //@CheckColeccion(coleccion = "listapreguntas")
     private String preguntaRecuperacion;
     @NotBlank
     private String respuestaRecuperacion;
@@ -47,6 +47,15 @@ public class Usuario {
     private LocalDate fechaUltimaConexion;
     private Integer numAccesos;
     private LocalDate fechaBloqueo; //Si es null no esta bloqueado
+
+    public Usuario(UUID idUsuario, String email, String clave, String confirmClave, String preguntaRecuperacion, String respuestaRecuperacion) {
+        this.id_usuario = idUsuario;
+        this.email = email;
+        this.clave = clave;
+        this.confirmClave = confirmClave;
+        this.preguntaRecuperacion = preguntaRecuperacion;
+        this.respuestaRecuperacion = respuestaRecuperacion;
+    }
 
     //private Auditoria //TODO: Implementar auditoria
 

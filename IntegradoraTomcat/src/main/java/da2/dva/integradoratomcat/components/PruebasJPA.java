@@ -5,6 +5,7 @@ import da2.dva.integradoratomcat.model.collections.Pais;
 import da2.dva.integradoratomcat.model.entities.*;
 import da2.dva.integradoratomcat.repositories.jpa.*;
 import da2.dva.integradoratomcat.repositories.mongo.ProductoRepository;
+import org.bson.BsonString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -25,51 +26,51 @@ public class PruebasJPA {
     @Autowired
     private PaisRepository paisRepository;
 
-    /*@Bean
+    @Bean
     //@Transactional // esto hace que no falle la transacción porque la hace toda de una; no es lo que quiero
     public void pruebitas() {
 
         UsuarioCliente usuarioCliente = new UsuarioCliente();
         usuarioCliente.setEmail("admin@integradora.jpa");
         usuarioCliente.setNumAccesos(2);
-        usuarioCliente.setClave("Admin123!");
+        usuarioCliente.setClave("Clientillo1!");
         usuarioCliente.setPreguntaRecuperacion("1");
         usuarioCliente.setRespuestaRecuperacion("Croquetas");
-        usuarioCliente.setConfirmClave("Admin123!");
-        UCRepository.save(usuarioCliente); // esto hace que quede detached, por lo que sea
-        /*Dirección asignada
+        usuarioCliente.setConfirmClave("Clientillo1!");
+        UCRepository.save(usuarioCliente);
+        //Dirección asignada
         Direccion direccion = getDireccion();
         direccionRepository.save(direccion);
 
-//        Cliente cliente = new Cliente();
+        Cliente cliente = new Cliente();
 
         Pais pais = new Pais();
         pais.setNombrePais("España");
         pais.setSiglasPais("ES");
         paisRepository.save(pais);
 
-//        if (usuarioCliente != null) {
-//            cliente.setUsuarioCliente(usuarioCliente);
-//            cliente.setDireccion(direccion);
-//            cliente.setPais(pais);
-//            cliente.setNombre("Pepe");
-//            cliente.setApellidos("García Mongólez");
-//            cliente.setGenero("Hombre");
-//            cliente.setFechaNacimiento(LocalDate.of(1988, 1, 14));
-//            cliente.setTipoDocumento("DNI");
-//            cliente.setDocumento("12345678A");
-//            cliente.setTelefonoMovil("687456842");
-//            clienteRepository.save(cliente);
-//        } else {
-//            System.err.println("No lo pilló.");
-//        }
-/*
+        if (usuarioCliente != null) {
+            cliente.setUsuarioCliente(usuarioCliente);
+            cliente.setDireccion(direccion);
+            cliente.setPaisNacimiento(pais);
+            cliente.setNombre("Pepe");
+            cliente.setApellidos("García Mongólez");
+            cliente.setGenero("Hombre");
+            cliente.setFechaNacimiento(LocalDate.of(1988, 1, 14));
+            cliente.setTipoDocumento("DNI");
+            cliente.setDocumento("12345678A");
+            cliente.setTelefonoMovil("687456842");
+            clienteRepository.save(cliente);
+        } else {
+            System.err.println("No lo pilló.");
+        }
+
         cliente.setComentarios("Trololó");
         cliente.setAceptacionLicencia(true);
         cliente.setDocumento("12345678B");
         clienteRepository.save(cliente);
 
-    }*/
+    }
 
     @Autowired
     private ProductoRepository productoRepository;
@@ -79,22 +80,28 @@ public class PruebasJPA {
 
     @Autowired
     private LineaPedidoRepository lineaPedidoRepository;
-    /*@Bean
+    @Bean
     public void pruebitasPedidos() {
         Producto producto = new Producto();
-        producto.setCodigo("1234");
-        producto.setPrecio(new BigDecimal("12.5"));
-        producto.setDescripcion("Muy bonita");
-        producto.setModelo("Cosa guayyyyyyyyyyy");
+        producto.setCodigo(new BsonString("12345"));
+        producto.setPrecio(new BigDecimal("1200000.5"));
+        producto.setDescripcion("Deportivo Berlinetta biplaza");
+        producto.setModelo(new BsonString("Testarossa"));
+        producto.setMarca(new BsonString("Ferrari"));
+        producto.setUnidadesVendidas(2);
+        producto.setGastoAcumulado(new BigDecimal("1200000.5")
+                .multiply(new BigDecimal(producto.getUnidadesVendidas())));
+        producto.setCantidadAlmacen(5);
+       // producto.append("color", "rojo");
         productoRepository.save(producto);
 
         UsuarioCliente usuarioCliente = new UsuarioCliente();
         usuarioCliente.setEmail("admin2@integradora.jpa");
         usuarioCliente.setNumAccesos(1);
-        usuarioCliente.setClave("Admin123!");
+        usuarioCliente.setClave("Cliente123!");
         usuarioCliente.setPreguntaRecuperacion("2");
         usuarioCliente.setRespuestaRecuperacion("Croquetas");
-        usuarioCliente.setConfirmClave("Admin123!");
+        usuarioCliente.setConfirmClave("Cliente123!");
         UCRepository.save(usuarioCliente);
 
         Pais pais = new Pais();
@@ -123,7 +130,7 @@ public class PruebasJPA {
         LineaPedido linea = new LineaPedido();
         linea.setUnidades(2);
         linea.setPrecioUnitario(producto);
-        linea.setProducto_id(producto.getId());
+        linea.setProducto_id(producto.getId().toHexString());
         linea.setPedido(pedido);
         lineaPedidoRepository.save(linea);
 
@@ -142,5 +149,5 @@ public class PruebasJPA {
 //        direccion.setTipo_via(1L);
         direccion.setNumero_via(1);
         return direccion;
-    }*/
+    }
 }

@@ -4,6 +4,7 @@ import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioAdministrador;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.services.Servicio;
+import da2.dva.integradoratomcat.services.ServicioUsuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,10 +26,12 @@ public class RegistroUsuarioController {
 
     @Autowired
     Servicio servicio;
+    @Autowired
+    ServicioUsuario servicioUsuario;
 
     @Bean
     public void conseguirColeccionesRU(){
-        mv.addObject("listaUsuarios",servicio.devuelveUsuarios());
+        mv.addObject("listaUsuarios",servicioUsuario.devuelveUsuarios());
         mv.addObject("listaPreguntas",servicio.devuelvePreguntas());
     }
 
@@ -65,7 +68,7 @@ public class RegistroUsuarioController {
 
             mv.setViewName("redirect:/login/paso1");
 
-            servicio.insertarUsuarioEmpleado(usuario);
+            servicioUsuario.insertarUsuario(usuario);
         }
         // mv.addObject("usuario", usuario);
         return mv;

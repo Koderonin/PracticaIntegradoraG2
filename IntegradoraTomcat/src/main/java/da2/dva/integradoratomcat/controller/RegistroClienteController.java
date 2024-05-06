@@ -2,7 +2,9 @@ package da2.dva.integradoratomcat.controller;
 
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.entities.Cliente;
+import da2.dva.integradoratomcat.services.ServicioCliente;
 import da2.dva.integradoratomcat.services.ServicioColecciones;
+import da2.dva.integradoratomcat.services.ServicioUsuario;
 import da2.dva.integradoratomcat.utils.DatosCliente;
 import da2.dva.integradoratomcat.utils.DatosContacto;
 import da2.dva.integradoratomcat.utils.DatosPersonales;
@@ -23,6 +25,10 @@ import java.util.Set;
 public class RegistroClienteController {
     @Autowired
     ServicioColecciones servicio;
+    @Autowired
+    ServicioUsuario servicioUsuario;
+    @Autowired
+    ServicioCliente servicioCliente;
     ModelAndView mv = new ModelAndView("/registro/cliente");
 
     @Bean
@@ -34,7 +40,7 @@ public class RegistroClienteController {
         mv.addObject("listaTiposDocumentos",servicio.devuelveTiposDocumentos());
         mv.addObject("listaPreguntas",servicio.devuelvePreguntas());
         mv.addObject("listaTiposVia",servicio.devuelveTiposVia());
-        mv.addObject("listaUsuarios",servicio.devuelveUsuarios());
+        mv.addObject("listaUsuarios",servicioUsuario.devuelveUsuarios());
     }
 
     @GetMapping("paso1")
@@ -181,7 +187,7 @@ public class RegistroClienteController {
     @PostMapping("paso4")
     public ModelAndView paso4(HttpSession sesion, @ModelAttribute("cliente") Cliente cliente) {
         if (mv.getModel().get("error").equals("No hay errores")) {
-            servicio.insertarCliente(cliente);
+            servicioCliente.insertarNuevoCliente(cliente);
             mv.setViewName("redirect:/area-cliente");
         }
         return mv;

@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface CheckClave {
 
-    String message() default "{password.invalidConfirmation}";
+    String message() default "Las claves no coinciden";
 
     Class<?>[] groups() default { };
 

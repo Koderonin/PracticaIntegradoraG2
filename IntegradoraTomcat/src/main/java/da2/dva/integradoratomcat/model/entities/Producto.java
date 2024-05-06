@@ -1,14 +1,17 @@
 package da2.dva.integradoratomcat.model.entities;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.BsonString;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -17,7 +20,7 @@ import java.math.BigDecimal;
 public class Producto {
     @MongoId
     private ObjectId id;
-    private String codigo;
+    private BsonString codigo;
     private String descripcion;
     private BigDecimal precio;
     private int unidadesVendidas;
@@ -29,9 +32,9 @@ public class Producto {
     private BigDecimal descuento;
     private boolean esNovedad;
     private int valoracionProducto;
-    private String marca;
-    private String modelo;
-    private String comentarios;
+    private BsonString marca;
+    private BsonString modelo;
+    private BsonString comentarios;
 
 //    private Auditoria auditoria;
 

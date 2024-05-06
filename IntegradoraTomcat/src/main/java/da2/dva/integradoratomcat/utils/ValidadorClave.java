@@ -1,7 +1,6 @@
 package da2.dva.integradoratomcat.utils;
 
 import da2.dva.integradoratomcat.model.entities.Usuario;
-import da2.dva.integradoratomcat.model.entities.UsuarioEmpleado;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
