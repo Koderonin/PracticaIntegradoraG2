@@ -137,6 +137,46 @@ a {
     top:0;
 }
 
+/* BARRA NAVEGACIÓN PASOS */
+
+.barra_pasos {
+    margin-top: 100px;
+    font-size: small;
+}
+.barra_pasos ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.barra_pasos li {
+    margin: 0 10px; /
+}
+
+.enlace_img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+
+}
+
+.barra_pasos a {
+    text-align: center;
+    text-decoration: none;
+
+    display: inline-block;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.barra_pasos a:hover {
+    transform: scale(1.1);
+}
+
+
+
 
 /* FOOTER*/
 .footer-container {
@@ -271,9 +311,41 @@ a {
     height: 30px;
     font-size: 14px;
 }
+/*REGISTRO-CLIENTE*/
 
+.form-container.registro-cliente{
+    padding: 20px;
+}
+
+fieldset{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+#div_direccion_entrega{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.inputs-genero{
+    margin-left: 50px;
+}
+.inputs-tipo-documento{
+    margin-left: 50px;
+}
+#div_usuario{
+    display: flex;
+    flex-direction: column;
+}
+#div_documento_id{
+    display: flex;
+    flex-direction: column;
+}
 
 /*LOGIN*/
+
 .login-container {
     display: flex;
     flex-direction: column;
@@ -303,21 +375,43 @@ a {
     gap:30px;
 }
 
+/*BOTONES*/
+
+.form-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-top :20px;
+    padding: 10px;
+}
 .button-container {
     display: flex;
     flex-direction: row-reverse;
     gap: 20px;
-
     justify-content: center;
-
 }
-
+.button-container .btn.small{
+    width: auto;
+}
+.btn .submit{
+    align-self: center;
+    justify-self: center;
+}
 .btn.small{
     font-size: 12px ;
     padding: 10px;
     width: 130px;
 }
-
+.btn.form{
+    margin: 5px;
+    font-size: 10px ;
+    padding: 8px;
+    width: auto;
+    background: #38B9F0;
+    border: 1px solid #38B9F0;
+}
 
 .btn {
     border-radius: 20px;
@@ -432,7 +526,7 @@ a {
 
 
 /*RESPONSIVE
-PARA QUE SE VEA EN MOVILES*/
+PARA QUE SE VEA EN DESKTOP*/
 
 
 @media (min-width: 51em) {
@@ -470,8 +564,19 @@ PARA QUE SE VEA EN MOVILES*/
         height: 800px;
     }
 
+    /*REGISTRO-CLIENTE*/
+    .barra_pasos {
+        padding: 10px;
+        font-size: large;
 
+    }
 
+    .barra_pasos ul {
+        gap:20px;
+    }
+    .form-container.registro-cliente{
+        padding: 80px;
+    }
 
 }
 

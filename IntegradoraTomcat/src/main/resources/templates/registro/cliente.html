@@ -4,18 +4,24 @@
     <body>
     <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
     <nav th:replace="~{fragments/navs :: navegacion_pasos(${paso})}"></nav>
-    <div class="container">
-        <div class="form-container">
+    <div class="container registro-cliente">
+        <div class="form-container registro-cliente">
             <form id="form" th:action="paso__${paso}__" method="post" th:object="${cliente}">  <!-- TODO: Implementar acción -->
                 <div th:if="${#fields.hasErrors('global')}" class="error">
-                    <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
+                    <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error"></p>
                 </div>
                 <input type="hidden" id="iteraciones" name="iteraciones" th:value="${iteraciones}"/>
                 <p th:text="${error}"></p>
                 <fieldset th:replace="~{fragments/forms :: registroPaso__${paso}__}"></fieldset>
-                <input type="submit" value="Enviar"/>
-                <input type="reset" value="Restablecer"/>
-                <input type="button" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
+
+                <div class="form-buttons">
+                    <div class="button-container">
+                        <input type="reset" class="btn small" value="Restablecer"/>
+                        <input type="button" class="btn small" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
+                    </div>
+                    <input type="submit" class="btn submit" value="Enviar"/>
+                </div>
+
             </form>
         </div>
     </div>

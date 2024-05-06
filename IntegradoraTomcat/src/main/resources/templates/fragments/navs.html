@@ -16,17 +16,29 @@
 
 <nav th:fragment="navegacion_pasos(paso)" class="barra_pasos">    <!-- TODO: Implementar barra de navegación -->
     <ul>
-        <a href="paso1" title="Paso 1 (Datos Personales)" class="enlace_img">
-            <img alt="imagen paso 1" th:src="@{/imgs/paso1.png}" width="75" height="75" />
+        <a href="paso1" title="Paso 1 (Datos Personales)" >
+            <div class="enlace_img">
+                <img id="numero-1" alt="imagen paso 1" th:src="@{/img/numeros/numero-1.png}" width="45" height="45" />
+                <span>Datos Personales</span>
+            </div>
         </a>
-        <a href="paso2" title="Paso 2 (Datos de Contacto)" class="enlace_img visitando">
-            <img alt="imagen paso 2" th:src="@{/imgs/paso2.png}" width="75" height="75" />
+        <a href="paso2" title="Paso 2 (Datos de Contacto)">
+            <div class="enlace_img">
+                <img id="numero-2" alt="imagen paso 2" th:src="@{/img/numeros/numero-2.png}" width="45" height="45" />
+                <span>Datos de Contacto</span>
+            </div>
         </a>
-        <a href="paso3" title="Paso 3 (Datos de Cliente)" class="enlace_img">
-            <img alt="imagen paso 3" th:src="@{/imgs/paso3.png}" width="75" height="75" />
+        <a href="paso3" title="Paso 3 (Datos de Cliente)" >
+            <div class="enlace_img">
+                <img id="numero-3" alt="imagen paso 3" th:src="@{/img/numeros/numero-3.png}" width="45" height="45" />
+                <span>Datos de Cliente</span>
+            </div>
         </a>
-        <a href="paso4" title="Paso 4 (Resumen Final)" class="enlace_img">
-            <img alt="imagen paso 4" th:src="@{/imgs/paso4.png}" width="75" height="75" />
+        <a href="paso4" title="Paso 4 (Resumen Final)" >
+            <div class="enlace_img">
+                <img id="numero-4" alt="imagen paso 4" th:src="@{/img/numeros/numero-4.png}" width="45" height="45" />
+                <span>Resumen Final</span>
+            </div>
         </a>
     </ul>
 </nav>
