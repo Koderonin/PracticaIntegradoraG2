@@ -3,39 +3,58 @@
     <head th:replace="~{fragments/head :: cabeza(${titulo})}"/>
     <body>
         <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
-        <form id="form" th:action="${tipoUsuario}" method="post" th:object="${usuario}">
-            <div th:if="${#fields.hasErrors('global')}" class="error">
-                <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
+        <div class="container registro-usuario">
+            <div class="form-container registro-usuario">
+                <div class="img-container" ><p th:text="#{etiqueta.registro}"> </p></div>
+                <form id="form" th:action="${tipoUsuario}" method="post" th:object="${usuario}">
+                    <div th:if="${#fields.hasErrors('global')}" class="error">
+                        <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
+                    </div>
+                    <div class="contenedor-izquierda">
+                            <div id="div_usuario">
+                                <span class="required">* </span><input class="input" type="text" th:field="*{email}" th:placeholder="#{etiqueta.email}"/>
+                                <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                            </div>
+                            <div id="div_claves" class="div_claves">
+                                <div class="column1">
+                                    <span class="required">* </span><input class="input" type="password" th:field="*{clave}" th:placeholder="#{etiqueta.clave}"/>
+                                    <div class="error" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
+                                </div>
+                                <div class="column2">
+                                    <span class="required">* </span><input class="input" type="password" th:field="*{confirmClave}" th:placeholder="#{etiqueta.confirmarClave}"/>
+                                    <div class="error" th:if="${#fields.hasErrors('confirmClave')}" th:errors="*{confirmClave}"></div>
+                                </div>
+                                <input type="button"  class="btn small" id="btn_mostrar_claves" value="Mostrar Claves" onmousedown="mostrarClaves()" onmouseup="ocultarClaves()"/>
+                            </div>
+                        </div>
+                    <div class="contenedor-derecha">
+                            <div id="div_preguntas" class="div_preguntas">
+                                <div class="column1">
+                                    <span class="required">* </span><select th:field="*{preguntaRecuperacion}" th:placeholder="#{etiqueta.preguntaSeguridad}">
+                                    <option th:each="pregunta : ${listaPreguntas}" th:value="${pregunta.key}" th:text="${pregunta.value}"></option>
+                                </select>
+                                    <div class="error" th:if="${#fields.hasErrors('preguntaRecuperacion')}" th:errors="*{preguntaRecuperacion}"></div>
+                                </div>
+                                <div class="column2">
+                                    <span class="required">* </span><input class="input" type="text" th:field="*{respuestaRecuperacion}" th:placeholder="#{etiqueta.respuestaSeguridad}"/>
+                                    <div class="error" th:if="${#fields.hasErrors('respuestaRecuperacion')}" th:errors="*{respuestaRecuperacion}"></div>
+                                </div>
+
+                            </div>
+                            <div class="div_btns">
+                                <input type="reset" class="btn small" value="Restablecer"/>
+                                <input type="button" class="btn small" value="Vaciar" onclick="vaciarFormulario()"/>
+                            </div>
+                        </div>
+
+                    <input type="submit" class="btn submit" value="Enviar"/>
+
+                </form>
             </div>
-            <div id="div_usuario">
-                <span class="required">* </span><label for="email" th:text="#{etiqueta.email}"/>
-                <input type="text" th:field="*{email}"/>
-                <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-            </div>
-            <div id="div_claves">
-                <span class="required">* </span><label for="clave" th:text="#{etiqueta.clave}"/>
-                <input type="password" th:field="*{clave}"/>
-                <div class="error" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
-                <span class="required">* </span><label for="confirmClave" th:text="#{etiqueta.confirmarClave}"/>
-                <input type="password" th:field="*{confirmClave}"/>
-                <div class="error" th:if="${#fields.hasErrors('confirmClave')}" th:errors="*{confirmClave}"></div>
-                <input type="button" id="btn_mostrar_claves" value="Mostrar Claves" onmousedown="mostrarClaves()" onmouseup="ocultarClaves()"/>
-            </div>
-            <div id="div_preguntas">
-                <span class="required">* </span><label for="preguntaRecuperacion" th:text="#{etiqueta.preguntaSeguridad}"/>
-                <select th:field="*{preguntaRecuperacion}">
-                    <option th:each="pregunta : ${listaPreguntas}" th:value="${pregunta.key}" th:text="${pregunta.value}"></option>
-                </select>
-                <div class="error" th:if="${#fields.hasErrors('preguntaRecuperacion')}" th:errors="*{preguntaRecuperacion}"></div>
-                <span class="required">* </span><label for="respuestaRecuperacion" th:text="#{etiqueta.respuestaSeguridad}"/>
-                <input type="text" th:field="*{respuestaRecuperacion}"/>
-                <div class="error" th:if="${#fields.hasErrors('respuestaRecuperacion')}" th:errors="*{respuestaRecuperacion}"></div>
-            </div>
-            <input type="submit" class="btn" value="Enviar"/>
-            <input type="reset" class="btn" value="Restablecer"/>
-            <input type="button" class="btn" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
-        </form>
+        </div>
+
         <footer th:replace="~{fragments/footer :: pie_pagina}"/>
+
         <script type="text/javascript" th:src="@{/js/script.js}"></script>
     </body>
 </html>

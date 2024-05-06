@@ -4,12 +4,14 @@
     <body>
         <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
         <div class="container" id="container">
-            <div class="form-container">
+            <div class="form-container login-container">
+                <div class="img-container"></div>
                 <form id="form" th:action="paso__${paso}__" method="post">
                     <div th:replace="~{fragments/forms :: login__${paso}__}"></div>
-                    <input type="submit" class="btn" value="Enviar"/>
-                    <input type="reset" class="btn" value="Restablecer"/>
-                    <input type="button" class="btn" value="Vaciar Formulario" onclick="vaciarFormulario()"/>
+                    <div class="button-container">
+                        <input type="submit" class="btn" value="Enviar"/>
+                        <input type="reset" class="btn" value="Restablecer"/>
+                    </div>
                 </form>
             </div>
         </div>
