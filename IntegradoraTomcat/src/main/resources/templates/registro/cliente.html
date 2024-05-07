@@ -11,7 +11,7 @@
                     <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error"></p>
                 </div>
                 <input type="hidden" id="iteraciones" name="iteraciones" th:value="${iteraciones}"/>
-                <p th:text="${error}"></p>
+                <p th:text="${error}" class="error"></p>
                 <fieldset th:replace="~{fragments/forms :: registroPaso__${paso}__}"></fieldset>
 
                 <div class="form-buttons">

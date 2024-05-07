@@ -323,6 +323,19 @@ fieldset{
     align-items: center;
     gap: 20px;
 }
+.resumen-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+}
+.resumen{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    font-size: small;
+    padding: 10px;
+}
 #div_direccion_entrega{
     display: flex;
     flex-direction: column;
@@ -576,6 +589,20 @@ PARA QUE SE VEA EN DESKTOP*/
     }
     .form-container.registro-cliente{
         padding: 80px;
+    }
+    .resumen-container{
+        display: flex;
+        flex-direction: row;
+        min-width: 600px;
+        gap: 20px;
+    }
+    .resumen{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        font-size: small;
+        padding: 10px;
     }
 
 }

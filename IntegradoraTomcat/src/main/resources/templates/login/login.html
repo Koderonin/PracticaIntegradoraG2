@@ -7,6 +7,7 @@
             <div class="form-container login-container">
                 <div class="img-container"></div>
                 <form id="form" th:action="paso__${paso}__" method="post">
+                    <p th:text="${errorGlobal}" class="error"></p>
                     <div th:replace="~{fragments/forms :: login__${paso}__}"></div>
                     <div class="button-container">
                         <input type="submit" class="btn" value="Enviar"/>

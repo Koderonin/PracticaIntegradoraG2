@@ -56,15 +56,28 @@ function deseleccionarGenero() {
 }
 
 function seleccionarPrimerGenero() {
+    // Encuentra el primer elemento de entrada de radio con el nombre 'genero'
+    let primerGeneroRadio = document.querySelector('input[name="genero"]:first-child');
 
+    // Establece 'checked' en true para el primer elemento de entrada de radio
+    primerGeneroRadio.checked = true;
 }
 
 function deseleccionarPais() {
+    // Encuentra el elemento select con el nombre 'pais'
+    let paisSelect = document.querySelector('select[name="pais"]');
 
+    // Establece el valor del elemento select en vacío
+    paisSelect.value = '';
 }
 
 function deseleccionarTipoDocumento() {
+    let documentoRadios = document.querySelectorAll('input[name="tipoDocumento"]');
 
+    // Itera sobre los elementos de entrada de radio y establece 'checked' en false
+    documentoRadios.forEach(function(radio) {
+        radio.checked = false;
+    });
 }
 function mostrarClaves() {
     if (claveInput && confirmarClaveInput) {

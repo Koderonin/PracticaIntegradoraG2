@@ -6,6 +6,7 @@ import da2.dva.integradoratomcat.model.auxiliar.TarjetaCredito;
 import da2.dva.integradoratomcat.model.collections.Pais;
 import da2.dva.integradoratomcat.utils.*;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -62,10 +63,11 @@ public class Cliente {
     @NotBlank(groups = DatosPersonales.class)
     private String documento;
     @NotBlank(groups = DatosContacto.class)
-    @Pattern(regexp = "[0-9]{9}")
+    @Pattern(regexp = "[0-9]{9}" , groups = DatosContacto.class)
     @Column(name = "telefono_movil", length = 9)
     private String telefonoMovil;
     private BigDecimal gastoAcumuladoCliente;
+    @Valid
     @OneToOne
     @JoinColumn(name = "id_direccion_postal", referencedColumnName = "id_direccion", foreignKey = @ForeignKey(name = "FK_DIRECCION_CLIENTE"))
     private Direccion direccion;

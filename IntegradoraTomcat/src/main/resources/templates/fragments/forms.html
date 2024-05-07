@@ -134,10 +134,70 @@
 </fieldset>
 
 <fieldset th:fragment="registroPaso4">
+
     <legend>Revisión de datos</legend>
-    <fieldset th:replace="~{fragments/forms :: registroPaso1}"></fieldset>
-    <fieldset th:replace="~{fragments/forms :: registroPaso2}"></fieldset>
-    <fieldset th:replace="~{fragments/forms :: registroPaso3}"></fieldset>
+    <div class="resumen-container">
+        <fieldset>
+            <legend th:text="#{leyenda.datosPersonales}"/>
+            <div class="resumen">
+                <p th:text="'Nombre: ' + *{nombre}"></p>
+                <p th:text="${nombre}" class="error"></p>
+                <p th:text="'Apellidos: ' + *{apellidos}"></p>
+                <p th:text="${apellidos}" class="error"></p>
+                <p th:text="'Género: ' + *{genero}"></p>
+                <p th:text="${genero}" class="error"></p>
+                <p th:text="'Fecha de nacimiento: ' + *{fechaNacimiento}"></p>
+                <p th:text="${fechaNacimiento}" class="error"></p>
+                <p th:text="'Nacionalidad: ' + *{paisNacimiento}"></p>
+                <p th:text="${paisNacimiento}" class="error"></p>
+                <p th:text="'Tipo de documento: ' + *{tipoDocumento}"></p>
+                <p th:text="${tipoDocumento}" class="error"></p>
+                <p th:text="'Documento: ' + *{documento}"></p>
+                <p th:text="${documento}" class="error"></p>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend th:text="#{leyenda.datosContacto}"/>
+            <div class="resumen">
+                <p th:text="'Teléfono móvil: ' + *{telefonoMovil}"></p>
+                <p th:text="${telefonoMovil}" class="error"></p>
+                <p th:text="'Tipo de vía: ' + *{direccion.tipo_via}"></p>
+                <p th:text="${tipo_via}" class="error"></p>
+                <p th:text="'Nombre de vía: ' + *{direccion.nombre_via}"></p>
+                <p th:text="${nombre_via}" class="error"></p>
+                <p th:text="'Número de vía: ' + *{direccion.numero_via}"></p>
+                <p th:text="${numero_via}" class="error"></p>
+                <p th:text="'Planta: ' + *{direccion.planta}"></p>
+                <p th:text="${planta}" class="error"></p>
+                <p th:text="'Puerta: ' + *{direccion.puerta}"></p>
+                <p th:text="${puerta}" class="error"></p>
+                <p th:text="'Portal: ' + *{direccion.portal}"></p>
+                <p th:text="${portal}" class="error"></p>
+                <p th:text="'Localidad: ' + *{direccion.localidad}"></p>
+                <p th:text="${localidad}" class="error"></p>
+                <p th:text="'Código postal: ' + *{direccion.cp}"></p>
+                <p th:text="${cp}" class="error"></p>
+                <p th:text="'Región: ' + *{direccion.region}"></p>
+                <p th:text="${region}" class="error"></p>
+                <p th:text="'País: ' + *{direccion.pais}"></p>
+                <p th:text="${pais}" class="error"></p>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend th:text="#{leyenda.datosCliente}"/>
+            <div class="resumen">
+                <p th:text="'Comentarios: ' + *{comentarios}"></p>
+                <p th:text="${comentarios}" class="error"></p>
+                <p th:text="'Licencia: ' + *{aceptacionLicencia}"></p>
+                <p th:text="${aceptacionLicencia}" class="error"></p>
+            </div>
+        </fieldset>
+
+    </div>
+
+
 </fieldset>
 
 <div th:fragment="login1">

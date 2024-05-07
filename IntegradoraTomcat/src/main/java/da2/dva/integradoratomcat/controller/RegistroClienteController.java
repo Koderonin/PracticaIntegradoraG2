@@ -2,6 +2,7 @@ package da2.dva.integradoratomcat.controller;
 
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.entities.Cliente;
+import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.services.ServicioCliente;
 import da2.dva.integradoratomcat.services.ServicioColecciones;
 import da2.dva.integradoratomcat.services.ServicioUsuario;
@@ -115,6 +116,7 @@ public class RegistroClienteController {
 
             return mv;
         }
+
         //Recuperación de datos de otros pasos
         Cliente clienteSesion = (Cliente) sesion.getAttribute("cliente");
         if (clienteSesion == null) clienteSesion = new Cliente();
@@ -182,56 +184,72 @@ public class RegistroClienteController {
 
     @GetMapping("paso4")
     public ModelAndView resumen(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
+        //TODO: REVISAR CÓDIGO POR SI SE PUEDE MEJORAR, ES MU LARGO
+
+        //Creación de ModelAndView
         ModelAndView mv = new ModelAndView("/registro/cliente");
-        //Paso de colecciones necesarias
-        mv.addObject("listaGeneros", servicio.getGeneros());
-        mv.addObject("listaPaises", servicio.getPaises());
-        mv.addObject("listaTiposDocumentos", servicio.getTiposDocumentos());
-        mv.addObject("listaTiposVia", servicio.getTiposVia());
         //Recuperación de datos de otros pasos
         cliente = (Cliente) sesion.getAttribute("cliente");
+        //Si el cliente es nulo, se crea uno
         if (cliente == null) cliente = new Cliente();
         mv.addObject("cliente", cliente);
 
-        //Validación de los datos ingresados hasta el momento
+        //Creamos una fabrica de validaciiones y un validador a partir de ella
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
+        // Se realiza la validación del objeto cliente, aplicando restricciones de los diferentes grupos
         Set<ConstraintViolation<Cliente>> violations = validator.validate(cliente, DatosPersonales.class, DatosContacto.class, DatosCliente.class);
+        //Para cada violación se crea un error y se agrega al modelo
         for(ConstraintViolation<Cliente> violation : violations) {
             String error = violation.getMessage();
             String name = violation.getPropertyPath().toString();
             mv.addObject(name, error);
         }
+
+        //Si el cliente no tiene una dirección, se crea una nueva
+        if(cliente.getDireccion()==null) cliente.setDireccion(new Direccion());
+
+        //Hacemos lo mismo para la dirección
+        Set<ConstraintViolation<Direccion>> violationDir = validator.validate(cliente.getDireccion(), DatosContacto.class);
+        for(ConstraintViolation<Direccion> violation : violationDir) {
+            String error = violation.getMessage();
+            String name = violation.getPropertyPath().toString();
+            mv.addObject(name,  error);
+        }
+
         //Paso de parámetros para resolución de la vista
         mv.addObject("paso" ,"4");
 
-        //paso al modelo los errores para guardarlo en un hidden y ver si se puede registrar en el siguiente paso
-        if(!violations.isEmpty()){
+        //Si violations y violationDir NO están vacías, hay errores
+        if (!violations.isEmpty() && !violationDir.isEmpty()) {
+            sesion.setAttribute("hayErrores", true);
             mv.addObject("error", "Hay errores");
-        }else{
+        } else {
+            sesion.setAttribute("hayErrores", false);
+            //paso al modelo los errores para guardarlo en un hidden y ver si se puede registrar en el siguiente paso
             mv.addObject("error", "No hay errores");
+            sesion.setAttribute("cliente", cliente);
         }
 
         return mv;
     }
 
     @PostMapping("paso4")
-    public ModelAndView paso4(@ModelAttribute("cliente") Cliente cliente) {
-        ModelAndView mv = new ModelAndView("/registro/cliente");
-        //Paso de colecciones necesarias
-        mv.addObject("listaGeneros", servicio.getGeneros());
-        mv.addObject("listaPaises", servicio.getPaises());
-        mv.addObject("listaTiposDocumentos", servicio.getTiposDocumentos());
-        mv.addObject("listaTiposVia", servicio.getTiposVia());
-
-        if (mv.getModel().get("error") == null || mv.getModel().get("error").equals("No hay errores")) {
+    public ModelAndView paso4( HttpSession sesion) {
+        //Obtener el cliente de la sesión
+        Cliente cliente = (Cliente) sesion.getAttribute("cliente");
+        //Si en el paso anterior no hay errores se inserta el cliente
+        if (sesion.getAttribute("hayErrores").equals(false)) {
+            //VINCULO EL CLIENTE CON EL USUARIO
+             UsuarioCliente usuario = (UsuarioCliente)sesion.getAttribute("usuario");
+            cliente.setUsuarioCliente(usuario);
             servicioCliente.insertarNuevoCliente(cliente);
             mv.setViewName("redirect:/area-cliente");
+            sesion.removeAttribute("usuario");
         } else {
-            //Paso de parámetros para resolución de la vista
-            mv.addObject("paso" ,"4");
+            //Redirigir al getMapping del paso 4
+            mv.setViewName("redirect:paso4");
         }
-
         return mv;
     }
 }

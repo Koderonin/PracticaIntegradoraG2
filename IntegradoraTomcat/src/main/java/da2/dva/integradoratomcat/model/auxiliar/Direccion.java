@@ -1,6 +1,7 @@
 package da2.dva.integradoratomcat.model.auxiliar;
 
 import da2.dva.integradoratomcat.utils.CheckColeccion;
+import da2.dva.integradoratomcat.utils.DatosContacto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,19 +18,19 @@ public class Direccion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_direccion;
 
-    @NotNull
+    @NotNull(groups = DatosContacto.class)
     //@CheckColeccion(coleccion = "listavias")
     Long tipo_via;
-    @NotBlank
+    @NotBlank(groups = DatosContacto.class)
     String nombre_via;
-    @NotNull
+    @NotNull(groups = DatosContacto.class)
     Integer numero_via;
     String planta;
     String puerta;
     String portal;
-    @NotBlank
+    @NotBlank(groups = DatosContacto.class)
     String localidad;
-    @NotBlank
+    @NotBlank (groups = DatosContacto.class)
     String cp;
     String region;
     String pais;

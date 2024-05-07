@@ -29,7 +29,7 @@ public class LoginController {
         mv.addObject("titulo","Login de usuario");
         mv.addObject("paso" ,"1");
         sesion.removeAttribute("email");
-        if(sesion.getAttribute("email")!=null){
+        if(sesion.getAttribute("email")!=null && sesion.getAttribute("clave")!=null){
             mv.setViewName("redirect:/area-cliente");
         }
         return mv;
@@ -41,6 +41,7 @@ public class LoginController {
 
         // esto ahora mismo sólo chequea vs lista de UsuarioCliente!!
         if(servicioUsuario.devuelveUsuarios().containsKey(email)){
+            //Si el usuario tiene fecha de bloqueo mandamos un error
            if (servicioUsuario.devuelveUsuarios().get(email).getFechaBloqueo() != null) {
                mv.addObject("error","Usuario bloqueado hasta " + servicioUsuario.devuelveUsuarios().get(email).getFechaBloqueo());
            } else {
@@ -56,7 +57,15 @@ public class LoginController {
     }
 
     @GetMapping("paso2")
-    public ModelAndView clave() {
+    public ModelAndView clave(HttpSession sesion) {
+        /*
+        if(sesion.getAttribute("email")==null){
+            mv.addObject("errorGlobal","Debe introducir su email");
+            mv.addObject("paso" ,"1");
+            mv.setViewName("redirect:/login/paso1");
+        }
+
+         */
         mv.addObject("titulo","Login de usuario");
         mv.setViewName("login/login");
         mv.addObject("paso" ,"2");
@@ -68,21 +77,17 @@ public class LoginController {
         String email = (String) sesion.getAttribute("email");
         // Quizá sería interesante en este punto vincular a la sesión el objeto de usuario, o al menos crearlo aquí pa trabajar con él?
         UsuarioCliente usuario = servicioUsuario.devuelveUsuarios().get(email);
-        // sesion.setAttribute("usuario", usuario);
-        Boolean passCheck = usuario.getClave().equals(clave);
-        System.out.println("CLAVE CORRECTA: " + passCheck);
-        // esto ahora mismo sólo carga los usuarios clientes!!
-        if(passCheck){
-            // no habría que cargar el objeto de cliente como tal? Pa no estar haciendo queries luego a sus datos. Algo como:
-            // sesion.setAttribute("cliente", servicioCliente.getClienteByUsuario(servicioUsuario.devuelveUsuarios().get(email)));
-            sesion.setAttribute("usuario", email);
-            // TODO: Añadir query JPA para comprobar si el usuario tiene un cliente vinculado
-//            if(servicio.getUsuarios().get(email).getId_usuario()!=null) {
-            mv.setViewName("redirect:/area-cliente");
-//            } else {
-//                mv.setViewName("redirect:/registro/cliente/paso1");
-//            }
+        sesion.setAttribute("usuario",usuario);//TODO: REVISAR SI ES NECESARIO
 
+        Boolean passCheck = usuario.getClave().equals(clave);
+        // esto ahora mismo sólo carga los usuarios clientes!!!!!!!!!!!
+        if(passCheck){
+            sesion.setAttribute("usuario", email);
+            if(servicioCliente.getClienteByUsuario(usuario)!=null) {
+                mv.setViewName("redirect:/area-cliente");
+            }else{
+                mv.setViewName("redirect:/registro/cliente/paso1");
+            }
             //ACTUALIZAR EN LA BBDD EL NUMERO DE CONEXIONES EXITOSAS DE ESTE USUARIO
             servicioUsuario.actualizarNumAccesos(usuario);
         } else {
