@@ -22,7 +22,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("registro/usuario")
 public class RegistroUsuarioController {
-    ModelAndView mv = new ModelAndView("/registro/usuario");
+    ModelAndView mv = new ModelAndView("registro/usuario");
 
     @Autowired
     ServicioColecciones servicio;
@@ -49,6 +49,7 @@ public class RegistroUsuarioController {
 
     @GetMapping("/")
     public ModelAndView registroUsuario(@ModelAttribute("usuario") UsuarioCliente usuario) {
+        mv.setViewName("/registro/usuario");
         mv.addObject("titulo","Registro de usuario");
         mv.addObject("tipoUsuario","empleado");
 

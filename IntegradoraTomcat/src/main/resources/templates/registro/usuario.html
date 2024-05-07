@@ -3,7 +3,7 @@
     <head th:replace="~{fragments/head :: cabeza(${titulo})}"/>
     <body>
         <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
-        <form id="form" th:action="/" method="post" th:object="${usuario}">
+        <form id="form" action="/registro/usuario/" method="post" th:object="${usuario}">
             <div th:if="${#fields.hasErrors('global')}" class="error">
                 <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
             </div>
