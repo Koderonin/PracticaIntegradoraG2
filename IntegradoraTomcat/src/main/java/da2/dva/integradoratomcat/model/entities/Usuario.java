@@ -55,6 +55,7 @@ public class Usuario {
         this.confirmClave = confirmClave;
         this.preguntaRecuperacion = preguntaRecuperacion;
         this.respuestaRecuperacion = respuestaRecuperacion;
+        this.numAccesos = 0;
     }
 
     //private Auditoria //TODO: Implementar auditoria
