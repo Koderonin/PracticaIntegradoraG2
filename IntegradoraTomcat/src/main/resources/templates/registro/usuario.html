@@ -6,7 +6,7 @@
         <div class="container registro-usuario">
             <div class="form-container registro-usuario">
                 <div class="img-container" ><p th:text="#{etiqueta.registro}"> </p></div>
-                <form id="form" th:action="${tipoUsuario}" method="post" th:object="${usuario}">
+                <form id="form" action="/registro/usuario/" method="post" th:object="${usuario}">
                     <div th:if="${#fields.hasErrors('global')}" class="error">
                         <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
                     </div>
@@ -54,7 +54,6 @@
         </div>
 
         <footer th:replace="~{fragments/footer :: pie_pagina}"/>
-
         <script type="text/javascript" th:src="@{/js/script.js}"></script>
     </body>
 </html>
