@@ -60,7 +60,7 @@ public class ServicioUsuario {
 
     public Map<String, UsuarioCliente> devuelveUsuarios() {
         Map<String, UsuarioCliente> usuarios = new HashMap<>();
-        UsuarioCliente cliente1 = new UsuarioCliente(UUID.randomUUID(),"admin@gmail.com", "aA1111111?", "aA1111111?", "Como se llama tu perro?", "Manolo");
+        UsuarioCliente cliente1 = new UsuarioCliente(UUID.randomUUID(),"admin@gmail.com", "aA1111111?", "aA1111111?", 1L, "Manolo");
         usuarios.put(cliente1.getEmail(), cliente1);
         usuarioClienteRepository.findAll().forEach(
                 usuario -> usuarios.put(usuario.getEmail(), usuario)

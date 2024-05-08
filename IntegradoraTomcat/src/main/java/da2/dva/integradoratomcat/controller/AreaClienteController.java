@@ -1,5 +1,6 @@
 package da2.dva.integradoratomcat.controller;
 
+import jakarta.servlet.http.HttpSession;
 import da2.dva.integradoratomcat.repositories.jpa.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,11 @@ public class AreaClienteController {
     PedidoRepository pedidoRepository;
 
     @GetMapping("area-cliente")
-    public ModelAndView areaCliente() {
-
+    public ModelAndView areaCliente(HttpSession sesion) {
+        if (sesion.getAttribute("email") == null || sesion.getAttribute("clave") == null) {
+            sesion.setAttribute("errorClave", "Debes iniciar sesión");
+            mv.setViewName("redirect:/login/paso2");
+        }
         return mv;
     }
 }

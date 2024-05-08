@@ -20,7 +20,7 @@ import java.util.UUID;
 })
 public class UsuarioCliente extends Usuario {
 
-    public UsuarioCliente(UUID id_usuario, String email, String clave, String confirmClave, String preguntaRecuperacion, String respuestaRecuperacion) {
+    public UsuarioCliente(UUID id_usuario, String email, String clave, String confirmClave, Long preguntaRecuperacion, String respuestaRecuperacion) {
         super(id_usuario, email, clave, confirmClave, preguntaRecuperacion, respuestaRecuperacion);
     }
 /*

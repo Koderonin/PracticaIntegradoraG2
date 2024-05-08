@@ -1,22 +1,19 @@
 package da2.dva.integradoratomcat.services;
 
-import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Usuario;
-import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 
-import java.util.List;
 import java.util.Map;
 
 public interface Servicio {
-     Map<String,String> devuelvePaises();
+     void cargarPaises();
 
-     Map<String,String> devuelveGeneros();
+     void cargarGeneros();
 
-     Map<String,String> devuelveTiposDocumentos();
+     void cargarTiposDocumentos();
 
-     Map<String,String> devuelvePreguntas();
+     void cargarPreguntas();
 
-     Map<Long, String> devuelveTiposVia();
+     void cargarTiposVia();
 
      Map<String, Usuario> devuelveAdministradores();
 

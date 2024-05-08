@@ -1,5 +1,6 @@
 package da2.dva.integradoratomcat.model.entities;
 
+import da2.dva.integradoratomcat.utils.CheckColeccionLong;
 import jakarta.persistence.*;
 import da2.dva.integradoratomcat.utils.CheckClave;
 import da2.dva.integradoratomcat.utils.CheckColeccion;
@@ -38,9 +39,8 @@ public class Usuario {
     @NotBlank
     private String confirmClave;
     @NotNull
-    @Size(min = 1)
-    //@CheckColeccion(coleccion = "listapreguntas")
-    private String preguntaRecuperacion;
+    @CheckColeccionLong(coleccion = "listapreguntas")
+    private Long preguntaRecuperacion;
     @NotBlank
     private String respuestaRecuperacion;
 
@@ -48,13 +48,14 @@ public class Usuario {
     private Integer numAccesos;
     private LocalDate fechaBloqueo; //Si es null no esta bloqueado
 
-    public Usuario(UUID idUsuario, String email, String clave, String confirmClave, String preguntaRecuperacion, String respuestaRecuperacion) {
+    public Usuario(UUID idUsuario, String email, String clave, String confirmClave, Long preguntaRecuperacion, String respuestaRecuperacion) {
         this.id_usuario = idUsuario;
         this.email = email;
         this.clave = clave;
         this.confirmClave = confirmClave;
         this.preguntaRecuperacion = preguntaRecuperacion;
         this.respuestaRecuperacion = respuestaRecuperacion;
+        this.numAccesos = 0;
     }
 
     //private Auditoria //TODO: Implementar auditoria
