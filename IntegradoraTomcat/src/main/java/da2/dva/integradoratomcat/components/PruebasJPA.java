@@ -34,7 +34,7 @@ public class PruebasJPA {
         usuarioCliente.setEmail("admin@integradora.jpa");
         usuarioCliente.setNumAccesos(2);
         usuarioCliente.setClave("Clientillo1!");
-        usuarioCliente.setPreguntaRecuperacion("1");
+        usuarioCliente.setPreguntaRecuperacion(1L);
         usuarioCliente.setRespuestaRecuperacion("Croquetas");
         usuarioCliente.setConfirmClave("Clientillo1!");
         UCRepository.save(usuarioCliente);
@@ -46,8 +46,10 @@ public class PruebasJPA {
 
         Pais pais = new Pais();
         pais.setNombrePais("España");
-        pais.setSiglasPais("ES");
+        pais.setSiglasPais("es");
         paisRepository.save(pais);
+
+
 
         if (usuarioCliente != null) {
             cliente.setUsuarioCliente(usuarioCliente);
@@ -57,7 +59,7 @@ public class PruebasJPA {
             cliente.setApellidos("García Mongólez");
             cliente.setGenero("Hombre");
             cliente.setFechaNacimiento(LocalDate.of(1988, 1, 14));
-            cliente.setTipoDocumento("DNI");
+            cliente.setTipoDocumento("dni");
             cliente.setDocumento("12345678A");
             cliente.setTelefonoMovil("687456842");
             clienteRepository.save(cliente);
@@ -99,14 +101,14 @@ public class PruebasJPA {
         usuarioCliente.setEmail("admin2@integradora.jpa");
         usuarioCliente.setNumAccesos(1);
         usuarioCliente.setClave("Cliente123!");
-        usuarioCliente.setPreguntaRecuperacion("2");
+        usuarioCliente.setPreguntaRecuperacion(2L);
         usuarioCliente.setRespuestaRecuperacion("Croquetas");
         usuarioCliente.setConfirmClave("Cliente123!");
         UCRepository.save(usuarioCliente);
 
         Pais pais = new Pais();
         pais.setNombrePais("España");
-        pais.setSiglasPais("ES");
+        pais.setSiglasPais("es");
         paisRepository.save(pais);
 
         Cliente cliente = new Cliente();
@@ -142,7 +144,7 @@ public class PruebasJPA {
         direccion.setCp("28024");
         direccion.setLocalidad("Madrid");
         direccion.setNombre_via("Escalona");
-        direccion.setPais("ES");
+        direccion.setPais("es");
         direccion.setPlanta("4");
         direccion.setPuerta("1");
         direccion.setRegion("Madrid");

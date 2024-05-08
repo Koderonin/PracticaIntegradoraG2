@@ -19,7 +19,7 @@ public class ServicioColecciones implements Servicio {
     private Map<String, String> paises;
     private Map<String, String> generos;
     private Map<String, String> tiposDocumentos;
-    private Map<String, String> preguntas;
+    private Map<Long, String> preguntas;
     private Map<Long, String> tiposVia;
     private Map<String, Usuario> usuarios;
 
@@ -71,9 +71,9 @@ public class ServicioColecciones implements Servicio {
 
     @Override
     public void cargarPreguntas() {
-        Map<String, String> preguntas = new HashMap<>();
+        Map<Long, String> preguntas = new HashMap<>();
         preguntaRepository.findAll().forEach(
-                pregunta -> preguntas.put(String.valueOf(pregunta.getId()), pregunta.getPregunta())
+                pregunta -> preguntas.put(pregunta.getId(), pregunta.getPregunta())
         );
         this.preguntas = preguntas;
     }
@@ -91,7 +91,7 @@ public class ServicioColecciones implements Servicio {
     public Map<String, Usuario> devuelveAdministradores() {
         Map<String, Usuario> usuarios = new HashMap<>();
         // TODO: Eliminar la inserción en este método
-        usuarios.put("admin@gmail.com", new Usuario(UUID.randomUUID(),"admin@gmail.com", "aA1111111?", "aA1111111?", "Como se llama tu perro?", "Manolo", null, null, null));
+        usuarios.put("admin@gmail.com", new Usuario(UUID.randomUUID(),"admin@gmail.com", "aA1111111?", "aA1111111?", 1L, "Manolo", null, null, null));
         usuarioAdministradorRepository.findAll().forEach(
                 usuario -> usuarios.put(usuario.getEmail(), usuario)
         );

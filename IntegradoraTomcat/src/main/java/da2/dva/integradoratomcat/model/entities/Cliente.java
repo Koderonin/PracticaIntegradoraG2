@@ -43,7 +43,7 @@ public class Cliente {
     private String apellidos;
 
     @NotNull(groups = DatosPersonales.class)
-    //@CheckColeccion(coleccion = "listageneros")
+    @CheckColeccion(coleccion = "listageneros",groups = DatosPersonales.class)
     private String genero;
 
     @NotNull(groups = DatosPersonales.class)
@@ -51,12 +51,12 @@ public class Cliente {
     @CheckMayor18(groups = DatosPersonales.class)
     private LocalDate fechaNacimiento;
     @NotNull(groups = DatosPersonales.class)
-   // @CheckColeccion(coleccion = "listapaises")
     @ManyToOne
     @JoinColumn(name = "pais", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO"))
+    @Valid
     private Pais paisNacimiento;
     @NotNull(groups = DatosPersonales.class)
-    //@CheckColeccion(coleccion = "listatiposDocumentos")
+    @CheckColeccion(coleccion = "listatiposDocumentos", groups = DatosPersonales.class)
     @Column(name = "tipo_documento", length = 3)
     private String tipoDocumento;
     @Column(name = "num_documento", length = 10)

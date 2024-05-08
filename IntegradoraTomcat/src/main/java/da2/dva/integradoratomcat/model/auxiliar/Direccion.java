@@ -1,6 +1,7 @@
 package da2.dva.integradoratomcat.model.auxiliar;
 
 import da2.dva.integradoratomcat.utils.CheckColeccion;
+import da2.dva.integradoratomcat.utils.CheckColeccionLong;
 import da2.dva.integradoratomcat.utils.DatosContacto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -19,7 +20,7 @@ public class Direccion {
     private Long id_direccion;
 
     @NotNull(groups = DatosContacto.class)
-    //@CheckColeccion(coleccion = "listavias")
+    @CheckColeccionLong(coleccion = "listatiposVia",  groups = DatosContacto.class)
     Long tipo_via;
     @NotBlank(groups = DatosContacto.class)
     String nombre_via;

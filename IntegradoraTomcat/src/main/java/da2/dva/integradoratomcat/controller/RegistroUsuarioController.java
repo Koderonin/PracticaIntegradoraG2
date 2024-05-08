@@ -55,6 +55,7 @@ public class RegistroUsuarioController {
         mv.setViewName("/registro/usuario");
         mv.addObject("titulo","Registro de usuario");
         mv.addObject("tipoUsuario","empleado");
+        mv.addObject("listaPreguntas",servicio.getPreguntas());
 
         return mv;
     }
