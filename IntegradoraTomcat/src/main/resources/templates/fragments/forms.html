@@ -101,7 +101,7 @@
             <div class="error" th:if="${#fields.hasErrors('direccion.localidad')}" th:errors="*{direccion.localidad}"></div>
         </div>
         <div id="div_region">
-            <span class="required">* </span><label for="region"  th:text="#{etiqueta.region}"/>
+            <label for="region"  th:text="#{etiqueta.region}"/>
             <input type="text" th:field="*{direccion.region}"/>
             <div class="error" th:if="${#fields.hasErrors('direccion.region')}" th:errors="*{direccion.region}"></div>
         </div>
