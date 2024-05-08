@@ -2,9 +2,11 @@ package da2.dva.integradoratomcat.components;
 
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.collections.Pais;
+import da2.dva.integradoratomcat.model.composedkeys.NominaKey;
 import da2.dva.integradoratomcat.model.entities.*;
 import da2.dva.integradoratomcat.repositories.jpa.*;
 import da2.dva.integradoratomcat.repositories.mongo.ProductoRepository;
+import da2.dva.integradoratomcat.services.ServicioNomina;
 import da2.dva.integradoratomcat.services.ServicioProducto;
 import org.bson.BsonString;
 import org.bson.Document;
@@ -152,6 +154,35 @@ public class PruebasJPA {
 
     }
 
+    @Autowired
+    private ServicioNomina servicioNomina;
+
+    @Bean
+    public void pruebitasNominas() {
+
+        Pais pais = new Pais();
+        pais.setNombrePais("España");
+        pais.setSiglasPais("es");
+        paisRepository.save(pais);
+
+        Cliente cliente = new Cliente();
+        cliente.setNombre("Trabajador");
+        cliente.setApellidos("Mc Trabajo");
+        cliente.setGenero("M");
+        cliente.setFechaNacimiento(LocalDate.of(1980, 6, 17));
+        cliente.setPaisNacimiento(pais);
+        cliente.setTipoDocumento("P");
+        cliente.setDocumento("ESP123456");
+        cliente.setTelefonoMovil("742344842");
+        cliente.setAceptacionLicencia(true);
+        clienteRepository.save(cliente);
+        Nomina nomina = servicioNomina.crearNuevaNomina(cliente);
+        servicioNomina.crearNuevaNomina(cliente);
+        servicioNomina.crearNuevaNomina(cliente);
+        servicioNomina.crearNuevaNomina(cliente);
+        System.out.println(nomina);
+    }
+
     private static Direccion getDireccion() {
         Direccion direccion = new Direccion();
         direccion.setTipo_via(1L);
@@ -165,4 +196,7 @@ public class PruebasJPA {
         direccion.setNumero_via(1);
         return direccion;
     }
+
+
+
 }
