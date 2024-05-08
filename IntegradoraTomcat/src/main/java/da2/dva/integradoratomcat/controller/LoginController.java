@@ -14,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("login")
 public class LoginController {
+    // OJO: mv es un atributo de la instancia de LoginController; si luego vuelves a ella y no reasignas el valor de mv,
+    // te dirige a la última vista que te enviara (por ej. vas a área cliente, cierras sesión, vas a paso 1 y te manda a
+    // área cliente de nuevo)
     ModelAndView mv = new ModelAndView("/login/login");
 
     @Autowired
@@ -30,24 +33,36 @@ public class LoginController {
         //Limpiamos el error para que no aparezca cuando se recarga la página
         mv.addObject("error",null);
         mv.addObject("errorClave",null);
+        sesion.removeAttribute("email");
+        /* Aquí comprobamos si ya hay un usuario en sesion, y de dónde viene este usuario:
+        * si viene de area-cliente, redirigimos al area-cliente
+        * si viene de registro-usuario, redirigimos al registro-cliente (no tiene Cliente asociado)
+        * */
+        if(sesion.getAttribute("usuario")!=null){
+            // si ya hay un usuario en sesión y no tiene Cliente asociado, redirigimos al registro de cliente
+            if (servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario")) == null) {
+                mv.setViewName("redirect:/registro/cliente/paso1");
+                return mv;
+            }
+            // si ya hay un usuario en sesion y tiene Cliente asociado, redirigimos al area-cliente
+            mv.setViewName("redirect:/area-cliente");
+            return mv;
+        }
         mv.addObject("titulo","Login de usuario");
         mv.addObject("paso" ,"1");
-        sesion.removeAttribute("email");
-        if(sesion.getAttribute("usuario")!=null && sesion.getAttribute("clave")!=null){
-            mv.setViewName("redirect:/area-cliente");
-        }
+        mv.setViewName("/login/login");
         return mv;
     }
 
 
     @PostMapping("paso1")
     public ModelAndView login(@RequestParam("usuario") String email, HttpSession sesion) {
-
         // esto ahora mismo sólo chequea vs lista de UsuarioCliente!!
         if(servicioUsuario.devuelveUsuarios().containsKey(email)){
             //Si el usuario tiene fecha de bloqueo mandamos un error
-           if (servicioUsuario.devuelveUsuarios().get(email).getFechaBloqueo() != null) {
-               mv.addObject("error","Usuario bloqueado hasta " + servicioUsuario.devuelveUsuarios().get(email).getFechaBloqueo());
+            UsuarioCliente usuario = servicioUsuario.devuelveUsuarios().get(email);
+           if (usuario.getFechaBloqueo() != null) {
+               mv.addObject("error","Usuario bloqueado hasta " + usuario.getFechaBloqueo());
            } else {
                sesion.setAttribute("email", email);
                mv.addObject("paso" ,"2");
@@ -64,15 +79,21 @@ public class LoginController {
 
     @GetMapping("paso2")
     public ModelAndView clave(HttpSession sesion) {
-        //Si no se ha introducido un email mandamos un error para que el usuario lo introduzca
+        if(sesion.getAttribute("usuario")!=null){
+            mv.setViewName("redirect:/area-cliente");
+            return mv;
+        }
+        //Si no se ha introducido un email mandamos un error para que el usuario lo introduzca y devolvemos a paso 1
         if(sesion.getAttribute("email")==null){
+            mv.setViewName("/login/login");
+            mv.addObject("error",null);
             mv.addObject("errorUsuario","Debe introducir su email");
             mv.addObject("paso" ,"1");
             return mv;
         }
-        //Si se ha enviado un error desde el area de cliente lo mostramos
-        if(sesion.getAttribute("errorClave")!=null){
-            mv.addObject("errorClave",sesion.getAttribute("errorClave"));
+        //Si se ha enviado un error desde el area de cliente lo mostramos : no es un error desde el paso 2? Fallo de clave?
+        if(sesion.getAttribute("errorLogin")!=null){
+            mv.addObject("errorLogin",sesion.getAttribute("errorClave"));
         }
         //Limpiamos  errores para que no aparezcan cuando se recarga la página        sesion.removeAttribute("errorClave");
         mv.addObject("error",null);
@@ -88,17 +109,17 @@ public class LoginController {
     public ModelAndView clave(@RequestParam("clave") String clave, HttpSession sesion) {
         String email = (String) sesion.getAttribute("email");
         UsuarioCliente usuario = servicioUsuario.devuelveUsuarios().get(email);
-        sesion.setAttribute("usuario",usuario);//TODO: REVISAR SI ES NECESARIO
 
         Boolean passCheck = usuario.getClave().equals(clave);
-        // esto ahora mismo sólo carga los usuarios clientes!!!!!!!!!!!
+
         if(passCheck){ //Si la clave es correcta se redirecciona a la area de cliente y se guarda en la sesión
-            //sesion.setAttribute("usuario", email);
-            if(servicioCliente.getClienteByUsuario(usuario)!=null) {
+            sesion.setAttribute("usuario", usuario);
+            Cliente cliente = servicioCliente.getClienteByUsuario(usuario);
+            if(cliente!=null) {
                 mv.setViewName("redirect:/area-cliente");
             }else{
-                Cliente cliente = new Cliente();
-                cliente.setUsuarioCliente(usuario);
+                Cliente nuevoCliente = new Cliente();
+                nuevoCliente.setUsuarioCliente(usuario);
                 mv.setViewName("redirect:/registro/cliente/paso1");
             }
             //ACTUALIZAR EN LA BBDD EL NUMERO DE CONEXIONES EXITOSAS DE ESTE USUARIO

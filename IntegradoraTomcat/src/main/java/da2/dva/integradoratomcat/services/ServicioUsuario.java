@@ -52,7 +52,11 @@ public class ServicioUsuario {
      }
 
      public void actualizarNumAccesos(UsuarioCliente usuario){
-         usuario.setNumAccesos(usuario.getNumAccesos() + 1);
+         try {
+             usuario.setNumAccesos(usuario.getNumAccesos() + 1);
+         } catch (NullPointerException e) {
+             usuario.setNumAccesos(1);
+         }
          // TODO: mirar si en algún momento se puede quitar la remilmierda ésta.
          usuario.setConfirmClave(usuario.getClave());
          usuarioClienteRepository.save(usuario);

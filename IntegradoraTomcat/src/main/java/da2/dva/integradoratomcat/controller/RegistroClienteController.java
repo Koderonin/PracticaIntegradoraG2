@@ -43,7 +43,9 @@ public class RegistroClienteController {
 
     @GetMapping("paso1")
     public ModelAndView registroCliente(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
-        ModelAndView mv = new ModelAndView("/registro/cliente");
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
         //Paso de parámetros para resolución de la vista
         mv.addObject("titulo","Registro de cliente");
         mv.addObject("paso" ,"1");
@@ -60,7 +62,8 @@ public class RegistroClienteController {
 
     @PostMapping("paso1")
     public ModelAndView registrar(@Validated(DatosPersonales.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
-        ModelAndView mv = new ModelAndView("/registro/cliente");
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario");
         //Validación de los datos ingresados
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
@@ -93,7 +96,8 @@ public class RegistroClienteController {
 
     @GetMapping("paso2")
     public ModelAndView paso2(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
-        ModelAndView mv = new ModelAndView("/registro/cliente");
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
         //Paso de parámetros para resolución de la vista
         mv.addObject("paso" ,"2");
         //Paso de colecciones necesarias
@@ -107,7 +111,8 @@ public class RegistroClienteController {
 
     @PostMapping("paso2")
     public ModelAndView registrar2(@Validated(DatosContacto.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
-        ModelAndView mv = new ModelAndView("/registro/cliente");
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario");
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
             mv.addObject("paso" ,"2");
@@ -147,7 +152,8 @@ public class RegistroClienteController {
 
     @GetMapping("paso3")
     public ModelAndView paso3(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
-        ModelAndView mv = new ModelAndView("/registro/cliente");
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
         //Paso de parámetros para resolución de la vista
         mv.addObject("paso" ,"3");
         //Recuperación de datos de otros pasos
@@ -159,7 +165,8 @@ public class RegistroClienteController {
 
     @PostMapping("paso3")
     public ModelAndView registrar3(@Validated(DatosCliente.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
-        ModelAndView mv = new ModelAndView("/registro/cliente");
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
         //Validación de los datos ingresados
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
@@ -186,8 +193,8 @@ public class RegistroClienteController {
     public ModelAndView resumen(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
         //TODO: REVISAR CÓDIGO POR SI SE PUEDE MEJORAR, ES MU LARGO
 
-        //Creación de ModelAndView
-        ModelAndView mv = new ModelAndView("/registro/cliente");
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
         //Recuperación de datos de otros pasos
         cliente = (Cliente) sesion.getAttribute("cliente");
         //Si el cliente es nulo, se crea uno
@@ -241,15 +248,34 @@ public class RegistroClienteController {
         //Si en el paso anterior no hay errores se inserta el cliente
         if (sesion.getAttribute("hayErrores").equals(false)) {
             //VINCULO EL CLIENTE CON EL USUARIO
-             UsuarioCliente usuario = (UsuarioCliente)sesion.getAttribute("usuario");
+            UsuarioCliente usuario = (UsuarioCliente)sesion.getAttribute("usuario");
             cliente.setUsuarioCliente(usuario);
             servicioCliente.insertarNuevoCliente(cliente);
             mv.setViewName("redirect:/area-cliente");
-            sesion.removeAttribute("usuario");
+            sesion.removeAttribute("usuario"); // ¿¿por qué??
+
+            // no soy fan, pero la comprobación para quedarse en el area del cliente la hace con el usuario, así que si
+            // se tiene que volver a loguear por segunda vez, que pida el mail, no la contraseña, no?
+            /* A este respecto, propongo una de las siguientes, de más fav a menos fav:
+            * - Mantener en sesión tanto usuario como cliente (área cliente chequea que haya cliente en sesión; en el login se mete cliente en sesión)
+            * - No eliminar usuario AQUÍ, sí eliminar cliente (área cliente chequea que haya usuario en sesión; el login se queda igual)
+            *   Cualquiera de las dos hace que no haya que loguearse de nuevo
+            */
+            // La ñapa siguiente es para que no mande al paso 2 del login, sino al "1"
+            sesion.removeAttribute("email");
         } else {
             //Redirigir al getMapping del paso 4
             mv.setViewName("redirect:paso4");
         }
+
         return mv;
     }
+    // Métodos auxiliares
+
+    private Boolean checkUserSession(HttpSession sesion) {
+        return sesion.getAttribute("usuario") != null;
+    }
 }
+
+
+

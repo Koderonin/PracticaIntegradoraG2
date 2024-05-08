@@ -18,8 +18,11 @@ public class AreaClienteController {
 
     @GetMapping("area-cliente")
     public ModelAndView areaCliente(HttpSession sesion) {
-        if (sesion.getAttribute("email") == null || sesion.getAttribute("clave") == null) {
-            sesion.setAttribute("errorClave", "Debes iniciar sesión");
+        /* si no se añade esto aquí no funciona el redirect de arriba; te vuelve a mandar al paso 2 si vienes desde un acceso no permitido
+        (intentando acceder directamente aquí). Creo que porque no sale de ámbito, y la viewName siempre es "redirect:/login/paso2" */
+        mv.setViewName("area-cliente");
+        if (sesion.getAttribute("usuario") == null) {
+            sesion.setAttribute("errorLogin", "Debes iniciar sesión");
             mv.setViewName("redirect:/login/paso2");
         }
         return mv;
