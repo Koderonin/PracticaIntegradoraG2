@@ -5,6 +5,7 @@ import da2.dva.integradoratomcat.utils.DatosContacto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,18 +22,24 @@ public class Direccion {
     @NotNull(groups = DatosContacto.class)
     //@CheckColeccion(coleccion = "listavias")
     Long tipo_via;
+
     @NotBlank(groups = DatosContacto.class)
     String nombre_via;
+
     @NotNull(groups = DatosContacto.class)
     Integer numero_via;
-    String planta;
+    Integer planta;
     String puerta;
     String portal;
+
     @NotBlank(groups = DatosContacto.class)
     String localidad;
+
     @NotBlank (groups = DatosContacto.class)
     String cp;
     String region;
+
+    @NotBlank(groups = DatosContacto.class)
     String pais;
 
 }
