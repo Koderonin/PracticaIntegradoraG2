@@ -5,13 +5,16 @@ import da2.dva.integradoratomcat.model.collections.Pais;
 import da2.dva.integradoratomcat.model.entities.*;
 import da2.dva.integradoratomcat.repositories.jpa.*;
 import da2.dva.integradoratomcat.repositories.mongo.ProductoRepository;
+import da2.dva.integradoratomcat.services.ServicioProducto;
 import org.bson.BsonString;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -80,6 +83,11 @@ public class PruebasJPA {
 
     @Autowired
     private LineaPedidoRepository lineaPedidoRepository;
+
+    @Autowired
+    private ServicioProducto servicioProducto;
+
+
     @Bean
     public void pruebitasPedidos() {
         Producto producto = new Producto();
@@ -133,6 +141,13 @@ public class PruebasJPA {
         linea.setProducto_id(producto.getId().toHexString());
         linea.setPedido(pedido);
         lineaPedidoRepository.save(linea);
+
+        List<Producto> productos = productoRepository.findAll();
+
+        List<Document> productosDocument = servicioProducto.findAllDocuments();
+
+        System.out.println(productosDocument);
+        System.err.println("Pedidos: " + productosDocument.size());
 
     }
 

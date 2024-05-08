@@ -7,6 +7,7 @@ import da2.dva.integradoratomcat.services.ServicioCliente;
 import da2.dva.integradoratomcat.services.ServicioUsuario;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +43,7 @@ public class LoginController {
     public ModelAndView login(@RequestParam("usuario") String email, HttpSession sesion) {
         /*for(Usuario usuario : servicio.devuelveUsuarios())  {
             if(email.equals(usuario.getEmail())){
-                sesion.setAttribute("OBJusuario", usuario); //TODO: REVISAR
+                sesion.setAttribute("OBJusuario", usuario); //TODO: REVISAR SI SE METE OBJETO EN SESION O SÓLO EMAIL
                 sesion.setAttribute("email",email);
                 break;
             }

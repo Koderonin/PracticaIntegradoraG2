@@ -3,16 +3,18 @@ spring:
     name: IntegradoraTomcat
   datasource:
     #url: jdbc:mysql://mysql:3306/integradoraJPA?createDatabaseIfNotExist=true
-    url: jdbc:mysql://172.26.224.1:3306/integradoraJPA?createDatabaseIfNotExist=true
+    #url: jdbc:mysql://172.26.224.1:3306/integradoraJPA?createDatabaseIfNotExist=true
+    url: jdbc:mysql://192.168.7.10:5580/integradoraJPA?createDatabaseIfNotExist=true
     username: root
-    password: root
+    #password: root
+    password: admin # Vicen
     driver-class-name: com.mysql.cj.jdbc.Driver
   messages:
     basename: lang/messages
   jpa:
     hibernate:
      # ddl-auto: update #cuando persistamos definitivamente y dejemos de hacer pruebas
-      ddl-auto: create #para que elimine la db al parar la aplicación
+      ddl-auto: create-drop #para que elimine la db al parar la aplicación
     database: mysql
     show-sql: true
     generate-ddl: true # esto hace que se creen las tablas
@@ -23,6 +25,7 @@ spring:
   data:
     mongodb:
       #uri: mongodb://root:root@mongo:27017/tienda?authSource=admin
-      uri: mongodb://root:root@172.26.224.1:27017/tienda?authSource=admin
+      #uri: mongodb://root:root@172.26.224.1:27017/tienda?authSource=admin
+      uri: mongodb://192.168.7.10:27017/tienda # Vicen
       username: root
       password: root

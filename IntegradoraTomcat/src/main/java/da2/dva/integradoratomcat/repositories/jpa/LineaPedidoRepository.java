@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LineaPedidoRepository extends JpaRepository<LineaPedido, LineaPedidoKey> {
+    // No se me ocurre en esto cómo usar na
 }

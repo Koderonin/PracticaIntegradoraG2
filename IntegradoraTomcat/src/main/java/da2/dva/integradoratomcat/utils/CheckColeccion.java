@@ -19,7 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface CheckColeccion {
 
     String coleccion();
-    String message() default "ERROR";
+    String message() default "ERROR EN LA PREGUNTA";
 
     Class<?>[] groups() default { };
 
