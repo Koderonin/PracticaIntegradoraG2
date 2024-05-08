@@ -57,8 +57,8 @@ public class PruebasJPA {
             cliente.setApellidos("García Mongólez");
             cliente.setGenero("Hombre");
             cliente.setFechaNacimiento(LocalDate.of(1988, 1, 14));
-            cliente.setTipoDocumento("DNI");
-            cliente.setDocumento("12345678A");
+            cliente.setTipoDocumento("S");
+            cliente.setDocumento("22/12345678/39");
             cliente.setTelefonoMovil("687456842");
             clienteRepository.save(cliente);
         } else {
@@ -67,7 +67,8 @@ public class PruebasJPA {
 
         cliente.setComentarios("Trololó");
         cliente.setAceptacionLicencia(true);
-        cliente.setDocumento("12345678B");
+        cliente.setTipoDocumento("D");
+        cliente.setDocumento("00000000T");
         clienteRepository.save(cliente);
 
     }
@@ -116,8 +117,8 @@ public class PruebasJPA {
         cliente.setGenero("M");
         cliente.setFechaNacimiento(LocalDate.of(1978, 2, 14));
         cliente.setPaisNacimiento(pais);
-        cliente.setTipoDocumento("D");
-        cliente.setDocumento("12345678C");
+        cliente.setTipoDocumento("P");
+        cliente.setDocumento("ESP123456");
         cliente.setTelefonoMovil("642344842");
         cliente.setAceptacionLicencia(true);
         clienteRepository.save(cliente);
@@ -146,7 +147,6 @@ public class PruebasJPA {
         direccion.setPlanta("4");
         direccion.setPuerta("1");
         direccion.setRegion("Madrid");
-//        direccion.setTipo_via(1L);
         direccion.setNumero_via(1);
         return direccion;
     }
