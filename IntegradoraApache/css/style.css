@@ -1,0 +1,615 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+*{
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+html,body{
+    margin: 0;
+    background:#edf2f8;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+
+}
+
+body > .container {
+    flex-grow: 1; /* Hace que .container llene el espacio disponible */
+}
+
+footer {
+    margin-top: auto; /* Empuja el footer al fondo */
+}
+
+.required{
+    color: red;
+}
+.error{
+    color: red;
+}
+/* HEADER MENú*/
+.menu_container{
+    height: 60px;
+}
+
+a {
+    color: #000;
+}
+.header{
+    top: 0;
+    position: relative;
+    width: 100%;
+    z-index: 3;
+}
+
+.header ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background:#edf2f8;
+}
+
+.header li a {
+    color:black;
+    display: block;
+    padding: 20px 20px;
+    text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+    background-color:#d3d7dc;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    margin: 10px 10px;
+}
+
+/* MENU */
+
+.header .menu {
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+/* MENU ICON*/
+
+.header .menu-icon {
+    cursor: pointer;
+    float: right;
+    padding: 28px 20px;
+}
+
+.header .menu-icon .nav-icon {
+    background: black;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+}
+
+.header .menu-icon .nav-icon:before,
+.header .menu-icon .nav-icon:after {
+    background: black;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+
+.header .menu-icon .nav-icon:before {
+    top: 5px;
+}
+
+.header .menu-icon .nav-icon:after {
+    top: -5px;
+}
+
+/* BOTON MENU */
+
+.header .menu-btn {
+    display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+    max-height: 420px;
+
+}
+
+.header .menu-btn:checked ~ .menu-icon .nav-icon {
+    background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .nav-icon:before {
+    transform: rotate(-45deg);
+    top:0;
+}
+
+.header .menu-btn:checked ~ .menu-icon .nav-icon:after {
+    transform: rotate(45deg);
+    top:0;
+}
+
+/* BARRA NAVEGACIÓN PASOS */
+
+.barra_pasos {
+    margin-top: 100px;
+    font-size: small;
+}
+.barra_pasos ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.barra_pasos li {
+    margin: 0 10px; /
+}
+
+.enlace_img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+
+}
+
+.barra_pasos a {
+    text-align: center;
+    text-decoration: none;
+
+    display: inline-block;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.barra_pasos a:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+/* FOOTER*/
+.footer-container {
+    background-color: #48556A;
+    position: relative;
+    color: white;
+    width: 100%;
+    height: 100px;
+    left: 0;
+    bottom:0;
+}
+
+.footer-nav {
+    list-style: none; /* Elimina los bullets de la lista */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centra los elementos de la lista horizontalmente */
+    align-items: center; /* Centra los elementos de la lista verticalmente */
+    height: 100%; /* Asegura que los enlaces usen la altura completa del contenedor */
+}
+
+.footer-nav li {
+    margin: 0 20px; /* Añade espaciamiento horizontal entre elementos de la lista */
+}
+
+.footer-nav a {
+    color: white;
+    text-decoration: none;
+    position: relative; /* Asegura que el pseudo-elemento se posicione correctamente */
+}
+
+.footer-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0; /* Inicialmente la línea no tiene ancho */
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease; /* Transición para el ancho */
+}
+
+.footer-nav a:hover::after {
+    width: 100%; /* Al pasar el cursor, la línea se hace tan ancha como el enlace */
+}
+
+/*FORMS*/
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    margin:50px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    padding: 80px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+    0 10px 10px rgba(0,0,0,0.22);
+}
+
+/*REGISTRO-USUARIO*/
+.registro-usuario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap:50px;
+}
+.registro-usuario .img-container  {
+    background-image: url("../img/cielo.png");
+    flex: 0.45;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    font-size: xx-large;
+    color: white;
+    font-weight: bold;
+    justify-items: center;
+    width:100%;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+.registro-usuario form{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 50px 10px;
+    flex:1.5;
+    gap:20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.contenedor-izquierda{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.contenedor-derecha{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.div_claves{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+.div_preguntas{
+    display: flex;
+    flex-direction: column;
+    gap : 20px;
+}
+.div_btns{
+    display: flex;
+    gap: 20px;
+}
+.registro-usuario .input,
+.registro-usuario select {
+    width: 230px;
+    height: 30px;
+    font-size: 14px;
+}
+/*REGISTRO-CLIENTE*/
+
+.form-container.registro-cliente{
+    padding: 20px;
+}
+
+fieldset{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.resumen-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+}
+.resumen{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    font-size: small;
+    padding: 10px;
+}
+#div_direccion_entrega{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.inputs-genero{
+    margin-left: 50px;
+}
+.inputs-tipo-documento{
+    margin-left: 50px;
+}
+#div_usuario{
+    display: flex;
+    flex-direction: column;
+}
+#div_documento_id{
+    display: flex;
+    flex-direction: column;
+}
+
+/*LOGIN*/
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 700px;
+    padding: 40px;
+}
+
+.login-container .img-container  {
+    background-image: url("../img/login-email.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex:1;
+    height: 100%;
+    min-width: 300px;
+
+}
+
+.login-container form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+    margin:0;
+    gap:30px;
+}
+
+#div_usuario_login{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/*BOTONES*/
+
+.form-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-top :20px;
+    padding: 10px;
+}
+.button-container {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+    justify-content: center;
+}
+.button-container .btn.small{
+    width: auto;
+}
+.btn .submit{
+    align-self: center;
+    justify-self: center;
+}
+.btn.small{
+    font-size: 12px ;
+    padding: 10px;
+    width: 130px;
+}
+.btn.form{
+    margin: 5px;
+    font-size: 10px ;
+    padding: 8px;
+    width: auto;
+    background: #38B9F0;
+    border: 1px solid #38B9F0;
+}
+
+.btn {
+    border-radius: 20px;
+    border: 1px solid #FF4B2B;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    font-size: 12px ;
+    font-weight: bold;
+    padding: 15px;
+    width: 140px;
+    letter-spacing: 1px;
+    transition: transform 80ms ease-in;
+}
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+
+
+.btn.ghost {
+    background-color: transparent;
+    border-color: #FFFFFF;
+}
+
+/*Animacion inputs*/
+
+.input-container  {
+    height: 50px;
+    position: relative;
+    width: 100%;
+}
+
+.input {
+    background-color: #abaec4;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #252323;
+    font-size: 18px;
+    outline: 0;
+    padding: 4px 20px ;
+    width: 100%;
+    height: 50px;
+}
+.input.email-input {
+    background-image: url("../img/email.webp");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 60px;
+}
+.input.password-input {
+    background-image: url("../img/pass-icon.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 60px;
+}
+
+
+.input.email-input::placeholder {
+    padding-left: 70px;
+}
+
+.cut {
+    background-color: #ffffff;
+    border-radius: 10px;
+    height: 20px;
+    left: 20px;
+    position: absolute;
+    top: -20px;
+    transform: translateY(0);
+    transition: transform 200ms;
+    width: 100px;
+}
+
+.cut-short {
+    width: 50px;
+}
+/*Bajo el cut cuando el input tiene el foco*/
+.input:focus ~ .cut,
+.input:not(:placeholder-shown) ~ .cut {
+    transform: translateY(8px);
+}
+/*Muevo el placeholder al lado de los inputs*/
+.placeholder {
+    color: #65657b;
+    left: 50px;
+    line-height: 14px;
+    pointer-events: none;
+    position: absolute;
+    transform-origin: 0 50%;
+    transition: transform 200ms, color 200ms;
+    top: 20px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+    transform: translateY(-30px) translateX(-15px) scale(0.75);
+}
+
+
+
+.input:focus ~ .placeholder {
+    color: #111212;
+
+}
+
+
+/*RESPONSIVE
+PARA QUE SE VEA EN DESKTOP*/
+
+
+@media (min-width: 51em) {
+    .header li {
+        float: left;
+    }
+    .header li a {
+        padding: 20px 30px;
+    }
+    .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+    .header .menu-icon {
+        display: none;
+    }
+
+
+    /*LOGIN*/
+    .login-container {
+        flex-direction: row;
+        gap: 1em;
+        height: 500px;
+        width: 100%;
+        max-width: 55%;
+        min-width: 710px;
+    }
+    /*REGISTRO*/
+    .registro-usuario{
+        align-self: center;
+        width: 100%;
+        max-width: 60%;
+        min-width: 700px;
+        height: 800px;
+    }
+
+    /*REGISTRO-CLIENTE*/
+    .barra_pasos {
+        padding: 10px;
+        font-size: large;
+
+    }
+
+    .barra_pasos ul {
+        gap:20px;
+    }
+    .form-container.registro-cliente{
+        padding: 80px;
+    }
+    .resumen-container{
+        display: flex;
+        flex-direction: row;
+        min-width: 600px;
+        gap: 20px;
+    }
+    .resumen{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        font-size: small;
+        padding: 10px;
+    }
+
+}
+
