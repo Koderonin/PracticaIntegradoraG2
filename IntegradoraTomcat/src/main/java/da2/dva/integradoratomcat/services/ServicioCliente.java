@@ -27,6 +27,10 @@ public class ServicioCliente {
         return clienteRepository.findByUsuarioCliente(usuario);
     }
 
+    public Cliente getClienteByNameAndSurname(String nombre, String apellidos){
+        return clienteRepository.findByNombreAndApellidos(nombre, apellidos);
+    }
+
     public void borrarCliente(Cliente cliente){
         clienteRepository.delete(cliente);
     }
@@ -41,6 +45,10 @@ public class ServicioCliente {
 
     public void borrarTodosClientes(){
         clienteRepository.deleteAll();
+    }
+
+    public void save(Cliente cliente) {
+        clienteRepository.save(cliente);
     }
 
 }

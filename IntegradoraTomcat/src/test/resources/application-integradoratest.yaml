@@ -1,6 +1,6 @@
 spring:
   application:
-    name: IntegradoraTomcat
+    name: Test
   datasource:
     #url: jdbc:mysql://mysql:3306/integradoraJPA?createDatabaseIfNotExist=true
     #url: jdbc:mysql://172.26.224.1:3306/integradoraJPA?createDatabaseIfNotExist=true
@@ -13,12 +13,12 @@ spring:
     basename: lang/messages
   jpa:
     hibernate:
-     # ddl-auto: update #cuando persistamos definitivamente y dejemos de hacer pruebas
+      # ddl-auto: update #cuando persistamos definitivamente y dejemos de hacer pruebas
       ddl-auto: update #para que elimine la db al parar la aplicación
     database: mysql
-    show-sql: true
-    generate-ddl: true # esto hace que se creen las tablas
-    defer-datasource-initialization: true # diferir la carga de datos (DataSource initialization)
+#    show-sql: true
+#    generate-ddl: true # esto hace que se creen las tablas
+#    defer-datasource-initialization: true # diferir la carga de datos (DataSource initialization)
 #  sql:
 #    init:
 #      mode: always # para que se cree la db al iniciar la aplicación

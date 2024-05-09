@@ -31,7 +31,7 @@ public class PruebasJPA {
     @Autowired
     private PaisRepository paisRepository;
 
-    @Bean
+    /*@Bean
     //@Transactional // esto hace que no falle la transacción porque la hace toda de una; no es lo que quiero
     public void pruebitas() {
 
@@ -197,6 +197,6 @@ public class PruebasJPA {
         return direccion;
     }
 
-
+*/
 
 }
