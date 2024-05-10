@@ -1,14 +1,19 @@
 package da2.dva.integradoratomcat.controller;
 
+import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.services.ServicioCliente;
 import da2.dva.integradoratomcat.services.ServicioColecciones;
+import da2.dva.integradoratomcat.services.ServicioCookie;
 import da2.dva.integradoratomcat.services.ServicioUsuario;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("login")
@@ -23,6 +28,9 @@ public class LoginController {
 
     @Autowired
     ServicioColecciones servicio;
+
+    @Autowired
+    ServicioCookie servicioCookie;
 
     @GetMapping("paso1")
     public ModelAndView login(HttpSession sesion) {
@@ -64,7 +72,8 @@ public class LoginController {
     }
 
     @PostMapping("paso2")
-    public ModelAndView clave(@RequestParam("clave") String clave, HttpSession sesion) {
+    public ModelAndView clave(@RequestParam("clave") String clave, HttpSession sesion,
+                              @CookieValue(name ="accesosUsuarios", defaultValue ="none" )String contenidoCookie) {
         String email = (String) sesion.getAttribute("email");
         // Quizá sería interesante en este punto vincular a la sesión el objeto de usuario, o al menos crearlo aquí pa trabajar con él?
         UsuarioCliente usuario = servicioUsuario.devuelveUsuarios().get(email);
@@ -79,6 +88,7 @@ public class LoginController {
             // TODO: Añadir query JPA para comprobar si el usuario tiene un cliente vinculado
 //            if(servicio.getUsuarios().get(email).getId_usuario()!=null) {
             mv.setViewName("redirect:/area-cliente");
+
 //            } else {
 //                mv.setViewName("redirect:/registro/cliente/paso1");
 //            }
