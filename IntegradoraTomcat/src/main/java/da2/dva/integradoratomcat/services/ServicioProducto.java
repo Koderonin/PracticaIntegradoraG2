@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import da2.dva.integradoratomcat.model.entities.Producto;
 import da2.dva.integradoratomcat.repositories.mongo.ProductoRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.bson.BsonString;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
@@ -100,6 +102,13 @@ public class ServicioProducto {
     public Document findById(ObjectId objectId) {
         Document producto = mongoTemplate.findById(objectId, Document.class, "producto");
         return producto;
+    }
+
+    public Document findByCodigo(String codigo) throws Exception {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("codigo").is(codigo));
+        List<Document> list = mongoTemplate.find(query, Document.class, "producto");
+        return list.get(0);
     }
 
     public Document findByModelo(BsonString modelo) {
