@@ -16,9 +16,9 @@ public interface ProductoRepository extends MongoRepository<Producto, String> {
 
     List<Producto> findById(ObjectId id);
 
-    List<Producto> findByCodigo(BsonString codigo);
+    List<Producto> findByCodigo(String codigo);
 
-    List<Producto> findByMarca(BsonString marca);
+    List<Producto> findByMarca(String marca);
 
     List<Producto> findByValoracionProductoBetween(int min, int max);
 

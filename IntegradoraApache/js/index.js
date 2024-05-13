@@ -4,7 +4,7 @@ function crearItemProducto(producto) {
     var itemHTML = `
         <div class="item">
             <figure>
-                <img src="https://via.placeholder.com/300" alt="producto">
+                <img src="https://via.placeholder.com/300" class="product-image" alt="producto">
             </figure>
             <div class="info-product">
                 <h2>${producto.descripcion}</h2>
