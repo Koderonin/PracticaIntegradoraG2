@@ -1,13 +1,17 @@
 const containerProductos = document.querySelector('.container-items');
+let listaProductos;
 listarProductos();
+
 function crearItemProducto(producto) {
-    var itemHTML = `
+    let itemHTML = `
         <div class="item">
             <figure>
-                <img src="https://via.placeholder.com/300" class="product-image" alt="producto">
+                <img src=${devolverImagen(producto)} class="product-image" alt="producto">
             </figure>
             <div class="info-product">
-                <h2>${producto.descripcion}</h2>
+                <h2>${producto.modelo}</h2>
+				<span>${producto.marca}</span> </br>
+				<span>${producto.codigo}</span> </br>
                 <p class="price">$${producto.precio}</p>
                 <button class="btn-add-cart">Añadir al carrito</button>
             </div>
@@ -18,16 +22,29 @@ function crearItemProducto(producto) {
 
 
 
-function listarProductos(){
-    for (var i = 0; i < 9 ; i++) { 
-        var itemHTML = crearItemProducto(listaProductos[i]);
+async function listarProductos(){
+	let respuesta = await fetch("http://localhost:8080/api/producto/listado")
+	listaProductos = await respuesta.json();
+	console.log(respuesta);
+	console.log(listaProductos);
+	listaProductos.forEach(element => {
+		let itemHTML = crearItemProducto(element);
         containerProductos.innerHTML += itemHTML;
-        console.log(listaProductos[1].descripcion);
-    }
-
+	});
+    // for (let i = 0; i < 20 ; i++) { 
+    //     let itemHTML = crearItemProducto(listaProductos[i]);
+    //     containerProductos.innerHTML += itemHTML;
+    //     console.log(listaProductos[i].descripcion);
+    // }
 }
 
-
+function devolverImagen(producto){
+	if(producto.imagenes == null){
+		return "https://placehold.co/600x400"
+	} else {
+		return producto.imagenes[0];
+	}
+}
 
 
 
