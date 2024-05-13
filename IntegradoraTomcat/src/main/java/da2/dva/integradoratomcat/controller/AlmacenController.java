@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("api/producto")
 public class AlmacenController {
 
     ModelAndView mv = new ModelAndView("/add-producto");
@@ -17,8 +17,8 @@ public class AlmacenController {
     @Autowired
     PedidoRepository pedidoRepository;
 
-    @GetMapping("add-producto")
-    public ModelAndView areaCliente(HttpSession sesion) {
+    @GetMapping("/add-producto")
+    public ModelAndView addProducto(HttpSession sesion) {
 
         mv.setViewName("add-producto");
 
