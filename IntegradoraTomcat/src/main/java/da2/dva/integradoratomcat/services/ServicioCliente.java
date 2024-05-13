@@ -4,6 +4,7 @@ import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.ClienteRepository;
 import da2.dva.integradoratomcat.repositories.jpa.DireccionRepository;
+import da2.dva.integradoratomcat.repositories.jpa.UsuarioClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,9 @@ public class ServicioCliente {
 
     @Autowired
     private DireccionRepository direccionRepository;
+
+    @Autowired
+    private UsuarioClienteRepository UCRepository;
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -29,6 +33,10 @@ public class ServicioCliente {
 
     public Cliente getClienteByNameAndSurname(String nombre, String apellidos){
         return clienteRepository.findByNombreAndApellidos(nombre, apellidos);
+    }
+
+    public Cliente getClienteByEmail(String email){
+        return clienteRepository.findByUsuarioCliente(UCRepository.findByEmail(email));
     }
 
     public void borrarCliente(Cliente cliente){

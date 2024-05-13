@@ -13,8 +13,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 
     Cliente findByUsuarioCliente(UsuarioCliente usuarioCliente);
 
-    // Cliente findByNombreAndApellidos(@NotBlank(groups = DatosPersonales.class) String nombre, @NotBlank(groups = DatosPersonales.class) String apellidos);
     Cliente findByNombreAndApellidos(String nombre, String apellidos);
+
     @Override
     Optional<Cliente> findById(UUID id);
 }

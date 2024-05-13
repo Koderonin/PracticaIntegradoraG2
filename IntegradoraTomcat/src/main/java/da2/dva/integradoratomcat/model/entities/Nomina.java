@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,4 +18,8 @@ public class Nomina {
     @EmbeddedId
     private NominaKey id_nomina;
 
+    private Long mes;
+    private Long anio;
+
+    private BigDecimal salario;
 }
