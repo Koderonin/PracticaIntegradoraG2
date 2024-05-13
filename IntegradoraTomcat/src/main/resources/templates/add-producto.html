@@ -8,7 +8,7 @@
     Código: <input type="text" id="codigo"><br>
     Descripción: <input type="text" id="descripcion"><br>
     Precio: <input type="text" id="precio"><br>
-    Imágenes: <input type="file" id="imagenes" name="imagenes" multiple ><br>
+    Imágenes: <input type="file" id="imagenes" name="imagenes" multiple accept="image/*"><br>
     <button type="button" onclick="addCampo()">Añadir campo</button>
     <input type="submit" value="Enviar">
 </form>
@@ -30,7 +30,7 @@
         }
 
         var formData = new FormData();
-        formData.append('formularioProducto', new Blob([JSON.stringify(producto)], {type: 'application/json'})); // JSON.stringify(producto));
+        formData.append('formularioProducto', new Blob([JSON.stringify(producto)], {type: 'application/json'}));
 
         var imagenes = document.getElementById('imagenes').files;
         if (imagenes.length > 0) {
@@ -41,22 +41,10 @@
             formData.append(`imagenes`, "");
         }
 
-
-
         fetch('/api/productos', {
             method: 'POST',
             body: formData
         })
-
-        // fetch('/api/productos', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(producto)
-        // }
-        // )
-        // ;
     });
 
     function addCampo() {
