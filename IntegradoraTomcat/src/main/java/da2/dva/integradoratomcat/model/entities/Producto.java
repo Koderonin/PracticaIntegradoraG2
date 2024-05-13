@@ -20,6 +20,7 @@ import java.util.UUID;
 public class Producto {
     @MongoId
     private ObjectId id;
+    private BsonString modelo; // ¡Esto es el "nombre"!
     private BsonString codigo;
     private String descripcion;
     private BigDecimal precio;
@@ -33,7 +34,6 @@ public class Producto {
     private boolean esNovedad;
     private int valoracionProducto;
     private BsonString marca;
-    private BsonString modelo;
     private BsonString comentarios;
 
 //    private Auditoria auditoria;
