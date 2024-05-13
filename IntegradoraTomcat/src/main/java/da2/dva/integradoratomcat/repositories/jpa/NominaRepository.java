@@ -8,8 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface NominaRepository extends JpaRepository<Nomina, NominaKey> {
-    @Query("SELECT n FROM Nomina n WHERE n.id_nomina.cliente_id = :cliente ORDER BY n.id_nomina.num_nomina DESC LIMIT 1")
+    @Query("SELECT n FROM Nomina n WHERE n.id_nomina.id_cliente = :cliente ORDER BY n.id_nomina.num_nomina DESC LIMIT 1")
     Nomina findTopByCliente(@Param("cliente") Cliente cliente);
+
+    @Query("SELECT n FROM Nomina n WHERE n.id_nomina.id_cliente = :cliente ORDER BY n.id_nomina.num_nomina DESC")
+    List<Nomina> findByCliente(@Param("cliente") Cliente cliente);
 }

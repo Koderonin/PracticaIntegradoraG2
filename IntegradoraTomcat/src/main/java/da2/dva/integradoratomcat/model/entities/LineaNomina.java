@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class LineaNomina {
 
     @EmbeddedId
-    private LineaNominaKey nomina_id;
+    private LineaNominaKey linea_id;
 
     private BigDecimal importe;
 

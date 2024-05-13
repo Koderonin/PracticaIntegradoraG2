@@ -23,6 +23,10 @@ public class UsuarioCliente extends Usuario {
     public UsuarioCliente(UUID id_usuario, String email, String clave, String confirmClave, Long preguntaRecuperacion, String respuestaRecuperacion) {
         super(id_usuario, email, clave, confirmClave, preguntaRecuperacion, respuestaRecuperacion);
     }
+
+    public UsuarioCliente(String email, String clave, Long preguntaRecuperacion, String respuestaRecuperacion) {
+        super(email, clave, preguntaRecuperacion, respuestaRecuperacion);
+    }
 /*
     @OneToOne(mappedBy = "usuarioCliente", cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.LAZY)
     private Cliente cliente;

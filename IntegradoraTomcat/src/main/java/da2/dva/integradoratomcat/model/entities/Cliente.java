@@ -81,13 +81,14 @@ public class Cliente {
     @JoinColumn(name = "id_direccion_postal", referencedColumnName = "id_direccion", foreignKey = @ForeignKey(name = "FK_DIRECCION_CLIENTE"))
     private Direccion direccion;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
+
     @JoinTable(name="direcciones_entrega",
             joinColumns = @JoinColumn(name = "id_cliente", foreignKey = @ForeignKey(name = "FK_CLIENTE_DIRECCION_ENTREGA_ID_CLIENTE")),
             inverseJoinColumns = @JoinColumn(name = "id_direccion", foreignKey = @ForeignKey(name = "FK_DIRECCION_DIRECCION_ENTREGA_ID_DIRECCION")))
     private Set<Direccion> direccionEntrega = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<@Valid TarjetaCredito> tarjetasCredito = new HashSet<>();
     private String tipoCliente;
     private String comentarios;
@@ -98,7 +99,21 @@ public class Cliente {
 
     private LocalDate fechaBajaEntidad; // si null, no se ha dado de baja; es para borrado lógico
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.EAGER)
     private Set<Pedido> pedidos = new HashSet<>();
+
+    public Cliente(UsuarioCliente usuarioCliente, String nombre, String apellidos, String genero, Pais paisNacimiento, LocalDate fechaNacimiento, String tipoDocumento, String documento, String telefonoMovil, Direccion direccion) {
+        setUsuarioCliente(usuarioCliente);
+        setNombre(nombre);
+        setApellidos(apellidos);
+        setGenero(genero);
+        setPaisNacimiento(paisNacimiento);
+        setFechaNacimiento(fechaNacimiento);
+        setTipoDocumento(tipoDocumento);
+        setDocumento(documento);
+        setTelefonoMovil(telefonoMovil);
+        setDireccion(direccion);
+        setAceptacionLicencia(true);
+    }
 }
 

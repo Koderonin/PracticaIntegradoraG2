@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Formulario de Producto</h2>
+
+<form id="productoForm" enctype="multipart/form-data">
+    Código: <input type="text" id="codigo"><br>
+    Descripción: <input type="text" id="descripcion"><br>
+    Precio: <input type="text" id="precio"><br>
+    Imágenes: <input type="file" id="imagenes" name="imagenes" multiple accept="image/*"><br>
+    <button type="button" onclick="addCampo()">Añadir campo</button>
+    <input type="submit" value="Enviar">
+</form>
+
+<script>
+    document.getElementById('productoForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var producto = {
+            codigo: document.getElementById('codigo').value,
+            descripcion: document.getElementById('descripcion').value,
+            precio: document.getElementById('precio').value
+        };
+
+        // Añadir campos dinámicos al objeto producto
+        var camposDinamicos = document.getElementsByClassName('dinamico');
+        for (var i = 0; i < camposDinamicos.length; i++) {
+            producto[camposDinamicos[i].id] = camposDinamicos[i].value;
+        }
+
+        var formData = new FormData();
+        formData.append('formularioProducto', new Blob([JSON.stringify(producto)], {type: 'application/json'}));
+
+        var imagenes = document.getElementById('imagenes').files;
+        if (imagenes.length > 0) {
+            for (var i = 0; i < imagenes.length; i++) {
+                formData.append(`imagenes`, imagenes[i]);
+            }
+        } else {
+            formData.append(`imagenes`, "");
+        }
+
+        fetch('/api/productos', {
+            method: 'POST',
+            body: formData
+        })
+    });
+
+    function addCampo() {
+        var nombreCampo = prompt("Por favor, introduce el nombre del campo:");
+        if (nombreCampo) {
+            var input = document.createElement("input");
+            input.type = "text";
+            input.id = nombreCampo;
+            input.className = "dinamico";
+            document.getElementById('productoForm').appendChild(document.createTextNode(nombreCampo + ": "));
+            document.getElementById('productoForm').appendChild(input);
+            document.getElementById('productoForm').appendChild(document.createElement("br"));
+        }
+    }
+</script>
+
+</body>
+</html>
