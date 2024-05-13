@@ -7,7 +7,7 @@ plugins {
     id "io.freefair.lombok" version "8.4"
 }
 
-bootWar {
+bootWar {   // Para no tener que escribir la app en la URL
     archiveFileName = 'ROOT.war'
 }
 
