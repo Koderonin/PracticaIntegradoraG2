@@ -550,16 +550,14 @@ transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
     color: white; /* Color del texto */
 }
 
-.main-wrapper h1,h2 {
-    margin-bottom: 100px;
+.main-wrapper h1,
+.main-wrapper h2 {
     font-size: 3em; /* Tamaño del texto */
     text-align: center; /* Alineación del texto */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
 }
 .main-wrapper h2{
-    
     font-size: 1.5em; /
-
 }
 .btn-access-products {
     margin-bottom: 100px;
