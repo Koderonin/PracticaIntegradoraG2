@@ -58,6 +58,15 @@ public class Usuario {
         this.numAccesos = 0;
     }
 
+    public Usuario(String email, String clave,  Long preguntaRecuperacion, String respuestaRecuperacion) {
+        setEmail(email);
+        setClave(clave);
+        setConfirmClave(clave);
+        setPreguntaRecuperacion(preguntaRecuperacion);
+        setRespuestaRecuperacion(respuestaRecuperacion);
+        setNumAccesos(0);
+    }
+
     //private Auditoria //TODO: Implementar auditoria
 
 

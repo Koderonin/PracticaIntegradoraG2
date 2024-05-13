@@ -36,7 +36,7 @@ public class PruebasJPA {
     public void pruebitas() {
 
         UsuarioCliente usuarioCliente = new UsuarioCliente();
-        usuarioCliente.setEmail("admin@integradora.jpa");
+        usuarioCliente.setEmail("admin@integradora.jpa2");
         usuarioCliente.setNumAccesos(2);
         usuarioCliente.setClave("Clientillo1!");
         usuarioCliente.setPreguntaRecuperacion(1L);
