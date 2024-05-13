@@ -101,5 +101,19 @@ public class Cliente {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.EAGER)
     private Set<Pedido> pedidos = new HashSet<>();
+
+    public Cliente(UsuarioCliente usuarioCliente, String nombre, String apellidos, String genero, Pais paisNacimiento, LocalDate fechaNacimiento, String tipoDocumento, String documento, String telefonoMovil, Direccion direccion) {
+        setUsuarioCliente(usuarioCliente);
+        setNombre(nombre);
+        setApellidos(apellidos);
+        setGenero(genero);
+        setPaisNacimiento(paisNacimiento);
+        setFechaNacimiento(fechaNacimiento);
+        setTipoDocumento(tipoDocumento);
+        setDocumento(documento);
+        setTelefonoMovil(telefonoMovil);
+        setDireccion(direccion);
+        setAceptacionLicencia(true);
+    }
 }
 

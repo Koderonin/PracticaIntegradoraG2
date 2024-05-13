@@ -2,30 +2,34 @@ spring:
   application:
     name: IntegradoraTomcat
   datasource:
-    #url: jdbc:mysql://mysql:3306/integradoraJPA?createDatabaseIfNotExist=true
+    url: jdbc:mysql://mysql.da2.dva:3306/integradoraJPA?createDatabaseIfNotExist=true #Despliegue
+    #url: jdbc:mysql://192.168.100.2:3306/integradoraJPA?createDatabaseIfNotExist=true # Diego
     #url: jdbc:mysql://172.26.224.1:3306/integradoraJPA?createDatabaseIfNotExist=true
-    url: jdbc:mysql://192.168.7.10:5580/integradoraJPA?createDatabaseIfNotExist=true
+    #url: jdbc:mysql://192.168.7.10:5580/integradoraJPA?createDatabaseIfNotExist=true
     username: root
-    #password: root
-    password: admin # Vicen
+    password: root
+    #password: admin # Vicen
     driver-class-name: com.mysql.cj.jdbc.Driver
   messages:
     basename: lang/messages
   jpa:
     hibernate:
-     # ddl-auto: update #cuando persistamos definitivamente y dejemos de hacer pruebas
-      ddl-auto: update #para que elimine la db al parar la aplicación
+     ddl-auto: update #cuando persistamos definitivamente y dejemos de hacer pruebas
+      #ddl-auto: create-drop #para que elimine la db al parar la aplicación
     database: mysql
     show-sql: true
     generate-ddl: true # esto hace que se creen las tablas
-    defer-datasource-initialization: true # diferir la carga de datos (DataSource initialization)
+#    defer-datasource-initialization: true # diferir la carga de datos (DataSource initialization)
 #  sql:
 #    init:
 #      mode: always # para que se cree la db al iniciar la aplicación
   data:
     mongodb:
-      #uri: mongodb://root:root@mongo:27017/tienda?authSource=admin
+      uri: mongodb://root:root@mongo.da2.dva:27017/tienda?authSource=admin  #Despliegue
+      #uri: mongodb://root:root@192.168.100.3:27017/tienda?authSource=admin # Diego
       #uri: mongodb://root:root@172.26.224.1:27017/tienda?authSource=admin
-      uri: mongodb://192.168.7.10:27017/tienda # Vicen
-#      username: root
-#      password: root
+      #uri: mongodb://192.168.7.10:27017/tienda # Vicen
+      username: root
+      password: root
+server:
+  port: 8081

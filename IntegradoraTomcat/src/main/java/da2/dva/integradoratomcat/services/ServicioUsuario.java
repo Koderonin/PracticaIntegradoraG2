@@ -6,10 +6,8 @@ import da2.dva.integradoratomcat.repositories.jpa.UsuarioClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.util.*;
 
 
 /**
@@ -59,6 +57,11 @@ public class ServicioUsuario {
          }
          // TODO: mirar si en algún momento se puede quitar la remilmierda ésta.
          usuario.setConfirmClave(usuario.getClave());
+         usuarioClienteRepository.save(usuario);
+     }
+
+     public void actualizarFechaBloqueo(UsuarioCliente usuario, LocalDate fecha) {
+         usuario.setFechaBloqueo(fecha);
          usuarioClienteRepository.save(usuario);
      }
 

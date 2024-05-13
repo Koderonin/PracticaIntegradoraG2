@@ -34,6 +34,19 @@ public class Producto {
     private String marca;
     private String comentarios;
 
+    public Producto (String marca, String modelo, String codigo, String descripcion, BigDecimal precio, int unidadesVendidas, BigDecimal gastoAcumulado, int cantidadAlmacen, boolean enOferta, String comentarios) {
+        setMarca(marca);
+        setModelo(modelo);
+        setCodigo(codigo);
+        setPrecio(precio);
+        setDescripcion(descripcion);
+        setUnidadesVendidas(unidadesVendidas);
+        setGastoAcumulado(gastoAcumulado);
+        setCantidadAlmacen(cantidadAlmacen);
+        setEnOferta(enOferta);
+        setComentarios(comentarios);
+    }
+
 //    private Auditoria auditoria;
 
 }

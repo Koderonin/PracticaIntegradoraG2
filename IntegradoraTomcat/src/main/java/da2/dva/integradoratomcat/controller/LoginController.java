@@ -1,15 +1,24 @@
 package da2.dva.integradoratomcat.controller;
 
 import da2.dva.integradoratomcat.model.entities.Cliente;
+import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.services.ServicioCliente;
 import da2.dva.integradoratomcat.services.ServicioColecciones;
+import da2.dva.integradoratomcat.services.ServicioCookie;
 import da2.dva.integradoratomcat.services.ServicioUsuario;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("login")
@@ -19,6 +28,8 @@ public class LoginController {
     // área cliente de nuevo)
     ModelAndView mv = new ModelAndView("/login/login");
 
+    int intentos;
+
     @Autowired
     ServicioUsuario servicioUsuario;
 
@@ -27,6 +38,9 @@ public class LoginController {
 
     @Autowired
     ServicioColecciones servicio;
+
+    @Autowired
+    ServicioCookie servicioCookie;
 
     @GetMapping("paso1")
     public ModelAndView login(HttpSession sesion) {
@@ -79,6 +93,7 @@ public class LoginController {
 
     @GetMapping("paso2")
     public ModelAndView clave(HttpSession sesion) {
+        intentos = 0;
         if(sesion.getAttribute("usuario")!=null){
             mv.setViewName("redirect:/area-cliente");
             return mv;
@@ -106,27 +121,42 @@ public class LoginController {
     }
 
     @PostMapping("paso2")
-    public ModelAndView clave(@RequestParam("clave") String clave, HttpSession sesion) {
+    public ModelAndView clave(@RequestParam("clave") String clave, HttpSession sesion,
+                              @CookieValue(name ="accesosUsuarios", defaultValue ="none" )String contenidoCookie) {
         String email = (String) sesion.getAttribute("email");
         UsuarioCliente usuario = servicioUsuario.devuelveUsuarios().get(email);
 
         Boolean passCheck = usuario.getClave().equals(clave);
-
-        if(passCheck){ //Si la clave es correcta se redirecciona a la area de cliente y se guarda en la sesión
-            sesion.setAttribute("usuario", usuario);
-            Cliente cliente = servicioCliente.getClienteByUsuario(usuario);
-            if(cliente!=null) {
-                mv.setViewName("redirect:/area-cliente");
-            }else{
-                Cliente nuevoCliente = new Cliente();
-                nuevoCliente.setUsuarioCliente(usuario);
-                mv.setViewName("redirect:/registro/cliente/paso1");
+        if (usuario.getFechaBloqueo() != null && LocalDateTime.now().toLocalDate().isAfter(usuario.getFechaBloqueo())) {
+            servicioUsuario.actualizarFechaBloqueo(usuario, null);
+        }
+        if (intentos < 3 && usuario.getFechaBloqueo() == null) {
+            if(passCheck){ //Si la clave es correcta se redirecciona a la area de cliente y se guarda en la sesión
+                sesion.setAttribute("usuario", usuario);
+                Cliente cliente = servicioCliente.getClienteByUsuario(usuario);
+                if(cliente!=null) {
+                    mv.setViewName("redirect:/area-cliente");
+                }else{
+                    Cliente nuevoCliente = new Cliente();
+                    nuevoCliente.setUsuarioCliente(usuario);
+                    mv.setViewName("redirect:/registro/cliente/paso1");
+                }
+                //ACTUALIZAR EN LA BBDD EL NUMERO DE CONEXIONES EXITOSAS DE ESTE USUARIO
+                servicioUsuario.actualizarNumAccesos(usuario);
+            } else {
+                mv.addObject("error","La clave no es correcta");
+                mv.addObject("errorClave",null);
+                intentos++;
+                if (intentos == 3) {
+                    servicioUsuario.actualizarFechaBloqueo(usuario, LocalDateTime.now().plusMinutes(15).toLocalDate());
+                }
+                mv.setViewName("/login/login");
+                mv.addObject("paso" ,"2");
             }
-            //ACTUALIZAR EN LA BBDD EL NUMERO DE CONEXIONES EXITOSAS DE ESTE USUARIO
-            servicioUsuario.actualizarNumAccesos(usuario);
-        }else{
-            mv.addObject("error","La clave no es correcta");
-            mv.addObject("errorClave",null);
+        } else {
+            intentos = 0;
+            mv.addObject("bloqueo", null);
+            mv.addObject("bloqueo", "El usuario se encuentra bloqueado");
         }
         return mv;
     }

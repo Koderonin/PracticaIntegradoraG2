@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head> <!-- TODO: Implementar CSS y JS -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title th:text="Página Principal"></title>
+        <!-- CSS -->
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
+        <!-- JS -->
+        <!-- <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script> -->
+     <!--   <script type="text/javascript" src="js/script.js"></script> -->
+    </head>
+    <body>
+        <nav class="barra_navegacion">    <!-- TODO: Implementar barra de navegación -->
+            <div class="menu_container">
+                <header class="header">
+                    <a href="http://apache.da2.dva/" class="logo"><img src="logo.png"/> </a>
+                    <input class="menu-btn" type="checkbox" id="menu-btn" />
+                    <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
+                    <ul class="menu">
+                        <li><a href="http://tomcat.da2.dva:8080/producto/listado">Cátalogo de Productos</a></li>
+                        <li><a href="#">Comprar</a></li>
+                        <li><a href="http://tomcat.da2.dva:8080/registro/cliente/paso1">Registro</a></li>
+                        <li><a href="http://tomcat.da2.dva:8080/login/paso1">Login</a></li>
+                    </ul>
+                </header>
+            </div>
+        </nav>
+        <main>
+            <h1>Página Princial</h1>
+        </main>
+        <footer>    <!-- TODO: Implementar barra de navegación -->
+            <div class="footer-container">
+                <ul class="footer-nav">
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Quiénes somos</a></li>
+                    <li><a href="#">Conócenos</a></li>
+                </ul>
+            </div>
+        </footer>
+    </body>
+</html>
