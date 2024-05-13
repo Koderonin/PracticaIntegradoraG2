@@ -1,0 +1,93 @@
+services:
+  tomcat:
+    container_name: contiene_tomcat
+    hostname: tomcat
+    image: tomcat:latest
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql: 
+        condition: service_healthy
+      mongo: 
+        condition: service_started
+    volumes:
+      - ./IntegradoraTomcat/build/libs:/usr/local/tomcat/webapps
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.4
+  mysql:
+    container_name: contiene_mysql
+    hostname: mysql
+    image: mysql:latest
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: root
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.2
+    healthcheck:
+        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+        timeout: 20s
+        retries: 10
+  mongo:
+    container_name: contiene_mongo
+    image: mongo:4.4.6
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.3
+  #dns:  #TODO: Investigar
+  #  container_name: contiene_bind9
+  #  hostname: bind
+  #  image: ubuntu/bind9
+  #  restart: always
+  #  ports:
+  #    - "53:53/tcp"
+  #    - "53:53/udp"
+  #    - "953:953/tcp"
+  #    - "953:953/udp"
+  #    - "853:853/tcp"
+  #    - "853:853/udp"
+#  networks:
+#    red_integradora:
+#      ipv4_address: 192.168.100.1
+  apache:
+    container_name: contiene_apache
+    hostname: apache
+    image: httpd:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+    #  - dns
+      - tomcat
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.5
+  node:
+    container_name: contiene_vue
+    hostname: vue
+    image: node:latest
+    #restart: always
+    ports:
+      - "3000:3000"
+    #depends_on:
+     # - dns
+    networks:
+      red_integradora:
+        ipv4_address: 192.168.100.6
+networks:
+  red_integradora:
+    ipam:
+       config:
+         - subnet: 192.168.100.0/24
