@@ -55,13 +55,14 @@ public class ServicioUsuario {
          } catch (NullPointerException e) {
              usuario.setNumAccesos(1);
          }
-         // TODO: mirar si en algún momento se puede quitar la remilmierda ésta.
+         // ODO: mirar si en algún momento se puede quitar la remilmierda ésta.
          usuario.setConfirmClave(usuario.getClave());
          usuarioClienteRepository.save(usuario);
      }
 
      public void actualizarFechaBloqueo(UsuarioCliente usuario, LocalDate fecha) {
          usuario.setFechaBloqueo(fecha);
+         usuario.setConfirmClave(usuario.getClave());
          usuarioClienteRepository.save(usuario);
      }
 

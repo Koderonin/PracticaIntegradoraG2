@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.http.HttpHeaders;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,10 +43,16 @@ public class ProductoControllerREST {
             int i = 0;
             for (MultipartFile imagen : imagenes) {
                 if (imagen != null && !imagen.isEmpty()) {
-                    // TODO: guardar imagen (npi cómo, luego hay que encontrarla!)
-
-                    // TODO: pasar la referencia de la imagen al documento que va a mongo, lo que hay es una pruebita
-                    imagenesArray[i++] = imagen.getOriginalFilename();
+                    // guardar imagen en una carpeta local
+                    Path path = Paths.get("/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/static/img", imagen.getOriginalFilename());
+                    try {
+                        Files.write(path, imagen.getBytes());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    // pasar la referencia de la imagen al documento que va a mongo TODO: SE JODEN LAS COSAS SI HAY ESPACIOS, HAY QUE PROCESAR EL NOMBRE
+                    String pathString = "http://localhost:8080/img/" + imagen.getOriginalFilename();
+                    imagenesArray[i++] = pathString;
                 }
             }
             formularioProducto.append("imagenes", imagenesArray);

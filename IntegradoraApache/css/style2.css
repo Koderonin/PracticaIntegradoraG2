@@ -415,6 +415,10 @@ img{
     display: none;
 }
 
+.product-image{
+    height: 300px;
+    width: 300px;
+}
 /* ----------------------------- FOOTER --------------------------- */
 
 #containerFooter
