@@ -1,5 +1,11 @@
 const containerProductos = document.querySelector('.container-items');
-listarProductos();
+
+if(containerProductos != null){
+	listarProductos();
+}
+
+
+
 function crearItemProducto(producto) {
     var itemHTML = `
         <div class="item">
@@ -34,10 +40,13 @@ function listarProductos(){
 // Selecciona el botón del carrito y el contenedor de productos del carrito del DOM
 const btnCart = document.querySelector('.container-cart-icon');
 const containerCartProducts = document.querySelector('.container-cart-products');
+const dropdownMenu = document.getElementById("dropdownMenu");
 
 // Agrega un evento de clic al botón del carrito para alternar la visibilidad del contenedor de productos del carrito
 btnCart.addEventListener('click', () => {
 	containerCartProducts.classList.toggle('hidden-cart');
+	dropdownMenu.classList.remove("show");
+	
 });
 
 /* ========================= */
@@ -53,6 +62,7 @@ const cartTotal = document.querySelector('.cart-total');
 const productsList = document.querySelector('.container-items');
 const countProducts = document.querySelector('#contador-productos');
 const valorTotal = document.querySelector('.total-pagar');
+
 
 // Array que almacena los productos en el carrito
 let allProducts = [];
@@ -174,3 +184,34 @@ const showHTML = () => {
 	countProducts.innerText = totalOfProducts;
 };
 
+/*--------------------------------- DESPLEGABLE AREA CLIENTE ---------------------------------*/
+function toggleDropdown() {
+    dropdownMenu.classList.toggle("show");
+	containerCartProducts.classList.add('hidden-cart');
+	
+}
+
+// Cerrar el menú desplegable si el usuario hace clic fuera de él
+window.onclick = function(event) {
+    if (!event.target.matches('.userIcon')) {
+        let dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+            let openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
+
+//--------------------------------- MENU HAMBURGUESA ---------------------------------
+function openNav(x) {
+	document.getElementById("mySidenav").classList.toggle("show");
+	x.classList.toggle("change");
+  }
+//--------------------------------- OFERTAS ---------------------------------
+
+
+            
+       
