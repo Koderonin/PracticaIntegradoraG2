@@ -8,9 +8,12 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
-      - mongo
-      - dns
+      mysql:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+      dns:
+        condition: service_started
     volumes:
       - ./IntegradoraTomcat/build/libs:/usr/local/tomcat/webapps
     networks:
@@ -29,12 +32,18 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: root
     depends_on:
-      - dns
+      dns:
+        condition: service_started
     networks:
       red_integradora:
         ipv4_address: 192.168.100.2
     dns:
       - 192.168.100.254
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
   mongo:
     container_name: contiene_mongo
     image: mongo:4.4.6
@@ -51,6 +60,11 @@ services:
         ipv4_address: 192.168.100.3
     dns:
       - 192.168.100.254
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongodb://root:root@localhost:27017/?authSource=admin --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
   dns:
     container_name: contiene_bind9
     hostname: bind
@@ -74,27 +88,15 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - dns
-      - tomcat
+      dns:
+        condition: service_started
+      tomcat:
+        condition: service_started
     volumes:
       - ./IntegradoraApache:/usr/local/apache2/htdocs/
     networks:
       red_integradora:
         ipv4_address: 192.168.100.5
-    dns:
-      - 192.168.100.254
-  node:
-    container_name: contiene_vue
-    hostname: vue
-    image: node:latest
-    #restart: always
-    ports:
-      - "3000:3000"
-    depends_on:
-      - dns
-    networks:
-      red_integradora:
-        ipv4_address: 192.168.100.6
     dns:
       - 192.168.100.254
 networks:
