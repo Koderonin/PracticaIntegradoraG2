@@ -20,10 +20,10 @@ public class AreaClienteController {
     public ModelAndView areaCliente(HttpSession sesion) {
         /* si no se añade esto aquí no funciona el redirect de arriba; te vuelve a mandar al paso 2 si vienes desde un acceso no permitido
         (intentando acceder directamente aquí). Creo que porque no sale de ámbito, y la viewName siempre es "redirect:/login/paso2" */
-        mv.setViewName("redirect:/http://apache.da2.dva/area-cliente");
+        mv.setViewName("redirect:/http://apache.da2.dva/area-cliente.html");
         if (sesion.getAttribute("usuario") == null) {
             sesion.setAttribute("errorLogin", "Debes iniciar sesión");
-            mv.setViewName("redirect:/login/paso2");
+            mv.setViewName("redirect:/login/paso1");
         }
         return mv;
     }
