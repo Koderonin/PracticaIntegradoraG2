@@ -40,16 +40,17 @@ footer {
 
 #container
 {
+
     background-color: white;
     margin: auto;
     text-align: center;
     width: 100%;
     display: flex;
-    z-index: 1;
     justify-content: space-between;
     align-items: center;
-    gap: 50px;
     flex :1 ;
+    gap:5px;
+    z-index: 1;
     padding: 15px 40px;
     box-sizing: border-box;
     position: fixed;
@@ -60,10 +61,10 @@ footer {
     display: flex;
     align-items: center;
     gap: 20px;
-    font-size: 40px; 
+    font-size: 28px;
     font-family: 'Lato', sans-serif;
 }
-#shopName a
+#shopName a 
 {
     text-decoration: none;
     color: rgb(29, 29, 29);
@@ -74,8 +75,13 @@ footer {
     font: black;
 }
 
+#shopName span{
+    display: none;
+}
+
 #collection
 {
+    font-size: 10px;
     font-weight: bold;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -101,8 +107,9 @@ footer {
     /* float: right; */
     align-items: center;
     justify-content: center;
-    gap: 50px;
+    gap: 7px;
     justify-self: flex-end;
+    width: 200px;
  
 }
 
@@ -111,7 +118,9 @@ footer {
     margin-top: 8px;
     height: 40px;
     width: 40px;
-    font-size: 45px;
+    background-image: url("/img/user.png");
+    background-size: 40px;
+    background-repeat: no-repeat;
 }
 
 .input-container  {
@@ -140,52 +149,47 @@ footer {
     background-position: 10px center;
     padding-left: 60px;
 }
+#search
+{
+    /*QUe aparezca*/
+    display: none;
+}
 
 
 /* ----------------------------- MEDIA QUERY --------------------------- */
 
-
-@media(max-width: 1300px)
+@media(min-width: 650px)
 {
+    #container{
+        gap: 50px;
+
+    }
+    #shopName span{
+        display: block;
+    }
+    #shopName
+    {
+        font-size: 24px;
+    }
     #collection
     {
-        font-size: 13px;
+        font-size: 10px;
     }
-    #input 
+    .userIcon
     {
-        width: 25em;
+        font-size: 30px;
     }
-}
-@media(max-width: 1212px)
-{
-    #collection
-    {
-        font-size: 13px;
+    #user{
+        gap: 50px;
     }
-    #input 
-    {
-        width: 20em;
-    }
-    .addedToCart
-    {
-        font-size: 1.5em;
-        margin: 10px 20px;
-    }
-}
-
-@media(max-width: 1090px)
-{
-    #container
-    {
+    .container-items {
         display: grid;
-        grid-template-columns: 1fr 2fr 0.5fr;
-    }
-    #search
-    {
-        display: none;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px; /* Agregado el gap aquí para el contenedor principal */
     }
 }
-@media(max-width: 750px)
+
+@media(min-width: 750px)
 {
     #shopName
     {
@@ -204,30 +208,61 @@ footer {
         font-size: 1.2em;
         margin: 10px 20px;
     }
+    .container-items{
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-@media(max-width: 650px)
+@media(min-width: 1090px)
 {
+  ç
+    
+    .container-items{
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+@media(min-width: 1400px)
+{
+    #container
+    {
+      gap: 20px;
+    }
+    #search
+    {
+        /*QUe aparezca*/
+        display: block;
+    }
+
     #shopName
     {
-        font-size: 24px;
+        font-size: 25px; 
+
     }
     #collection
     {
-        font-size: 10px;
+        font-size: 12px;
     }
     .userIcon
     {
-        font-size: 30px;
+        font-size: 35px;
     }
-}
-@media(max-width: 550px)
-{
-    #container 
+    .addedToCart
     {
-        padding: 20px 25px;
+        font-size: 1.2em;
+        margin: 10px 20px;
     }
+
+    .container-items{
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+
 }
+
+
+
+
 
 /* ----------------------------- ESTILOS CARRITO --------------------------- */
 
@@ -355,7 +390,6 @@ img{
 .container-items{
     margin-top: 100px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
