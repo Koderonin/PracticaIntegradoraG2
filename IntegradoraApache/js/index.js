@@ -10,9 +10,11 @@ function crearItemProducto(producto) {
 	let img = document.createElement('img'); img.alt = 'Imagen' + producto.modelo; img.src = devolverImagen(producto); //TODO: Obtener imagen
 	let div2 = document.createElement('div'); div2.classList.add('info-product');
 	let h2 = document.createElement('h2'); h2.textContent = producto.modelo;
+	let marca = document.createElement('p'); marca.classList.add('brand'); marca.textContent = producto.marca;
+	let descripcion = document.createElement('p'); descripcion.classList.add('description'); descripcion.textContent = producto.descripcion;
 	let p = document.createElement('p'); p.classList.add('price'); p.textContent = producto.precio + ' €';
 	let button = document.createElement('button'); button.classList.add('btn-add-cart'); button.textContent = 'Añadir al carrito';
-	div2.append(h2, p, button); figure.append(img); div.append(figure, div2);
+	div2.append(h2, marca,descripcion ,p , button); figure.append(img); div.append(figure, div2);
     return div;
 }
 
@@ -77,8 +79,9 @@ productsList.addEventListener('click', e => {
 		// Crea un objeto con la información del producto clickeado
 		const infoProduct = {
 			quantity: 1,
+			//Coge el valor del p que tiene como clase price
 			title: product.querySelector('h2').textContent,
-			price: product.querySelector('p').textContent,
+			price: product.querySelector('.price').textContent
 		};
 
 		// Verifica si el producto ya está en el carrito
@@ -174,16 +177,15 @@ const showHTML = () => {
 		rowProduct.append(containerProduct);
 
 		// Calcula el total a pagar y el total de productos en el carrito
-		total +=
-			total + parseInt(product.quantity * product.price.slice(1));
+		const priceNumber = parseFloat(product.price.replace('€', '').trim());
+		total += product.quantity * priceNumber;
 		totalOfProducts += product.quantity;
 	});
 
 	// Actualiza el total a pagar y el contador de productos
-	valorTotal.innerText = `$${total}`;
+	valorTotal.innerText = `${total.toFixed(2)} €`;
 	countProducts.innerText = totalOfProducts;
 };
-
 /*--------------------------------- DESPLEGABLE AREA CLIENTE ---------------------------------*/
 function toggleDropdown() {
     dropdownMenu.classList.toggle("show");

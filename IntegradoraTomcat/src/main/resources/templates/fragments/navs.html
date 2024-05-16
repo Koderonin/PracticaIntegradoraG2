@@ -1,6 +1,91 @@
 <nav th:fragment="barra_navegacion" class="barra_navegacion">    <!-- TODO: Implementar barra de navegación -->
-    <div class="menu_container">
-        <header class="header">
+        <header>
+            <section>
+                <!-- MAIN CONTAINER -->
+                <div id="container-navegacion">
+                    <div class="container-menu-icon" onclick="openNav(this)">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                    <div class="menu" id="mySidenav">
+                        <div class="seccion"><a href="productos.html"> PRODUCTOS </a></div>
+                    </div>
+
+                    <!-- NOMBRE QUE LE QUERAMOS PONER -->
+                    <div id="shopName">
+                        <a href="http://localhost/index.html" class="logo"><img src="/img/logo.png" alt="logo" /></a >
+                        <a href="http://localhost/index.html"><span> <b>Foot</b>Shop</span> </a>
+                    </div>
+                    <!-- SECCIONES DE PRODUCTOS (SI HAY) -->
+
+                    <div id="collection">
+                        <div class="seccion"><a href="http://localhost/productos.html"> PRODUCTOS </a></div>
+                    </div>
+
+                    <div id="search" class="input-container">
+                        <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories" class="input search-input">
+                    </div>
+
+                    <!-- CARRITO Y USUARIO -->
+                    <div id="user">
+
+                        <div class="container-icon">
+                            <div class="container-cart-icon">
+                                <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        class="icon-cart"
+                                >
+                                    <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                    />
+                                </svg>
+                                <div class="count-products">
+                                    <span id="contador-productos">0</span>
+                                </div>
+                            </div>
+
+                            <div class="container-cart-products hidden-cart">
+                                <div class="row-product hidden">
+                                    <div class="cart-product">
+                                        <div class="info-cart-product">
+                                            <span class="cantidad-producto-carrito">1</span>
+                                            <p class="titulo-producto-carrito">Zapatos Nike</p>
+                                            <span class="precio-producto-carrito">$80</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="cart-total hidden">
+                                    <h3>Total:</h3>
+                                    <span class="total-pagar">$200</span>
+                                </div>
+                                <p class="cart-empty">El carrito está vacío</p>
+                            </div>
+                        </div>
+                        <div id="userIcon">
+                            <img th:src="@{/img/user-icon.png}" class="userIcon" onclick="toggleDropdown()">
+                            <!-- Menú desplegable -->
+                            <div id="dropdownMenu" class="dropdown-content" >
+                                <a href="http://tomcat.da2.dva:8080/login/paso1">Login</a>
+                                <a href="http://tomcat.da2.dva:8080/area-cliente">Área de Cliente</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </header>
+
+
+        <!--
+          <header class="header">
             <a href="http://apache.da2.dva/" class="logo"><img src="logo.png"/> </a>
             <input class="menu-btn" type="checkbox" id="menu-btn" />
             <label class="menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
@@ -11,7 +96,8 @@
                 <li><a href="http://tomcat.da2.dva:8080/login/paso1">Login</a></li>
             </ul>
         </header>
-    </div>
+        -->
+
 </nav>
 
 <nav th:fragment="navegacion_pasos(paso)" class="barra_pasos">    <!-- TODO: Implementar barra de navegación -->
