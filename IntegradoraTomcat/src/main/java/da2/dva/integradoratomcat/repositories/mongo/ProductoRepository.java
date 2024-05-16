@@ -1,10 +1,8 @@
 package da2.dva.integradoratomcat.repositories.mongo;
 
 import da2.dva.integradoratomcat.model.entities.Producto;
-import org.bson.BsonString;
+
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.math.BigDecimal;

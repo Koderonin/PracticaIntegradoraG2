@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -33,8 +34,9 @@ public class Producto {
     private int valoracionProducto;
     private String marca;
     private String comentarios;
+    private List<String> imagenes;
 
-    public Producto (String marca, String modelo, String codigo, String descripcion, BigDecimal precio, int unidadesVendidas, BigDecimal gastoAcumulado, int cantidadAlmacen, boolean enOferta, String comentarios) {
+    public Producto (String marca, String modelo, String codigo, String descripcion, BigDecimal precio, int unidadesVendidas, BigDecimal gastoAcumulado, int cantidadAlmacen, boolean enOferta, String comentarios, List<String> imagenes) {
         setMarca(marca);
         setModelo(modelo);
         setCodigo(codigo);
@@ -45,6 +47,7 @@ public class Producto {
         setCantidadAlmacen(cantidadAlmacen);
         setEnOferta(enOferta);
         setComentarios(comentarios);
+        setImagenes(imagenes);
     }
 
 //    private Auditoria auditoria;

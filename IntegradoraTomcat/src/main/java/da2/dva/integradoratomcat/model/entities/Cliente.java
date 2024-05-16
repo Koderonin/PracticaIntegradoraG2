@@ -1,8 +1,10 @@
 package da2.dva.integradoratomcat.model.entities;
 
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
+import da2.dva.integradoratomcat.model.collections.Genero;
 import da2.dva.integradoratomcat.model.collections.Pais;
 import da2.dva.integradoratomcat.model.auxiliar.TarjetaCredito;
+import da2.dva.integradoratomcat.model.collections.TipoDocumento;
 import da2.dva.integradoratomcat.utils.*;
 
 import jakarta.persistence.*;
@@ -46,8 +48,10 @@ public class Cliente {
     private String apellidos;
 
     @NotNull(groups = DatosPersonales.class)
-    @CheckColeccion(coleccion = "listageneros",groups = DatosPersonales.class)
-    private String genero;
+    @ManyToOne
+    @JoinColumn(name = "genero", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_GENERO_CLIENTE"))
+    @Valid
+    private Genero genero;
 
     @NotNull(groups = DatosPersonales.class)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -56,14 +60,15 @@ public class Cliente {
 
     @NotNull(groups = DatosPersonales.class)
     @ManyToOne
-    @JoinColumn(name = "pais", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO"))
+    @JoinColumn(name = "pais", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_PAIS_NACIMIENTO_CLIENTE"))
     @Valid
     private Pais paisNacimiento;
 
     @NotNull(groups = DatosPersonales.class)
-    @CheckColeccion(coleccion = "listatiposDocumentos", groups = DatosPersonales.class)
-    @Column(name = "tipo_documento", length = 1)
-    private String tipoDocumento;
+    @ManyToOne
+    @JoinColumn(name = "tipo_documento", referencedColumnName = "siglas", foreignKey = @ForeignKey(name = "FK_TIPO_DOCUMENTO_CLIENTE"))
+    @Valid
+    private TipoDocumento tipoDocumento;
 
     @NotBlank(groups = DatosPersonales.class)
     @Column(name = "num_documento", length = 14)
@@ -82,7 +87,6 @@ public class Cliente {
     private Direccion direccion;
 
     @OneToMany(fetch = FetchType.EAGER)
-
     @JoinTable(name="direcciones_entrega",
             joinColumns = @JoinColumn(name = "id_cliente", foreignKey = @ForeignKey(name = "FK_CLIENTE_DIRECCION_ENTREGA_ID_CLIENTE")),
             inverseJoinColumns = @JoinColumn(name = "id_direccion", foreignKey = @ForeignKey(name = "FK_DIRECCION_DIRECCION_ENTREGA_ID_DIRECCION")))
@@ -90,7 +94,9 @@ public class Cliente {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<@Valid TarjetaCredito> tarjetasCredito = new HashSet<>();
+
     private String tipoCliente;
+
     private String comentarios;
 
     @NotNull(groups = DatosCliente.class)
@@ -102,7 +108,7 @@ public class Cliente {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.EAGER)
     private Set<Pedido> pedidos = new HashSet<>();
 
-    public Cliente(UsuarioCliente usuarioCliente, String nombre, String apellidos, String genero, Pais paisNacimiento, LocalDate fechaNacimiento, String tipoDocumento, String documento, String telefonoMovil, Direccion direccion) {
+    public Cliente(UsuarioCliente usuarioCliente, String nombre, String apellidos, Genero genero, Pais paisNacimiento, LocalDate fechaNacimiento, TipoDocumento tipoDocumento, String documento, String telefonoMovil, Direccion direccion) {
         setUsuarioCliente(usuarioCliente);
         setNombre(nombre);
         setApellidos(apellidos);

@@ -144,8 +144,8 @@ public class DatosSQL {
             clienteRepository.save(
                     new Cliente(
                             UCRepository.findByEmail("admin@integradora.jpa"), "Pepe", "García Mongólez",
-                            "m", paisRepository.findBySiglasPais("es"), LocalDate.of(1988, 1, 14),
-                            "S", "22/12345678/39",
+                            new Genero("m", "Masculino"), paisRepository.findBySiglasPais("es"), LocalDate.of(1988, 1, 14),
+                            new TipoDocumento("S", "Nº Seguridad Social"), "22/12345678/39",
                             "687456842", d1
                     )
             );
@@ -153,8 +153,8 @@ public class DatosSQL {
             clienteRepository.save(
                     new Cliente(
                             UCRepository.findByEmail("cilente@integradora.jpa"), "Pepo", "Compo Cosas",
-                            "m", paisRepository.findBySiglasPais("es"), LocalDate.of(1988, 1, 14),
-                            "D", "00000000T",
+                            new Genero("m", "Masculino"), paisRepository.findBySiglasPais("es"), LocalDate.of(1988, 1, 14),
+                            new TipoDocumento("D", "DNI"), "00000000T",
                             "687456842", d2
                     )
             );

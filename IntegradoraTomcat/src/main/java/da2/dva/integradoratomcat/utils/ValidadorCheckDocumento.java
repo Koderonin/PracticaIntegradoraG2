@@ -1,5 +1,6 @@
 package da2.dva.integradoratomcat.utils;
 
+import da2.dva.integradoratomcat.model.collections.TipoDocumento;
 import da2.dva.integradoratomcat.model.entities.Cliente;
 
 import jakarta.validation.ConstraintValidator;
@@ -11,10 +12,10 @@ public class ValidadorCheckDocumento implements ConstraintValidator<CheckDocumen
 
     @Override
     public boolean isValid(Cliente cliente, ConstraintValidatorContext context) {
-        String tipo = cliente.getTipoDocumento();
+        TipoDocumento tipo = cliente.getTipoDocumento();
         String documento = cliente.getDocumento();
 
-        switch (tipo) {
+        switch (tipo.getSiglas()) {
             case "D":
                 // Validar formato
                 if (!documento.matches("\\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]")) return false;

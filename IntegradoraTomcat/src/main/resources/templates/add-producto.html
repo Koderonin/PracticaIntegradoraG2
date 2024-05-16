@@ -6,12 +6,16 @@
 
 <form id="productoForm" enctype="multipart/form-data">
     Código: <input type="text" id="codigo"><br>
-    Descripción: <input type="text" id="descripcion"><br>
+    Modelo: <input type="text" id="modelo"><br>
+    Marca: <input type="text" id="marca"><br>
     Precio: <input type="text" id="precio"><br>
-    Imágenes: <input type="file" id="imagenes" name="imagenes" multiple accept="image/*"><br>
-    <button type="button" onclick="addCampo()">Añadir campo</button>
-    <input type="submit" value="Enviar">
+    Descripción: <input type="text" id="descripcion"><br>
+    Cantidad en almacen: <input type="text" id="cantidad_almacen"><br>
+    Es novedad: <input type="checkbox" id="esNovedad"><br>
 </form>
+<button form="productoForm" type="button" onclick="addCampo()">Añadir campo</button>
+<input form="productoForm" type="submit" value="Enviar">
+Imágenes: <input form="productoForm" type="file" id="imagenes" name="imagenes" multiple accept="image/*"><br>
 
 <script>
     document.getElementById('productoForm').addEventListener('submit', function(event) {
@@ -19,8 +23,13 @@
 
         var producto = {
             codigo: document.getElementById('codigo').value,
+            modelo: document.getElementById('modelo').value,
+            marca: document.getElementById('marca').value,
+            precio: document.getElementById('precio').value,
             descripcion: document.getElementById('descripcion').value,
-            precio: document.getElementById('precio').value
+            cantidad_almacen: document.getElementById('cantidad_almacen').value,
+            esNovedad: document.getElementById('esNovedad').checked
+
         };
 
         // Añadir campos dinámicos al objeto producto

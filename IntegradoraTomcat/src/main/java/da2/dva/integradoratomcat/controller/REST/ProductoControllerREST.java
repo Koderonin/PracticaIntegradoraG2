@@ -1,13 +1,15 @@
 package da2.dva.integradoratomcat.controller.REST;
 
-import da2.dva.integradoratomcat.model.entities.Producto;
-import da2.dva.integradoratomcat.repositories.mongo.ProductoRepository;
+import da2.dva.integradoratomcat.services.ServicioImagenes;
 import da2.dva.integradoratomcat.services.ServicioProducto;
+import jakarta.servlet.http.HttpServletRequest;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.HttpHeaders;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,11 +21,12 @@ import java.util.Optional;
 @CrossOrigin("*")
 @RequestMapping("/api/producto")
 public class ProductoControllerREST {
-    @Autowired
-    ProductoRepository productoRepository;
 
     @Autowired
     private ServicioProducto servicioProducto;
+
+    @Autowired
+    private ServicioImagenes servicioImagenes;
 
     // Create
     /**
@@ -67,8 +70,14 @@ public class ProductoControllerREST {
         return servicioProducto.findAllDocuments();
     }
 
-    @GetMapping("/detalle/{id}")
-    public Document detalleProductoById(@PathVariable("id") String id) {
-        return servicioProducto.findById(new ObjectId(id));
+    @GetMapping("/detalle/{codigo}")
+    public Document detalleProductoByCodigo(@PathVariable("codigo") String codigo) {
+        try {
+            return servicioProducto.findByCodigo(codigo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
+
 }
