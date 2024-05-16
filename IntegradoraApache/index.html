@@ -20,9 +20,9 @@
                         <div class="bar3"></div>
                     </div>
                     <div class="menu" id="mySidenav">
-                        <div id="clothing"><a href="http://apache.da2.dva/productos.html"> PRODUCTOS </a></div>
+                        <div id="clothing"><a href="productos.html"> PRODUCTOS </a></div>
                     </div>
-
+                   
                     <!-- NOMBRE QUE LE QUERAMOS PONER -->
                     <div id="shopName">
                         <a href="index.html" class="logo"><img src="img/logo.png" alt="logo" /></a >
@@ -32,16 +32,15 @@
                         
                         <div id="collection">
                             <div id="clothing"><a href="productos.html"> PRODUCTOS </a></div>
-                        <!-- <div id="accessories"><a href="accessories.html"> PRODUCTOS </a></div> -->
                         </div>
-
+                       
                         <div id="search" class="input-container">
                             <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories" class="input search-input">
                         </div>
                         
                         <!-- CARRITO Y USUARIO -->
                         <div id="user">
-
+                            
                             <div class="container-icon">
                                 <div class="container-cart-icon">
                                     <svg
@@ -102,19 +101,17 @@
                                 <img src="img/user-icon.png" class="userIcon" onclick="toggleDropdown()">
                                 <!-- Menú desplegable -->
                                 <div id="dropdownMenu" class="dropdown-content" >
-                                    <a href="#">Login</a>
-                                    <a href="#">Área de Cliente</a>
+                                    <a href="http://tomcat.da2.dva:8080/login/paso1">Login</a>
+                                    <a href="http://tomcat.da2.dva:8080/area-cliente">Área de Cliente</a>
                                 </div>
                             </div>
-                            <!--<a href="http://tomcat.da2.dva:8080/area-cliente"> <img src="img/user-icon.png" class="userIcon"></img> </a> -->
-
                         </div>
                 </div>
     
             </section>
         </header>
 
-
+        
 
         <div class="main-container">
             <div class="main-wrapper">
@@ -127,36 +124,36 @@
                 <div class="slider-container">
                     <div class="slider">
                       <div class="slide">
-                        <a href="http://apache.da2.dva/productos.html"><img src="img/zapatilla1.avif" alt="Oferta 1"></a>
+                        <a href="productos.html"><img src="img/zapatilla1.avif" alt="Oferta 1"></a>
                       </div>
                       <div class="slide">
-                        <a href="http://apache.da2.dva/productos.html"><img src="img/zapatilla2.avif" alt="Oferta 2"></a>
+                        <a href="productos.html"><img src="img/zapatilla2.avif" alt="Oferta 2"></a>
                       </div>
                       <div class="slide">
-                        <a href="http://apache.da2.dva/productos.html"><img src="img/zapatilla3.avif" alt="Oferta 3"></a>
+                        <a href="productos.html"><img src="img/zapatilla3.avif" alt="Oferta 3"></a>
                       </div>
                       <div class="slide">
-                        <a href="http://apache.da2.dva/productos.html"><img src="img/zapatilla4.avif" alt="Oferta 4"></a>
+                        <a href="productos.html"><img src="img/zapatilla4.avif" alt="Oferta 4"></a>
                       </div>
                       <div class="slide">
-                        <a href="http://apache.da2.dva/productos.html"><img src="img/zapatilla5.avif" alt="Oferta 5"></a>
+                        <a href="productos.html"><img src="img/zapatilla5.avif" alt="Oferta 5"></a>
                       </div>
                       <div class="slide">
-                        <a href="http://apache.da2.dva/productos.html"><img src="img/zapatilla6.avif" alt="Oferta 5"></a>
+                        <a href="productos.html"><img src="img/zapatilla6.avif" alt="Oferta 5"></a>
                       </div>
                       <div class="slide">
-                        <a href="http://apache.da2.dva/productos.html"><img src="img/zapatilla7.avif" alt="Oferta 5"></a>
+                        <a href="productos.html"><img src="img/zapatilla7.avif" alt="Oferta 5"></a>
                       </div>
                     </div>
                     <button class="prev" onclick="prevSlide()">&#10094;</button>
                     <button class="next" onclick="nextSlide()">&#10095;</button>
                   </div>
-
+                  
                 </div>
             </section>
-
-
-
+            
+           
+            
         </div>
  <footer>
 
@@ -172,7 +169,7 @@
         <script>
             /* Slideshow  OFERTAS */
             let slideIndex = 0;
-
+        
             function showSlides() {
                 const slides = document.querySelectorAll('.slide');
                 if (slideIndex >= slides.length - 3) { // Ajusta aquí el número de slides visibles
@@ -183,22 +180,21 @@
                 const offset = -slideIndex * (100 / 3); // Ajusta aquí el número de slides visibles
                 document.querySelector('.slider').style.transform = `translateX(${offset}%)`;
             }
-
+        
             function nextSlide() {
                 slideIndex++;
                 showSlides();
             }
-
+        
             function prevSlide() {
                 slideIndex--;
                 showSlides();
             }
-
+        
             document.addEventListener('DOMContentLoaded', (event) => {
                 showSlides(); // Inicializar la visualización de slides
             });
         </script>
-        <script type="text/javascript" src="/js/datos.js"></script>
         <script type="text/javascript" src="/js/index.js"></script>
     </body>
 </html>

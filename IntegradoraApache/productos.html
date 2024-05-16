@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="es">
-    <head> <!-- TODO: Implementar CSS y JS -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title></title>
-        <!-- CSS -->
-        <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"/>
-        <link type="text/css" rel="stylesheet" href="/css/style2.css"/>
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    </head>
+<head> <!-- TODO: Implementar CSS y JS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/style2.css"/>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
     <body>
         <header>
             <section>
@@ -23,7 +23,7 @@
                     <div class="menu" id="mySidenav">
                         <div id="clothing"><a href="productos.html"> PRODUCTOS </a></div>
                     </div>
-
+                   
                     <!-- NOMBRE QUE LE QUERAMOS PONER -->
                     <div id="shopName">
                         <a href="index.html" class="logo"><img src="img/logo.png" alt="logo" /></a >
@@ -41,6 +41,7 @@
                         
                         <!-- CARRITO Y USUARIO -->
                         <div id="user">
+                            
                             <div class="container-icon">
                                 <div class="container-cart-icon">
                                     <svg
@@ -101,12 +102,10 @@
                                 <img src="img/user-icon.png" class="userIcon" onclick="toggleDropdown()">
                                 <!-- Menú desplegable -->
                                 <div id="dropdownMenu" class="dropdown-content" >
-                                    <a href="#">Login</a>
-                                    <a href="#">Área de Cliente</a>
+                                    <a href="http://tomcat.da2.dva:8080/login/paso1">Login</a>
+                                    <a href="http://tomcat.da2.dva:8080/area-cliente">Área de Cliente</a>
                                 </div>
                             </div>
-                            <!--<a href="http://tomcat.da2.dva:8080/area-cliente"> <img src="img/user-icon.png" class="userIcon"></img> </a> -->
-
                         </div>
                 </div>
     
@@ -114,12 +113,12 @@
         </header>
 
 		<div class="container-items">
-
+            
             <div id="search-mobile" class="input-container">
                 <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories" class="input search-input">
             </div>
 
-			<div class="item">
+			<!--<div class="item">
 				<figure>
 					<img
 						src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
@@ -183,7 +182,7 @@
 					<p class="price">$50</p>
 					<button class="btn-add-cart">Añadir al carrito</button>
 				</div>
-			</div>
+			</div>-->
 		</div>
 
         <footer>
@@ -198,7 +197,6 @@
     
         </footer>
 
-        <!-- <script type="text/javascript" src="/js/datos.js"></script> -->
         <script type="text/javascript" src="/js/index.js"></script>
     </body>
 </html>
