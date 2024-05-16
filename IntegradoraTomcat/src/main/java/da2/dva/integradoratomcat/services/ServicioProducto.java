@@ -117,5 +117,8 @@ public class ServicioProducto {
         return mongoTemplate.findOne(query, Document.class, "producto");
     }
 
+    public void deleteAll() {
+        mongoTemplate.dropCollection("producto");
+    }
 
 }
