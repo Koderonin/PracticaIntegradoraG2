@@ -16,6 +16,9 @@ Práctica integradora de los módulos DAW, DWES, AD y DIW
 #### Primera Entrega
 [<img src="https://img.shields.io/badge/release-24%2F04-green?style=plastic">](https://github.com/Koderonin/PracticaIntegradoraG2/releases/tag/v0.2)
 
+#### Segunda Entrega
+[<img src="https://img.shields.io/badge/release-13%2F05-green?style=plastic">](https://github.com/Koderonin/PracticaIntegradoraG2/releases/tag/v0.3)
+
 
 ## ⚓ Docker 
 
@@ -31,35 +34,31 @@ Práctica integradora de los módulos DAW, DWES, AD y DIW
 ```
 ### 🌐 Datos de la Red Docker
 - IP: 192.168.100.0/24
+- Gateway: 192.168.100.1
 - Nombre: practicaintegradora_red_integradora
 - Nombre de Dominio: da2.dva
 #### Servidor DNS
   - IP: 192.168.100.254
-  - Nombre de dominio: dns
+  - Nombre de dominio: ns1.da2.dva
   - Nombre de host: bind
   - Nombre del Contenedor: contiene_bind
 #### Servidor MySQL
   - IP: 192.168.100.2
-  - Nombre de dominio: mysql
+  - Nombre de dominio: mysql.da2.dva
   - Nombre de host: mysql
   - Nombre del Contenedor: contiene_mysql
 #### Servidor MongoDB
   - IP: 192.168.100.3
-  - Nombre de dominio: mongo
+  - Nombre de dominio: mongo.da2.dva
   - Nombre de host: mongo
   - Nombre del Contenedor: contiene_mongo
 #### Servidor Apache Tomcat
   - IP: 192.168.100.4
-  - Nombre de dominio: tomcat
+  - Nombre de dominio: tomcat.da2.dva
   - Nombre de host: tomcat
   - Nombre del Contenedor: contiene_tomcat
 #### Servidor Apache HTTP
   - IP: 192.168.100.5
-  - Nombre de dominio: apache
+  - Nombre de dominio: apache.da2.dva
   - Nombre de host: apache
   - Nombre del Contenedor: contiene_apache
-#### Servidor Node.js
-  - IP: 192.168.100.6
-  - Nombre de dominio: vue
-  - Nombre de host: vue
-  - Nombre del Contenedor: contiene_vue

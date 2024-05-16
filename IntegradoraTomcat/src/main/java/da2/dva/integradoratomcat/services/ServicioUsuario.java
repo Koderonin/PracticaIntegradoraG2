@@ -1,8 +1,9 @@
 package da2.dva.integradoratomcat.services;
 
-import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
+import da2.dva.integradoratomcat.repositories.jpa.UsuarioAdministradorRepository;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioClienteRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,15 @@ import java.util.*;
  * @version 0.7
  * @since 0.7
  */
-@Service
+@Service("userDetailsService")
+@Transactional
 public class ServicioUsuario {
 
-     @Autowired
-     private UsuarioClienteRepository usuarioClienteRepository;
+    @Autowired
+    private UsuarioClienteRepository usuarioClienteRepository;
+
+        @Autowired
+        private UsuarioAdministradorRepository usuarioAdministradorRepository;
 
      public void insertarUsuario(UsuarioCliente usuario){
          usuarioClienteRepository.save(usuario);

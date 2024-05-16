@@ -1,24 +1,18 @@
 package da2.dva.integradoratomcat.controller;
 
-import da2.dva.integradoratomcat.model.entities.Usuario;
-import da2.dva.integradoratomcat.model.entities.UsuarioAdministrador;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
-import da2.dva.integradoratomcat.services.Servicio;
 import da2.dva.integradoratomcat.services.ServicioUsuario;
 import da2.dva.integradoratomcat.services.ServicioColecciones;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Map;
 
 @Controller
 @RequestMapping("registro/usuario")

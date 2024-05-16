@@ -1,44 +1,34 @@
 const containerProductos = document.querySelector('.container-items');
-let listaProductos;
-listarProductos();
+
+if(containerProductos != null){
+	listarProductos();
+}
 
 function crearItemProducto(producto) {
-    let itemHTML = `
-        <div class="item">
-            <figure>
-                <img src=${devolverImagen(producto)} class="product-image" alt="producto">
-            </figure>
-            <div class="info-product">
-                <h2>${producto.modelo}</h2>
-				<span>${producto.marca}</span> </br>
-				<span>${producto.codigo}</span> </br>
-                <p class="price">$${producto.precio}</p>
-                <button class="btn-add-cart">Añadir al carrito</button>
-            </div>
-        </div>
-    `;
-    return itemHTML;
+	let div = document.createElement('div'); div.classList.add('item');
+	let figure = document.createElement('figure');
+	let img = document.createElement('img'); img.alt = 'Imagen' + producto.modelo; img.src = devolverImagen(producto); //TODO: Obtener imagen
+	let div2 = document.createElement('div'); div2.classList.add('info-product');
+	let h2 = document.createElement('h2'); h2.textContent = producto.modelo;
+	let p = document.createElement('p'); p.classList.add('price'); p.textContent = producto.precio + ' €';
+	let button = document.createElement('button'); button.classList.add('btn-add-cart'); button.textContent = 'Añadir al carrito';
+	div2.append(h2, p, button); figure.append(img); div.append(figure, div2);
+    return div;
 }
 
 
 
-async function listarProductos(){
-	let respuesta = await fetch("http://localhost:8080/api/producto/listado")
-	listaProductos = await respuesta.json();
-	console.log(respuesta);
-	console.log(listaProductos);
-	listaProductos.forEach(element => {
-		let itemHTML = crearItemProducto(element);
-        containerProductos.innerHTML += itemHTML;
+function listarProductos(){
+	containerProductos.innerHTML = '<div id="search-mobile" class="input-container"><input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories" class="input search-input"></div>';
+	$.getJSON("http://tomcat.da2.dva:8080/api/producto/listado", function(result) {
+		$.each(result, function(i, field){
+        	containerProductos.appendChild(crearItemProducto(field));
+        });
 	});
-    // for (let i = 0; i < 20 ; i++) { 
-    //     let itemHTML = crearItemProducto(listaProductos[i]);
-    //     containerProductos.innerHTML += itemHTML;
-    //     console.log(listaProductos[i].descripcion);
-    // }
 }
 
 function devolverImagen(producto){
+
 	if(producto.imagenes == null){
 		return "https://placehold.co/600x400"
 	} else {
@@ -47,14 +37,16 @@ function devolverImagen(producto){
 }
 
 
-
 // Selecciona el botón del carrito y el contenedor de productos del carrito del DOM
 const btnCart = document.querySelector('.container-cart-icon');
 const containerCartProducts = document.querySelector('.container-cart-products');
+const dropdownMenu = document.getElementById("dropdownMenu");
 
 // Agrega un evento de clic al botón del carrito para alternar la visibilidad del contenedor de productos del carrito
 btnCart.addEventListener('click', () => {
 	containerCartProducts.classList.toggle('hidden-cart');
+	dropdownMenu.classList.remove("show");
+	
 });
 
 /* ========================= */
@@ -70,6 +62,7 @@ const cartTotal = document.querySelector('.cart-total');
 const productsList = document.querySelector('.container-items');
 const countProducts = document.querySelector('#contador-productos');
 const valorTotal = document.querySelector('.total-pagar');
+
 
 // Array que almacena los productos en el carrito
 let allProducts = [];
@@ -191,3 +184,34 @@ const showHTML = () => {
 	countProducts.innerText = totalOfProducts;
 };
 
+/*--------------------------------- DESPLEGABLE AREA CLIENTE ---------------------------------*/
+function toggleDropdown() {
+    dropdownMenu.classList.toggle("show");
+	containerCartProducts.classList.add('hidden-cart');
+	
+}
+
+// Cerrar el menú desplegable si el usuario hace clic fuera de él
+window.onclick = function(event) {
+    if (!event.target.matches('.userIcon')) {
+        let dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+            let openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
+
+//--------------------------------- MENU HAMBURGUESA ---------------------------------
+function openNav(x) {
+	document.getElementById("mySidenav").classList.toggle("show");
+	x.classList.toggle("change");
+  }
+//--------------------------------- OFERTAS ---------------------------------
+
+
+            
+       

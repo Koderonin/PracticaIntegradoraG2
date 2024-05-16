@@ -33,32 +33,29 @@ ext {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // MongoDB
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    //Springboot
+    // Springboot
     implementation 'org.springframework.boot:spring-boot-starter'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     // WEB
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    //Thymeleaf
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
-    //Lombok
+    // Thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // Lombok
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly 'org.projectlombok:lombok'
-    //JPA y MySQL
+    annotationProcessor 'org.projectlombok:lombok'
+    // JPA y MySQL
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.mysql:mysql-connector-j'
-    annotationProcessor 'org.projectlombok:lombok'
+    // Testing y REST
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-    //testImplementation 'io.rest-assured:rest-assured'
-    //testImplementation 'org.hamcrest:hamcrest'
-    //testImplementation 'org.junit.jupiter:junit-jupiter'
-    //testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    //Validaciones
+    // Validaciones
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    //Librería StringUtils
+    // Librería StringUtils //TODO: Si no se usa, fuera
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 

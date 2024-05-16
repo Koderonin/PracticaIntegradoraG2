@@ -8,29 +8,40 @@
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="/css/style2.css"/>
     <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
     <body>
         <header>
             <section>
                 <!-- MAIN CONTAINER -->
                 <div id="container">
+                    <div class="container-menu-icon" onclick="openNav(this)">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                    <div class="menu" id="mySidenav">
+                        <div id="clothing"><a href="productos.html"> PRODUCTOS </a></div>
+                    </div>
+                   
                     <!-- NOMBRE QUE LE QUERAMOS PONER -->
                     <div id="shopName">
                         <a href="index.html" class="logo"><img src="img/logo.png" alt="logo" /></a >
-                        <a href="index.html"> <b>Titulo</b>Random </a>
+                        <a href="index.html"><span> <b>Foot</b>Shop</span> </a>
                     </div>
-                    <!-- SECCIONES DE PRODUCTOS (SI HAY) -->
+                        <!-- SECCIONES DE PRODUCTOS (SI HAY) -->
                         
                         <div id="collection">
-                        <div id="clothing"><a href="http://apache.da2.dva/productos.html"> PRODUCTOS </a></div>
-                    <!-- <div id="accessories"><a href="accessories.html"> PRODUCTOS </a></div> -->
-                    </div>
+                            <div id="clothing"><a href="productos.html"> PRODUCTOS </a></div>
+                        </div>
+                       
                         <div id="search" class="input-container">
                             <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories" class="input search-input">
                         </div>
                         
                         <!-- CARRITO Y USUARIO -->
                         <div id="user">
+                            
                             <div class="container-icon">
                                 <div class="container-cart-icon">
                                     <svg
@@ -87,91 +98,74 @@
                                     <p class="cart-empty">El carrito está vacío</p>
                                 </div>
                             </div>
-                            <a href="http://tomcat.da2.dva:8080/area-cliente"> <img src="img/user-icon.png" class="userIcon"></img> </a>
-
+                            <div id="userIcon">
+                                <img src="img/user-icon.png" class="userIcon" onclick="toggleDropdown()">
+                                <!-- Menú desplegable -->
+                                <div id="dropdownMenu" class="dropdown-content" >
+                                    <a href="http://tomcat.da2.dva:8080/login/paso1">Login</a>
+                                    <a href="http://tomcat.da2.dva:8080/area-cliente">Área de Cliente</a>
+                                </div>
+                            </div>
                         </div>
                 </div>
     
             </section>
         </header>
+
         <div class=" container-area-cliente">
             <div class="form-container">
                 <div class="user-row" >
                     <div class="user-img"><img src="img/user-icon.png"/> </div>
                     <div class="user-main-info">
                       
-                        <h1 class="user-email">User Email</h1>
+                        <h1 class="user-email"></h1>
                     </div>
                 </div>
                 <div class="user-row2">
-                    <div class="personal-info">
-                        <p >Nombre</p>
-                        <p >Apellidos</p>
-                        <p>Genero</p>
-                        <p>Fecha de nacimiento</p>
-                        <p>Nacionalidad</p>
-                        <p>Telefono</p>
-                        <p>Tipo de documento</p>
-                        <p>Documento</p>
-                        <p> Teléfono Movil</p>
-                        <p>Comentarios</p>
+                    <div class="personal-info1">
+                        <p><b>Nombre</b></p>
+                        <p><b>Apellidos</b></p>
+                        <p><b>Género</b></p>
+                        <p><b>Fecha de nacimiento</b></p>
+                        <p><b>País de nacimiento</b></p>
+                        <p><b>Tipo de documento</b></p>
+                        <p><b>Nº de Documento</b></p>
+                        <p><b>Teléfono Movil</b></p>
+                        <p><b>Comentarios</b></p>
                     </div>
-                    <div class="direccion-info">
-                        <p>Tipo de via</p>
-                        <p>Nombre de via</p>
-                        <p>Numero</p>
-                        <p>Planta</p>
-                        <p>Puerta</p>
-                        <p>Portal</p>
-                        <p>Localidad</p>
-                        <p>CPostal</p>
-                        <p>Region</p>
-                        <p>Pais</p>
+                    <div class="personal-info2">
+
                     </div>
+                    <div class="direccion-info1">
+                        <p><b>Tipo de vía</b></p>
+                        <p><b>Nombre de vía</b></p>
+                        <p><b>Número</b></p>
+                        <p><b>Planta</b></p>
+                        <p><b>Puerta</b></p>
+                        <p><b>Portal</b></p>
+                        <p><b>Localidad</b></p>
+                        <p><b>Código Postal</b></p>
+                        <p><b>Región/Comunidad Autónoma</b></p>
+                        <p><b>País</b></p>
+                    </div>
+                    <div class="direccion-info2"></div>
 
                 </div>
             </div>
         </div>
         
         <footer>
-            <section>    
-                <div id="containerFooter">
-                    
-                    <div id="webFooter">
-                        <h3> online store </h3>
-                        <p> men clothing </p>
-                        <p> women clothing </p>
-                        <p> men accessories </p>
-                        <p> women accessories </p>
-                    </div>
-                    <div id="webFooter">
-                        <h3> helpful link </h3>
-                        <p> home </p>
-                        <p> about </p>
-                        <p> contact </p>
-                    </div>
-                    <div id="webFooter">
-                        <h3> partners </h3>
-                        <p> zara </p>
-                        <p> pantaloons </p>
-                        <p> levis </p>
-                        <p> ucb </p>
-                        <p> + many more </p>
-                    </div>
-                    <div id="webFooter">
-                        <h3> address </h3>
-                        <p> building 101 </p>
-                        <p> central avenue </p>
-                        <p> la - 902722 </p>
-                        <p> united states </p>
-                    </div>
-                </div>
-                <div id="credit"><a href="https://linkedin.com/in/priyanka-sharma-b79401142"> © Priyanka Sharma </a> &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp <a href="https://www.edyoda.com/" target="_blank"> EDYODA </a></div>
+
+            <section class="footer-container">
+                <ul class="footer-nav">
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Quiénes somos</a></li>
+                    <li><a href="#">Conócenos</a></li>
+                </ul>
             </section>
     
         </footer>
-
-        <script type="text/javascript" src="/js/datos.js"></script>
         <script type="text/javascript" src="/js/index.js"></script>
+        <script type="text/javascript" src="/js/area-cliente.js"></script>
     </body>
 </html>
