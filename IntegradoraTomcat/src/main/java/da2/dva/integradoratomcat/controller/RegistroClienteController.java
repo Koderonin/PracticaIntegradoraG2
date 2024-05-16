@@ -45,17 +45,20 @@ public class RegistroClienteController {
     public ModelAndView registroCliente(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
 
         ModelAndView mv = new ModelAndView();
-        mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
-        //Paso de parámetros para resolución de la vista
-        mv.addObject("titulo","Registro de cliente");
-        mv.addObject("paso" ,"1");
-        //Paso de colecciones necesarias
-        mv.addObject("listaGeneros", servicio.getGeneros());
-        mv.addObject("listaPaises", servicio.getPaises());
-        mv.addObject("listaTiposDocumentos", servicio.getTiposDocumentos());
-        //Recuperación de datos de otros pasos
-        cliente = (Cliente) sesion.getAttribute("cliente");
-        if (cliente != null) mv.addObject("cliente", cliente);
+        if (checkUserSession(sesion)) {
+            mv.setViewName("/registro/cliente");
+            //Paso de parámetros para resolución de la vista
+            mv.addObject("titulo","Registro de cliente");
+            mv.addObject("paso" ,"1");
+            //Paso de colecciones necesarias
+            mv.addObject("listaGeneros", servicio.getGeneros());
+            mv.addObject("listaPaises", servicio.getPaises());
+            mv.addObject("listaTiposDocumentos", servicio.getTiposDocumentos());
+            //Recuperación de datos de otros pasos
+            cliente = (Cliente) sesion.getAttribute("cliente");
+            if (cliente != null) mv.addObject("cliente", cliente);
+        } else
+            mv.setViewName("redirect:/registro/usuario/");
 
         return mv;
     }

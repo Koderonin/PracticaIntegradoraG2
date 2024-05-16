@@ -3,7 +3,6 @@ package da2.dva.integradoratomcat.model.entities;
 import da2.dva.integradoratomcat.utils.CheckColeccionLong;
 import jakarta.persistence.*;
 import da2.dva.integradoratomcat.utils.CheckClave;
-import da2.dva.integradoratomcat.utils.CheckColeccion;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

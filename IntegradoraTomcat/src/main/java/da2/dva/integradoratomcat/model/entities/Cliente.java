@@ -3,17 +3,18 @@ package da2.dva.integradoratomcat.model.entities;
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.collections.Pais;
 import da2.dva.integradoratomcat.model.auxiliar.TarjetaCredito;
-import da2.dva.integradoratomcat.model.collections.Pais;
 import da2.dva.integradoratomcat.utils.*;
+
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
@@ -35,7 +36,6 @@ public class Cliente {
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_USUARIO_CLIENTE"))
-    // @MapsId
     private UsuarioCliente usuarioCliente;
 
     @Column(name = "nombre", length = 20)
