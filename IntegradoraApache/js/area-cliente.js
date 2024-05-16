@@ -1,62 +1,48 @@
-const containerProductos = document.querySelector('.container-items');
+const USER_EMAIL = $('.user-email');
+const DIV_PERSONAL_INFO = $('.personal-info2')[0];
+const DIV_DIRECCION_INFO = $('.direccion-info2')[0];
 
-if(containerProductos != null){
-	listarProductos();
-}
+async function datosCliente() {
+	$.ajaxSetup({xhrFields: { withCredentials: true } });
 
+	$.getJSON('http://tomcat.da2.dva:8080/api/cliente/infoSesion', function(response) {
+		response = response[0];
 
+		USER_EMAIL.text(response.usuarioCliente.email);
 
-function crearItemProducto(producto) {
-    let itemHTML = `
-        <div class="item">
-            <figure>
-                <img src="https://via.placeholder.com/300" class="product-image" alt="producto">
-            </figure>
-            <div class="info-product">
-                <h2>${producto.descripcion}</h2>
-                <p class="price">$${producto.precio}</p>
-                <button class="btn-add-cart">Añadir al carrito</button>
-            </div>
-        </div>
-    `;
-    return itemHTML;
-}
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.nombre;
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.apellidos;
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.genero;
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.fechaNacimiento;
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.paisNacimiento.nombrePais;
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.tipoDocumento;
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.documento;
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.telefonoMovil;
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.comentarios;
 
-
-
-async function listarProductos(){
-	$.getJSON("http://tomcat.da2.dva:8080/api/producto/listado", function(result) {
-		$.each(result, function(i, field){
-            let itemHTML = crearItemProducto(field);
-        	containerProductos.innerHTML += itemHTML;
-        });
+		$.each(response.direccion, function(key, value) {
+			if (key !== 'id_direccion')
+				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = value;
+			if (value == null)
+				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = 'N/A';
+		})
 	});
 }
 
-function devolverImagen(producto){
-
-	if(producto.imagenes == null){
-		return "https://placehold.co/600x400"
-	} else {
-		return producto.imagenes[0];
-	}
-}
+datosCliente();
 
 
-
+/*
 // Selecciona el botón del carrito y el contenedor de productos del carrito del DOM
 const btnCart = document.querySelector('.container-cart-icon');
 const containerCartProducts = document.querySelector('.container-cart-products');
-const dropdownMenu = document.getElementById("dropdownMenu");
 
 // Agrega un evento de clic al botón del carrito para alternar la visibilidad del contenedor de productos del carrito
 btnCart.addEventListener('click', () => {
 	containerCartProducts.classList.toggle('hidden-cart');
-	dropdownMenu.classList.remove("show");
-
 });
 
-/* ========================= */
+/* ========================= 
 // Declaración de variables para interactuar con elementos del DOM
 
 // Elementos relacionados con la información del producto y el carrito
@@ -188,35 +174,5 @@ const showHTML = () => {
 	// Actualiza el total a pagar y el contador de productos
 	valorTotal.innerText = `$${total}`;
 	countProducts.innerText = totalOfProducts;
-};
-
-/*--------------------------------- DESPLEGABLE AREA CLIENTE ---------------------------------*/
-function toggleDropdown() {
-    dropdownMenu.classList.toggle("show");
-	containerCartProducts.classList.add('hidden-cart');
-
-}
-
-// Cerrar el menú desplegable si el usuario hace clic fuera de él
-window.onclick = function(event) {
-    if (!event.target.matches('.userIcon')) {
-        let dropdowns = document.getElementsByClassName("dropdown-content");
-        for (let i = 0; i < dropdowns.length; i++) {
-            let openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
-
-
-//--------------------------------- MENU HAMBURGUESA ---------------------------------
-function openNav(x) {
-	document.getElementById("mySidenav").classList.toggle("show");
-	x.classList.toggle("change");
-  }
-//--------------------------------- OFERTAS ---------------------------------
-
-
+};*/
 

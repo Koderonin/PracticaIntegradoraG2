@@ -22,7 +22,7 @@
                     <div class="menu" id="mySidenav">
                         <div id="clothing"><a href="http://apache.da2.dva/productos.html"> PRODUCTOS </a></div>
                     </div>
-                   
+
                     <!-- NOMBRE QUE LE QUERAMOS PONER -->
                     <div id="shopName">
                         <a href="index.html" class="logo"><img src="img/logo.png" alt="logo" /></a >
@@ -31,16 +31,17 @@
                         <!-- SECCIONES DE PRODUCTOS (SI HAY) -->
                         
                         <div id="collection">
-                            <div id="clothing"><a href="http://apache.da2.dva/productos.html"> PRODUCTOS </a></div>
+                            <div id="clothing"><a href="productos.html"> PRODUCTOS </a></div>
+                        <!-- <div id="accessories"><a href="accessories.html"> PRODUCTOS </a></div> -->
                         </div>
-                       
+
                         <div id="search" class="input-container">
                             <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories" class="input search-input">
                         </div>
                         
                         <!-- CARRITO Y USUARIO -->
                         <div id="user">
-                            
+
                             <div class="container-icon">
                                 <div class="container-cart-icon">
                                     <svg
@@ -113,7 +114,7 @@
             </section>
         </header>
 
-        
+
 
         <div class="main-container">
             <div class="main-wrapper">
@@ -150,12 +151,12 @@
                     <button class="prev" onclick="prevSlide()">&#10094;</button>
                     <button class="next" onclick="nextSlide()">&#10095;</button>
                   </div>
-                  
+
                 </div>
             </section>
-            
-           
-            
+
+
+
         </div>
  <footer>
 
@@ -171,7 +172,7 @@
         <script>
             /* Slideshow  OFERTAS */
             let slideIndex = 0;
-        
+
             function showSlides() {
                 const slides = document.querySelectorAll('.slide');
                 if (slideIndex >= slides.length - 3) { // Ajusta aquí el número de slides visibles
@@ -182,17 +183,17 @@
                 const offset = -slideIndex * (100 / 3); // Ajusta aquí el número de slides visibles
                 document.querySelector('.slider').style.transform = `translateX(${offset}%)`;
             }
-        
+
             function nextSlide() {
                 slideIndex++;
                 showSlides();
             }
-        
+
             function prevSlide() {
                 slideIndex--;
                 showSlides();
             }
-        
+
             document.addEventListener('DOMContentLoaded', (event) => {
                 showSlides(); // Inicializar la visualización de slides
             });

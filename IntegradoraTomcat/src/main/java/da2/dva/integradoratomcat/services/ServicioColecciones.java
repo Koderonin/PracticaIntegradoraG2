@@ -90,8 +90,6 @@ public class ServicioColecciones implements Servicio {
     @Override
     public Map<String, Usuario> devuelveAdministradores() {
         Map<String, Usuario> usuarios = new HashMap<>();
-        // TODO: Eliminar la inserción en este método
-        usuarios.put("admin@gmail.com", new Usuario(UUID.randomUUID(),"admin@gmail.com", "aA1111111?", "aA1111111?", 1L, "Manolo", null, null, null));
         usuarioAdministradorRepository.findAll().forEach(
                 usuario -> usuarios.put(usuario.getEmail(), usuario)
         );

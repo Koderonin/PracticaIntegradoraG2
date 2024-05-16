@@ -773,12 +773,12 @@ img{
     gap: 50px;
 
 }
-.personal-info{
+.personal-info1, .personal-info2 {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-.direccion-info{
+.direccion-info1, .direccion-info2 {
     display: flex;
     flex-direction: column;
     gap: 5px;
