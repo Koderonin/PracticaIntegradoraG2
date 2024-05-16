@@ -11,10 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LineaNominaKey implements java.io.Serializable {
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @AttributeOverrides({
             @AttributeOverride(name = "id_cliente", column = @Column(name = "id_cliente")),
             @AttributeOverride(name = "num_nomina", column = @Column(name = "num_nomina"))
     })
-    private NominaKey nomina_id;
+    private Nomina nomina_id;
     private Long linea_id;
 }

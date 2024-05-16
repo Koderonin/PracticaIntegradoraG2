@@ -40,7 +40,7 @@ public class ServicioProducto {
         return productoRepository.save(producto);
     }
 
-    public void addNuevoProducto(Document productoForm) throws JsonProcessingException {
+    public void addNuevoProducto(Document productoForm) {
 
         Document productoDoc = new Document();
 // productoDoc.putAll(productoForm);

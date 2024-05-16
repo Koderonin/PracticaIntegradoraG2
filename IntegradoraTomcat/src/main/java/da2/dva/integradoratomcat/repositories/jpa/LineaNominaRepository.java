@@ -17,15 +17,15 @@ import java.util.List;
 @Repository
 public interface LineaNominaRepository extends JpaRepository<LineaNomina, LineaNominaKey> {
 
-    @Query("SELECT l FROM LineaNomina l WHERE l.linea_id.nomina_id = :nominaKey ORDER BY l.linea_id.nomina_id.num_nomina DESC LIMIT 1")
-    LineaNomina findTopByNomina(@Param("nominaKey") NominaKey nominaKey);
-
-    @Query("SELECT l FROM LineaNomina l WHERE l.linea_id.nomina_id = :nominaKey")
-    List<LineaNomina> findByNomina(@Param("nominaKey") NominaKey nominaKey);
-
-    // elimina por PK nómina
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM LineaNomina l WHERE l.linea_id.nomina_id = :nominaKey")
-    void deleteByNomina(@Param("nominaKey") NominaKey idNominaKey);
+//    @Query("SELECT l FROM LineaNomina l WHERE l.linea_id.nomina_id = :nominaKey ORDER BY l.linea_id.nomina_id.num_nomina DESC LIMIT 1")
+//    LineaNomina findTopByNomina(@Param("nominaKey") NominaKey nominaKey);
+//
+//    @Query("SELECT l FROM LineaNomina l WHERE l.linea_id.nomina_id = :nominaKey")
+//    List<LineaNomina> findByNomina(@Param("nominaKey") NominaKey nominaKey);
+//
+//    // elimina por PK nómina
+//    @Modifying
+//    @Transactional
+//    @Query("DELETE FROM LineaNomina l WHERE l.linea_id.nomina_id = :nominaKey")
+//    void deleteByNomina(@Param("nominaKey") NominaKey idNominaKey);
 }

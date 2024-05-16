@@ -23,21 +23,21 @@ public class ServicioLineaNomina {
 
     // CREATE
 
-    public LineaNomina nuevaLineaNomina(Nomina nomina) {
-        LineaNomina ultimaLineaNomina = lineaNominaRepository.findTopByNomina(nomina.getId_nomina());
-
-        LineaNomina nuevaLineaNomina = new LineaNomina();
-        nuevaLineaNomina.setLinea_id(new LineaNominaKey(nomina.getId_nomina(), ultimaLineaNomina == null ? 1L : ultimaLineaNomina.getLinea_id().getLinea_id() + 1L));
-
-        return nuevaLineaNomina;
-    }
+//    public LineaNomina nuevaLineaNomina(Nomina nomina) {
+//        LineaNomina ultimaLineaNomina = lineaNominaRepository.findTopByNomina(nomina.getId_nomina());
+//
+//        LineaNomina nuevaLineaNomina = new LineaNomina();
+//        nuevaLineaNomina.setLinea_id(new LineaNominaKey(nomina, ultimaLineaNomina == null ? 1L : ultimaLineaNomina.getLinea_id().getLinea_id() + 1L));
+//
+//        return nuevaLineaNomina;
+//    }
 
     // READ
 
-    public List<LineaNomina> getLineasNomina(Nomina nomina) {
-        NominaKey nominaKey = nomina.getId_nomina();
-        return lineaNominaRepository.findByNomina(nominaKey);
-    }
+//    public List<LineaNomina> getLineasNomina(Nomina nomina) {
+//        NominaKey nominaKey = nomina.getId_nomina();
+//        return lineaNominaRepository.findByNomina(nominaKey);
+//    }
 
     // UPDATE
 
@@ -47,9 +47,9 @@ public class ServicioLineaNomina {
 
     // DELETE
 
-    public void borrarLineasPorNomina(Nomina nomina) {
-        lineaNominaRepository.deleteByNomina(nomina.getId_nomina());
-    }
+//    public void borrarLineasPorNomina(Nomina nomina) {
+//        lineaNominaRepository.deleteByNomina(nomina.getId_nomina());
+//    }
     public void borrarTodasLineasNomina() {
         lineaNominaRepository.deleteAll();
     }

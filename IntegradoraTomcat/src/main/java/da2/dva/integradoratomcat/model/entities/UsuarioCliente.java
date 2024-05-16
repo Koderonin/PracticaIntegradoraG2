@@ -12,6 +12,7 @@ import java.util.UUID;
 //@AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@SecondaryTable(name = "Cliente", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id_user_cliente"))
 @Table(name = "UsuarioCliente", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email", name = "usuario_cliente_email_uk")
 })
