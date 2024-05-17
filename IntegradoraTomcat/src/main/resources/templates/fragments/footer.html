@@ -6,8 +6,8 @@
             <li><a href="#">Conócenos</a></li>
             <li>
                 <div >
-                    <select id="language-select" onchange="changeLanguage()">
-                        <option th:each="idioma: ${listaIdiomas}" th:text="${idioma.value}">[[${idioma.value}]]</option>
+                    <select id="language-select">
+                        <option th:each="idioma: ${listaIdiomas}" th:text="${idioma.value}" th:value="${idioma.key}"/>
                     </select>
                 </div>
             </li>

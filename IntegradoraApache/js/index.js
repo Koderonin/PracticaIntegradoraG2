@@ -28,15 +28,16 @@ function crearItemProducto(producto) {
 	let figure = document.createElement('figure');
 	let img = document.createElement('img'); img.alt = 'Imagen' + producto.modelo; img.src = devolverImagen(producto); //TODO: Obtener imagen
 	let div2 = document.createElement('div'); div2.classList.add('info-product');
+	let div3 = document.createElement('div');
 	let h2 = document.createElement('h2'); h2.textContent = producto.modelo;
 	let marca = document.createElement('p'); marca.classList.add('brand'); marca.textContent = producto.marca;
 	let descripcion = document.createElement('p'); descripcion.classList.add('description'); descripcion.textContent = producto.descripcion;
 	let p = document.createElement('p'); p.classList.add('price'); p.textContent = producto.precio + ' €';
 	let button = document.createElement('button'); button.classList.add('btn-add-cart'); button.textContent = 'Añadir al carrito';
-	div2.append(h2, marca,descripcion ,p , button); figure.append(img); div.append(figure, div2);
+	div3.append(h2, marca,descripcion ,p); div2.append(div3, button); figure.append(img); div.append(figure, div2);
 
-	div2.style = 'cursor: pointer;';
-	div2.addEventListener('click', () => {
+	div.style = 'cursor: pointer;';
+	div3.addEventListener('click', () => {
 		location.href="producto-info.html?codigo="+producto.codigo;
 	})
 

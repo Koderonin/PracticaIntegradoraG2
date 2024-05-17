@@ -1,3 +1,14 @@
+const SELECTOR_IDIOMAS = document.getElementById("language-select");
+
+if (location.search.split("=")[1] === undefined)
+    SELECTOR_IDIOMAS.value = 'es';
+else
+    SELECTOR_IDIOMAS.value = location.search.split("=")[1];
+
+SELECTOR_IDIOMAS.addEventListener("change", (event) => {
+    const idioma = event.target.value;
+    location.search = `?lang=${idioma}`
+});
 
 /* REGISTRO DE CLIENTE */
 const btn_deseleccionar_genero = document.getElementById("btn_deseleccionar_genero");
@@ -8,9 +19,6 @@ const btn_mostrar_claves = document.getElementById("btn_mostrar_claves");
 const form = document.getElementById("form");
 const claveInput = document.querySelector('input[name="clave"]');
 const confirmarClaveInput = document.querySelector('input[name="confirmClave"]');
-
-
-
 
 document.addEventListener('DOMContentLoaded', (event) => {
     // Inicializa todas las imágenes a su versión inactiva
