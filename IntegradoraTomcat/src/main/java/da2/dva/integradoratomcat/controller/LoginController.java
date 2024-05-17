@@ -8,8 +8,10 @@ import da2.dva.integradoratomcat.services.ServicioColecciones;
 import da2.dva.integradoratomcat.services.ServicioCookie;
 import da2.dva.integradoratomcat.services.ServicioUsuario;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,8 +44,15 @@ public class LoginController {
     @Autowired
     ServicioCookie servicioCookie;
 
+    @Bean
+    public void descargarIdiomas() {
+        servicio.cargarIdiomas();
+    }
+
     @GetMapping("paso1")
     public ModelAndView login(HttpSession sesion) {
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
+
         //Limpiamos el error para que no aparezca cuando se recarga la página
         mv.addObject("error",null);
         mv.addObject("errorClave",null);
@@ -71,6 +80,7 @@ public class LoginController {
 
     @PostMapping("paso1")
     public ModelAndView login(@RequestParam("usuario") String email, HttpSession sesion) {
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
         // esto ahora mismo sólo chequea vs lista de UsuarioCliente!!
         if(servicioUsuario.devuelveUsuarios().containsKey(email)){
             //Si el usuario tiene fecha de bloqueo mandamos un error
@@ -93,6 +103,7 @@ public class LoginController {
 
     @GetMapping("paso2")
     public ModelAndView clave(HttpSession sesion) {
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
         intentos = 0;
         if(sesion.getAttribute("usuario")!=null){
             mv.setViewName("redirect:/area-cliente");
@@ -122,7 +133,9 @@ public class LoginController {
 
     @PostMapping("paso2")
     public ModelAndView clave(@RequestParam("clave") String clave, HttpSession sesion,
-                              @CookieValue(name ="accesosUsuarios", defaultValue ="none" )String contenidoCookie) {
+                              @CookieValue(name ="accesosUsuarios", defaultValue ="none" )String contenidoCookie,
+                              HttpServletResponse response) {
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
         String email = (String) sesion.getAttribute("email");
         UsuarioCliente usuario = servicioUsuario.devuelveUsuarios().get(email);
 
@@ -133,6 +146,9 @@ public class LoginController {
         if (intentos < 3 && usuario.getFechaBloqueo() == null) {
             if(passCheck){ //Si la clave es correcta se redirecciona a la area de cliente y se guarda en la sesión
                 sesion.setAttribute("usuario", usuario);
+                servicioCookie.actualizaOCreaCookieUsuarios( response,email, contenidoCookie);
+               // Cookie cookie = new Cookie("accesosUsuarios", valorCookie);
+               // response.addCookie(cookie);
                 Cliente cliente = servicioCliente.getClienteByUsuario(usuario);
                 if(cliente!=null) {
                     mv.setViewName("redirect:/area-cliente");

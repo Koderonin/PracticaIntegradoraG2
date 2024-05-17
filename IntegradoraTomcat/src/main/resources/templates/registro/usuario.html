@@ -12,8 +12,10 @@
                     </div>
                     <div class="contenedor-izquierda">
                             <div id="div_usuario">
-                                <span class="required">* </span><input class="input" type="text" th:field="*{email}" th:placeholder="#{etiqueta.email}"/>
-                                <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                                <div class="column1">
+                                    <span class="required">* </span><input class="input" type="text" th:field="*{email}" th:placeholder="#{etiqueta.email}"/>
+                                    <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                                </div>
                             </div>
                             <div id="div_claves" class="div_claves">
                                 <div class="column1">

@@ -349,6 +349,63 @@ img{
     display: none;
 }
 
+.language-select-container {
+    position: fixed;
+    top: 100px;
+    right: 10px;
+    z-index: 1;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#language-select {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+    background: #fff;
+}
+
+
+/* BARRA NAVEGACIÓN PASOS */
+
+.barra_pasos {
+    margin-top: 100px;
+    font-size: small;
+}
+.barra_pasos ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.barra_pasos li {
+    margin: 0 10px; /
+}
+
+.enlace_img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+
+}
+
+.barra_pasos a {
+    text-align: center;
+    text-decoration: none;
+
+    display: inline-block;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.barra_pasos a:hover {
+    transform: scale(1.1);
+}
+
+
+
 
 
 /* ----------------------------- MEDIA QUERY --------------------------- */
@@ -394,6 +451,7 @@ img{
     .container-items{
         grid-template-columns: repeat(2, 1fr);
     }
+
 }
 
 @media(min-width: 950px)
@@ -526,6 +584,7 @@ img{
     padding: 0;
     gap:50px;
 }
+
 .registro-usuario .img-container  {
     background-image: url("../img/cielo.png");
     flex: 0.45;
@@ -641,6 +700,7 @@ fieldset{
     align-items: center;
     height: 700px;
     padding: 40px;
+    margin-top:150px;
 }
 
 .login-container .img-container  {
@@ -857,6 +917,15 @@ PARA QUE SE VEA EN DESKTOP*/
         max-width: 60%;
         min-width: 700px;
         height: 800px;
+        margin-top:100px;
+        margin-bottom: 100px;
+    }
+
+    .column1{
+        justify-self: center;
+    }
+    .column2{
+        justify-self: center;
     }
 
     /*REGISTRO-CLIENTE*/
