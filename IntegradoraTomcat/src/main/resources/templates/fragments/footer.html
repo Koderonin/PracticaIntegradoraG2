@@ -4,6 +4,13 @@
             <li><a href="#">Contacto</a></li>
             <li><a href="#">Quiénes somos</a></li>
             <li><a href="#">Conócenos</a></li>
+            <li>
+                <div >
+                    <select id="language-select" onchange="changeLanguage()">
+                        <option th:each="idioma: ${listaIdiomas}" th:text="${idioma.value}">[[${idioma.value}]]</option>
+                    </select>
+                </div>
+            </li>
         </ul>
     </div>
 

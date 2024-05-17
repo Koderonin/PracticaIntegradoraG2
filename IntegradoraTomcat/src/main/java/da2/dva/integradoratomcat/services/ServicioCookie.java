@@ -11,7 +11,7 @@ import java.util.Map;
 @Service
 public class ServicioCookie {
 
-    public void actualizaOCreaCookieUsuarios(HttpServletResponse response, String email, String accesosUsuario) {
+    public void actualizaOCreaCookieUsuarios( HttpServletResponse response, String email, String accesosUsuario) {
         // LLamamos al método que deserializa el valor de la cookie y lo guardamos en un mapa
         Map<String, Integer> accesos = deserializar(accesosUsuario);
 
@@ -24,10 +24,13 @@ public class ServicioCookie {
         String cookieValor = serializar(accesos);
 
         // Creamos una cookie que contenga el email y el conteo de accesos
-        Cookie cookie = new Cookie("accesosUsuario", cookieValor);
-        cookie.setPath("/");
-        cookie.setMaxAge(7 * 24 * 60 * 60); //TODO: NO SE QUE EDAD DEBE TENER LA COOKIE
+
+        Cookie cookie = new Cookie("accesosUsuarios", cookieValor);
+//        cookie.setPath("/");
+ //       cookie.setMaxAge(7 * 24 * 60 * 60); //TODO: NO SE QUE EDAD DEBE TENER LA COOKIE
         response.addCookie(cookie);
+
+
     }
 
     public  String serializar(Map<String, Integer> accesosUsuarios) {

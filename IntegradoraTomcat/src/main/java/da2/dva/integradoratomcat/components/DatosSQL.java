@@ -105,9 +105,9 @@ public class DatosSQL {
     @Bean
     public void insertarIdiomas() {
         try {
-            idiomaRepository.save(new Idioma("es", "Español"));
-            idiomaRepository.save(new Idioma("en", "English"));
-            idiomaRepository.save(new Idioma("it", "Italiano"));
+            idiomaRepository.save(new Idioma("es", "\uD83C\uDDEA\uD83C\uDDF8 ES"));
+            idiomaRepository.save(new Idioma("en", "\uD83C\uDDEC\uD83C\uDDE7 EN"));
+            idiomaRepository.save(new Idioma("it", "\uD83C\uDDEE\uD83C\uDDF9 IT"));
         } catch (Exception e) {
             System.err.println("Omitida carga de datos de Idiomas: Datos repetidos");
         }

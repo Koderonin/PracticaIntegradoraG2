@@ -41,6 +41,7 @@ public class RegistroClienteController {
         servicio.devuelveAdministradores();
         servicio.cargarTiposVia();
         servicio.cargarTiposDocumentos();
+        servicio.cargarIdiomas();
     }
 
     @GetMapping("paso1")
@@ -56,6 +57,8 @@ public class RegistroClienteController {
             mv.addObject("listaGeneros", servicio.getGeneros());
             mv.addObject("listaPaises", servicio.getPaises());
             mv.addObject("listaTiposDocumentos", servicio.getTiposDocumentos());
+            mv.addObject("listaIdiomas", servicio.getIdiomas());
+
             //Recuperación de datos de otros pasos
             cliente = (Cliente) sesion.getAttribute("cliente");
             if (cliente != null) mv.addObject("cliente", cliente);
@@ -77,6 +80,7 @@ public class RegistroClienteController {
             mv.addObject("listaGeneros", servicio.getGeneros());
             mv.addObject("listaPaises", servicio.getPaises());
             mv.addObject("listaTiposDocumentos", servicio.getTiposDocumentos());
+            mv.addObject("listaIdiomas", servicio.getIdiomas());
 
             return mv;
         }
@@ -107,6 +111,7 @@ public class RegistroClienteController {
         mv.addObject("paso" ,"2");
         //Paso de colecciones necesarias
         mv.addObject("listaTiposVia", servicio.getTiposVia());
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
         //Recuperación de datos de otros pasos
         cliente = (Cliente) sesion.getAttribute("cliente");
         if (cliente != null) mv.addObject("cliente", cliente);
@@ -123,6 +128,7 @@ public class RegistroClienteController {
             mv.addObject("paso" ,"2");
             //Paso de colecciones necesarias
             mv.addObject("listaTiposVia", servicio.getTiposVia());
+            mv.addObject("listaIdiomas", servicio.getIdiomas());
 
             return mv;
         }
@@ -158,6 +164,7 @@ public class RegistroClienteController {
     @GetMapping("paso3")
     public ModelAndView paso3(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
         ModelAndView mv = new ModelAndView();
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
         mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
         //Paso de parámetros para resolución de la vista
         mv.addObject("paso" ,"3");
@@ -172,6 +179,7 @@ public class RegistroClienteController {
     public ModelAndView registrar3(@Validated(DatosCliente.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
         //Validación de los datos ingresados
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
@@ -197,6 +205,7 @@ public class RegistroClienteController {
     @GetMapping("paso4")
     public ModelAndView resumen(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
         //TODO: REVISAR CÓDIGO POR SI SE PUEDE MEJORAR, ES MU LARGO
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
@@ -248,6 +257,7 @@ public class RegistroClienteController {
 
     @PostMapping("paso4")
     public ModelAndView paso4( HttpSession sesion) {
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
         //Obtener el cliente de la sesión
         Cliente cliente = (Cliente) sesion.getAttribute("cliente");
         //Si en el paso anterior no hay errores se inserta el cliente

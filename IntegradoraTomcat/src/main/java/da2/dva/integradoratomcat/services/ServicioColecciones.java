@@ -19,6 +19,7 @@ public class ServicioColecciones implements Servicio {
     private Map<Long, String> preguntas;
     private Map<Long, String> tiposVia;
     private Map<String, Usuario> usuarios;
+    private Map<String, String> idiomas;
 
     @Autowired
     private PaisRepository paisRepository;
@@ -32,6 +33,8 @@ public class ServicioColecciones implements Servicio {
     private PreguntaRepository preguntaRepository;
     @Autowired
     private UsuarioAdministradorRepository usuarioAdministradorRepository;
+    @Autowired
+    private IdiomaRepository idiomaRepository;
 //    @Autowired
 //    private UsuarioClienteRepository usuarioClienteRepository;
 //    @Autowired
@@ -82,6 +85,15 @@ public class ServicioColecciones implements Servicio {
                 tipoVia -> tiposVia.put(tipoVia.getId(), tipoVia.getTipoVia())
         );
         this.tiposVia = tiposVia;
+    }
+
+    @Override
+    public void cargarIdiomas() {
+        Map<String, String> idiomas = new HashMap<>();
+        idiomaRepository.findAll().forEach(
+                idioma -> idiomas.put(idioma.getSiglas(), idioma.getIdioma())
+        );
+        this.idiomas = idiomas;
     }
 
     @Override

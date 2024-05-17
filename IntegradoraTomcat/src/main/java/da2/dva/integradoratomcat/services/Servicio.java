@@ -17,6 +17,8 @@ public interface Servicio {
 
      Map<String, Usuario> devuelveAdministradores();
 
+     void cargarIdiomas();
+
      void insertarPais(String siglasPais, String nombrePais);
 
      void insertarGenero(String siglas, String genero);

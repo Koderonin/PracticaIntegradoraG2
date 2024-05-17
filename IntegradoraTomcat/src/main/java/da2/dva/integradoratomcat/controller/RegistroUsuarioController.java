@@ -50,12 +50,15 @@ public class RegistroUsuarioController {
         mv.addObject("titulo","Registro de usuario");
         mv.addObject("tipoUsuario","empleado");
         mv.addObject("listaPreguntas",servicio.getPreguntas());
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
 
         return mv;
     }
 
     @PostMapping("/")
     public ModelAndView registroUsuario(@Valid @ModelAttribute("usuario") UsuarioCliente usuario, BindingResult resultado) {
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
+
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
             System.out.println(usuario.getEmail());
