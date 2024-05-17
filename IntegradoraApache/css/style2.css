@@ -646,6 +646,7 @@ img{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    filter: brightness(80%); /* Ajusta el porcentaje según tu preferencia */
     height: 1200px;
     width: 100%;
     display: flex;
@@ -657,16 +658,19 @@ img{
 
 .main-wrapper h1,
 .main-wrapper h2 {
+    filter: brightness(100%); /* Ajusta el porcentaje según tu preferencia */
     font-size: 3em; /* Tamaño del texto */
     text-align: center; /* Alineación del texto */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
 }
 .main-wrapper h2{
+    filter: brightness(100%); /* Ajusta el porcentaje según tu preferencia */
     font-size: 1.5em; /
 }
 .btn-access-products {
+    filter: brightness(100%); /* Ajusta el porcentaje según tu preferencia */
     margin-bottom: 100px;
-    background-color: transparent; /* Fondo transparente */
+    background-color: rgba(255, 255, 255, 0.3); /* Blanco con 50% de opacidad */
     border: 2px solid white; /* Borde blanco */
     color: white; /* Color del texto */
     padding: 15px 32px; /* Espaciado dentro del botón */
@@ -679,6 +683,8 @@ img{
     border-radius: 8px; /* Bordes redondeados */
     outline: none; /* Sin contorno */
     transition: all 0.3s ease; /* Transición suave */
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
+    font-weight: bolder;
 }
 
 .btn-access-products:hover {
@@ -691,7 +697,7 @@ img{
     padding: 40px;
 }
 .ofertas h1{
-    font-weight: lighter;
+    font-weight: bold;
 }
 
 .slider-container {
