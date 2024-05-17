@@ -47,6 +47,7 @@ public class Usuario {
     private Integer numAccesos;
     private LocalDate fechaBloqueo; //Si es null no esta bloqueado
 
+
     public Usuario(UUID idUsuario, String email, String clave, String confirmClave, Long preguntaRecuperacion, String respuestaRecuperacion) {
         this.id_usuario = idUsuario;
         this.email = email;

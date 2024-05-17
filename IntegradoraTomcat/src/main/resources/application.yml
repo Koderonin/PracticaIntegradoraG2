@@ -14,7 +14,7 @@ spring:
     basename: lang/messages
   jpa:
     hibernate:
-      ddl-auto: update #cuando persistamos definitivamente y dejemos de hacer pruebas
+      ddl-auto: create-drop #cuando persistamos definitivamente y dejemos de hacer pruebas
     database: mysql
     show-sql: true
     generate-ddl: true

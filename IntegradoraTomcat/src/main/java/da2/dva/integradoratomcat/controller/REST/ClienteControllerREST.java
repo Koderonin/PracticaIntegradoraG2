@@ -32,8 +32,8 @@ public class ClienteControllerREST {
     public List<Cliente> detalleClienteByUsuario(HttpSession sesion) {
         List<Cliente> listado = new ArrayList<>();
         System.out.println(sesion.getAttribute("usuario"));
-        System.out.println(servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario")));
-        listado.add(servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario")));
+//        System.out.println(servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario")));
+//        listado.add(servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario")));
         return listado;
 
     }

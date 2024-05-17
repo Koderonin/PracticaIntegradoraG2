@@ -252,7 +252,7 @@ public class RegistroClienteController {
         if (sesion.getAttribute("hayErrores").equals(false)) {
             //VINCULO EL CLIENTE CON EL USUARIO
             UsuarioCliente usuario = (UsuarioCliente)sesion.getAttribute("usuario");
-            cliente.setUsuarioCliente(usuario);
+        //    cliente.setUsuarioCliente(usuario);
             servicioCliente.insertarNuevoCliente(cliente);
             mv.setViewName("redirect:/area-cliente");
             sesion.removeAttribute("usuario"); // ¿¿por qué??

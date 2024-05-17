@@ -26,7 +26,7 @@ public class Pruebas {
         try{
             servicioUsuario.borrarUsuario(usuarioClienteRepository.findByEmail("admin@example.com"));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("No se ha podido borrar el usuario, no existe");
         }
 
         UsuarioCliente usuarioCliente = new UsuarioCliente();
