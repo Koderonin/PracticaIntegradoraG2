@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TipoViaRepository extends JpaRepository<TipoVia, Long> {
 
-
+    public TipoVia findByTipoVia(String tipoVia);
 }

@@ -31,6 +31,8 @@ public class RegistroClienteController {
     @Autowired
     ServicioCliente servicioCliente;
     ModelAndView mv = new ModelAndView("/registro/cliente");
+    @Autowired
+    private ServicioColecciones servicioColecciones;
 
     @Bean
     public void descargarColeccionesRC(){
@@ -131,7 +133,7 @@ public class RegistroClienteController {
 
         //Guardado de los datos ingresados
         Direccion direccion = new Direccion();
-        direccion.setTipo_via(cliente.getDireccion().getTipo_via());
+        direccion.setTipoVia(cliente.getDireccion().getTipoVia());
         direccion.setNombre_via(cliente.getDireccion().getNombre_via());
         direccion.setNumero_via(cliente.getDireccion().getNumero_via());
         direccion.setPlanta(cliente.getDireccion().getPlanta());

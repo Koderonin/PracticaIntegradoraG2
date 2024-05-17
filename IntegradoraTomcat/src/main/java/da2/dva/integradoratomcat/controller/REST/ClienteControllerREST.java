@@ -28,13 +28,14 @@ public class ClienteControllerREST {
         return servicioCliente.listarClientes();
     }
 
-    @GetMapping("/infoSesion")
+    /*@GetMapping("/infoSesion")
     public List<Cliente> detalleClienteByUsuario(HttpSession sesion) {
         List<Cliente> listado = new ArrayList<>();
-        System.out.println(sesion.getAttribute("usuario"));
-//        System.out.println(servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario")));
-//        listado.add(servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario")));
+        listado.add(servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario")));
         return listado;
-
+    }*/
+    @GetMapping("/infoSesion")
+    public Cliente detalleClienteByUsuario(HttpSession sesion) {
+        return servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario"));
     }
 }

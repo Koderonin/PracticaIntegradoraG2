@@ -3,11 +3,12 @@
 <head> <!-- TODO: Implementar CSS y JS -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>FootShop - Página Principal</title>
     <!-- CSS -->
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="/css/style2.css"/>
     <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
     <body>
         <header>
@@ -97,12 +98,12 @@
                                     <p class="cart-empty">El carrito está vacío</p>
                                 </div>
                             </div>
-                            <div id="userIcon">
+                            <div id="userIcon" style="cursor: pointer;">
                                 <img src="img/user-icon.png" class="userIcon" onclick="toggleDropdown()">
                                 <!-- Menú desplegable -->
-                                <div id="dropdownMenu" class="dropdown-content" >
-                                    <a href="http://tomcat.da2.dva:8080/login/paso1">Login</a>
-                                    <a href="http://tomcat.da2.dva:8080/area-cliente">Área de Cliente</a>
+                                <div id="dropdownMenu" class="dropdown-content">
+                                    <a id="enlace_login" href="http://tomcat.da2.dva:8080/area-cliente">Login</a>
+                                    <a id="enlace_registro" href="http://tomcat.da2.dva:8080/registro/usuario/">Registrarse</a>
                                 </div>
                             </div>
                         </div>

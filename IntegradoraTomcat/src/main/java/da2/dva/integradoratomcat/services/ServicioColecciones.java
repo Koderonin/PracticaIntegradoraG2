@@ -1,9 +1,6 @@
 package da2.dva.integradoratomcat.services;
 
-import da2.dva.integradoratomcat.model.collections.Genero;
-import da2.dva.integradoratomcat.model.collections.Pais;
-import da2.dva.integradoratomcat.model.collections.Pregunta;
-import da2.dva.integradoratomcat.model.collections.TipoDocumento;
+import da2.dva.integradoratomcat.model.collections.*;
 import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.repositories.jpa.*;
 import lombok.Getter;
@@ -117,7 +114,7 @@ public class ServicioColecciones implements Servicio {
     }
 
     @Override
-    public void insertarTipoVia(String siglas, String tipoVia) {
-
+    public void insertarTipoVia(Long id, String tipoVia) {
+        tipoViaRepository.save(new TipoVia(id, tipoVia));
     }
 }

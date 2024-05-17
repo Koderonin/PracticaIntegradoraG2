@@ -6,23 +6,23 @@ async function datosCliente() {
 	$.ajaxSetup({xhrFields: { withCredentials: true } });
 
 	$.getJSON('http://tomcat.da2.dva:8080/api/cliente/infoSesion', function(response) {
-		response = response[0];
-
 		USER_EMAIL.text(response.usuarioCliente.email);
 
 		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.nombre;
 		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.apellidos;
-		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.genero;
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.genero.genero;
 		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.fechaNacimiento;
 		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.paisNacimiento.nombrePais;
-		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.tipoDocumento;
+		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.tipoDocumento.tipoDocumento;
 		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.documento;
 		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.telefonoMovil;
 		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.comentarios;
 
 		$.each(response.direccion, function(key, value) {
-			if (key !== 'id_direccion')
+			if (key !== 'id_direccion' && key !== 'tipoVia')
 				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = value;
+			if (key == 'tipoVia')
+				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = value.tipoVia;
 			if (value == null)
 				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = 'N/A';
 		})

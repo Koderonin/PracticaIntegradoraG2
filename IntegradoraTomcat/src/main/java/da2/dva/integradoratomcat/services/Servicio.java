@@ -25,13 +25,5 @@ public interface Servicio {
 
      void insertarPregunta(Long pregunta, String respuesta);
 
-     void insertarTipoVia(String siglas, String tipoVia);
-
-
-
-
-//     // mover a sus respectivos servicios!
-//     void insertarUsuarioEmpleado(UsuarioCliente usuario);
-//
-//     void insertarCliente (Cliente cliente);
+     void insertarTipoVia(Long id, String tipoVia);
 }

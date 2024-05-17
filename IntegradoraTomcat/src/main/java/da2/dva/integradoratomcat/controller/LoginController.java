@@ -137,8 +137,7 @@ public class LoginController {
                 if(cliente!=null) {
                     mv.setViewName("redirect:/area-cliente");
                 }else{
-                    Cliente nuevoCliente = new Cliente();
-                   // nuevoCliente.setUsuarioCliente(usuario);
+                    mv.clear();
                     mv.setViewName("redirect:/registro/cliente/paso1");
                 }
                 //ACTUALIZAR EN LA BBDD EL NUMERO DE CONEXIONES EXITOSAS DE ESTE USUARIO

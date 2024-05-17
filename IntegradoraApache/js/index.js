@@ -1,3 +1,22 @@
+/* ---------------------- Barra de Navegación ---------------------- */
+
+const ENLACE_LOGIN = $('#enlace_login');
+const ENLACE_REGISTRO = $('#enlace_registro');
+
+$.ajaxSetup({xhrFields: { withCredentials: true } });	//Credenciales para solicitar la sesión
+$.getJSON('http://tomcat.da2.dva:8080/api/cliente/infoSesion', function(response) {
+	if(response == null) {
+		ENLACE_LOGIN.text("Login");
+		ENLACE_REGISTRO.text("Registrarse");
+	}
+	else {
+		ENLACE_LOGIN.text("Área de Cliente");
+		ENLACE_REGISTRO.text("Logout"); ENLACE_REGISTRO.attr('href', 'http://tomcat.da2.dva:8080/logout/invalidate');
+	}
+});
+$.ajaxSetup({xhrFields: { withCredentials: false } });
+/* ---------------------- Productos ---------------------- */
+
 const containerProductos = document.querySelector('.container-items');
 
 if(containerProductos != null){

@@ -51,7 +51,7 @@ public class AdminClienteControllerREST {
     // El siguiente método es una modificación del anterior, en el que recibiremos un array de atributos como parámetro
     // y devolveremos un listado, al igual que el anterior, pero sólo con los atributos pedidos
 
-    @GetMapping("listado_cribado")
+    /*@GetMapping("listado_cribado")
     public Object listadoClientesFiltrado(String[] atributos) {
         List<Cliente> listado = servicioCliente.listarClientes();
         List<Object> listadoReducido = new ArrayList<>();
@@ -62,7 +62,7 @@ public class AdminClienteControllerREST {
             );
         }
         return listadoReducido;
-    }
+    }*/
 
     @GetMapping("/verify")
     public List<Object> verify(HttpSession sesion) {
