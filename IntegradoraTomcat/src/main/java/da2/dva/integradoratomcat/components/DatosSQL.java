@@ -5,9 +5,11 @@ import da2.dva.integradoratomcat.model.collections.*;
 import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.*;
+import da2.dva.integradoratomcat.services.ServicioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
@@ -33,6 +35,9 @@ public class DatosSQL {
     private UsuarioClienteRepository UCRepository;
     @Autowired
     private DireccionRepository direccionRepository;
+
+    @Autowired
+    private ServicioCliente servicioCliente;
 
     @Bean
     public void insertarPaises() {
@@ -141,24 +146,41 @@ public class DatosSQL {
             Direccion d3 = new Direccion(3L, 2L, "De la Virgen", 3, 2, "C", "1", "Madrid", "28024", "Madrid", "España");
             direccionRepository.save(d3);
 
-            clienteRepository.save(
-                    new Cliente(
-                            UCRepository.findByEmail("admin@integradora.jpa"), "Pepe", "García Mongólez",
-                            new Genero("m", "Masculino"), paisRepository.findBySiglasPais("es"), LocalDate.of(1988, 1, 14),
-                            new TipoDocumento("S", "Nº Seguridad Social"), "22/12345678/39",
-                            "687456842", d1
-                    )
-            );
+            UsuarioCliente uc = UCRepository.findByEmail("admin@integradora.jpa");
+
+            Cliente cliente = new Cliente();
+            cliente.setUsuarioCliente(uc);
+            cliente.setNombre("Pepe");
+            cliente.setApellidos("García Mongólez");
+            cliente.setGenero(generoRepository.findBySiglas("m"));
+            cliente.setPaisNacimiento(paisRepository.findBySiglasPais("es"));
+            cliente.setFechaNacimiento(LocalDate.of(1988, 1, 14));
+            cliente.setTipoDocumento(tipoDocumentoRepository.findBySiglas("S"));
+            cliente.setDocumento("22/12345678/39");
+            cliente.setTelefonoMovil("687456842");
+            cliente.setDireccion(d1);
+           // cliente.setId_cliente(uc.getId_usuario());
+            clienteRepository.save(cliente);
+
+//            clienteRepository.save(
+//                    new Cliente(
+//                            UCRepository.findByEmail("admin@integradora.jpa"), "Pepe", "García Mongólez",
+//                            new Genero("m", "Masculino"), paisRepository.findBySiglasPais("es"), LocalDate.of(1988, 1, 14),
+//                            new TipoDocumento("S", "Nº Seguridad Social"), "22/12345678/39",
+//                            "687456842", d1
+//                    )
+//            );
 
             clienteRepository.save(
                     new Cliente(
-                            UCRepository.findByEmail("cilente@integradora.jpa"), "Pepo", "Compo Cosas",
+                            UCRepository.findByEmail("cliente@integradora.jpa"), "Pepo", "Compo Cosas",
                             new Genero("m", "Masculino"), paisRepository.findBySiglasPais("es"), LocalDate.of(1988, 1, 14),
                             new TipoDocumento("D", "DNI"), "00000000T",
                             "687456842", d2
                     )
             );
         } catch (Exception e) {
+            e.printStackTrace();
         System.err.println("Omitida carga de datos de Direcciones Y Clientes: Datos repetidos");
         }
     }

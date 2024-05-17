@@ -4,6 +4,7 @@ import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -18,4 +19,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 
     @Override
     Optional<Cliente> findById(UUID id);
+
 }

@@ -37,7 +37,8 @@ public class Cliente {
     private UUID id_cliente;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_usuario", foreignKey = @ForeignKey(name = "FK_USUARIO_CLIENTE"))
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_user_cliente", foreignKey = @ForeignKey(name = "FK_USUARIO_CLIENTE"))
+//    @MapsId("id_cliente")
     private UsuarioCliente usuarioCliente;
 
     @Column(name = "nombre", length = 20)
