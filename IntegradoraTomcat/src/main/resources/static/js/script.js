@@ -1,9 +1,15 @@
 const SELECTOR_IDIOMAS = document.getElementById("language-select");
 
-if (location.search.split("=")[1] === undefined)
-    SELECTOR_IDIOMAS.value = 'es';
-else
-    SELECTOR_IDIOMAS.value = location.search.split("=")[1];
+location.addEventListener("change", (event) => {
+    seleccionarIdioma();
+})
+
+function seleccionarIdioma() {
+    if (location.search.split("=")[1] === undefined)
+        SELECTOR_IDIOMAS.value = 'es';
+    else
+        SELECTOR_IDIOMAS.value = location.search.split("=")[1];
+}
 
 SELECTOR_IDIOMAS.addEventListener("change", (event) => {
     const idioma = event.target.value;

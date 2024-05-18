@@ -28,7 +28,7 @@ public class LoginController {
     // OJO: mv es un atributo de la instancia de LoginController; si luego vuelves a ella y no reasignas el valor de mv,
     // te dirige a la última vista que te enviara (por ej. vas a área cliente, cierras sesión, vas a paso 1 y te manda a
     // área cliente de nuevo)
-    ModelAndView mv = new ModelAndView("/login/login");
+    //ModelAndView mv = new ModelAndView("/login/login");
 
     int intentos;
 
@@ -51,6 +51,7 @@ public class LoginController {
 
     @GetMapping("paso1")
     public ModelAndView login(HttpSession sesion) {
+        ModelAndView mv = new ModelAndView("/login/login");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
 
         //Limpiamos el error para que no aparezca cuando se recarga la página
@@ -80,6 +81,7 @@ public class LoginController {
 
     @PostMapping("paso1")
     public ModelAndView login(@RequestParam("usuario") String email, HttpSession sesion) {
+        ModelAndView mv = new ModelAndView("/login/login");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
         // esto ahora mismo sólo chequea vs lista de UsuarioCliente!!
         if(servicioUsuario.devuelveUsuarios().containsKey(email)){
@@ -103,6 +105,7 @@ public class LoginController {
 
     @GetMapping("paso2")
     public ModelAndView clave(HttpSession sesion) {
+        ModelAndView mv = new ModelAndView("/login/login");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
         intentos = 0;
         if(sesion.getAttribute("usuario")!=null){
@@ -135,6 +138,7 @@ public class LoginController {
     public ModelAndView clave(@RequestParam("clave") String clave, HttpSession sesion,
                               @CookieValue(name ="accesosUsuarios", defaultValue ="none" )String contenidoCookie,
                               HttpServletResponse response) {
+        ModelAndView mv = new ModelAndView("/login/login");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
         String email = (String) sesion.getAttribute("email");
         UsuarioCliente usuario = servicioUsuario.devuelveUsuarios().get(email);

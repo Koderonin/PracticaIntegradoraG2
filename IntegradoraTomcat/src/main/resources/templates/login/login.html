@@ -11,8 +11,8 @@
                     <p th:if="${errorUsuario}" class="error" th:text="${errorUsuario}"></p>
                     <div th:replace="~{fragments/forms :: login__${paso}__}"></div>
                     <div class="button-container">
-                        <input type="submit" class="btn" value="Enviar"/>
-                        <input type="reset" class="btn" value="Restablecer"/>
+                        <input type="submit" class="btn" th:value="#{boton.enviar}"/>
+                        <input type="reset" class="btn" th:value="#{boton.restablecer}"/>
                     </div>
                 </form>
             </div>
