@@ -1,5 +1,6 @@
 package da2.dva.integradoratomcat.services;
 
+import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioAdministradorRepository;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioClienteRepository;
@@ -45,6 +46,10 @@ public class ServicioUsuario {
          return usuarioClienteRepository.findAll();
      }
 
+     public Usuario getUsuarioByEmail(String email){
+         return usuarioAdministradorRepository.findByEmail(email);
+     }
+
      // éste es igual que el de insertar, es una cuestión de claridad
      public void actualizarUsuario(UsuarioCliente usuario){
          usuarioClienteRepository.save(usuario);
@@ -71,11 +76,12 @@ public class ServicioUsuario {
          usuarioClienteRepository.save(usuario);
      }
 
-    public Map<String, UsuarioCliente> devuelveUsuarios() {
-        Map<String, UsuarioCliente> usuarios = new HashMap<>();
-        UsuarioCliente cliente1 = new UsuarioCliente(UUID.randomUUID(),"admin@gmail.com", "aA1111111?", "aA1111111?", 1L, "Manolo");
-        usuarios.put(cliente1.getEmail(), cliente1);
+    public Map<String, Usuario> devuelveUsuarios() {
+        Map<String, Usuario> usuarios = new HashMap<>();
         usuarioClienteRepository.findAll().forEach(
+                usuario -> usuarios.put(usuario.getEmail(), usuario)
+        );
+        usuarioAdministradorRepository.findAll().forEach(
                 usuario -> usuarios.put(usuario.getEmail(), usuario)
         );
         return usuarios;

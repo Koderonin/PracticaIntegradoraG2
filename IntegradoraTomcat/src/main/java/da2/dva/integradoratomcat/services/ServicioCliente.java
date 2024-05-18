@@ -5,6 +5,7 @@ import da2.dva.integradoratomcat.model.entities.Producto;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.ClienteRepository;
 import da2.dva.integradoratomcat.repositories.jpa.DireccionRepository;
+import da2.dva.integradoratomcat.repositories.jpa.UsuarioAdministradorRepository;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioClienteRepository;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;

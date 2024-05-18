@@ -1,13 +1,11 @@
 package da2.dva.integradoratomcat.controller;
 
 import da2.dva.integradoratomcat.model.entities.Cliente;
-import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.services.ServicioCliente;
 import da2.dva.integradoratomcat.services.ServicioColecciones;
 import da2.dva.integradoratomcat.services.ServicioCookie;
 import da2.dva.integradoratomcat.services.ServicioUsuario;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-
-import java.util.Map;
 
 @Controller
 @RequestMapping("login")
 public class LoginController {
-    // OJO: mv es un atributo de la instancia de LoginController; si luego vuelves a ella y no reasignas el valor de mv,
-    // te dirige a la última vista que te enviara (por ej. vas a área cliente, cierras sesión, vas a paso 1 y te manda a
-    // área cliente de nuevo)
-    //ModelAndView mv = new ModelAndView("/login/login");
-
     int intentos;
 
     @Autowired
@@ -83,6 +72,7 @@ public class LoginController {
     public ModelAndView login(@RequestParam("usuario") String email, HttpSession sesion) {
         ModelAndView mv = new ModelAndView("/login/login");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
+
         // esto ahora mismo sólo chequea vs lista de UsuarioCliente!!
         if(servicioUsuario.devuelveUsuarios().containsKey(email)){
             //Si el usuario tiene fecha de bloqueo mandamos un error
