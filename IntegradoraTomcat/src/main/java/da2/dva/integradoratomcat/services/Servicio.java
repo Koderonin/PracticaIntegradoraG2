@@ -19,6 +19,8 @@ public interface Servicio {
 
      void cargarIdiomas();
 
+     void cargarTiposTarjeta();
+
      void insertarPais(String siglasPais, String nombrePais);
 
      void insertarGenero(String siglas, String genero);

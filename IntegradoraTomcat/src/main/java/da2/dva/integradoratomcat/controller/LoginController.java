@@ -146,6 +146,8 @@ public class LoginController {
                // response.addCookie(cookie);
                 Cliente cliente = servicioCliente.getClienteByUsuario(usuario);
                 if(cliente!=null) {
+
+                    sesion.setAttribute("cliente", cliente); //TODO:  VER SI ESTO ES NECESARIO
                     mv.setViewName("redirect:/area-cliente");
                 }else{
                     mv.clear();

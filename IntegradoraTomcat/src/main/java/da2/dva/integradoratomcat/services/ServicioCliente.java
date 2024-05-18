@@ -1,5 +1,6 @@
 package da2.dva.integradoratomcat.services;
 
+import da2.dva.integradoratomcat.model.auxiliar.TarjetaCredito;
 import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Producto;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
@@ -107,6 +108,12 @@ public class ServicioCliente {
     }
 
     public void save(Cliente cliente) {
+        clienteRepository.save(cliente);
+    }
+
+    public void agregarTarjeta(Cliente cliente, TarjetaCredito tarjeta) {
+        tarjeta.setId_tarjeta(tarjeta.getTipoTarjetaCredito() + "-" + tarjeta.getNumeroTarjeta() + "-" + tarjeta.getCvv());
+        cliente.getTarjetasCredito().add(tarjeta);
         clienteRepository.save(cliente);
     }
 

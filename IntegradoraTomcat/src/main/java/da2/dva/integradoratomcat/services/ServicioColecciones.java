@@ -20,6 +20,7 @@ public class ServicioColecciones implements Servicio {
     private Map<Long, String> tiposVia;
     private Map<String, Usuario> usuarios;
     private Map<String, String> idiomas;
+    private Map<Long, String> tiposTarjeta;
 
     @Autowired
     private PaisRepository paisRepository;
@@ -35,6 +36,8 @@ public class ServicioColecciones implements Servicio {
     private UsuarioAdministradorRepository usuarioAdministradorRepository;
     @Autowired
     private IdiomaRepository idiomaRepository;
+    @Autowired
+    private TipoTarjetaRepository tipoTarjetaRepository;
 //    @Autowired
 //    private UsuarioClienteRepository usuarioClienteRepository;
 //    @Autowired
@@ -94,6 +97,15 @@ public class ServicioColecciones implements Servicio {
                 idioma -> idiomas.put(idioma.getSiglas(), idioma.getIdioma())
         );
         this.idiomas = idiomas;
+    }
+
+    @Override
+    public void cargarTiposTarjeta() {
+        Map<Long, String> tiposTarjeta = new HashMap<>();
+        tipoTarjetaRepository.findAll().forEach(
+                tipoTarjeta -> tiposTarjeta.put(tipoTarjeta.getId(), tipoTarjeta.getTipoTarjeta())
+        );
+        this.tiposTarjeta = tiposTarjeta;
     }
 
     @Override

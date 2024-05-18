@@ -46,8 +46,10 @@ public class RegistroClienteController {
 
     @GetMapping("paso1")
     public ModelAndView registroCliente(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
+        //Recuperamos las paginas visitadas y si es la primera vez iniciamos el contador
         if (sesion.getAttribute("paginas_visitadas") == null)
             sesion.setAttribute("paginas_visitadas", 0);
+        //Convertimos el atributo en entero para poder incrementarlo
         int pags_visitadas = (int) sesion.getAttribute("paginas_visitadas");
         sesion.setAttribute("paginas_visitadas", pags_visitadas + 1);
         ModelAndView mv = new ModelAndView();

@@ -15,7 +15,7 @@ public class TarjetaCredito {
     private String id_tarjeta;
     private String tipoTarjetaCredito;
     private String cvv;
-    private Integer numeroTarjeta;
+    private String numeroTarjeta;
     private LocalDate fechaVencimiento;
     private Boolean predeterminada;
 }
