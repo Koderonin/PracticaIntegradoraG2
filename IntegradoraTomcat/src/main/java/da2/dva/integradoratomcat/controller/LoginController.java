@@ -40,6 +40,7 @@ public class LoginController {
 
     @GetMapping("paso1")
     public ModelAndView login(HttpSession sesion) {
+
         ModelAndView mv = new ModelAndView("/login/login");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
 

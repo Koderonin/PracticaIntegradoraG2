@@ -2,6 +2,7 @@
 
 const ENLACE_LOGIN = $('#enlace_login');
 const ENLACE_REGISTRO = $('#enlace_registro');
+const PAGINAS_VISITADAS =  $('#pags_visitadas');
 
 $.ajaxSetup({xhrFields: { withCredentials: true } });	//Credenciales para solicitar la sesión
 $.getJSON('http://tomcat.da2.dva:8080/api/sesion/cliente', function(response) {
@@ -16,9 +17,10 @@ $.getJSON('http://tomcat.da2.dva:8080/api/sesion/cliente', function(response) {
 });
 $.getJSON('http://tomcat.da2.dva:8080/api/sesion/paginas-visitadas', function(response) {
 	if(response != null) {
-		console.log(response);
+		PAGINAS_VISITADAS.text("Páginas visitadas: " + response);
 	}
 });
+$.get('http://tomcat.da2.dva:8080/api/cliente/sesion/agregarVisita');
 $.ajaxSetup({xhrFields: { withCredentials: false } });
 /* ---------------------- Productos ---------------------- */
 
