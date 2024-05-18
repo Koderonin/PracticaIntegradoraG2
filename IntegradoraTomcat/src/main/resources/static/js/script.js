@@ -50,13 +50,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 asignarEventos();
 function asignarEventos(){
-
     btn_deseleccionar_genero.addEventListener("click", deseleccionarGenero);
     btn_seleccionar_primer_genero.addEventListener("click", seleccionarPrimerGenero);
     btn_deseleccionar_pais.addEventListener("click", deseleccionarPais);
     btn_deseleccionar_tipoDocumento.addEventListener("click", deseleccionarTipoDocumento);
-
-
 }
 
 function deseleccionarGenero() {

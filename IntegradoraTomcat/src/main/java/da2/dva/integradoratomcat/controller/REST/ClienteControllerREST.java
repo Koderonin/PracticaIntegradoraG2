@@ -38,4 +38,19 @@ public class ClienteControllerREST {
     public Cliente detalleClienteByUsuario(HttpSession sesion) {
         return servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario"));
     }
+
+    @GetMapping("/sesion")
+    public int getVisitasSesion(HttpSession sesion){
+        if( sesion.getAttribute("paginas_visitadas") != null){
+            return (int) sesion.getAttribute("paginas_visitadas") ;
+        }else return 0;
+
+    }
+    @GetMapping("/sesion/agregarVisita")
+    public void agregarVisitaSesion(HttpSession sesion){
+        if( sesion.getAttribute("paginas_visitadas") == null){
+            sesion.setAttribute("paginas_visitadas",0);
+        }
+        sesion.setAttribute("paginas_visitadas" ,(int) sesion.getAttribute("paginas_visitadas") +1 );
+    }
 }

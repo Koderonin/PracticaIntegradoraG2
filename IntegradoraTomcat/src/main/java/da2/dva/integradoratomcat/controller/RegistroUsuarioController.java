@@ -64,7 +64,6 @@ public class RegistroUsuarioController {
             System.out.println(usuario.getEmail());
             return mv;
         }else{
-
             mv.setViewName("redirect:/login/paso1");
 
             servicioUsuario.insertarUsuario(usuario);
