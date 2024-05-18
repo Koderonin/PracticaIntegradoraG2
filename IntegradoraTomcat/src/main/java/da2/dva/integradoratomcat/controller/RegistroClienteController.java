@@ -46,7 +46,9 @@ public class RegistroClienteController {
 
     @GetMapping("paso1")
     public ModelAndView registroCliente(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
-        int pags_visitadas = Integer.parseInt((String) sesion.getAttribute("paginas_visitadas"));
+        if (sesion.getAttribute("paginas_visitadas") == null)
+            sesion.setAttribute("paginas_visitadas", 0);
+        int pags_visitadas = (int) sesion.getAttribute("paginas_visitadas");
         sesion.setAttribute("paginas_visitadas", pags_visitadas + 1);
         ModelAndView mv = new ModelAndView();
         if (checkUserSession(sesion)) {

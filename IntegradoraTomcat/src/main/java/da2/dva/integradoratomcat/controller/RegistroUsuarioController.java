@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("registro/usuario")
 public class RegistroUsuarioController {
-    ModelAndView mv = new ModelAndView("registro/usuario");
 
     @Autowired
     ServicioUsuario servicioUsuario;
@@ -30,22 +29,9 @@ public class RegistroUsuarioController {
         servicioUsuario.devuelveUsuarios(); //TODO: Cargar en estático ( a lo mejor no interesa)
     }
 
-//    @GetMapping("administrador")//TODO:INVESTIGAR PARA PONER LA IP Y EL REGISTRO
-//    public ModelAndView registroUsuario(@ModelAttribute("usuario") UsuarioAdministrador usuario) {
-//        mv.addObject("titulo","Registro de usuario");
-//        mv.addObject("tipoUsuario","administrador");
-//        return mv;
-//    }
-//    @PostMapping("administrador")
-//    public ModelAndView registrar(@Valid @ModelAttribute("usuario") UsuarioAdministrador usuario
-//                                  ,BindingResult resultado
-//    ) {
-//       // mv.addObject("usuario", usuario);
-//        return mv;
-//    }
-
     @GetMapping("/")
     public ModelAndView registroUsuario(@ModelAttribute("usuario") UsuarioCliente usuario) {
+        ModelAndView mv = new ModelAndView("registro/usuario");
         mv.setViewName("/registro/usuario");
         mv.addObject("titulo","Registro de usuario");
         mv.addObject("tipoUsuario","empleado");
@@ -57,18 +43,20 @@ public class RegistroUsuarioController {
 
     @PostMapping("/")
     public ModelAndView registroUsuario(@Valid @ModelAttribute("usuario") UsuarioCliente usuario, BindingResult resultado) {
+        ModelAndView mv = new ModelAndView("registro/usuario");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
-
+        if (servicioUsuario.devuelveUsuarios().containsKey(usuario.getEmail())) {
+            mv.addObject("error", "El usuario ya existe");
+            return mv;
+        }
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
-            System.out.println(usuario.getEmail());
             return mv;
         }else{
             mv.setViewName("redirect:/login/paso1");
 
             servicioUsuario.insertarUsuario(usuario);
         }
-        // mv.addObject("usuario", usuario);
         return mv;
     }
 

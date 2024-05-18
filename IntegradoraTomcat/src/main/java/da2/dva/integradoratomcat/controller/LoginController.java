@@ -77,7 +77,7 @@ public class LoginController {
         // esto ahora mismo sólo chequea vs lista de UsuarioCliente!!
         if(servicioUsuario.devuelveUsuarios().containsKey(email)){
             //Si el usuario tiene fecha de bloqueo mandamos un error
-            UsuarioCliente usuario = servicioUsuario.devuelveUsuarios().get(email);
+            UsuarioCliente usuario = (UsuarioCliente) servicioUsuario.devuelveUsuarios().get(email);
            if (usuario.getFechaBloqueo() != null) {
                mv.addObject("error","Usuario bloqueado hasta " + usuario.getFechaBloqueo());
            } else {
@@ -132,7 +132,7 @@ public class LoginController {
         ModelAndView mv = new ModelAndView("/login/login");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
         String email = (String) sesion.getAttribute("email");
-        UsuarioCliente usuario = servicioUsuario.devuelveUsuarios().get(email);
+        UsuarioCliente usuario =  (UsuarioCliente) servicioUsuario.devuelveUsuarios().get(email);
 
         Boolean passCheck = usuario.getClave().equals(clave);
         if (usuario.getFechaBloqueo() != null && LocalDateTime.now().toLocalDate().isAfter(usuario.getFechaBloqueo())) {

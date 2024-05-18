@@ -20,7 +20,7 @@ public class Pruebas {
     @Autowired
     ServicioUsuario servicioUsuario;
 
-    @Bean
+    /*@Bean
     public void prTest() {
 
         try{
@@ -37,5 +37,5 @@ public class Pruebas {
         usuarioCliente.setRespuestaRecuperacion("Muy bien");
         usuarioClienteRepository.save(usuarioCliente);
 
-    }
+    }*/
 }

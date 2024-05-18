@@ -20,7 +20,7 @@ $.getJSON('http://tomcat.da2.dva:8080/api/sesion/paginas-visitadas', function(re
 		PAGINAS_VISITADAS.text("Páginas visitadas: " + response);
 	}
 });
-$.get('http://tomcat.da2.dva:8080/api/cliente/sesion/agregarVisita');
+$.get('http://tomcat.da2.dva:8080/api/sesion/agregar-visita');
 $.ajaxSetup({xhrFields: { withCredentials: false } });
 /* ---------------------- Productos ---------------------- */
 

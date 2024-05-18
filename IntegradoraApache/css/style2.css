@@ -22,7 +22,11 @@ footer {
     margin-top: auto; /* Empuja el footer al fondo */
 }
 
+/* ----------------------------- TARJETA --------------------------- */
 
+#nueva_tarjeta {
+    display: none;
+}
 
 /* ----------------------------- HEADER --------------------------- */
 

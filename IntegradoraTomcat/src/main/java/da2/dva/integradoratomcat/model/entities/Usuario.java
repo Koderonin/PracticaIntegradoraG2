@@ -23,7 +23,6 @@ public class Usuario {
 
     @NotBlank
     @Pattern(regexp = "^\\w+@([\\w-]+\\.)+[\\w-]{2,4}$")
-    //COMPROBAR QUE EXISTE
     private String email;
     @NotBlank
     @Size(min = 6, max = 12, message = "{password.invalidSize}")
