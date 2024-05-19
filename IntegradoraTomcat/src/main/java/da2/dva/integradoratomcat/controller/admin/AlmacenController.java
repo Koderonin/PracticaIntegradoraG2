@@ -1,8 +1,6 @@
-package da2.dva.integradoratomcat.controller;
+package da2.dva.integradoratomcat.controller.admin;
 
-import da2.dva.integradoratomcat.repositories.jpa.PedidoRepository;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin/almacen")
 public class AlmacenController {
 
-    ModelAndView mv = new ModelAndView("/add-producto");
-
-
-
     @GetMapping("/add-producto")
     public ModelAndView addProducto(HttpSession sesion) {
-
-        mv.setViewName("add-producto");
+        ModelAndView mv = new ModelAndView("/admin/almacen/nuevo-producto");
 
         return mv;
     }

@@ -1,8 +1,10 @@
 package da2.dva.integradoratomcat.controller.REST;
 
 import da2.dva.integradoratomcat.model.entities.Cliente;
+import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.services.ServicioCliente;
+import da2.dva.integradoratomcat.services.ServicioUsuario;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,10 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class SesionControllerREST {
     @Autowired
     private ServicioCliente servicioCliente;
+    @Autowired
+    private ServicioUsuario servicioUsuario;
 
     @GetMapping("/cliente")
     public Cliente detalleClienteByUsuario(HttpSession sesion) {
         return servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario"));
+    }
+
+    @GetMapping("/usuarioEsAdmin")
+    public boolean usuarioEnSesionEsAdmin(HttpSession sesion) {
+        return servicioUsuario.devuelveUsuarios().get(((Usuario) sesion.getAttribute("usuario")).getEmail()).getAdministrador();
     }
 
     @GetMapping("/paginas-visitadas")

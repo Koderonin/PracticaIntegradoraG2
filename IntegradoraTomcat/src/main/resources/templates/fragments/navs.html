@@ -9,18 +9,18 @@
                         <div class="bar3"></div>
                     </div>
                     <div class="menu" id="mySidenav">
-                        <div class="seccion"><a href="productos.html"> PRODUCTOS </a></div>
+                        <div class="seccion"><a id="enlace_productos" href="http://apache.da2.dva/productos.html"> PRODUCTOS </a></div>
                     </div>
 
                     <!-- NOMBRE QUE LE QUERAMOS PONER -->
                     <div id="shopName">
-                        <a href="http://localhost/index.html" class="logo"><img src="/img/logo.png" alt="logo" /></a >
-                        <a href="http://localhost/index.html"><span> <b>Foot</b>Shop</span> </a>
+                        <a href="http://apache.da2.dva/index.html" class="logo"><img src="/img/logo.png" alt="logo" /></a >
+                        <a href="http://apache.da2.dva/index.html"><span> <b>Foot</b>Shop</span> </a>
                     </div>
                     <!-- SECCIONES DE PRODUCTOS (SI HAY) -->
 
                     <div id="collection">
-                        <div class="seccion"><a href="http://localhost/productos.html"> PRODUCTOS </a></div>
+                        <div class="seccion"><a id="enlace_productos" href="http://apache.da2.dva/productos.html"> PRODUCTOS </a></div>
                     </div>
 
                     <div id="search" class="input-container">
@@ -73,7 +73,7 @@
                             <img th:src="@{/img/user-icon.png}" class="userIcon" onclick="toggleDropdown()">
                             <!-- Menú desplegable -->
                             <div id="dropdownMenu" class="dropdown-content">
-                                <a id="enlace_login" href="http://tomcat.da2.dva:8080/area-cliente">Login</a>
+                                <a id="enlace_login" href="http://tomcat.da2.dva:8080/cliente/area-cliente">Login</a>
                                 <a id="enlace_registro" href="http://tomcat.da2.dva:8080/registro/usuario/">Registrarse</a>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
 
 </nav>
 
-<nav th:fragment="navegacion_pasos(paso)" class="barra_pasos">    <!-- TODO: Implementar barra de navegación -->
+<nav th:fragment="navegacion_pasos(paso)" class="barra_pasos">
     <ul>
         <a href="paso1" title="Paso 1 (Datos Personales)" >
             <div class="enlace_img">

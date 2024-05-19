@@ -1,4 +1,4 @@
-package da2.dva.integradoratomcat.controller;
+package da2.dva.integradoratomcat.controller.login;
 
 import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Usuario;
@@ -99,9 +99,9 @@ public class LoginController {
         //Comprobamos si ya hay un usuario en sesión
         if (sesion.getAttribute("usuario") != null) {
             if (((Usuario) sesion.getAttribute("usuario")).getAdministrador())
-                mv.setViewName("redirect:/admin/listado");
+                mv.setViewName("redirect:/admin/area-admin");
             else
-                mv.setViewName("redirect:/area-cliente");
+                mv.setViewName("redirect:/cliente/area-cliente");
             return mv;
         }
 
@@ -150,13 +150,13 @@ public class LoginController {
                     Cliente cliente = servicioCliente.getClienteByUsuario((UsuarioCliente) usuario);
                     if (cliente != null) {
                         sesion.setAttribute("cliente", cliente); //TODO:  VER SI ESTO ES NECESARIO
-                        mv.setViewName("redirect:/area-cliente");
+                        mv.setViewName("redirect:/cliente/area-cliente");
                     } else {
                         mv.clear();
                         mv.setViewName("redirect:/registro/cliente/paso1");
                     }
                 } else {
-                    mv.setViewName("redirect:/admin/listado");
+                    mv.setViewName("redirect:/admin/area-admin");
                 }
                 //ACTUALIZAR EN LA BBDD EL NUMERO DE CONEXIONES EXITOSAS DE ESTE USUARIO
                 servicioUsuario.actualizarNumAccesos(usuario);
@@ -177,9 +177,5 @@ public class LoginController {
         }
         return mv;
     }
-
-
-
-
 
 }

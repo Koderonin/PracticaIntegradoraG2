@@ -7,7 +7,7 @@ if(containerProductos != null){
 function crearItemProducto(producto) {
     let div = document.createElement('div'); div.classList.add('item');
     let figure = document.createElement('figure');
-    let img = document.createElement('img'); img.alt = 'Imagen' + producto.modelo; img.src = devolverImagen(producto); //TODO: Obtener imagen
+    let img = document.createElement('img'); img.alt = 'Imagen' + producto.modelo; img.src = devolverImagen(producto);
     let div2 = document.createElement('div'); div2.classList.add('info-product');
     let h2 = document.createElement('h2'); h2.textContent = producto.modelo;
     let marca = document.createElement('p'); marca.classList.add('brand'); marca.textContent = producto.marca;

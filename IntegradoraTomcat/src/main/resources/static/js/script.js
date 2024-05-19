@@ -1,3 +1,33 @@
+/* ---------------------- Barra de Navegación ---------------------- */
+
+const ENLACE_LOGIN = $('#enlace_login');
+const ENLACE_REGISTRO = $('#enlace_registro');
+const ENLACE_PRODUCTOS = $('#enlace_productos');
+const PAGINAS_VISITADAS =  $('#pags_visitadas');
+
+$.getJSON('http://tomcat.da2.dva:8080/api/sesion/usuarioEsAdmin', function(response) {
+    if(response == null) {
+        ENLACE_LOGIN.text("Login");
+        ENLACE_REGISTRO.text("Registrarse");
+    }
+    else {
+        if (response) {
+            ENLACE_LOGIN.text("Área de Administrador");
+            ENLACE_LOGIN.attr('href', 'http://tomcat.da2.dva:8080/admin/area-admin');
+            ENLACE_PRODUCTOS.attr('href', 'http://tomcat.da2.dva:8080/admin/api/producto/listado');
+        } else {
+            ENLACE_LOGIN.text("Área de Cliente");
+        }
+        ENLACE_REGISTRO.text("Logout"); ENLACE_REGISTRO.attr('href', 'http://tomcat.da2.dva:8080/logout/invalidate');
+    }
+});
+$.getJSON('http://tomcat.da2.dva:8080/api/sesion/paginas-visitadas', function(response) {
+    if(response != null && response > 0) {
+        PAGINAS_VISITADAS.text("Páginas visitadas: " + response);
+    }
+});
+$.get('http://tomcat.da2.dva:8080/api/sesion/agregar-visita');
+
 const SELECTOR_IDIOMAS = document.getElementById("language-select");
 
 location.addEventListener("change", (event) => {

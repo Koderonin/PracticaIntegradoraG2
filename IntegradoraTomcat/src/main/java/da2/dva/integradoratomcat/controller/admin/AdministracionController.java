@@ -1,8 +1,9 @@
-package da2.dva.integradoratomcat.controller;
+package da2.dva.integradoratomcat.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * ¡Esta clase es de administración, no se puede acceder con UsuarioCliente!
@@ -13,13 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdministracionController {
 
-    @GetMapping("/")
-    public String index() {
-        return "redirect:/admin/listado";
-    }
-
-    @GetMapping("/listado")
-    public String listado() {
-        return "listado";
+    @GetMapping("/area-admin")
+    public ModelAndView devuelveAreaAdmin() {
+        ModelAndView mv = new ModelAndView("/admin/area-admin");
+        return mv;
     }
 }

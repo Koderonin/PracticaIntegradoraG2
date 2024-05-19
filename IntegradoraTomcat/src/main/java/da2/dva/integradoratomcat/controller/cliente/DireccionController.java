@@ -1,6 +1,6 @@
-package da2.dva.integradoratomcat.controller;
+package da2.dva.integradoratomcat.controller.cliente;
 
-import da2.dva.integradoratomcat.model.auxiliar.TarjetaCredito;
+import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.services.ServicioCliente;
 import da2.dva.integradoratomcat.services.ServicioColecciones;
@@ -17,22 +17,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/cliente/tarjeta")
-public class TarjetaController {
+@RequestMapping("/cliente")
+public class DireccionController {
     @Autowired
     ServicioCliente servicioCliente;
     @Autowired
     ServicioColecciones servicio;
 
     @Bean
-    public void descargarColeccionesTC(){
-        servicio.cargarTiposTarjeta();
+    public void descargarColeccionesDIR(){
+        servicio.cargarTiposVia();
         servicio.cargarIdiomas();
     }
+    ModelAndView mv = new ModelAndView("cliente/nueva-direccion");
 
-    @GetMapping("/add-tarjeta")
-    public ModelAndView agregarTarjeta(@ModelAttribute("tarjeta") TarjetaCredito tarjeta, HttpSession sesion){
-        ModelAndView mv = new ModelAndView("/add-tarjeta");
+
+    @GetMapping("/nueva-direccion")
+    public ModelAndView agregarDireccion(@ModelAttribute("direccion") Direccion direccion, HttpSession sesion){
         //Recuperamos las paginas visitadas y si es la primera vez iniciamos el contador
         if (sesion.getAttribute("paginas_visitadas") == null)
             sesion.setAttribute("paginas_visitadas", 0);
@@ -40,20 +41,23 @@ public class TarjetaController {
         int pags_visitadas = (int) sesion.getAttribute("paginas_visitadas");
         sesion.setAttribute("paginas_visitadas", pags_visitadas + 1);
         mv.addObject("visitas", pags_visitadas);
-        mv.addObject("listaTiposTarjeta", servicio.getTiposTarjeta());
+        mv.addObject("listaTiposVia",servicio.getTiposVia());
         mv.addObject("listaIdiomas", servicio.getIdiomas());
 
         return mv;
     }
-    @PostMapping("/add-tarjeta")
-    public ModelAndView insertarTarjeta(@Valid @ModelAttribute("tarjeta") TarjetaCredito tarjeta, HttpSession sesion, BindingResult resultado){
-        ModelAndView mv = new ModelAndView("/add-tarjeta");
-        if(resultado.hasErrors()){
+
+    @PostMapping("/nueva-direccion")
+    public ModelAndView insertarTarjeta(@Valid @ModelAttribute("direccion") Direccion direccion, HttpSession sesion,
+                                        BindingResult result){
+        if(result.hasErrors()){
             mv.addObject("error","Por favor, rellene los campos obligatorios");
             return mv;
         }
-        servicioCliente.agregarTarjeta((Cliente) sesion.getAttribute("cliente"), tarjeta);
-        mv.setViewName("redirect:http://apache.da2.dva/area-cliente.html");
+        //servicioCliente.agregarTarjeta((Cliente) sesion.getAttribute("cliente"), tarjeta);
+        servicioCliente.agregarDireccion((Cliente) sesion.getAttribute("cliente"), direccion);
+        mv.setViewName("redirect:http://apache.da2.dva/cliente/area-cliente.html");
         return mv;
     }
+
 }

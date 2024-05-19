@@ -1,4 +1,4 @@
-package da2.dva.integradoratomcat.controller;
+package da2.dva.integradoratomcat.controller.registro;
 
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.services.ServicioUsuario;
