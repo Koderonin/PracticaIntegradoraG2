@@ -12,11 +12,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@IdClass(LineaCarritoId.class)
 public class LineaCarrito {
 
     @Id
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "carrito_id", foreignKey = @ForeignKey(name = "FK_CARRO_LINEA_CARRO_ID_CARRO"))
+   // @JoinColumn(name = "cliente", foreignKey = @ForeignKey(name = "FK_CARRO_LINEA_CARRO_ID_CARRO"))
     private Carrito carrito;
 
     @Id

@@ -32,8 +32,7 @@ public class Carrito {
     @Transient
     private BigDecimal precio;
 
-    @OneToMany
-    @JoinColumn(name = "carrito", foreignKey = @ForeignKey(name = "FK_CARRO_LINEA_CARRO_ID_CARRO"))
+    @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL)
     private Set<LineaCarrito> lineas = new HashSet<>();
 
 }

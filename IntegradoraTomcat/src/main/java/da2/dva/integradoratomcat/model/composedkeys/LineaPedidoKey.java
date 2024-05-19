@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 public class LineaPedidoKey implements java.io.Serializable {
-    private String producto_id;
+
     private Pedido pedido;
+    private String producto_id;
 }

@@ -2,9 +2,11 @@ package da2.dva.integradoratomcat.model.composedkeys;
 
 import da2.dva.integradoratomcat.model.entities.Carrito;
 import da2.dva.integradoratomcat.model.entities.Producto;
-import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Embeddable
+@Data @AllArgsConstructor @NoArgsConstructor
 public class LineaCarritoId implements java.io.Serializable {
 
     private Carrito carrito;
