@@ -8,13 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @MappedSuperclass
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Data @AllArgsConstructor @NoArgsConstructor
 @CheckClave
 public class Usuario {
     @Id
@@ -24,6 +22,7 @@ public class Usuario {
     @NotBlank
     @Pattern(regexp = "^\\w+@([\\w-]+\\.)+[\\w-]{2,4}$")
     private String email;
+
     @NotBlank
     @Size(min = 6, max = 12, message = "{password.invalidSize}")
     @Pattern.List({
@@ -33,37 +32,31 @@ public class Usuario {
             @Pattern(regexp = ".*[!#$%&].*", message = "{password.invalidPattern.simbolo}")
     })
     private String clave;
+
     @Transient
     @NotBlank
     private String confirmClave;
+
     @NotNull
     @CheckColeccionLong(coleccion = "listapreguntas")
     private Long preguntaRecuperacion;
+
     @NotBlank
     private String respuestaRecuperacion;
 
-    private LocalDate fechaUltimaConexion;
+    private LocalDateTime fechaUltimaConexion;
     private Integer numAccesos;
-    private LocalDate fechaBloqueo; //Si es null no esta bloqueado
+    private LocalDateTime fechaBloqueo; //Si es null no esta bloqueado
+    private Boolean administrador;
 
-
-    public Usuario(UUID idUsuario, String email, String clave, String confirmClave, Long preguntaRecuperacion, String respuestaRecuperacion) {
-        this.id_usuario = idUsuario;
-        this.email = email;
-        this.clave = clave;
-        this.confirmClave = confirmClave;
-        this.preguntaRecuperacion = preguntaRecuperacion;
-        this.respuestaRecuperacion = respuestaRecuperacion;
-        this.numAccesos = 0;
-    }
-
-    public Usuario(String email, String clave,  Long preguntaRecuperacion, String respuestaRecuperacion) {
+    public Usuario(String email, String clave,  Long preguntaRecuperacion, String respuestaRecuperacion, Boolean administrador) {
         setEmail(email);
         setClave(clave);
         setConfirmClave(clave);
         setPreguntaRecuperacion(preguntaRecuperacion);
         setRespuestaRecuperacion(respuestaRecuperacion);
         setNumAccesos(0);
+        setAdministrador(administrador);
     }
 
     //private Auditoria //TODO: Implementar auditoria

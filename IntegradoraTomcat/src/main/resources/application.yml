@@ -2,9 +2,9 @@ spring:
   application:
     name: IntegradoraTomcat
   datasource:
-   # url: jdbc:mysql://mysql.da2.dva:3306/integradoraJPA?createDatabaseIfNotExist=true #Despliegue
+    url: jdbc:mysql://mysql.da2.dva:3306/integradoraJPA?createDatabaseIfNotExist=true #Despliegue
     #url: jdbc:mysql://192.168.7.10:5580/integradoraJPA?createDatabaseIfNotExist=true # Diego
-    url: jdbc:mysql://172.26.224.1:3306/integradoraJPA?createDatabaseIfNotExist=true  #Alicia
+    #url: jdbc:mysql://172.26.224.1:3306/integradoraJPA?createDatabaseIfNotExist=true  #Alicia
     #url: jdbc:mysql://192.168.7.10:5580/integradoraJPA?createDatabaseIfNotExist=true
     username: root
     password: root
@@ -14,15 +14,15 @@ spring:
     basename: lang/messages
   jpa:
     hibernate:
-      ddl-auto: update #cuando persistamos definitivamente y dejemos de hacer pruebas
+      ddl-auto: update
     database: mysql
     show-sql: true
     generate-ddl: true
   data:
     mongodb:
-     # uri: mongodb://root:root@mongo.da2.dva:27017/tienda?authSource=admin  #Despliegue
+      uri: mongodb://root:root@mongo.da2.dva:27017/tienda?authSource=admin  #Despliegue
       #uri: mongodb://root:root@192.168.100.3:27017/tienda?authSource=admin # Diego
-      uri: mongodb://root:root@172.26.224.1:27017/tienda?authSource=admin  #Alicia
+      #uri: mongodb://root:root@172.26.224.1:27017/tienda?authSource=admin  #Alicia
       #uri: mongodb://192.168.7.10:27017/tienda # Vicen
       username: root
       password: root

@@ -25,11 +25,13 @@ import java.util.UUID;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @CheckDocumento
+@Data @AllArgsConstructor @NoArgsConstructor
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"id_usuario"}, name = "UK_CLIENTE_USUARIO"),
+        @UniqueConstraint(columnNames = {"id_direccion_postal"}, name = "UK_CLIENTE_DIRECCION_POSTAL")
+})
 public class Cliente {
 
     @Id
@@ -89,15 +91,17 @@ public class Cliente {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name="direcciones_entrega",
-            joinColumns = @JoinColumn(name = "id_cliente", foreignKey = @ForeignKey(name = "FK_CLIENTE_DIRECCION_ENTREGA_ID_CLIENTE")),
-            inverseJoinColumns = @JoinColumn(name = "id_direccion", foreignKey = @ForeignKey(name = "FK_DIRECCION_DIRECCION_ENTREGA_ID_DIRECCION")))
+            joinColumns = @JoinColumn(name = "id_cliente", foreignKey = @ForeignKey(name = "FK_CLIENTE_DIRECCIONES_ENTREGA_ID_CLIENTE")),
+            inverseJoinColumns = @JoinColumn(name = "id_direccion", foreignKey = @ForeignKey(name = "FK_DIRECCION_DIRECCIONES_ENTREGA_ID_DIRECCION")))
     private Set<Direccion> direccionEntrega = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name="tarjetas_credito",
+            joinColumns = @JoinColumn(name = "id_cliente", foreignKey = @ForeignKey(name = "FK_CLIENTE_TARJETAS_CREDITO_ID_CLIENTE")),
+            inverseJoinColumns = @JoinColumn(name = "id_tarjeta", foreignKey = @ForeignKey(name = "FK_TARJETA_CREDITO_TARJETAS_CREDITO_ID_TARJETA")))
     private Set<@Valid TarjetaCredito> tarjetasCredito = new HashSet<>();
 
     private String tipoCliente;
-
     private String comentarios;
 
     @NotNull(groups = DatosCliente.class)

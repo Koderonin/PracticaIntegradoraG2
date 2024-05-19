@@ -1,6 +1,7 @@
 package da2.dva.integradoratomcat.controller;
 
 import da2.dva.integradoratomcat.model.entities.Cliente;
+import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.services.ServicioCliente;
 import da2.dva.integradoratomcat.services.ServicioColecciones;
@@ -23,13 +24,10 @@ public class LoginController {
 
     @Autowired
     ServicioUsuario servicioUsuario;
-
     @Autowired
     ServicioCliente servicioCliente;
-
     @Autowired
     ServicioColecciones servicio;
-
     @Autowired
     ServicioCookie servicioCookie;
 
@@ -52,7 +50,7 @@ public class LoginController {
         * si viene de area-cliente, redirigimos al area-cliente
         * si viene de registro-usuario, redirigimos al registro-cliente (no tiene Cliente asociado)
         * */
-        if(sesion.getAttribute("usuario")!=null){
+        if (sesion.getAttribute("usuario") != null) {
             // si ya hay un usuario en sesión y no tiene Cliente asociado, redirigimos al registro de cliente
             if (servicioCliente.getClienteByUsuario((UsuarioCliente) sesion.getAttribute("usuario")) == null) {
                 mv.setViewName("redirect:/registro/cliente/paso1");
@@ -74,10 +72,9 @@ public class LoginController {
         ModelAndView mv = new ModelAndView("/login/login");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
 
-        // esto ahora mismo sólo chequea vs lista de UsuarioCliente!!
-        if(servicioUsuario.devuelveUsuarios().containsKey(email)){
+        if (servicioUsuario.devuelveUsuarios().containsKey(email)) {
+            Usuario usuario = servicioUsuario.devuelveUsuarios().get(email);
             //Si el usuario tiene fecha de bloqueo mandamos un error
-            UsuarioCliente usuario = (UsuarioCliente) servicioUsuario.devuelveUsuarios().get(email);
            if (usuario.getFechaBloqueo() != null) {
                mv.addObject("error","Usuario bloqueado hasta " + usuario.getFechaBloqueo());
            } else {
@@ -99,28 +96,35 @@ public class LoginController {
         ModelAndView mv = new ModelAndView("/login/login");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
         intentos = 0;
-        if(sesion.getAttribute("usuario")!=null){
-            mv.setViewName("redirect:/area-cliente");
+        //Comprobamos si ya hay un usuario en sesión
+        if (sesion.getAttribute("usuario") != null) {
+            if (((Usuario) sesion.getAttribute("usuario")).getAdministrador())
+                mv.setViewName("redirect:/admin/listado");
+            else
+                mv.setViewName("redirect:/area-cliente");
             return mv;
         }
+
         //Si no se ha introducido un email mandamos un error para que el usuario lo introduzca y devolvemos a paso 1
-        if(sesion.getAttribute("email")==null){
+        if (sesion.getAttribute("email") == null) {
             mv.setViewName("/login/login");
             mv.addObject("error",null);
             mv.addObject("errorUsuario","Debe introducir su email");
             mv.addObject("paso" ,"1");
             return mv;
         }
+
         //Si se ha enviado un error desde el area de cliente lo mostramos : no es un error desde el paso 2? Fallo de clave?
-        if(sesion.getAttribute("errorLogin")!=null){
+        if (sesion.getAttribute("errorLogin") != null) {
             mv.addObject("errorLogin",sesion.getAttribute("errorClave"));
         }
+
         //Limpiamos  errores para que no aparezcan cuando se recarga la página        sesion.removeAttribute("errorClave");
         mv.addObject("error",null);
         mv.addObject("errorUsuario",null);
         //Paso de parámetros para resolución de la vista
         mv.addObject("titulo","Login de usuario");
-        mv.setViewName("login/login");
+        //mv.setViewName("login/login");
         mv.addObject("paso" ,"2");
         return mv;
     }
@@ -132,26 +136,27 @@ public class LoginController {
         ModelAndView mv = new ModelAndView("/login/login");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
         String email = (String) sesion.getAttribute("email");
-        UsuarioCliente usuario =  (UsuarioCliente) servicioUsuario.devuelveUsuarios().get(email);
+        Usuario usuario = servicioUsuario.devuelveUsuarios().get(email);
 
         Boolean passCheck = usuario.getClave().equals(clave);
-        if (usuario.getFechaBloqueo() != null && LocalDateTime.now().toLocalDate().isAfter(usuario.getFechaBloqueo())) {
+        if (usuario.getFechaBloqueo() != null && LocalDateTime.now().isAfter(usuario.getFechaBloqueo())) {
             servicioUsuario.actualizarFechaBloqueo(usuario, null);
         }
         if (intentos < 3 && usuario.getFechaBloqueo() == null) {
             if(passCheck){ //Si la clave es correcta se redirecciona a la area de cliente y se guarda en la sesión
                 sesion.setAttribute("usuario", usuario);
-                servicioCookie.actualizaOCreaCookieUsuarios( response,email, contenidoCookie);
-               // Cookie cookie = new Cookie("accesosUsuarios", valorCookie);
-               // response.addCookie(cookie);
-                Cliente cliente = servicioCliente.getClienteByUsuario(usuario);
-                if(cliente!=null) {
-
-                    sesion.setAttribute("cliente", cliente); //TODO:  VER SI ESTO ES NECESARIO
-                    mv.setViewName("redirect:/area-cliente");
-                }else{
-                    mv.clear();
-                    mv.setViewName("redirect:/registro/cliente/paso1");
+                servicioCookie.actualizaOCreaCookieUsuarios(response, email, contenidoCookie);
+                if (!usuario.getAdministrador()) {
+                    Cliente cliente = servicioCliente.getClienteByUsuario((UsuarioCliente) usuario);
+                    if (cliente != null) {
+                        sesion.setAttribute("cliente", cliente); //TODO:  VER SI ESTO ES NECESARIO
+                        mv.setViewName("redirect:/area-cliente");
+                    } else {
+                        mv.clear();
+                        mv.setViewName("redirect:/registro/cliente/paso1");
+                    }
+                } else {
+                    mv.setViewName("redirect:/admin/listado");
                 }
                 //ACTUALIZAR EN LA BBDD EL NUMERO DE CONEXIONES EXITOSAS DE ESTE USUARIO
                 servicioUsuario.actualizarNumAccesos(usuario);
@@ -160,7 +165,7 @@ public class LoginController {
                 mv.addObject("errorClave",null);
                 intentos++;
                 if (intentos == 3) {
-                    servicioUsuario.actualizarFechaBloqueo(usuario, LocalDateTime.now().plusMinutes(15).toLocalDate());
+                    servicioUsuario.actualizarFechaBloqueo(usuario, LocalDateTime.now().plusMinutes(15));
                 }
                 mv.setViewName("/login/login");
                 mv.addObject("paso" ,"2");

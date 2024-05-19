@@ -2,6 +2,7 @@ package da2.dva.integradoratomcat.services;
 
 import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Usuario;
+import da2.dva.integradoratomcat.model.entities.UsuarioAdministrador;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioAdministradorRepository;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioClienteRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -64,21 +66,22 @@ public class ServicioUsuario {
      usuarioClienteRepository.deleteAll();
     }
 
-    public void actualizarNumAccesos(UsuarioCliente usuario){
+    public void actualizarNumAccesos(Usuario usuario){
          try {
              usuario.setNumAccesos(usuario.getNumAccesos() + 1);
          } catch (NullPointerException e) {
              usuario.setNumAccesos(1);
          }
-         // ODO: mirar si en algún momento se puede quitar la remilmierda ésta.
          usuario.setConfirmClave(usuario.getClave());
-         usuarioClienteRepository.save(usuario);
+        if (usuario.getAdministrador()) usuarioAdministradorRepository.save((UsuarioAdministrador) usuario);
+        else usuarioClienteRepository.save((UsuarioCliente) usuario);
     }
 
-    public void actualizarFechaBloqueo(UsuarioCliente usuario, LocalDate fecha) {
+    public void actualizarFechaBloqueo(Usuario usuario, LocalDateTime fecha) {
         usuario.setFechaBloqueo(fecha);
         usuario.setConfirmClave(usuario.getClave());
-        usuarioClienteRepository.save(usuario);
+        if (usuario.getAdministrador()) usuarioAdministradorRepository.save((UsuarioAdministrador) usuario);
+        else usuarioClienteRepository.save((UsuarioCliente) usuario);
     }
 
     public Map<String, Usuario> devuelveUsuarios() {

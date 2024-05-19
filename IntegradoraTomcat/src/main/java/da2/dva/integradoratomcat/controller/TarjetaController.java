@@ -30,10 +30,9 @@ public class TarjetaController {
         servicio.cargarIdiomas();
     }
 
-    ModelAndView mv = new ModelAndView("/add-tarjeta");
-
     @GetMapping("/add-tarjeta")
     public ModelAndView agregarTarjeta(@ModelAttribute("tarjeta") TarjetaCredito tarjeta, HttpSession sesion){
+        ModelAndView mv = new ModelAndView("/add-tarjeta");
         //Recuperamos las paginas visitadas y si es la primera vez iniciamos el contador
         if (sesion.getAttribute("paginas_visitadas") == null)
             sesion.setAttribute("paginas_visitadas", 0);
@@ -41,15 +40,15 @@ public class TarjetaController {
         int pags_visitadas = (int) sesion.getAttribute("paginas_visitadas");
         sesion.setAttribute("paginas_visitadas", pags_visitadas + 1);
         mv.addObject("visitas", pags_visitadas);
-        mv.addObject("listaTiposTarjeta",servicio.getTiposTarjeta());
+        mv.addObject("listaTiposTarjeta", servicio.getTiposTarjeta());
         mv.addObject("listaIdiomas", servicio.getIdiomas());
 
         return mv;
     }
     @PostMapping("/add-tarjeta")
-    public ModelAndView insertarTarjeta(@Valid @ModelAttribute("tarjeta") TarjetaCredito tarjeta, HttpSession sesion,
-                                        BindingResult result){
-        if(result.hasErrors()){
+    public ModelAndView insertarTarjeta(@Valid @ModelAttribute("tarjeta") TarjetaCredito tarjeta, HttpSession sesion, BindingResult resultado){
+        ModelAndView mv = new ModelAndView("/add-tarjeta");
+        if(resultado.hasErrors()){
             mv.addObject("error","Por favor, rellene los campos obligatorios");
             return mv;
         }
@@ -57,6 +56,4 @@ public class TarjetaController {
         mv.setViewName("redirect:http://apache.da2.dva/area-cliente.html");
         return mv;
     }
-
-
 }

@@ -6,6 +6,9 @@ const validityInput = document.getElementById("validity-input");
 const cardNumberDisplay = document.querySelectorAll(".card-number-display");
 const cvvInput = document.getElementById("cvv");
 const cvvDisplay = document.getElementById("cvv-display");
+const tipoTarjeta = document.getElementById("tipo_tarjeta");
+const logoTarjetaF = document.getElementById("logo-tarjeta-front");
+const logoTarjetaB = document.getElementById("logo-tarjeta-back");
 let currentSpanIndex = 0;
 cardNumber.addEventListener("input", () => {
     const inputNumber = cardNumber.value.replace(/\D/g, "");
@@ -23,13 +26,15 @@ cardNumber.addEventListener("input", () => {
         currentSpanIndex = cardNumberDisplay.length;
     }
 });
-cardNameInput.addEventListener("input", () => {
-    if (cardNameInput.value.length < 1) {
-        cardHolderName.innerText = "Your Name Here";
-    } else if (cardNameInput.value.length > 30) {
-        cardNameInput.value = cardNameInput.value.slice(0, 30);
-    } else {
-        cardHolderName.innerText = cardNameInput.value;
+logoTarjetaF.src = '/img/' + tipoTarjeta.selectedOptions[0].dataset.logo;
+logoTarjetaB.src = logoTarjetaF.src
+tipoTarjeta.addEventListener("change", () => {
+    logoTarjetaF.src = '/img/' + tipoTarjeta.selectedOptions[0].dataset.logo;
+    logoTarjetaB.src = logoTarjetaF.src
+})
+$.getJSON('http://tomcat.da2.dva:8080/api/sesion/cliente', function (data) {
+    if (data != null) {
+        cardHolderName.innerText = data.nombre + "  " + data.apellidos;
     }
 });
 validityInput.addEventListener("input", () => {

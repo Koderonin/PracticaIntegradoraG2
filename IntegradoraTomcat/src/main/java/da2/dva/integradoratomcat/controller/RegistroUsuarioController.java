@@ -52,7 +52,7 @@ public class RegistroUsuarioController {
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
             return mv;
-        }else{
+        } else{
             mv.setViewName("redirect:/login/paso1");
 
             servicioUsuario.insertarUsuario(usuario);

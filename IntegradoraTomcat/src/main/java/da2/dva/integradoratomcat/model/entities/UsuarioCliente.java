@@ -4,11 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
-@Data
-//@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "usuario_cliente", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email", name = "usuario_cliente_email_uk")
@@ -16,17 +11,11 @@ import java.util.UUID;
 @AttributeOverrides({
         @AttributeOverride(name = "id_usuario", column = @Column(name = "id_user_cliente"))
 })
+@Data @NoArgsConstructor
 public class UsuarioCliente extends Usuario {
 
-    public UsuarioCliente(UUID id_usuario, String email, String clave, String confirmClave, Long preguntaRecuperacion, String respuestaRecuperacion) {
-        super(id_usuario, email, clave, confirmClave, preguntaRecuperacion, respuestaRecuperacion);
+    public UsuarioCliente(String email, String clave, Long preguntaRecuperacion, String respuestaRecuperacion) {
+        super(email, clave, preguntaRecuperacion, respuestaRecuperacion, false);
     }
 
-    public UsuarioCliente(String email, String clave, Long preguntaRecuperacion, String respuestaRecuperacion) {
-        super(email, clave, preguntaRecuperacion, respuestaRecuperacion);
-    }
-/*
-    @OneToOne(mappedBy = "usuarioCliente", cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Cliente cliente;
-*/
 }

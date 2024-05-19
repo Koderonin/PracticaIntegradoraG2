@@ -1,23 +1,17 @@
 package da2.dva.integradoratomcat.model.auxiliar;
 
-import da2.dva.integradoratomcat.model.collections.Genero;
 import da2.dva.integradoratomcat.model.collections.TipoVia;
-import da2.dva.integradoratomcat.utils.CheckColeccion;
-import da2.dva.integradoratomcat.utils.CheckColeccionLong;
 import da2.dva.integradoratomcat.utils.DatosContacto;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Entity
+@Data @NoArgsConstructor @AllArgsConstructor
 public class Direccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

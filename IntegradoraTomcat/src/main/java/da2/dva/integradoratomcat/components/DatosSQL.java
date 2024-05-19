@@ -3,6 +3,7 @@ package da2.dva.integradoratomcat.components;
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.collections.*;
 import da2.dva.integradoratomcat.model.entities.Cliente;
+import da2.dva.integradoratomcat.model.entities.UsuarioAdministrador;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.*;
 import da2.dva.integradoratomcat.services.ServicioCliente;
@@ -34,6 +35,8 @@ public class DatosSQL {
     private ClienteRepository clienteRepository;
     @Autowired
     private UsuarioClienteRepository UCRepository;
+    @Autowired
+    private UsuarioAdministradorRepository UARepository;
     @Autowired
     private DireccionRepository direccionRepository;
     @Autowired
@@ -73,10 +76,10 @@ public class DatosSQL {
     @Bean
     public void insertatTiposTarjeta() {
         try {
-            tipoTarjetaRepository.save(new TipoTarjeta(1L, "Visa"));
-            tipoTarjetaRepository.save(new TipoTarjeta(2L, "MasterCard"));
-            tipoTarjetaRepository.save(new TipoTarjeta(3L, "American Express"));
-            tipoTarjetaRepository.save(new TipoTarjeta(4L, "Diners Club"));
+            tipoTarjetaRepository.save(new TipoTarjeta(1L, "Visa", "visa.png"));
+            tipoTarjetaRepository.save(new TipoTarjeta(2L, "MasterCard", "mastercard.png"));
+            tipoTarjetaRepository.save(new TipoTarjeta(3L, "American Express", "amex.png"));
+            tipoTarjetaRepository.save(new TipoTarjeta(4L, "Diners Club", "diners.png"));
         } catch (Exception e) {
             System.err.println("Omitida carga de datos de Tipos de Tarjetas: Datos repetidos");
         }
@@ -146,9 +149,10 @@ public class DatosSQL {
     @Bean
     public void insertarUsuarios() {
         try {
-            UCRepository.save(new UsuarioCliente("admin@integradora.jpa", "Clientillo1!", 1L, "Croquetas"));
-            UCRepository.save(new UsuarioCliente("cliente@integradora.jpa", "Clientillo2!", 2L, "Ahí va"));
-            UCRepository.save(new UsuarioCliente("cliente2@integradora.jpa", "Clientillo3!", 3L, "Paco"));
+            UARepository.save(new UsuarioAdministrador("admin@integradora.jpa", "Administra1!", 1L, "Croquetas"));
+            UCRepository.save(new UsuarioCliente("cliente@integradora.jpa", "Clientillo1!", 2L, "Ahí va"));
+            UCRepository.save(new UsuarioCliente("cliente2@integradora.jpa", "Clientillo2!", 3L, "Paco"));
+            UCRepository.save(new UsuarioCliente("cliente3@integradora.jpa", "Clientillo3!", 4L, "Juan"));
         } catch (Exception e) {
             System.err.println("Omitida carga de datos de Usuarios: Datos repetidos");
         }
@@ -164,42 +168,36 @@ public class DatosSQL {
             Direccion d3 = new Direccion(3L, servicioColecciones.getTipoViaById(2L), "De la Virgen", 3, 2, "C", "1", "Madrid", "28024", "Madrid", "España");
             direccionRepository.save(d3);
 
-            UsuarioCliente uc = UCRepository.findByEmail("admin@integradora.jpa");
+            UsuarioCliente u1 = UCRepository.findByEmail("cliente@integradora.jpa");
+            UsuarioCliente u2 = UCRepository.findByEmail("cliente2@integradora.jpa");
 
-            Cliente cliente = new Cliente();
-            cliente.setUsuarioCliente(uc);
-            cliente.setNombre("Pepe");
-            cliente.setApellidos("García Mongólez");
-            cliente.setGenero(generoRepository.findBySiglas("m"));
-            cliente.setPaisNacimiento(paisRepository.findBySiglasPais("es"));
-            cliente.setFechaNacimiento(LocalDate.of(1988, 1, 14));
-            cliente.setTipoDocumento(tipoDocumentoRepository.findBySiglas("S"));
-            cliente.setDocumento("22/12345678/39");
-            cliente.setTelefonoMovil("687456842");
-            cliente.setDireccion(d1);
-           // cliente.setId_cliente(uc.getId_usuario());
-            clienteRepository.save(cliente);
+            Pais es = paisRepository.findBySiglasPais("es");
+            TipoDocumento dni = tipoDocumentoRepository.findBySiglas("D");
+            TipoDocumento seg = tipoDocumentoRepository.findBySiglas("S");
+            Genero masc = generoRepository.findBySiglas("m");
+            Genero nbin = generoRepository.findBySiglas("n");
 
-//            clienteRepository.save(
-//                    new Cliente(
-//                            UCRepository.findByEmail("admin@integradora.jpa"), "Pepe", "García Mongólez",
-//                            new Genero("m", "Masculino"), paisRepository.findBySiglasPais("es"), LocalDate.of(1988, 1, 14),
-//                            new TipoDocumento("S", "Nº Seguridad Social"), "22/12345678/39",
-//                            "687456842", d1
-//                    )
-//            );
 
             clienteRepository.save(
                     new Cliente(
-                            UCRepository.findByEmail("cliente@integradora.jpa"), "Pepo", "Compo Cosas",
-                            new Genero("m", "Masculino"), paisRepository.findBySiglasPais("es"), LocalDate.of(1988, 1, 14),
-                            new TipoDocumento("D", "DNI"), "00000000T",
+                            u1, "Pepe", "García Mongólez",
+                            masc, es, LocalDate.of(1988, 1, 14),
+                            dni, "00000000T",
+                            "687456842", d1
+                    )
+            );
+
+            clienteRepository.save(
+                    new Cliente(
+                            u2, "Pepo", "Compo Cosas",
+                            nbin, es, LocalDate.of(1988, 1, 14),
+                            seg, "22/12345678/39",
                             "687456842", d2
                     )
             );
         } catch (Exception e) {
             e.printStackTrace();
-        System.err.println("Omitida carga de datos de Direcciones Y Clientes: Datos repetidos");
+            System.err.println("Omitida carga de datos de Direcciones Y Clientes: Datos repetidos");
         }
     }
 }
