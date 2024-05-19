@@ -4,8 +4,11 @@ import da2.dva.integradoratomcat.model.collections.TipoVia;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface TipoViaRepository extends JpaRepository<TipoVia, Long> {
 
-    public TipoVia findByTipoVia(String tipoVia);
+
+    Optional<TipoVia> findById(Long id);
 }
