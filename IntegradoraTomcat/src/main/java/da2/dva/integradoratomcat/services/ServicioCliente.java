@@ -7,7 +7,6 @@ import da2.dva.integradoratomcat.repositories.jpa.ClienteRepository;
 import da2.dva.integradoratomcat.repositories.jpa.DireccionRepository;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioClienteRepository;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -17,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ServicioCliente {
@@ -43,6 +40,10 @@ public class ServicioCliente {
 
     public Cliente getClienteByUsuario(UsuarioCliente usuario){
         return clienteRepository.findByUsuarioCliente(usuario);
+    }
+
+    public Cliente getClienteById(String id){
+        return clienteRepository.findById(UUID.fromString(id)).get();
     }
 
     public Cliente getClienteByNameAndSurname(String nombre, String apellidos){

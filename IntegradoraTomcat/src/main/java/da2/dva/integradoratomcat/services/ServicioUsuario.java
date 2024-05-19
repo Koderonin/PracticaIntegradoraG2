@@ -1,5 +1,7 @@
 package da2.dva.integradoratomcat.services;
 
+import da2.dva.integradoratomcat.model.entities.Cliente;
+import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioAdministradorRepository;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioClienteRepository;
@@ -30,31 +32,35 @@ public class ServicioUsuario {
     @Autowired
     private UsuarioClienteRepository usuarioClienteRepository;
 
-        @Autowired
-        private UsuarioAdministradorRepository usuarioAdministradorRepository;
+    @Autowired
+    private UsuarioAdministradorRepository usuarioAdministradorRepository;
 
-     public void insertarUsuario(UsuarioCliente usuario){
-         usuarioClienteRepository.save(usuario);
-     }
+    public Usuario getUsuario(String id) {
+        return usuarioClienteRepository.findById(UUID.fromString(id)).get();
+    }
 
-     public void borrarUsuario(UsuarioCliente usuario){
-         usuarioClienteRepository.delete(usuario);
-     }
+    public void insertarUsuario(UsuarioCliente usuario){
+     usuarioClienteRepository.save(usuario);
+    }
 
-     public List<UsuarioCliente> listarUsuarios(){
-         return usuarioClienteRepository.findAll();
-     }
+    public void borrarUsuario(UsuarioCliente usuario){
+     usuarioClienteRepository.delete(usuario);
+    }
 
-     // éste es igual que el de insertar, es una cuestión de claridad
-     public void actualizarUsuario(UsuarioCliente usuario){
-         usuarioClienteRepository.save(usuario);
-     }
+    public List<UsuarioCliente> listarUsuarios(){
+     return usuarioClienteRepository.findAll();
+    }
 
-     public void borrarTodosUsuarios(){
-         usuarioClienteRepository.deleteAll();
-     }
+    // éste es igual que el de insertar, es una cuestión de claridad
+    public void actualizarUsuario(UsuarioCliente usuario){
+     usuarioClienteRepository.save(usuario);
+    }
 
-     public void actualizarNumAccesos(UsuarioCliente usuario){
+    public void borrarTodosUsuarios(){
+     usuarioClienteRepository.deleteAll();
+    }
+
+    public void actualizarNumAccesos(UsuarioCliente usuario){
          try {
              usuario.setNumAccesos(usuario.getNumAccesos() + 1);
          } catch (NullPointerException e) {
@@ -63,13 +69,13 @@ public class ServicioUsuario {
          // ODO: mirar si en algún momento se puede quitar la remilmierda ésta.
          usuario.setConfirmClave(usuario.getClave());
          usuarioClienteRepository.save(usuario);
-     }
+    }
 
-     public void actualizarFechaBloqueo(UsuarioCliente usuario, LocalDate fecha) {
-         usuario.setFechaBloqueo(fecha);
-         usuario.setConfirmClave(usuario.getClave());
-         usuarioClienteRepository.save(usuario);
-     }
+    public void actualizarFechaBloqueo(UsuarioCliente usuario, LocalDate fecha) {
+        usuario.setFechaBloqueo(fecha);
+        usuario.setConfirmClave(usuario.getClave());
+        usuarioClienteRepository.save(usuario);
+    }
 
     public Map<String, UsuarioCliente> devuelveUsuarios() {
         Map<String, UsuarioCliente> usuarios = new HashMap<>();

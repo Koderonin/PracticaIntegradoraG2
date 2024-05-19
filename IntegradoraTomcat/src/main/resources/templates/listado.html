@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Departamentos</title>
-    <link rel="stylesheet" href="/css/listadoDepartamentos.css">
+    <title>Admin area - FootShop</title>
+    <link rel="stylesheet" href="/css/listado_entidades.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <script src="/js/listado_ajax.js" defer></script>
 </head>
 <body>
@@ -18,10 +19,16 @@
 <h1 th:text="${entity_name}"> </h1>
 <main id="main">
 <!--    Aquí, meter botón de agregar nuevo registro a la entidad seleccionada cada vez que se liste algo -->
+
 <!--    Aquí, una barra de busqueda para filtrar por campo onkeyup -->
 <!--    Aquí, la tabla listado de la entidad seleccionada-->
 
 </main>
-
+<div id="ventana_detalle">
+    <div>
+        <span id="cerrar_detalle">&times;</span>
+        <div id="detalle_entidad"></div>
+    </div>
+</div>
 </body>
 </html>

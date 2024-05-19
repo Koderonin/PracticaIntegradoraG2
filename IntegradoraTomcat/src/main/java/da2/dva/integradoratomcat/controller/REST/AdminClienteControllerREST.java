@@ -8,10 +8,7 @@ import da2.dva.integradoratomcat.services.ServicioUsuario;
 import jakarta.servlet.http.HttpSession;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,23 +23,25 @@ public class AdminClienteControllerREST {
     @Autowired
     private ServicioCliente servicioCliente;
 
-    @Autowired
-    private ServicioUsuario servicioUsuario;
-
     // Read
-    @GetMapping("listado")
+    @GetMapping("listado_ampliado")
     public Object listadoClientes() {
         return servicioCliente.listarClientes();
     }
 
-    @GetMapping("listado_cribado")
+    @GetMapping({"/{id}"})
+    public Cliente getCliente(@PathVariable("id") String id) {
+        return servicioCliente.getClienteById(id);
+    }
+
+    @GetMapping("listado")
     public Object listadoClientesFiltrado() {
         List<Cliente> listado = servicioCliente.listarClientes();
         List<Object> listadoReducido = new ArrayList<>();
     // gestiono qué campos quiero quedarme
         for (int i = 0; i < listado.size(); i++) {
             listadoReducido.add(
-                toDocument(listado.get(i))
+                reducirListado(listado.get(i))
             );
         }
         return listadoReducido;
@@ -72,7 +71,7 @@ public class AdminClienteControllerREST {
     }
 
     // métodos auxiliares
-    private Document toDocument(Cliente cliente) {
+    private Document reducirListado(Cliente cliente) {
         return new Document("id_cliente", cliente.getId_cliente())
                 .append("email", cliente.getUsuarioCliente().getEmail())
                 .append("nombre", cliente.getNombre())

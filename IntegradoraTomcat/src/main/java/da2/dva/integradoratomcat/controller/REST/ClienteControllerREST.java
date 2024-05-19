@@ -13,11 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost", "http://apache.da2.dva", "http://tomcat.da2.dva", "http://localhost:8080"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost", "http://apache.da2.dva", "http://tomcat.da2.dva", "http://localhost:8080", ""}, allowCredentials = "true")
 @RequestMapping("/api/cliente")
 public class ClienteControllerREST {
-    @Autowired
-    ClienteRepository clienteRepository;
 
     @Autowired
     private ServicioCliente servicioCliente;

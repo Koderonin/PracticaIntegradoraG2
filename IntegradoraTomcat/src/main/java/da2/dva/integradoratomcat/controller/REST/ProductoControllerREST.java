@@ -28,43 +28,8 @@ public class ProductoControllerREST {
     @Autowired
     private ServicioImagenes servicioImagenes;
 
-    // Create
-    /**
-     * Este método es el endpoint para crear un nuevo producto.
-     * Sería interesante estudiar la posibilidad de retornar una respuesta al cliente con el resultado de la operación
-     * (puede haber errores al persistir, por ejemplo).
-     * */
-    @PostMapping(consumes = "multipart/form-data")
-    public void createProducto(@RequestPart("formularioProducto") Document formularioProducto,
-                               @RequestPart(value = "imagenes", required = false) MultipartFile[] imagenes) {
-        // si hay imagenes, las procesamos: guardamos en base de datos y una referencia en producto
-        if (imagenes != null) {
-            String[] imagenesArray = new String[imagenes.length];
-            int i = 0;
-            for (MultipartFile imagen : imagenes) {
-                if (imagen != null && !imagen.isEmpty()) {
-                    // guardar imagen en una carpeta local
-                    Path path = Paths.get("/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/static/img", imagen.getOriginalFilename());
-                    try {
-                        Files.write(path, imagen.getBytes());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    // pasar la referencia de la imagen al documento que va a mongo TODO: SE JODEN LAS COSAS SI HAY ESPACIOS, HAY QUE PROCESAR EL NOMBRE
-                    String pathString = "http://localhost:8080/img/" + imagen.getOriginalFilename();
-                    imagenesArray[i++] = pathString;
-                }
-            }
-            formularioProducto.append("imagenes", imagenesArray);
-        }
-        try {
-            servicioProducto.addNuevoProducto(formularioProducto);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    // SÓLO MÉTODOS READ, ESTO ES PARTE DE LA -API DE CLIENTE-
 
-    // Read
     @GetMapping("listado")
     public List<Document> listadoProyectos() {
         return servicioProducto.findAllDocuments();
