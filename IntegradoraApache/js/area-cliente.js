@@ -32,11 +32,11 @@ async function datosCliente() {
 datosCliente();
 
 function nuevaTarjeta() {
-	location.href="http://tomcat.da2.dva:8080/cliente/tarjeta/add-tarjeta";
+	location.href="http://tomcat.da2.dva:8080/cliente/nueva-tarjeta";
 }
 
 function nuevaDireccion() {
-	location.href="http://tomcat.da2.dva:8080/cliente/direccion/add-direccion";
+	location.href="http://tomcat.da2.dva:8080/cliente/nueva-direccion";
 }
 
 

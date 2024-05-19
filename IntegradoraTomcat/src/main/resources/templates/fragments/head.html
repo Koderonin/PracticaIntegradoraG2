@@ -1,12 +1,14 @@
-<head th:fragment="cabeza(titulo)"> <!-- TODO: Implementar CSS y JS -->
+<head th:fragment="cabeza(titulo)">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="${titulo}"/>
+    <title th:text="'FootShop - ' + ${titulo}"/>
     <!-- CSS -->
-    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}"/>
     <link type="text/css" rel="stylesheet" th:href="@{/css/tarjeta.css}" th:if="${titulo} == 'Tarjeta de Crédito'"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/direccion.css}" th:if="${titulo} == 'Dirección de Entrega'"/>
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
- <!--   <script type="text/javascript" th:src="@{/js/script.js}"></script> -->
+    <script type="text/javascript" th:src="@{/js/script.js}" defer></script>
+    <script type="text/javascript" th:src="@{/js/menu.js}" defer></script>
+    <script type="text/javascript" th:src="@{/js/listado_ajax.js}" defer th:if="${titulo} == 'Área Admin'"></script>
 </head>

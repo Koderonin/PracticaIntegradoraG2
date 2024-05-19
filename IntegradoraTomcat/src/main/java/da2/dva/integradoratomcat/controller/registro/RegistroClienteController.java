@@ -1,4 +1,4 @@
-package da2.dva.integradoratomcat.controller;
+package da2.dva.integradoratomcat.controller.registro;
 
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.entities.Cliente;
@@ -271,7 +271,7 @@ public class RegistroClienteController {
             UsuarioCliente usuario = (UsuarioCliente)sesion.getAttribute("usuario");
         //    cliente.setUsuarioCliente(usuario);
             servicioCliente.insertarNuevoCliente(cliente);
-            mv.setViewName("redirect:/area-cliente");
+            mv.setViewName("redirect:/cliente/area-cliente");
             sesion.removeAttribute("usuario"); // ¿¿por qué??
 
             // no soy fan, pero la comprobación para quedarse en el area del cliente la hace con el usuario, así que si

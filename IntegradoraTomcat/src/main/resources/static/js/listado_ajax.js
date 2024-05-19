@@ -1,6 +1,3 @@
-//Al cargar la página, se cargan los departamentos en la tabla haciendo una petición GET a la API
-
-
 const main = document.getElementById("main");
 const buscador = document.getElementById("buscador-entidad");
 

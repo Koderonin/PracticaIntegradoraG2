@@ -2,21 +2,28 @@
 
 const ENLACE_LOGIN = $('#enlace_login');
 const ENLACE_REGISTRO = $('#enlace_registro');
+const ENLACE_PRODUCTOS = $('#enlace_productos');
 const PAGINAS_VISITADAS =  $('#pags_visitadas');
 
 $.ajaxSetup({xhrFields: { withCredentials: true } });	//Credenciales para solicitar la sesión
-$.getJSON('http://tomcat.da2.dva:8080/api/sesion/cliente', function(response) {
-	if(response == null) {
-		ENLACE_LOGIN.text("Login");
-		ENLACE_REGISTRO.text("Registrarse");
-	}
-	else {
-		ENLACE_LOGIN.text("Área de Cliente");
-		ENLACE_REGISTRO.text("Logout"); ENLACE_REGISTRO.attr('href', 'http://tomcat.da2.dva:8080/logout/invalidate');
-	}
+$.getJSON('http://tomcat.da2.dva:8080/api/sesion/usuarioEsAdmin', function(response) {
+    if(response == null) {
+        ENLACE_LOGIN.text("Login");
+        ENLACE_REGISTRO.text("Registrarse");
+    }
+    else {
+        if (response) {
+            ENLACE_LOGIN.text("Área de Administrador");
+            ENLACE_LOGIN.attr('href', 'http://tomcat.da2.dva:8080/admin/area-admin');
+			ENLACE_PRODUCTOS.attr('href', 'http://tomcat.da2.dva:8080/admin/api/producto/listado');
+        } else {
+            ENLACE_LOGIN.text("Área de Cliente");
+        }
+        ENLACE_REGISTRO.text("Logout"); ENLACE_REGISTRO.attr('href', 'http://tomcat.da2.dva:8080/logout/invalidate');
+    }
 });
 $.getJSON('http://tomcat.da2.dva:8080/api/sesion/paginas-visitadas', function(response) {
-	if(response != null) {
+	if(response != null && response > 0) {
 		PAGINAS_VISITADAS.text("Páginas visitadas: " + response);
 	}
 });
@@ -33,7 +40,7 @@ if(containerProductos != null){
 function crearItemProducto(producto) {
 	let div = document.createElement('div'); div.classList.add('item');
 	let figure = document.createElement('figure');
-	let img = document.createElement('img'); img.alt = 'Imagen' + producto.modelo; img.src = devolverImagen(producto); //TODO: Obtener imagen
+	let img = document.createElement('img'); img.alt = 'Imagen' + producto.modelo; img.src = devolverImagen(producto);
 	let div2 = document.createElement('div'); div2.classList.add('info-product');
 	let div3 = document.createElement('div');
 	let h2 = document.createElement('h2'); h2.textContent = producto.modelo;
