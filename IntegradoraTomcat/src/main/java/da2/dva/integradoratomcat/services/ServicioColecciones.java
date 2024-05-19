@@ -141,4 +141,29 @@ public class ServicioColecciones implements Servicio {
     public void insertarTipoVia(Long id, String tipoVia) {
         tipoViaRepository.save(new TipoVia(id, tipoVia));
     }
+
+    public Genero getGeneroBySiglas(String siglas) {
+        return generoRepository.findBySiglas(siglas);
+    }
+
+    public TipoDocumento getTipoDocumentoBySiglas(String siglas) {
+        return tipoDocumentoRepository.findBySiglas(siglas);
+    }
+
+    public TipoVia getTipoViaById(Long id) {
+        return tipoViaRepository.findById(id).get();
+    }
+
+    public Pregunta getPreguntaById(Long id) {
+        return preguntaRepository.findById(id).get();
+    }
+
+    public Pais getPaisBySiglas(String siglas) {
+        return paisRepository.findBySiglasPais(siglas);
+    }
+
+
+
+
+
 }

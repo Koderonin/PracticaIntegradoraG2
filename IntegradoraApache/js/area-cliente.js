@@ -5,7 +5,7 @@ const DIV_DIRECCION_INFO = $('.direccion-info2')[0];
 async function datosCliente() {
 	$.ajaxSetup({xhrFields: { withCredentials: true } });
 
-	$.getJSON('http://tomcat.da2.dva:8080/api/cliente/infoSesion', function(response) {
+	$.getJSON('http://tomcat.da2.dva:8080/api/sesion/cliente', function(response) {
 		USER_EMAIL.text(response.usuarioCliente.email);
 
 		DIV_PERSONAL_INFO.appendChild(document.createElement('p')).innerText = response.nombre;
@@ -30,6 +30,14 @@ async function datosCliente() {
 }
 
 datosCliente();
+
+function nuevaTarjeta() {
+	location.href="http://tomcat.da2.dva:8080/cliente/tarjeta/add-tarjeta";
+}
+
+function nuevaDireccion() {
+	location.href="http://tomcat.da2.dva:8080/cliente/direccion/add-direccion";
+}
 
 
 /*

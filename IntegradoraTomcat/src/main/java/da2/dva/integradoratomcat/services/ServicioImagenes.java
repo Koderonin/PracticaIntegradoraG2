@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Service
 public class ServicioImagenes {
-    // Save image in a local directory
+
     public String guardarImagen(String uploadDirectory, MultipartFile imageFile) throws IOException, IOException {
         String uniqueFileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
 
@@ -27,7 +27,6 @@ public class ServicioImagenes {
         return uniqueFileName;
     }
 
-    // To view an image
     public byte[] getImage(String imageDirectory, String imageName) throws IOException {
         Path imagePath = Path.of(imageDirectory, imageName);
 

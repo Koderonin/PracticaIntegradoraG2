@@ -6,6 +6,7 @@ import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.*;
 import da2.dva.integradoratomcat.services.ServicioCliente;
+import da2.dva.integradoratomcat.services.ServicioColecciones;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -40,6 +41,9 @@ public class DatosSQL {
 
     @Autowired
     private ServicioCliente servicioCliente;
+
+    @Autowired
+    private ServicioColecciones servicioColecciones;
 
     @Bean
     public void insertarPaises() {
@@ -153,11 +157,11 @@ public class DatosSQL {
     @Bean
     public void insertarDireccionesYClientes() {
         try {
-            Direccion d1 = new Direccion(1L, tipoViaRepository.findByTipoVia("Calle"), "Escalona", 1, 4, "A", null, "Madrid", "28024", "Madrid", "España");
+            Direccion d1 = new Direccion(1L, servicioColecciones.getTipoViaById(1L), "Escalona", 1, 4, "A", null, "Madrid", "28024", "Madrid", "España");
             direccionRepository.save(d1);
-            Direccion d2 = new Direccion(2L, tipoViaRepository.findByTipoVia("Calle"), "De la Mañana", 2, 3, "B", "4", "Madrid", "28024", "Madrid", "España");
+            Direccion d2 = new Direccion(2L, servicioColecciones.getTipoViaById(1L), "De la Mañana", 2, 3, "B", "4", "Madrid", "28024", "Madrid", "España");
             direccionRepository.save(d2);
-            Direccion d3 = new Direccion(3L, tipoViaRepository.findByTipoVia("Calle"), "De la Virgen", 3, 2, "C", "1", "Madrid", "28024", "Madrid", "España");
+            Direccion d3 = new Direccion(3L, servicioColecciones.getTipoViaById(2L), "De la Virgen", 3, 2, "C", "1", "Madrid", "28024", "Madrid", "España");
             direccionRepository.save(d3);
 
             UsuarioCliente uc = UCRepository.findByEmail("admin@integradora.jpa");
