@@ -44,13 +44,18 @@ public class RegistroUsuarioController {
     @PostMapping("/")
     public ModelAndView registroUsuario(@Valid @ModelAttribute("usuario") UsuarioCliente usuario, BindingResult resultado) {
         ModelAndView mv = new ModelAndView("registro/usuario");
+        mv.addObject("titulo","Registro de usuario");
+        mv.addObject("tipoUsuario","empleado");
+        mv.addObject("listaPreguntas",servicio.getPreguntas());
         mv.addObject("listaIdiomas", servicio.getIdiomas());
         if (servicioUsuario.devuelveUsuarios().containsKey(usuario.getEmail())) {
             mv.addObject("error", "El usuario ya existe");
+            mv.addObject("listaPreguntas",servicio.getPreguntas());
             return mv;
         }
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
+            mv.addObject("listaPreguntas",servicio.getPreguntas());
             return mv;
         } else{
             mv.setViewName("redirect:/login/paso1");
