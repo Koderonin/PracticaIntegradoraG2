@@ -1,4 +1,17 @@
-.form-tarjeta{  margin:50px;
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+*{
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+.form-tarjeta{
+    margin: 150px 50px 50px;
     background-color: white;
     border-radius: 10px;
     padding: 80px;
@@ -38,7 +51,11 @@
         display: flex;
         justify-content: center;
     }
-
+.date-cvv{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
 
 
 

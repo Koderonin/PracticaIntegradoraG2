@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="cabeza(titulo)"> <!-- TODO: Implementar CSS y JS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo}"/>
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/direccion.css}"/>
+
+    <!-- JS -->
+    <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <!--   <script type="text/javascript" th:src="@{/js/script.js}"></script> -->
+</head><body>
+<nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
+<div class="container">
+    <div class="form-direccion">
+        <form id="form" action="/cliente/direccion/add-direccion" method="post" th:object="${direccion}">
+            <!-- Tipo de Vía -->
+            <label for="tipo_via" th:text="#{etiqueta.tipoVia}">Tipo de Vía</label>
+            <select id="tipo_via" th:field="*{tipoVia}">
+                <option th:each="tipo: ${listaTiposVia}" th:value="${tipo.key}" th:text="${tipo.value}"></option>
+            </select>
+            <div class="error" th:if="${#fields.hasErrors('tipoVia')}" th:errors="*{tipoVia}"></div>
+
+            <!-- Nombre de Vía -->
+            <label for="nombre_via" th:text="#{etiqueta.nombreVia}">Nombre de Vía</label>
+            <input type="text" id="nombre_via" th:field="*{nombre_via}" placeholder="Nombre de la Vía"/>
+            <div class="error" th:if="${#fields.hasErrors('nombre_via')}" th:errors="*{nombre_via}"></div>
+
+            <!-- Número de Vía -->
+            <label for="numero_via" th:text="#{etiqueta.numeroVia}">Número de Vía</label>
+            <input type="text" id="numero_via" th:field="*{numero_via}" placeholder="Número de la Vía"/>
+            <div class="error" th:if="${#fields.hasErrors('numero_via')}" th:errors="*{numero_via}"></div>
+
+            <!-- Planta -->
+            <label for="planta" th:text="#{etiqueta.planta}">Planta</label>
+            <input type="text" id="planta" th:field="*{planta}" placeholder="Planta"/>
+            <div class="error" th:if="${#fields.hasErrors('planta')}" th:errors="*{planta}"></div>
+
+            <!-- Puerta -->
+            <label for="puerta" th:text="#{etiqueta.puerta}">Puerta</label>
+            <input type="text" id="puerta" th:field="*{puerta}" placeholder="Puerta"/>
+            <div class="error" th:if="${#fields.hasErrors('puerta')}" th:errors="*{puerta}"></div>
+
+            <!-- Portal -->
+            <label for="portal" th:text="#{etiqueta.portal}">Portal</label>
+            <input type="text" id="portal" th:field="*{portal}" placeholder="Portal"/>
+            <div class="error" th:if="${#fields.hasErrors('portal')}" th:errors="*{portal}"></div>
+
+            <!-- Localidad -->
+            <label for="localidad" th:text="#{etiqueta.localidad}">Localidad</label>
+            <input type="text" id="localidad" th:field="*{localidad}" placeholder="Localidad"/>
+            <div class="error" th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}"></div>
+
+            <!-- Código Postal -->
+            <label for="cp" th:text="#{etiqueta.cp}">Código Postal</label>
+            <input type="text" id="cp" th:field="*{cp}" placeholder="Código Postal"/>
+            <div class="error" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}"></div>
+
+            <!-- Región -->
+            <label for="region" th:text="#{etiqueta.region}">Región</label>
+            <input type="text" id="region" th:field="*{region}" placeholder="Región"/>
+            <div class="error" th:if="${#fields.hasErrors('region')}" th:errors="*{region}"></div>
+
+            <!-- País -->
+            <label for="pais" th:text="#{etiqueta.pais}">País</label>
+            <input type="text" id="pais" th:field="*{pais}" placeholder="País"/>
+            <div class="error" th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+
+            <div>
+                <button type="submit" class="btn-add-card" th:text="#{etiqueta.submit}">Agregar Dirección</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/footer :: pie_pagina}"/>
+<script type="text/javascript" th:src="@{/js/tarjeta.js}"></script>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+<script type="text/javascript" th:src="@{/js/menu.js}"></script>
+</body>
+</html>

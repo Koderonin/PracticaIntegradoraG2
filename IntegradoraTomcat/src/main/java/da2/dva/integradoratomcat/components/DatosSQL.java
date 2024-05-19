@@ -35,6 +35,8 @@ public class DatosSQL {
     private UsuarioClienteRepository UCRepository;
     @Autowired
     private DireccionRepository direccionRepository;
+    @Autowired
+    private TipoTarjetaRepository tipoTarjetaRepository;
 
     @Autowired
     private ServicioCliente servicioCliente;
@@ -61,6 +63,18 @@ public class DatosSQL {
             preguntaRepository.save(new Pregunta(4L, "¿Cuál es tu opinión sobre la insoportable levedad del ser?"));
         } catch (Exception e) {
             System.err.println("Omitida carga de datos de Preguntas: Datos repetidos");
+        }
+
+    }
+    @Bean
+    public void insertatTiposTarjeta() {
+        try {
+            tipoTarjetaRepository.save(new TipoTarjeta(1L, "Visa"));
+            tipoTarjetaRepository.save(new TipoTarjeta(2L, "MasterCard"));
+            tipoTarjetaRepository.save(new TipoTarjeta(3L, "American Express"));
+            tipoTarjetaRepository.save(new TipoTarjeta(4L, "Diners Club"));
+        } catch (Exception e) {
+            System.err.println("Omitida carga de datos de Tipos de Tarjetas: Datos repetidos");
         }
 
     }

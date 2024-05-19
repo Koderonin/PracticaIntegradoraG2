@@ -73,8 +73,11 @@
             <label for="card-number" th:text="#{etiqueta.numeroTarjeta}">Número Tarjeta</label>
             <input type="text" id="card-number" placeholder="1234123412341234" th:field="*{numeroTarjeta}"/>
             <div class="error" th:if="${#fields.hasErrors('numeroTarjeta')}" th:errors="*{numeroTarjeta}"></div>
-            <label for="card-holder">Card Holder:</label>
-            <input type="text" id="card-name-input" placeholder="Your Name" />
+            <label for="tipo_tarjeta" th:text="#{etiqueta.tipoTarjeta}"></label>
+            <select id="tipo_tarjeta" th:field="*{tipoTarjetaCredito}">
+                <option th:each="tipo: ${listaTiposTarjeta}" th:text="${tipo.value}" th:value="${tipo.key}"/>
+            </select>
+
             <div class="date-cvv">
                 <div>
                     <label for="fechaVencimiento" th:text="#{etiqueta.fechaVencimiento}">Expires On:</label>
