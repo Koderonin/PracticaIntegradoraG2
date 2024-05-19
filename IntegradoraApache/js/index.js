@@ -252,7 +252,6 @@ function openNav(x) {
 	document.getElementById("mySidenav").classList.toggle("show");
 	x.classList.toggle("change");
   }
-//--------------------------------- OFERTAS ---------------------------------
 
 
             

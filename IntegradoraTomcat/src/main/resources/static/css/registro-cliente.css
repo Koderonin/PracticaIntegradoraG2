@@ -1,0 +1,77 @@
+/*REGISTRO-CLIENTE*/
+
+.form-container.registro-cliente{
+    padding: 20px;
+}
+
+fieldset{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.resumen-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+}
+.resumen{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    font-size: small;
+    padding: 10px;
+}
+#div_direccion_entrega{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.inputs-genero{
+    margin-left: 50px;
+}
+.inputs-tipo-documento{
+    margin-left: 50px;
+}
+#div_usuario{
+    display: flex;
+    flex-direction: column;
+}
+#div_documento_id{
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media (min-width: 51em) {
+    /*REGISTRO-CLIENTE*/
+    .barra_pasos {
+        padding: 10px;
+        font-size: large;
+
+    }
+
+    .barra_pasos ul {
+        gap:20px;
+    }
+    .form-container.registro-cliente{
+        padding: 80px;
+    }
+    .resumen-container{
+        display: flex;
+        flex-direction: row;
+        min-width: 600px;
+        gap: 20px;
+    }
+    .resumen{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        font-size: small;
+        padding: 10px;
+    }
+
+}
