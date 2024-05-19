@@ -53,7 +53,8 @@ public class ServicioUsuario {
 
     // éste es igual que el de insertar, es una cuestión de claridad
     public void actualizarUsuario(UsuarioCliente usuario){
-     usuarioClienteRepository.save(usuario);
+        System.out.println(usuario.toString());
+        usuarioClienteRepository.save(usuario);
     }
 
     public void borrarTodosUsuarios(){

@@ -8,6 +8,7 @@ import da2.dva.integradoratomcat.services.ServicioUsuario;
 import jakarta.servlet.http.HttpSession;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = {"http://localhost", "http://apache.da2.dva", "http://tomcat.da2.dva", "http://localhost:8080", "http://localhost:8081"}
         , allowCredentials = "true")
+@Service
 @RequestMapping("admin/api/cliente")
 public class AdminClienteControllerREST {
 
@@ -45,6 +47,13 @@ public class AdminClienteControllerREST {
             );
         }
         return listadoReducido;
+    }
+
+    // UPDATE
+
+    @PostMapping(value = "/update", consumes = "application/json")
+    public void actualizarCliente(@RequestBody Cliente cliente) {
+        servicioCliente.actualizarCliente(cliente);
     }
 
     // El siguiente método es una modificación del anterior, en el que recibiremos un array de atributos como parámetro

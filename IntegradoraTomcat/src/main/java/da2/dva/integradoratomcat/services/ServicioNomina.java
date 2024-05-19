@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ServicioNomina {
@@ -32,18 +33,19 @@ public class ServicioNomina {
         return nominaRepository.findAll();
     }
 
-
+    public List<Nomina> findByCliente(Cliente cliente) {
+        return nominaRepository.findByCliente(cliente);
+    }
 
     // CREATE
 
     @Transactional
-    public Nomina crearNuevaNomina(Cliente cliente) {
+    public synchronized Nomina crearNuevaNomina(Cliente cliente, Nomina nomina) {
         Nomina ultimaNomina = nominaRepository.findTopByCliente(cliente);
 
-        Nomina nuevaNomina = new Nomina();
-        nuevaNomina.setId_nomina(new NominaKey(cliente, ultimaNomina == null ? 1L : ultimaNomina.getId_nomina().getNum_nomina() + 1L));
-        nuevaNomina.setSalario(new BigDecimal(0));
-        return nominaRepository.save(nuevaNomina);
+        nomina.setId_nomina(new NominaKey(cliente, ultimaNomina == null ? 1L : ultimaNomina.getId_nomina().getNum_nomina() + 1L));
+        nomina.setSalario(new BigDecimal(0));
+        return nominaRepository.save(nomina);
     }
 
     // UPDATE
@@ -52,22 +54,22 @@ public class ServicioNomina {
         nominaRepository.save(nomina);
     }
 
-//    @Transactional
-//    public void setSalario(Nomina nomina){
-//
-//        // recogemos los importes de cada apunte relacionado con la nómina y sumarlos
-//        List<LineaNomina> lineas = lineaNominaRepository.findByNomina(nomina.getId_nomina());
-//
-//        // reiniciamos el importe de la nómina
-//        nomina.setSalario(new BigDecimal(0));
-//
-//        for (LineaNomina linea : lineas) {
-//            nomina.setSalario(nomina.getSalario().add(linea.getImporte()));
-//        }
-//
-//        // actualizamos la nómina
-//        nominaRepository.save(nomina);
-//    }
+    @Transactional
+    public void setSalario(Nomina nomina){
+
+        // recogemos los importes de cada apunte relacionado con la nómina y sumarlos
+        List<LineaNomina> lineas = lineaNominaRepository.findByNomina(nomina);
+
+        // reiniciamos el importe de la nómina
+        nomina.setSalario(new BigDecimal(0));
+
+        for (LineaNomina linea : lineas) {
+            nomina.setSalario(nomina.getSalario().add(linea.getImporte()));
+        }
+
+        // actualizamos la nómina
+        nominaRepository.save(nomina);
+    }
 
     // DELETE
 

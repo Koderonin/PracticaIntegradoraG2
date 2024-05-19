@@ -8,7 +8,7 @@ const buscador = document.getElementById("buscador-entidad");
 // aquí cargo los datos!
 let ventanaDetalle = document.getElementById("ventana_detalle");
 let cerrarDetalle = document.getElementById("cerrar_detalle");
-const detalleEntidad = document.getElementById("detalle_entidad")
+const detalleEntidad = document.getElementById("detalle_entidad");
 
 document.getElementById('buscar-entidad').addEventListener('click', async function (event) {
     event.preventDefault();
@@ -47,7 +47,7 @@ document.getElementById('buscar-entidad').addEventListener('click', async functi
                     }
                     celda.innerHTML = valor;
                 }
-// Botón para ver más datos
+                // Botón para ver más datos
                 let celda = fila.insertCell(-1)
                 let boton = document.createElement("button");
                 boton.innerHTML = "Ver más";
@@ -61,22 +61,7 @@ document.getElementById('buscar-entidad').addEventListener('click', async functi
             // Añadir la tabla al cuerpo del documento HTML
             main.appendChild(tabla);
 
-            // Añadir botón de editar
-            // let editarCell = row.insertCell(4);
-            // editarCell.innerHTML = `<button class="btn" onclick="editarDepartamento(${departamento.id_departamento})">Editar</button>`;
-            //
-            // // Añadir botón de borrar
-            // let borrarCell = row.insertCell(5);
-            // borrarCell.innerHTML = `<button class="btn" onclick="borrarDepartamento(${departamento.id_departamento}, '${departamento.nombre}')">Borrar</button>`;
     }).catch(error => console.error('Hubo un problema con la solicitud fetch:', error))
-
-    // ¡Esto es con JQuery, debería funcionar!
-
-    // $.getJSON(`http://localhost:8080/admin/api/${buscador.value}/listado`, function (data) {
-    //     console.log(data);
-    // });
-
-
 
 });
 
@@ -96,8 +81,10 @@ async function datosDevueltos () {
 function mostrarDatos(data) {
     let tabla = document.createElement('table');
     detalleEntidad.innerHTML = "";
+    let entidad;
 
     tabla.classList.add("tabla_detalle");
+    tabla.id = "tabla_detalle"
     //cargo los datos al modal
     for (let clave in data){
         let valor = data[clave]
@@ -109,16 +96,38 @@ function mostrarDatos(data) {
         let celdaValor = fila.insertCell(-1);
 
         if (typeof valor === 'object' && valor != null){
-            if (Object.keys(valor).length === 2){
-                celdaValor.innerHTML = Object.values(valor)[1];
-            } else {
-                let tablaAnidada = mostrarDatos(valor);
-                celdaValor.appendChild(tablaAnidada);
-            }
-        } else
-            celdaValor.innerHTML = valor;
+            let tablaAnidada = mostrarDatos(valor);  // Llamada recursiva para objetos anidados
+            celdaValor.appendChild(tablaAnidada);
+        } else {
+            let input = document.createElement('input');
+            input.name = clave;
+            input.value = valor;
+            celdaValor.appendChild(input);
+        }
+
     }
+
     return tabla;
+}
+
+// Función recursiva para recoger los datos de una tabla
+function recogerDatos(tabla) {
+    let datos = {};
+    let inputs = tabla.getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i++) {
+        let input = inputs[i];
+        datos[input.name] = input.value;
+    }
+
+    // Recoge los datos de las tablas anidadas
+    let tablasAnidadas = tabla.getElementsByTagName('table');
+    for (let i = 0; i < tablasAnidadas.length; i++) {
+        let tablaAnidada = tablasAnidadas[i];
+        let datosAnidados = recogerDatos(tablaAnidada);  // Llamada recursiva
+        Object.assign(datos, datosAnidados);
+    }
+
+    return datos;
 }
 
 // se le llama al pulsar un botón
@@ -128,7 +137,29 @@ function mostrarDetalle(id) {
     $.getJSON(`http://tomcat.da2.dva:8080/admin/api/${buscador.value.toLowerCase()}/${id}`, function (data) {
 
     let tabla= mostrarDatos(data);
+
+    let boton = document.createElement('button');
+    boton.innerHTML = `Guardar`;
+    tabla.appendChild(boton);
+    boton.onclick = function () {
+        let datos = recogerDatos(tabla);  // Llamada a la función recogerDatos
+
+        let datosJson = JSON.stringify(datos);
+
+        fetch(`http://tomcat.da2.dva:8080/admin/api/${buscador.value.toLowerCase()}/update`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: datosJson
+        }).then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    };
+
     detalleEntidad.appendChild(tabla)
+
 
     ventanaDetalle.style.display = "block";
     })

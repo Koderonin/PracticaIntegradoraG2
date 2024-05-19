@@ -13,19 +13,23 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LineaNominaRepository extends JpaRepository<LineaNomina, LineaNominaKey> {
 
-//    @Query("SELECT l FROM LineaNomina l WHERE l.linea_id.nomina_id = :nominaKey ORDER BY l.linea_id.nomina_id.num_nomina DESC LIMIT 1")
-//    LineaNomina findTopByNomina(@Param("nominaKey") NominaKey nominaKey);
-//
-//    @Query("SELECT l FROM LineaNomina l WHERE l.linea_id.nomina_id = :nominaKey")
-//    List<LineaNomina> findByNomina(@Param("nominaKey") NominaKey nominaKey);
-//
-//    // elimina por PK nómina
-//    @Modifying
-//    @Transactional
-//    @Query("DELETE FROM LineaNomina l WHERE l.linea_id.nomina_id = :nominaKey")
-//    void deleteByNomina(@Param("nominaKey") NominaKey idNominaKey);
+//    @Query("SELECT l FROM LineaNomina l WHERE l.linea_id.nomina_id = :nomina ORDER BY l.linea_id.nomina_id.id_nomina.num_nomina DESC LIMIT 1")
+//    LineaNomina findTopByNomina(@Param("nomina") Nomina nomina);
+
+    @Query("SELECT l FROM LineaNomina l WHERE l.linea_id.nomina_id = :nomina ORDER BY l.linea_id.linea_id DESC LIMIT 1")
+    LineaNomina findTopByNomina(@Param("nomina") Nomina nomina);
+
+    @Query("SELECT l FROM LineaNomina l WHERE l.linea_id.nomina_id = :nomina")
+    List<LineaNomina> findByNomina(@Param("nomina") Nomina nomina);
+
+    // elimina por PK nómina
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM LineaNomina l WHERE l.linea_id.nomina_id = :nominaKey")
+    void deleteByNomina(@Param("nominaKey") NominaKey idNominaKey);
 }

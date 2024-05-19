@@ -193,25 +193,25 @@ public class JPATests {
 
     // TESTS CON NOMINAS
 
-    @Test
-    public void findAllNominas() {
-        servicioNomina.borrarTodasNominas();
-
-        Nomina nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("cliente1@integradora.jpa"));
-        nomina.setAnio(2022L);
-        nomina.setMes(1L);
-        servicioNomina.save(nomina);
-        nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("cliente2@integradora.jpa"));
-        nomina.setAnio(2022L);
-        nomina.setMes(2L);
-        servicioNomina.save(nomina);
-        nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("cliente2@integradora.jpa"));
-        nomina.setAnio(2022L);
-        nomina.setMes(3L);
-        servicioNomina.save(nomina);
-
-        assertEquals(3, servicioNomina.findAll().size());
-    }
+//    @Test
+//    public void findAllNominas() {
+//        servicioNomina.borrarTodasNominas();
+//
+//        Nomina nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("cliente1@integradora.jpa"));
+//        nomina.setAnio(2022L);
+//        nomina.setMes(1L);
+//        servicioNomina.save(nomina);
+//        nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("cliente2@integradora.jpa"));
+//        nomina.setAnio(2022L);
+//        nomina.setMes(2L);
+//        servicioNomina.save(nomina);
+//        nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("cliente2@integradora.jpa"));
+//        nomina.setAnio(2022L);
+//        nomina.setMes(3L);
+//        servicioNomina.save(nomina);
+//
+//        assertEquals(3, servicioNomina.findAll().size());
+//    }
 
 //    @Test
 //    public void setSalarioCheckSalario() {

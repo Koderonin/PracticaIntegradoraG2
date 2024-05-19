@@ -50,7 +50,7 @@ Imágenes: <input form="productoForm" type="file" id="imagenes" name="imagenes" 
             formData.append(`imagenes`, "");
         }
 
-        fetch('/api/producto', {
+        fetch('http://tomcat.da2.dva:8080/admin/api/producto', {
             method: 'POST',
             body: formData
         })
