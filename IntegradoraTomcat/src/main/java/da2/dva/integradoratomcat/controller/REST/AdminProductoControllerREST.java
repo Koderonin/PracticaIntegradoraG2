@@ -29,6 +29,8 @@ public class AdminProductoControllerREST {
     @Autowired
     private ServicioImagenes servicioImagenes;
 
+
+
     // Create
     /**
      * Este método es el endpoint para crear un nuevo producto.

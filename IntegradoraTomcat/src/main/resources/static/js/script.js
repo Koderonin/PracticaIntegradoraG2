@@ -1,3 +1,20 @@
+const claveInput = document.getElementById("clave");
+const confirmarClaveInput = document.getElementById("confirmClave");
+function mostrarClaves() {
+    if (claveInput && confirmarClaveInput) {
+        claveInput.type = "text";
+        confirmarClaveInput.type = "text";
+    }
+}
+function ocultarClaves() {
+
+    if (claveInput && confirmarClaveInput) {
+        claveInput.type = "password";
+        confirmarClaveInput.type = "password";
+    }
+}
+
+
 /* ---------------------- Barra de Navegación ---------------------- */
 
 const ENLACE_LOGIN = $('#enlace_login');
@@ -53,8 +70,9 @@ const btn_deseleccionar_pais = document.getElementById("btn_deseleccionar_pais")
 const btn_deseleccionar_tipoDocumento = document.getElementById("btn_deseleccionar_tipoDocumento");
 const btn_mostrar_claves = document.getElementById("btn_mostrar_claves");
 const form = document.getElementById("form");
-const claveInput = document.querySelector('input[name="clave"]');
-const confirmarClaveInput = document.querySelector('input[name="confirmClave"]');
+
+//const claveInput = document.querySelector('input[name="clave"]');
+//const confirmarClaveInput = document.querySelector('input[name="confirmClave"]');
 
 document.addEventListener('DOMContentLoaded', (event) => {
     // Inicializa todas las imágenes a su versión inactiva
@@ -119,19 +137,6 @@ function deseleccionarTipoDocumento() {
     documentoRadios.forEach(function(radio) {
         radio.checked = false;
     });
-}
-function mostrarClaves() {
-    if (claveInput && confirmarClaveInput) {
-        claveInput.type = "text";
-        confirmarClaveInput.type = "text";
-    }
-}
-function ocultarClaves() {
-
-    if (claveInput && confirmarClaveInput) {
-        claveInput.type = "password";
-        confirmarClaveInput.type = "password";
-    }
 }
 
 function vaciarFormulario() {
