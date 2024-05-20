@@ -213,7 +213,7 @@ public class DatosSQL {
         try{
             Cliente cliente = servicioCliente.getClienteByEmail("cliente@integradora.jpa");
 
-            Nomina nomina = servicioNomina.crearNuevaNomina(cliente);
+            Nomina nomina = servicioNomina.crearNuevaNomina(cliente, new Nomina());
             nomina.setAnio(2022L);
             nomina.setMes(1L);
             servicioNomina.save(nomina);
