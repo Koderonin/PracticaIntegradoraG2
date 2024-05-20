@@ -64,11 +64,11 @@
     </div>
     <div id="div_direccion_entrega">
        <div id="div_tipo_via">
-           <span class="required">* </span><label for="tipo_via"   th:text="#{etiqueta.tipoVia}"/>
-           <select th:field="*{direccion.tipo_via}">
+           <span class="required">* </span><label for="tipoVia"   th:text="#{etiqueta.tipoVia}"/>
+           <select th:field="*{direccion.tipoVia}">
                <option th:each="tipoVia: ${listaTiposVia}" th:value="${tipoVia.key}">[[${tipoVia.value}]]</option>
            </select>
-           <div class="error" th:if="${#fields.hasErrors('direccion.tipo_via')}" th:errors="*{direccion.tipo_via}"></div>
+           <div class="error" th:if="${#fields.hasErrors('direccion.tipoVia')}" th:errors="*{direccion.tipoVia}"></div>
        </div>
        <div id="div_nombre_via">
            <span class="required">* </span><label for="nombre_via"   th:text="#{etiqueta.nombreVia}"/>

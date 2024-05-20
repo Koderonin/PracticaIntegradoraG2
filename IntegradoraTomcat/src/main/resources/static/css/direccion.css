@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+*{
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+.form-direccion{
+    margin: 150px 50px 50px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 80px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+    0 10px 10px rgba(0,0,0,0.22);
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+.btn-add-card{
+    border-radius: 20px;
+    border: 1px solid #48556A;
+    background-color: #48556A;
+    color: #FFFFFF;
+    font-size: 12px ;
+    font-weight: bold;
+    padding: 15px;
+    width: 140px;
+    letter-spacing: 1px;
+    transition: transform 80ms ease-in;
+    justify-self: center;
+}
+
+.btn-add-card:hover {
+    cursor: pointer;
+    background-color: #1F1F20;
+}
+
+.btn-add-card:active {
+    transform: scale(0.95);
+}
+
+.btn-container{
+    display: flex;
+    justify-content: center;
+}

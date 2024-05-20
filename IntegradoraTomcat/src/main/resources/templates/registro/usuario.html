@@ -10,6 +10,7 @@
                     <div th:if="${#fields.hasErrors('global')}" class="error">
                         <p th:each="error : ${#fields.errors('global')}" th:text="${error}" class="error" />
                     </div>
+                    <div class="error" th:if="${error}" th:text="${error}"></div>
                     <div class="contenedor-izquierda">
                             <div id="div_usuario">
                                 <div class="column1">

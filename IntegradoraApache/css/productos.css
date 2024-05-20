@@ -1,0 +1,111 @@
+
+/* ----------------------------- PRODUCTOS --------------------------- */
+
+/* Main */
+.container-items{
+    margin-top: 100px;
+    display: grid;
+    gap: 20px;
+}
+
+.item{
+    border-radius: 10px;
+}
+
+.item:hover{
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20);
+}
+
+.item img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    transition: all .5s;
+}
+
+.item figure{
+    overflow: hidden;
+}
+
+.item:hover img{
+    transform: scale(1.2);
+}
+
+.info-product{
+    padding: 15px 30px;
+    line-height: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.price{
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.info-product button{
+    border: none;
+    background: none;
+    background-color: #48556A;
+    color: #fff;
+    padding: 15px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.info-product button:hover{
+    background-color: #1f1f20;
+}
+.info-product button:active{
+    transform: scale(0.98);
+}
+
+
+.cart-empty{
+    padding: 20px;
+    text-align: center;
+}
+
+
+.hidden{
+    display: none;
+}
+
+.product-image{
+    height: 300px;
+    width: 300px;
+}
+
+
+
+
+@media(min-width: 750px)
+{
+    .container-items{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media(min-width: 1090px)
+{
+    .container-items{
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+@media(min-width: 1400px)
+{
+
+    .container-items{
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+    }
+
+
+}
+
+
+
+

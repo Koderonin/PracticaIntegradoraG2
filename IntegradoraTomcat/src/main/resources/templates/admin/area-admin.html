@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+    <head th:replace="~{fragments/head :: cabeza('Área Admin')}"/>
+    <body>
+        <nav th:replace="~{fragments/navs :: barra_navegacion}"></nav>
+        <div class="container">
+            <div>
+                <input type="text" id="buscador-entidad" placeholder="Buscar">
+                <button id="buscar-entidad">Buscar</button>
+            </div>
+            <div>
+                <h1 th:text="${entity_name}"> </h1>
+                <main id="main">
+                    <!--    Aquí, meter botón de agregar nuevo registro a la entidad seleccionada cada vez que se liste algo -->
+
+                    <!--    Aquí, una barra de busqueda para filtrar por campo onkeyup -->
+                    <!--    Aquí, la tabla listado de la entidad seleccionada-->
+
+                </main>
+                <div id="ventana_detalle">
+                    <div>
+                        <span id="cerrar_detalle">&times;</span>
+                        <div id="detalle_entidad"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="~{fragments/footer :: pie_pagina}"/>
+    </body>
+</html>

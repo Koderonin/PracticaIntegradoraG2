@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+<head> <!-- TODO: Implementar CSS y JS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FootShop - Área de cliente</title>
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="/css/style2.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/area-cliente.css"/>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+    <body>
+        <header>
+            <section>
+                <!-- MAIN CONTAINER -->
+                <div id="container">
+                    <div class="container-menu-icon" onclick="openNav(this)">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                    <div class="menu" id="mySidenav">
+                        <div id="clothing"><a href="http://apache.da2.dva/productos.html"> PRODUCTOS </a></div>
+                    </div>
+
+                    <!-- NOMBRE QUE LE QUERAMOS PONER -->
+                    <div id="shopName">
+                        <a href="http://apache.da2.dva/index.html" class="logo"><img src="/img/logo.png" alt="logo" /></a >
+                        <a href="http://apache.da2.dva/index.html"><span> <b>Foot</b>Shop</span> </a>
+                    </div>
+                        <!-- SECCIONES DE PRODUCTOS (SI HAY) -->
+
+                        <div id="collection">
+                            <div id="clothing"><a href="http://apache.da2.dva/productos.html"> PRODUCTOS </a></div>
+                        </div>
+
+                        <div id="search" class="input-container">
+                            <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories" class="input search-input">
+                        </div>
+
+                        <!-- CARRITO Y USUARIO -->
+                        <div id="user">
+
+                            <div class="container-icon">
+                                <div class="container-cart-icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        class="icon-cart"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                        />
+                                    </svg>
+                                    <div class="count-products">
+                                        <span id="contador-productos">0</span>
+                                    </div>
+                                </div>
+
+                                <div class="container-cart-products hidden-cart">
+                                    <div class="row-product hidden">
+                                        <div class="cart-product">
+                                            <div class="info-cart-product">
+                                                <span class="cantidad-producto-carrito">1</span>
+                                                <p class="titulo-producto-carrito">Zapatos Nike</p>
+                                                <span class="precio-producto-carrito">$80</span>
+                                            </div>
+                                            <!--
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="icon-close"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M6 18L18 6M6 6l12 12"
+                                                />
+                                            </svg>
+                                            -->
+
+                                        </div>
+                                    </div>
+
+                                    <div class="cart-total hidden">
+                                        <h3>Total:</h3>
+                                        <span class="total-pagar">$200</span>
+                                    </div>
+                                    <p class="cart-empty">El carrito está vacío</p>
+                                </div>
+                            </div>
+                            <div id="userIcon" style="cursor: pointer;">
+                                <img src="/img/user-icon.png" class="userIcon" onclick="toggleDropdown()">
+                                <!-- Menú desplegable -->
+                                <div id="dropdownMenu" class="dropdown-content">
+                                    <a id="enlace_login" href="http://tomcat.da2.dva:8080/cliente/area-cliente">Login</a>
+                                    <a id="enlace_registro" href="http://tomcat.da2.dva:8080/registro/usuario/">Registrarse</a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+            </section>
+        </header>
+
+        <div class=" container-area-cliente">
+            <div class="form-container">
+                <div class="user-row" >
+                    <div class="user-img"><img src="/img/user-icon.png"/> </div>
+                    <div class="user-main-info">
+                      
+                        <h1 class="user-email"></h1>
+                    </div>
+                </div>
+                <div class="user-row2">
+                    <div class="personal-info1">
+                        <p><b>Nombre</b></p>
+                        <p><b>Apellidos</b></p>
+                        <p><b>Género</b></p>
+                        <p><b>Fecha de nacimiento</b></p>
+                        <p><b>País de nacimiento</b></p>
+                        <p><b>Tipo de documento</b></p>
+                        <p><b>Nº de Documento</b></p>
+                        <p><b>Teléfono Movil</b></p>
+                        <p><b>Comentarios</b></p>
+                    </div>
+                    <div class="personal-info2">
+
+                    </div>
+                    <div class="direccion-info1">
+                        <p><b>Tipo de vía</b></p>
+                        <p><b>Nombre de vía</b></p>
+                        <p><b>Número</b></p>
+                        <p><b>Planta</b></p>
+                        <p><b>Puerta</b></p>
+                        <p><b>Portal</b></p>
+                        <p><b>Localidad</b></p>
+                        <p><b>Código Postal</b></p>
+                        <p><b>Región/Comunidad Autónoma</b></p>
+                        <p><b>País</b></p>
+                    </div>
+                    <div class="direccion-info2"></div>
+
+                </div>
+            </div>
+            <div class="form-container">
+                <div class="user-row" >
+                    <div class="user-main-info">
+                        <h1>Tarjetas de Crédito</h1>
+                    </div>
+                </div>
+                <div class="user-row2">
+                    <div id="tarjetas_container" class="personal-info1"> <!--Tarjetas-->
+                    </div>
+                    <button class="btn-add-card" onClick="nuevaTarjeta()">Nueva tarjeta</button>
+                </div>
+            </div>
+            <div class="form-container">
+                <div class="user-row" >
+                    <div class="user-main-info">              
+                        <h1>Direcciones de entrega</h1>
+                    </div>
+                </div>
+                <div class="user-row2">
+                    <div id="direcciones_container" class="personal-info1"> <!--Direcciones-->
+                    </div>
+                    <button class="btn-add-card" onClick="nuevaDireccion()">Nueva dirección</button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+
+            <section class="footer-container">
+                <ul class="footer-nav">
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Quiénes somos</a></li>
+                    <li><a href="#">Conócenos</a></li>
+                    <li id="pags_visitadas"></li>
+                </ul>
+            </section>
+    
+        </footer>
+        <script type="text/javascript" src="/js/index.js"></script>
+        <script type="text/javascript" src="/js/area-cliente.js"></script>
+    </body>
+</html>

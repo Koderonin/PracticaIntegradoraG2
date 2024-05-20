@@ -23,7 +23,6 @@ footer {
 }
 
 
-
 /* ----------------------------- HEADER --------------------------- */
 
 
@@ -347,85 +346,6 @@ img{
 }
 
 
-
-/* ----------------------------- PRODUCTOS --------------------------- */
-
-
-/* Main */
-.container-items{
-    margin-top: 100px;
-    display: grid;
-    gap: 20px;
-}
-
-.item{
-    border-radius: 10px;
-}
-
-.item:hover{
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.20);
-}
-
-.item img{
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-    transition: all .5s;
-}
-
-.item figure{
-    overflow: hidden;
-}
-
-.item:hover img{
-    transform: scale(1.2);
-}
-
-.info-product{
-    padding: 15px 30px;
-    line-height: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.price{
-    font-size: 18px;
-    font-weight: 900;
-}
-
-.info-product button{
-    border: none;
-    background: none;
-    background-color: #48556A;
-    color: #fff;
-    padding: 15px 10px;
-    cursor: pointer;
-    border-radius: 10px;
-}
-.info-product button:hover{
-    background-color: #1f1f20;
-}
-.info-product button:active{
-    transform: scale(0.98);
-}
-
-
-.cart-empty{
-    padding: 20px;
-    text-align: center;
-}
-
-
-.hidden{
-    display: none;
-}
-
-.product-image{
-    height: 300px;
-    width: 300px;
-}
 /* ----------------------------- FOOTER --------------------------- */
 
 .footer-container {
@@ -439,23 +359,23 @@ img{
 }
 
 .footer-nav {
-    list-style: none; /* Elimina los bullets de la lista */
+    list-style: none; 
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center; /* Centra los elementos de la lista horizontalmente */
-    align-items: center; /* Centra los elementos de la lista verticalmente */
-    height: 100%; /* Asegura que los enlaces usen la altura completa del contenedor */
+    justify-content: center; 
+    align-items: center; 
+    height: 100%; 
 }
 
 .footer-nav li {
-    margin: 0 20px; /* Añade espaciamiento horizontal entre elementos de la lista */
+    margin: 0 20px; 
 }
 
 .footer-nav a {
     color: white;
     text-decoration: none;
-    position: relative; /* Asegura que el pseudo-elemento se posicione correctamente */
+    position: relative; 
 }
 
 .footer-nav a::after {
@@ -463,14 +383,14 @@ img{
     position: absolute;
     left: 0;
     bottom: -2px;
-    width: 0; /* Inicialmente la línea no tiene ancho */
+    width: 0;
     height: 2px;
     background-color: white;
-    transition: width 0.3s ease; /* Transición para el ancho */
+    transition: width 0.3s ease; 
 }
 
 .footer-nav a:hover::after {
-    width: 100%; /* Al pasar el cursor, la línea se hace tan ancha como el enlace */
+    width: 100%; 
 }
 
 /* ----------------------------- MEDIA QUERY --------------------------- */
@@ -569,9 +489,7 @@ img{
         font-size: 1.2em;
         margin: 10px 20px;
     }
-    .container-items{
-        grid-template-columns: repeat(2, 1fr);
-    }
+  
 }
 
 @media(min-width: 950px)
@@ -587,13 +505,7 @@ img{
    
 }
 
-@media(min-width: 1090px)
-{
-    .container-items{
-        grid-template-columns: repeat(3, 1fr);
-    }
 
-}
 @media(min-width: 1400px)
 {
     #container
@@ -623,178 +535,9 @@ img{
         margin: 10px 20px;
     }
 
-    .container-items{
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0;
-    }
-
-
-}
-
-
-
-
-/* ----------------------------- INDEX --------------------------- */
-.main-container {
-
-    height: 1000vh; /* Usar la altura completa de la ventana */
-    width: 100%; /* Usar todo el ancho disponible */
-    background-color: #fff;
-}
-.main-wrapper {
-    background-image: url('/img/nike_banner.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    filter: brightness(80%); /* Ajusta el porcentaje según tu preferencia */
-    height: 1200px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-    color: white; /* Color del texto */
-}
-
-.main-wrapper h1,
-.main-wrapper h2 {
-    filter: brightness(100%); /* Ajusta el porcentaje según tu preferencia */
-    font-size: 3em; /* Tamaño del texto */
-    text-align: center; /* Alineación del texto */
-    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
-}
-.main-wrapper h2{
-    filter: brightness(100%); /* Ajusta el porcentaje según tu preferencia */
-    font-size: 1.5em; /
-}
-.btn-access-products {
-    filter: brightness(100%); /* Ajusta el porcentaje según tu preferencia */
-    margin-bottom: 100px;
-    background-color: rgba(255, 255, 255, 0.3); /* Blanco con 50% de opacidad */
-    border: 2px solid white; /* Borde blanco */
-    color: white; /* Color del texto */
-    padding: 15px 32px; /* Espaciado dentro del botón */
-    text-align: center; /* Alineación del texto */
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px; /* Tamaño del texto */
-    margin-top: 20px; /* Espaciado superior */
-    cursor: pointer; /* Cambio de cursor al pasar el mouse */
-    border-radius: 8px; /* Bordes redondeados */
-    outline: none; /* Sin contorno */
-    transition: all 0.3s ease; /* Transición suave */
-    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
-    font-weight: bolder;
-}
-
-.btn-access-products:hover {
-    background-color: white; /* Cambio de color de fondo al pasar el mouse */
-    color: black; /* Cambio de color del texto al pasar el mouse */
-}
-
-/* ----------------------------- OFERTAS --------------------------- */
-.ofertas{
-    padding: 40px;
-}
-.ofertas h1{
-    font-weight: bold;
-}
-
-.slider-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  .slider {
-    display: flex;
-    transition: transform 0.5s ease;
-    margin-left: 60px;
-  }
-  
-  .slide {
-    flex: 0 0 33.333%; /* Para mostrar 3 slides a la vez */
-  }
-  
-  .slide img {
-    width: 80%;
-    display: block;
-  }
-  
-  .prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1;
-  }
-  
-  .prev {
-    left: 0;
-  }
-  
-  .next {
-    right: 0;
-  }
-
-  .contenedor-main-wrapper {
-    background-color: rgba(15, 40, 121, 0.3); /* Blanco con 50% de opacidad */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-}
   
 
-/* ----------------------------- AREA CLIENTE  --------------------------- */
-.container-area-cliente{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.form-container {
-    margin-top: 150px;
-    margin-bottom: 150px;
-    justify-self: center;
-    background-color: white;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    padding: 80px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
-    0 10px 10px rgba(0,0,0,0.22);
-}
-.user-img{
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-}
-.user-row{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 30px;
-}
-.user-row2{
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
 
 }
-.personal-info{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-.direccion-info{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+
+

@@ -1,7 +1,7 @@
 package da2.dva.integradoratomcat.services;
 
-import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Usuario;
+import da2.dva.integradoratomcat.model.entities.UsuarioAdministrador;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioAdministradorRepository;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioClienteRepository;
@@ -9,7 +9,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -37,6 +37,10 @@ public class ServicioUsuario {
 
     public Usuario getUsuario(String id) {
         return usuarioClienteRepository.findById(UUID.fromString(id)).get();
+    }
+
+    public Usuario getUsuarioByEmail(String email){
+        return usuarioAdministradorRepository.findByEmail(email);
     }
 
     public void insertarUsuario(UsuarioCliente usuario){
@@ -75,28 +79,30 @@ public class ServicioUsuario {
      usuarioClienteRepository.deleteAll();
     }
 
-    public void actualizarNumAccesos(UsuarioCliente usuario){
+    public void actualizarNumAccesos(Usuario usuario){
          try {
              usuario.setNumAccesos(usuario.getNumAccesos() + 1);
          } catch (NullPointerException e) {
              usuario.setNumAccesos(1);
          }
-         // ODO: mirar si en algún momento se puede quitar la remilmierda ésta.
          usuario.setConfirmClave(usuario.getClave());
-         usuarioClienteRepository.save(usuario);
+        if (usuario.getAdministrador()) usuarioAdministradorRepository.save((UsuarioAdministrador) usuario);
+        else usuarioClienteRepository.save((UsuarioCliente) usuario);
     }
 
-    public void actualizarFechaBloqueo(UsuarioCliente usuario, LocalDate fecha) {
+    public void actualizarFechaBloqueo(Usuario usuario, LocalDateTime fecha) {
         usuario.setFechaBloqueo(fecha);
         usuario.setConfirmClave(usuario.getClave());
-        usuarioClienteRepository.save(usuario);
+        if (usuario.getAdministrador()) usuarioAdministradorRepository.save((UsuarioAdministrador) usuario);
+        else usuarioClienteRepository.save((UsuarioCliente) usuario);
     }
 
-    public Map<String, UsuarioCliente> devuelveUsuarios() {
-        Map<String, UsuarioCliente> usuarios = new HashMap<>();
-        UsuarioCliente cliente1 = new UsuarioCliente(UUID.randomUUID(),"admin@gmail.com", "aA1111111?", "aA1111111?", 1L, "Manolo");
-        usuarios.put(cliente1.getEmail(), cliente1);
+    public Map<String, Usuario> devuelveUsuarios() {
+        Map<String, Usuario> usuarios = new HashMap<>();
         usuarioClienteRepository.findAll().forEach(
+                usuario -> usuarios.put(usuario.getEmail(), usuario)
+        );
+        usuarioAdministradorRepository.findAll().forEach(
                 usuario -> usuarios.put(usuario.getEmail(), usuario)
         );
         return usuarios;

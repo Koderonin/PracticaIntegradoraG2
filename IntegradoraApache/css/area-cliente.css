@@ -1,0 +1,48 @@
+/* ----------------------------- AREA CLIENTE  --------------------------- */
+.container-area-cliente{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.form-container {
+    margin-top: 150px;
+    margin-bottom: 150px;
+    justify-self: center;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 80px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+    0 10px 10px rgba(0,0,0,0.22);
+}
+.user-img{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+.user-row{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+}
+.user-row2{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+
+}
+.personal-info{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.direccion-info{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+/*hjkdfkjhdasfjklahsdfjkhasdf*/

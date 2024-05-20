@@ -29,16 +29,6 @@ public class ValidadorColecciones implements ConstraintValidator<CheckColeccion,
             case "listatiposDocumentos":
                 this.coleccion = servicioColecciones.getTiposDocumentos();
                 break;
-                /*
-            case "listapreguntas":
-                this.coleccion = servicioColecciones.getPreguntas();
-                break;
-                /*
-            case "listatiposVia":
-                this.coleccion = (Map<Long, String>) servicioColecciones.devuelveTiposVia();
-                break;
-
-                 */
         }
     }
     @Override

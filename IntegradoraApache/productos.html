@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FootShop - Productos</title>
     <!-- CSS -->
-    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="/css/style2.css"/>
+    <link type="text/css" rel="stylesheet" href="/css/productos.css"/>
+
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
     <body>
         <header>
@@ -21,7 +23,7 @@
                         <div class="bar3"></div>
                     </div>
                     <div class="menu" id="mySidenav">
-                        <div id="clothing"><a href="productos.html"> PRODUCTOS </a></div>
+                        <div class="seccion"><a id="enlace_productos" href="productos.html"> PRODUCTOS </a></div>
                     </div>
                    
                     <!-- NOMBRE QUE LE QUERAMOS PONER -->
@@ -32,7 +34,7 @@
                         <!-- SECCIONES DE PRODUCTOS (SI HAY) -->
                         
                         <div id="collection">
-                            <div id="clothing"><a href="productos.html"> PRODUCTOS </a></div>
+                            <div class="seccion"><a id="enlace_productos" href="productos.html"> PRODUCTOS </a></div>
                         </div>
                        
                         <div id="search" class="input-container">
@@ -102,7 +104,7 @@
                                 <img src="img/user-icon.png" class="userIcon" onclick="toggleDropdown()">
                                 <!-- Menú desplegable -->
                                 <div id="dropdownMenu" class="dropdown-content">
-                                    <a id="enlace_login" href="http://tomcat.da2.dva:8080/area-cliente">Login</a>
+                                    <a id="enlace_login" href="http://tomcat.da2.dva:8080/cliente/area-cliente">Login</a>
                                     <a id="enlace_registro" href="http://tomcat.da2.dva:8080/registro/usuario/">Registrarse</a>
                                 </div>
                             </div>
@@ -117,72 +119,6 @@
             <div id="search-mobile" class="input-container">
                 <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories" class="input search-input">
             </div>
-
-			<!--<div class="item">
-				<figure>
-					<img
-						src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-						alt="producto"
-					/>
-				</figure>
-				<div class="info-product">
-					<h2>Zapatos Nike</h2>
-					<p class="price">$80</p>
-					<button class="btn-add-cart">Añadir al carrito</button>
-				</div>
-			</div>
-			<div class="item">
-				<figure>
-					<img
-						src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-						alt="producto"
-					/>
-				</figure>
-				<div class="info-product">
-					<h2>Audifonos</h2>
-					<p class="price">$20</p>
-					<button class="btn-add-cart">Añadir al carrito</button>
-				</div>
-			</div>
-			<div class="item">
-				<figure>
-					<img
-						src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1099&q=80"
-						alt="producto"
-					/>
-				</figure>
-				<div class="info-product">
-					<h2>Reloj</h2>
-					<p class="price">$50</p>
-					<button class="btn-add-cart">Añadir al carrito</button>
-				</div>
-			</div>
-			<div class="item">
-				<figure>
-					<img
-						src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-						alt="producto"
-					/>
-				</figure>
-				<div class="info-product">
-					<h2>Smartwatch</h2>
-					<p class="price">$90</p>
-					<button class="btn-add-cart">Añadir al carrito</button>
-				</div>
-			</div>
-			<div class="item">
-				<figure>
-					<img
-						src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
-						alt="producto"
-					/>
-				</figure>
-				<div class="info-product">
-					<h2>Perfume</h2>
-					<p class="price">$50</p>
-					<button class="btn-add-cart">Añadir al carrito</button>
-				</div>
-			</div>-->
 		</div>
 
         <footer>
@@ -192,6 +128,7 @@
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Quiénes somos</a></li>
                     <li><a href="#">Conócenos</a></li>
+                    <li id="pags_visitadas"></li>
                 </ul>
             </section>
     

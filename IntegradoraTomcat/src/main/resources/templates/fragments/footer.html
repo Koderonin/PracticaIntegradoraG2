@@ -4,6 +4,7 @@
             <li><a href="#">Contacto</a></li>
             <li><a href="#">Quiénes somos</a></li>
             <li><a href="#">Conócenos</a></li>
+            <!-- Recoger del modelo el num de visitas y solo mostrar si no es nullo-->
             <li>
                 <div >
                     <select id="language-select">
@@ -11,6 +12,7 @@
                     </select>
                 </div>
             </li>
+            <li th:if="${visitas} != 0"><p th:text="#{etiqueta.visitas}"><span th:text="${visitas}"></span> </p>
         </ul>
     </div>
 

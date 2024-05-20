@@ -1,3 +1,50 @@
+const claveInput = document.getElementById("clave");
+const confirmarClaveInput = document.getElementById("confirmClave");
+function mostrarClaves() {
+    if (claveInput && confirmarClaveInput) {
+        claveInput.type = "text";
+        confirmarClaveInput.type = "text";
+    }
+}
+function ocultarClaves() {
+
+    if (claveInput && confirmarClaveInput) {
+        claveInput.type = "password";
+        confirmarClaveInput.type = "password";
+    }
+}
+
+
+/* ---------------------- Barra de Navegación ---------------------- */
+
+const ENLACE_LOGIN = $('#enlace_login');
+const ENLACE_REGISTRO = $('#enlace_registro');
+const ENLACE_PRODUCTOS = $('#enlace_productos');
+const PAGINAS_VISITADAS =  $('#pags_visitadas');
+
+$.getJSON('http://tomcat.da2.dva:8080/api/sesion/usuarioEsAdmin', function(response) {
+    if(response == null) {
+        ENLACE_LOGIN.text("Login");
+        ENLACE_REGISTRO.text("Registrarse");
+    }
+    else {
+        if (response) {
+            ENLACE_LOGIN.text("Área de Administrador");
+            ENLACE_LOGIN.attr('href', 'http://tomcat.da2.dva:8080/admin/area-admin');
+            ENLACE_PRODUCTOS.attr('href', 'http://tomcat.da2.dva:8080/admin/api/producto/listado');
+        } else {
+            ENLACE_LOGIN.text("Área de Cliente");
+        }
+        ENLACE_REGISTRO.text("Logout"); ENLACE_REGISTRO.attr('href', 'http://tomcat.da2.dva:8080/logout/invalidate');
+    }
+});
+$.getJSON('http://tomcat.da2.dva:8080/api/sesion/paginas-visitadas', function(response) {
+    if(response != null && response > 0) {
+        PAGINAS_VISITADAS.text("Páginas visitadas: " + response);
+    }
+});
+$.get('http://tomcat.da2.dva:8080/api/sesion/agregar-visita');
+
 const SELECTOR_IDIOMAS = document.getElementById("language-select");
 
 location.addEventListener("change", (event) => {
@@ -23,8 +70,9 @@ const btn_deseleccionar_pais = document.getElementById("btn_deseleccionar_pais")
 const btn_deseleccionar_tipoDocumento = document.getElementById("btn_deseleccionar_tipoDocumento");
 const btn_mostrar_claves = document.getElementById("btn_mostrar_claves");
 const form = document.getElementById("form");
-const claveInput = document.querySelector('input[name="clave"]');
-const confirmarClaveInput = document.querySelector('input[name="confirmClave"]');
+
+//const claveInput = document.querySelector('input[name="clave"]');
+//const confirmarClaveInput = document.querySelector('input[name="confirmClave"]');
 
 document.addEventListener('DOMContentLoaded', (event) => {
     // Inicializa todas las imágenes a su versión inactiva
@@ -50,13 +98,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 asignarEventos();
 function asignarEventos(){
-
     btn_deseleccionar_genero.addEventListener("click", deseleccionarGenero);
     btn_seleccionar_primer_genero.addEventListener("click", seleccionarPrimerGenero);
     btn_deseleccionar_pais.addEventListener("click", deseleccionarPais);
     btn_deseleccionar_tipoDocumento.addEventListener("click", deseleccionarTipoDocumento);
-
-
 }
 
 function deseleccionarGenero() {
@@ -92,19 +137,6 @@ function deseleccionarTipoDocumento() {
     documentoRadios.forEach(function(radio) {
         radio.checked = false;
     });
-}
-function mostrarClaves() {
-    if (claveInput && confirmarClaveInput) {
-        claveInput.type = "text";
-        confirmarClaveInput.type = "text";
-    }
-}
-function ocultarClaves() {
-
-    if (claveInput && confirmarClaveInput) {
-        claveInput.type = "password";
-        confirmarClaveInput.type = "password";
-    }
 }
 
 function vaciarFormulario() {

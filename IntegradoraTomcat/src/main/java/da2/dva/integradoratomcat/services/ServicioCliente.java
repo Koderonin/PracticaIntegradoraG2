@@ -1,10 +1,13 @@
 package da2.dva.integradoratomcat.services;
 
+import da2.dva.integradoratomcat.model.auxiliar.Direccion;
+import da2.dva.integradoratomcat.model.auxiliar.TarjetaCredito;
 import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Producto;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.repositories.jpa.ClienteRepository;
 import da2.dva.integradoratomcat.repositories.jpa.DireccionRepository;
+import da2.dva.integradoratomcat.repositories.jpa.UsuarioAdministradorRepository;
 import da2.dva.integradoratomcat.repositories.jpa.UsuarioClienteRepository;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -107,6 +110,17 @@ public class ServicioCliente {
     }
 
     public void save(Cliente cliente) {
+        clienteRepository.save(cliente);
+    }
+
+    public void agregarTarjeta(Cliente cliente, TarjetaCredito tarjeta) {
+        cliente.getTarjetasCredito().add(tarjeta);
+        clienteRepository.save(cliente);
+    }
+
+    public void agregarDireccion(Cliente cliente, Direccion direccion) {
+        direccionRepository.save(direccion);
+        cliente.getDireccionEntrega().add(direccion);
         clienteRepository.save(cliente);
     }
 
