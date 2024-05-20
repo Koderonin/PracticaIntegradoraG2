@@ -1,0 +1,117 @@
+
+/* ----------------------------- INDEX --------------------------- */
+.main-container {
+
+    height: 1000vh; /* Usar la altura completa de la ventana */
+    width: 100%; /* Usar todo el ancho disponible */
+    background-color: #fff;
+}
+.main-wrapper {
+    background-image: url('/img/nike_banner.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(80%); /* Ajusta el porcentaje según tu preferencia */
+    height: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    color: white; /* Color del texto */
+}
+
+.main-wrapper h1,
+.main-wrapper h2 {
+    filter: brightness(100%); /* Ajusta el porcentaje según tu preferencia */
+    font-size: 3em; /* Tamaño del texto */
+    text-align: center; /* Alineación del texto */
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
+}
+.main-wrapper h2{
+    filter: brightness(100%); /* Ajusta el porcentaje según tu preferencia */
+    font-size: 1.5em; /
+}
+.btn-access-products {
+    filter: brightness(100%); /* Ajusta el porcentaje según tu preferencia */
+    margin-bottom: 100px;
+    background-color: rgba(255, 255, 255, 0.3); /* Blanco con 50% de opacidad */
+    border: 2px solid white; /* Borde blanco */
+    color: white; /* Color del texto */
+    padding: 15px 32px; /* Espaciado dentro del botón */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; /* Tamaño del texto */
+    margin-top: 20px; /* Espaciado superior */
+    cursor: pointer; /* Cambio de cursor al pasar el mouse */
+    border-radius: 8px; /* Bordes redondeados */
+    outline: none; /* Sin contorno */
+    transition: all 0.3s ease; /* Transición suave */
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
+    font-weight: bolder;
+}
+
+.btn-access-products:hover {
+    background-color: white; /* Cambio de color de fondo al pasar el mouse */
+    color: black; /* Cambio de color del texto al pasar el mouse */
+}
+
+/* ----------------------------- OFERTAS --------------------------- */
+.ofertas{
+    padding: 40px;
+}
+.ofertas h1{
+    font-weight: bold;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .slider {
+    display: flex;
+    transition: transform 0.5s ease;
+    margin-left: 60px;
+  }
+  
+  .slide {
+    flex: 0 0 33.333%; /* Para mostrar 3 slides a la vez */
+  }
+  
+  .slide img {
+    width: 80%;
+    display: block;
+  }
+  
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1;
+  }
+  
+  .prev {
+    left: 0;
+  }
+  
+  .next {
+    right: 0;
+  }
+
+  .contenedor-main-wrapper {
+    background-color: rgba(15, 40, 121, 0.3); /* Blanco con 50% de opacidad */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+}
+  
