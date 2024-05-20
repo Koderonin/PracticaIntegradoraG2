@@ -1,5 +1,6 @@
 package da2.dva.integradoratomcat.controller.REST;
 
+import da2.dva.integradoratomcat.controller.admin.REST.AdminClienteControllerREST;
 import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Nomina;
 import da2.dva.integradoratomcat.services.ServicioCliente;
