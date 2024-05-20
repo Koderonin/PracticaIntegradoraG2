@@ -1,5 +1,8 @@
 # Práctica Integradora DAM-DAW
-Práctica integradora de los módulos DAW, DWES, AD y DIW
+Práctica integradora de los módulos DAW, DWES, AD y DIW en la que hemos desarrollado una aplicación para una tienda de zapatillas y su administración.
+
+> [!IMPORTANT]
+> La versión final del código de la aplicación es la hospedada en la rama merge-Final, puesto que el merge con _main_ antes de la entrega no ha sido posible.
 
 ## 👥 Integrantes
 
@@ -11,6 +14,15 @@ Práctica integradora de los módulos DAW, DWES, AD y DIW
 
 [<img src="https://avatars.githubusercontent.com/u/132434651?v=4" style="display:inline; border-radius: 100%" width=50><a style="text-decoration:none;"> Alicia San Julián (@AliciaSJF)</a>](https://github.com/AliciaSJF)
 
+## 👨‍💻 Utilización de la aplicación
+
+> [!IMPORTANT]
+> Nuestra aplicación permite a través de Docker Compose, levantar la infraestructura de la aplicación y al mismo tiempo, desplegarla, permitiendo su uso sin necesidad de configurar manualmente nada. Solamente necesita que Docker Compose se encuentre previamente instalado (con la versión 3.3 o superior) en la máquina que ejecute la aplicación, y mediante siguiente el comando, desplegar la aplicación:
+
+```bash
+  docker compose -f ./docker-compose.yml -p practicaintegradora up -d
+```
+
 ## 📦 Entregas
 
 #### Primera Entrega
@@ -19,6 +31,59 @@ Práctica integradora de los módulos DAW, DWES, AD y DIW
 #### Segunda Entrega
 [<img src="https://img.shields.io/badge/release-13%2F05-green?style=plastic">](https://github.com/Koderonin/PracticaIntegradoraG2/releases/tag/v0.3)
 
+
+#### Tercera Entrega y definitiva
+[<img src="https://img.shields.io/badge/release%20final-20%2F05-green?style=plastic">](https://github.com/Koderonin/PracticaIntegradoraG2/releases/tag/v0.4)
+
+## 💻 Funcionalidades 
+
+> [!NOTE]
+> - Página principal responsiva
+> - Catálogo de productos que muestra los productos que existen en la base de datos 
+> - Vista del detalle de los productos
+> - Carrito al que puedes añadir productos y eliminarlos (no persiste en la base de datos)
+> - Login de usuario
+> - Impedimento a los usuarios a acceder a áreas a las que no tengan que poder acceder (Ej: no puedes pasar al registro de cliente sin haberte registrado como usuario)
+> - Registro de usuario
+> - Registro por pasos de cliente
+> - Validaciones para todos los registros y el login, validación de tipo de Documento, tarjeta de crédito, para que no se puedan modificar las colecciones (que con las herramientas de administrador pueda enviar género:Caballo)
+> - Internacionalización: Página traducida al español, inglés e italiano
+> - Conteo de autenticaciones en la base de datos
+> - Cookie con los usuarios y sus accesos
+> - Visualización de las páginas visitadas en la sesión en el footer de la página
+> - Área de cliente con los datos del usuario 
+> - Visualización y creación de tarjetas de crédito y direcciones 
+> - Página de administración que permite la búsqueda de entidades
+> - Visualización del detalle de clientes, productos y nómina
+> - Modificación de usuarios (lógica para modificar el resto de entidades implementada  en los servicios, no en uso) 
+> - Dar de alta productos con múltiples imágenes
+
+## ⚙️ Tecnologías utilizadas 
+
+> [!TIP]
+> - Docker
+> - Apache
+> - Tomcat
+> - Bind9
+> - MongoDB
+> - Mysql
+> - SpringBoot
+> - Thymeleaf
+> - JPA
+> - SpringData JPA, Hibernate
+> - HTML
+> - CSS
+> - JS, JQUERY
+
+## 📈 Diagrama de Gantt
+
+Hemos utilizado la funcionalidad de GitHub que permite realizar un diagrama de Gantt vinculado a los issues del repositorio de Git en el que se desarrolla. Aquí está el enlace a la web del diagrama:
+
+[📈 Diagrama de Gantt] (https://github.com/users/Koderonin/projects/2/views/4)
+
+## 📝 Memoria de la Práctica
+
+[📝 Memoria de la Práctica](./MemoriaG2.pdf)
 
 ## ⚓ Docker 
 
