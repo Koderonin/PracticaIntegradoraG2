@@ -46,7 +46,7 @@ public class ProductoControllerREST {
         return null;
     }
 
-    @GetMapping("/{codigo}")
+    @GetMapping("detalle/{codigo}")
     public Document detalleProductoByCodigo(@PathVariable("codigo") String codigo) {
         try {
             return servicioProducto.findByCodigo(codigo);

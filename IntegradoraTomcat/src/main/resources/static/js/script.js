@@ -63,6 +63,9 @@ SELECTOR_IDIOMAS.addEventListener("change", (event) => {
     location.search = `?lang=${idioma}`
 });
 
+/* ---------------------- Tarjetad de Credito y Direcciones ---------------------- */
+
+
 /* REGISTRO DE CLIENTE */
 const btn_deseleccionar_genero = document.getElementById("btn_deseleccionar_genero");
 const btn_seleccionar_primer_genero = document.getElementById("btn_seleccionar_primer_genero");

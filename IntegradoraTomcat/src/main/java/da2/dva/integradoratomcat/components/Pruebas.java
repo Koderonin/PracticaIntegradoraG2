@@ -34,7 +34,7 @@ public class Pruebas {
 
     @Bean
     public void prTest() throws InterruptedException {
-
+/*
         servicioLineaNomina.borrarTodasLineasNomina();
         servicioNomina.borrarTodasNominas();
 
@@ -86,6 +86,6 @@ public class Pruebas {
         ln6.setConcepto("Retención");
         ln6.setImporte(new BigDecimal(-189));
         servicioLineaNomina.nuevaLineaNomina(ln6, n2);
-
+*/
     }
 }

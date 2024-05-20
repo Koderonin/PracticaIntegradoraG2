@@ -77,6 +77,7 @@ public class RegistroClienteController {
     public ModelAndView registrar(@Validated(DatosPersonales.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario");
+        mv.addObject("titulo","Registro de cliente");
         //Validación de los datos ingresados
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
@@ -112,6 +113,7 @@ public class RegistroClienteController {
     public ModelAndView paso2(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
+        mv.addObject("titulo","Registro de cliente");
         //Paso de parámetros para resolución de la vista
         mv.addObject("paso" ,"2");
         //Paso de colecciones necesarias
@@ -128,6 +130,7 @@ public class RegistroClienteController {
     public ModelAndView registrar2(@Validated(DatosContacto.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario");
+        mv.addObject("titulo","Registro de cliente");
         if (resultado.hasErrors()) {
             mv.addObject("error", "Por favor, rellene los campos obligatorios");
             mv.addObject("paso" ,"2");
@@ -171,6 +174,7 @@ public class RegistroClienteController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("listaIdiomas", servicio.getIdiomas());
         mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
+        mv.addObject("titulo","Registro de cliente");
         //Paso de parámetros para resolución de la vista
         mv.addObject("paso" ,"3");
         //Recuperación de datos de otros pasos
@@ -184,6 +188,7 @@ public class RegistroClienteController {
     public ModelAndView registrar3(@Validated(DatosCliente.class) @ModelAttribute("cliente") Cliente cliente, BindingResult resultado, HttpSession sesion) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
+        mv.addObject("titulo","Registro de cliente");
         mv.addObject("listaIdiomas", servicio.getIdiomas());
         //Validación de los datos ingresados
         if (resultado.hasErrors()) {
@@ -209,10 +214,9 @@ public class RegistroClienteController {
 
     @GetMapping("paso4")
     public ModelAndView resumen(@ModelAttribute("cliente") Cliente cliente, HttpSession sesion, BindingResult result) {
-        //TODO: REVISAR CÓDIGO POR SI SE PUEDE MEJORAR, ES MU LARGO
-        mv.addObject("listaIdiomas", servicio.getIdiomas());
-
         ModelAndView mv = new ModelAndView();
+        mv.addObject("listaIdiomas", servicio.getIdiomas());
+        mv.addObject("titulo","Registro de cliente");
         mv.setViewName(checkUserSession(sesion) ? "/registro/cliente" : "redirect:/registro/usuario/");
         //Recuperación de datos de otros pasos
         cliente = (Cliente) sesion.getAttribute("cliente");
@@ -262,7 +266,9 @@ public class RegistroClienteController {
 
     @PostMapping("paso4")
     public ModelAndView paso4( HttpSession sesion) {
+        ModelAndView mv = new ModelAndView();
         mv.addObject("listaIdiomas", servicio.getIdiomas());
+        mv.addObject("titulo","Registro de cliente");
         //Obtener el cliente de la sesión
         Cliente cliente = (Cliente) sesion.getAttribute("cliente");
         //Si en el paso anterior no hay errores se inserta el cliente

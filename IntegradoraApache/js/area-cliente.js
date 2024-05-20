@@ -1,6 +1,8 @@
 const USER_EMAIL = $('.user-email');
 const DIV_PERSONAL_INFO = $('.personal-info2')[0];
 const DIV_DIRECCION_INFO = $('.direccion-info2')[0];
+const DIV_TARJETA_INFO = $('.tarjetas_container')[0];
+const DIV_DIRECCIONES_INFO = $('.direcciones_container')[0];
 
 async function datosCliente() {
 	$.ajaxSetup({xhrFields: { withCredentials: true } });
@@ -23,6 +25,22 @@ async function datosCliente() {
 				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = value;
 			if (key == 'tipoVia')
 				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = value.tipoVia;
+			if (value == null)
+				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = 'N/A';
+		})
+
+		$.each(response.tarjetasCredito, function(key, value) {
+			if (key !== 'id_tarjeta')
+				DIV_TARJETA_INFO.appendChild(document.createElement('p')).innerText = key + ': ' + value;
+			if (value == null)
+				DIV_TARJETA_INFO.appendChild(document.createElement('p')).innerText = 'N/A';
+		})
+
+		$.each(response.direccionesEntrega, function(key, value) {
+			if (key !== 'id_direccion' && key !== 'tipoVia')
+				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = key + ': ' + value;
+			if (key == 'tipoVia')
+				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = key + ': ' + value.tipoVia;
 			if (value == null)
 				DIV_DIRECCION_INFO.appendChild(document.createElement('p')).innerText = 'N/A';
 		})

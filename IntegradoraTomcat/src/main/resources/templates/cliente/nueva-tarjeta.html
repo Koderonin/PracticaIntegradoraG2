@@ -70,7 +70,7 @@
                     <div class="date-cvv">
                         <div>
                             <label for="fechaVencimiento" th:text="#{etiqueta.fechaVencimiento}">Expires On:</label>
-                            <input type="text" id="validity-input" th:field="*{fechaVencimiento}"/>
+                            <input type="date" id="validity-input" th:field="*{fechaVencimiento}"/>
                             <div class="error" th:if="${#fields.hasErrors('fechaVencimiento')}" th:errors="*{fechaVencimiento}"></div>
                         </div>
                         <div>

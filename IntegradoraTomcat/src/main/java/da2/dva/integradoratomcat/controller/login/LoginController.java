@@ -76,6 +76,7 @@ public class LoginController {
             Usuario usuario = servicioUsuario.devuelveUsuarios().get(email);
             //Si el usuario tiene fecha de bloqueo mandamos un error
            if (usuario.getFechaBloqueo() != null) {
+               mv.addObject("titulo","Login de usuario");
                mv.addObject("error","Usuario bloqueado hasta " + usuario.getFechaBloqueo());
                mv.addObject("paso" ,"1");
            } else {
@@ -84,6 +85,7 @@ public class LoginController {
                mv.setViewName("redirect:/login/paso2");
            }
         } else {
+            mv.addObject("titulo","Login de usuario");
             sesion.removeAttribute("email");
             mv.addObject("error","El usuario no existe");
             //limpiamos el error para que no aparezca cuando se recarga la página
