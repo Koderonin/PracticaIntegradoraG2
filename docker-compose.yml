@@ -3,7 +3,7 @@ services:
   tomcat:
     container_name: contiene_tomcat
     hostname: tomcat
-    image: tomcat:latest
+    image: drecioa/tomcat:latest
     restart: always
     ports:
       - "8080:8080"
@@ -14,8 +14,6 @@ services:
         condition: service_healthy
       dns:
         condition: service_started
-    volumes:
-      - ./IntegradoraTomcat/build/libs:/usr/local/tomcat/webapps
     networks:
       red_integradora:
         ipv4_address: 192.168.100.4
@@ -92,8 +90,6 @@ services:
         condition: service_started
       tomcat:
         condition: service_started
-    volumes:
-      - ./IntegradoraApache:/usr/local/apache2/htdocs/
     networks:
       red_integradora:
         ipv4_address: 192.168.100.5
