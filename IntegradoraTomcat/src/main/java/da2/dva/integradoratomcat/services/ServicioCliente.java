@@ -57,6 +57,8 @@ public class ServicioCliente {
         return clienteRepository.findByUsuarioCliente(UCRepository.findByEmail(email));
     }
 
+    // UPDATE
+
     public void borrarCliente(Cliente cliente){
         clienteRepository.delete(cliente);
     }
