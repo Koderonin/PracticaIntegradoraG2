@@ -72,8 +72,6 @@ public class ServicioProducto {
 
     }
 
-    // UPDATE
-
     // READ
     // to' lo que recupera objetos Document se hace con queries de mongo usando mongoTemplate
 
@@ -90,8 +88,15 @@ public class ServicioProducto {
      * @return List<Document>
      */
     public List<Document> findAllDocuments() {
-        return mongoTemplate.findAll(Document.class, "producto");
+        List<Document> listado = mongoTemplate.findAll(Document.class, "producto");
+        for (Document doc : listado) {
+            ObjectId id = (ObjectId) doc.get("_id");
+            String idStr = id.toHexString();
+            doc.replace("_id", idStr);
+        }
+        return listado;
     }
+
 
     public List<Document> findByAttribute(String atributo, String value) {
         Query query = new Query();
@@ -116,6 +121,16 @@ public class ServicioProducto {
         query.addCriteria(Criteria.where("modelo").alike((Example<?>) modelo));
         return mongoTemplate.findOne(query, Document.class, "producto");
     }
+
+    // UPDATE
+
+    public void updateProduct(Document product) {
+        ObjectId id = new ObjectId(product.get("_id").toString());
+        product.replace("_id", id.toHexString());
+        mongoTemplate.save(product, "producto");
+    }
+
+    // REMOVE
 
     public void deleteAll() {
         mongoTemplate.dropCollection("producto");

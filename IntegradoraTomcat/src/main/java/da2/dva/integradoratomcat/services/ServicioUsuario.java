@@ -52,9 +52,23 @@ public class ServicioUsuario {
     }
 
     // éste es igual que el de insertar, es una cuestión de claridad
-    public void actualizarUsuario(UsuarioCliente usuario){
-        System.out.println(usuario.toString());
-        usuarioClienteRepository.save(usuario);
+    public String actualizarUsuario(UsuarioCliente usuarioActualizado){
+        try {
+            UsuarioCliente usuario = (UsuarioCliente) getUsuario(usuarioActualizado.getId_usuario().toString());
+            usuario.setClave(usuarioActualizado.getClave());
+            usuario.setConfirmClave(usuarioActualizado.getConfirmClave());
+            System.out.println(usuarioActualizado.getEmail());
+            usuario.setEmail(usuarioActualizado.getEmail());
+            usuario.setPreguntaRecuperacion(usuarioActualizado.getPreguntaRecuperacion());
+            usuario.setRespuestaRecuperacion(usuarioActualizado.getRespuestaRecuperacion());
+            usuario.setNumAccesos(usuarioActualizado.getNumAccesos());
+            usuario.setFechaUltimaConexion(usuarioActualizado.getFechaUltimaConexion());
+            usuario.setFechaBloqueo(usuarioActualizado.getFechaBloqueo());
+            usuarioClienteRepository.save(usuario);
+        } catch (Exception e) {
+            return "Error en el servidor";
+        }
+        return "Usuario actualizado";
     }
 
     public void borrarTodosUsuarios(){

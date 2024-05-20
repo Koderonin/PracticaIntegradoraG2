@@ -7,6 +7,7 @@ import da2.dva.integradoratomcat.services.ServicioProducto;
 import da2.dva.integradoratomcat.services.ServicioUsuario;
 import jakarta.servlet.http.HttpSession;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,18 +67,28 @@ public class AdminProductoControllerREST {
     }
 
     // Read
+
     @GetMapping("listado")
-    public List<Document> listadoProyectos() {
+    public List<Document> listadoProductos() {
         return servicioProducto.findAllDocuments();
     }
 
-    @GetMapping("/detalle/{codigo}")
-    public Document detalleProductoByCodigo(@PathVariable("codigo") String codigo) {
+    @GetMapping("/{id}")
+    public Document detalleProductoById(@PathVariable("id") String id) {
         try {
-            return servicioProducto.findByCodigo(codigo);
+            return servicioProducto.findById(new ObjectId(id));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @PostMapping(value = "/update", consumes = "application/json")
+    public void updateProduct(@RequestBody Document product) {
+        try {
+            servicioProducto.updateProduct(product);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

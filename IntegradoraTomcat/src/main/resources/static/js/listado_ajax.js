@@ -1,6 +1,5 @@
 //Al cargar la página, se cargan los departamentos en la tabla haciendo una petición GET a la API
 
-
 const main = document.getElementById("main");
 const buscador = document.getElementById("buscador-entidad");
 
@@ -65,6 +64,36 @@ document.getElementById('buscar-entidad').addEventListener('click', async functi
 
 });
 
+function crearTabla(json) {
+
+    let tabla = document.createElement('table')
+
+    tabla.classList.add("tabla_detalle");
+    tabla.id = "tabla_detalle"
+    detalleEntidad.innerHTML = "";
+
+    for (let clave in json) {
+        let fila = document.createElement('tr');
+        let celdaClave = document.createElement('td');
+        celdaClave.textContent = clave;
+        fila.appendChild(celdaClave);
+
+        let celdaValor = document.createElement('td');
+        if (typeof json[clave] === 'object' && json[clave] !== null) {
+            // Si el valor es otro objeto JSON, crea una tabla anidada
+            celdaValor.appendChild(crearTabla(json[clave]));
+        } else {
+            // Si el valor no es un objeto, simplemente añade el valor
+            celdaValor.textContent = json[clave];
+            celdaValor.contentEditable = 'true';
+        }
+        fila.appendChild(celdaValor);
+
+        tabla.appendChild(fila);
+    }
+    return tabla;
+}
+
 async function datosDevueltos () {
     const response = await fetch(`http://tomcat.da2.dva:8080/admin/api/${buscador.value.toLowerCase()}/listado`, {
         method: 'GET',
@@ -79,6 +108,7 @@ async function datosDevueltos () {
 // Lógica de la ventana modal
 
 function mostrarDatos(data) {
+
     let tabla = document.createElement('table');
     detalleEntidad.innerHTML = "";
     let entidad;
@@ -110,25 +140,44 @@ function mostrarDatos(data) {
     return tabla;
 }
 
-// Función recursiva para recoger los datos de una tabla
-function recogerDatos(tabla) {
-    let datos = {};
-    let inputs = tabla.getElementsByTagName('input');
-    for (let i = 0; i < inputs.length; i++) {
-        let input = inputs[i];
-        datos[input.name] = input.value;
+function crearJsonDesdeTabla(tabla) {
+    let json = {};
+    let filas = tabla.getElementsByTagName('tr');
+    for (let i = 0; i < filas.length; i++) {
+        let celdas = filas[i].getElementsByTagName('td');
+        let clave = celdas[0].textContent;
+        let valor = celdas[1].textContent;
+        let tablaAnidada = celdas[1].getElementsByTagName('table')[0];
+        if (tablaAnidada) {
+            // Si hay una tabla anidada, haz una llamada recursiva
+            valor = crearJsonDesdeTabla(tablaAnidada);
+        }
+        json[clave] = valor;
     }
-
-    // Recoge los datos de las tablas anidadas
-    let tablasAnidadas = tabla.getElementsByTagName('table');
-    for (let i = 0; i < tablasAnidadas.length; i++) {
-        let tablaAnidada = tablasAnidadas[i];
-        let datosAnidados = recogerDatos(tablaAnidada);  // Llamada recursiva
-        Object.assign(datos, datosAnidados);
-    }
-
-    return datos;
+    console.log(json);
+    return json;
 }
+
+// Función recursiva para recoger los datos de una tabla
+// function recogerDatos(tabla) {
+//     let datos = {};
+//     let inputs = tabla.getElementsByTagName('input');
+//     for (let i = 0; i < inputs.length; i++) {
+//         let input = inputs[i];
+//         datos[input.name] = input.value;
+//     }
+//
+//     // Recoge los datos de las tablas anidadas
+//     let tablasAnidadas = tabla.getElementsByTagName('table');
+//     for (let i = 0; i < tablasAnidadas.length; i++) {
+//         let tablaAnidada = tablasAnidadas[i];
+//         let datosAnidados = recogerDatos(tablaAnidada);  // Llamada recursiva
+//         datos[tablaAnidada[0]] = datosAnidados;
+//        // Object.assign(datos, datosAnidados);
+//     }
+//
+//     return datos;
+// }
 
 // se le llama al pulsar un botón
 function mostrarDetalle(id) {
@@ -136,13 +185,15 @@ function mostrarDetalle(id) {
     $.ajaxSetup({xhrFields: { withCredentials: true } });
     $.getJSON(`http://tomcat.da2.dva:8080/admin/api/${buscador.value.toLowerCase()}/${id}`, function (data) {
 
-    let tabla= mostrarDatos(data);
+   // let tabla= mostrarDatos(data);
+    let tabla = crearTabla(data)
 
     let boton = document.createElement('button');
     boton.innerHTML = `Guardar`;
     tabla.appendChild(boton);
     boton.onclick = function () {
-        let datos = recogerDatos(tabla);  // Llamada a la función recogerDatos
+        //let datos = recogerDatos(tabla);  // Llamada a la función recogerDatos
+        let datos = crearJsonDesdeTabla(tabla)
 
         let datosJson = JSON.stringify(datos);
 
@@ -153,9 +204,16 @@ function mostrarDetalle(id) {
                 'Content-Type': 'application/json'
             },
             body: datosJson
-        }).then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
+        }).then(response => {
+            if (!response.ok){
+                throw new Error('Error en la solicitud');
+            }
+            return response.text()
+        }).then(data => {
+            alert(data)
+        }).catch(error => {
+               alert('Error en la petición.')
+            });
     };
 
     detalleEntidad.appendChild(tabla)

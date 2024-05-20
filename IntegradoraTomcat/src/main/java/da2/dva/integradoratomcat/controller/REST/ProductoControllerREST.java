@@ -1,5 +1,6 @@
 package da2.dva.integradoratomcat.controller.REST;
 
+import da2.dva.integradoratomcat.model.entities.Producto;
 import da2.dva.integradoratomcat.services.ServicioImagenes;
 import da2.dva.integradoratomcat.services.ServicioProducto;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,11 +32,21 @@ public class ProductoControllerREST {
     // SÓLO MÉTODOS READ, ESTO ES PARTE DE LA -API DE CLIENTE-
 
     @GetMapping("listado")
-    public List<Document> listadoProyectos() {
+    public List<Document> listadoProductos() {
         return servicioProducto.findAllDocuments();
     }
 
-    @GetMapping("/detalle/{codigo}")
+    @GetMapping("/{id}")
+    public Document detalleProductoById(@PathVariable("id") String id) {
+        try {
+            return servicioProducto.findById(new ObjectId(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @GetMapping("/{codigo}")
     public Document detalleProductoByCodigo(@PathVariable("codigo") String codigo) {
         try {
             return servicioProducto.findByCodigo(codigo);

@@ -5,7 +5,9 @@ import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Usuario;
 import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
 import da2.dva.integradoratomcat.services.ServicioUsuario;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -29,17 +31,11 @@ public class AdminUsuarioControllerREST {
         return servicioUsuario.getUsuario(id);
     }
 
-    @PutMapping(value = "/update", consumes = "application/json")
-    public void actualizarUsuarioCliente(@RequestBody UsuarioCliente usuarioActualizado) {
-        UsuarioCliente usuario = (UsuarioCliente) servicioUsuario.getUsuario(usuarioActualizado.getId_usuario().toString());
-        usuario.setClave(usuarioActualizado.getClave());
-        usuario.setConfirmClave(usuarioActualizado.getConfirmClave());
-        usuario.setPreguntaRecuperacion(usuarioActualizado.getPreguntaRecuperacion());
-        usuario.setRespuestaRecuperacion(usuarioActualizado.getRespuestaRecuperacion());
-        usuario.setNumAccesos(usuarioActualizado.getNumAccesos());
-        usuario.setFechaUltimaConexion(usuarioActualizado.getFechaUltimaConexion());
-        usuario.setFechaBloqueo(usuarioActualizado.getFechaBloqueo());
-        servicioUsuario.actualizarUsuario(usuario);
+    @PostMapping(value = "/update", consumes = "application/json")
+    public ResponseEntity<String> actualizarUsuarioCliente(@RequestBody UsuarioCliente usuarioActualizado) {
+        System.out.println("Actualizando usuario: ");
+        return ResponseEntity.ok().body(servicioUsuario.actualizarUsuario(usuarioActualizado));
+
     }
 
 }
