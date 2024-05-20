@@ -52,22 +52,22 @@ public class ServicioNomina {
         nominaRepository.save(nomina);
     }
 
-//    @Transactional
-//    public void setSalario(Nomina nomina){
-//
-//        // recogemos los importes de cada apunte relacionado con la nómina y sumarlos
-//        List<LineaNomina> lineas = lineaNominaRepository.findByNomina(nomina.getId_nomina());
-//
-//        // reiniciamos el importe de la nómina
-//        nomina.setSalario(new BigDecimal(0));
-//
-//        for (LineaNomina linea : lineas) {
-//            nomina.setSalario(nomina.getSalario().add(linea.getImporte()));
-//        }
-//
-//        // actualizamos la nómina
-//        nominaRepository.save(nomina);
-//    }
+    @Transactional
+    public void setSalario(Nomina nomina){
+
+        // recogemos los importes de cada apunte relacionado con la nómina y sumarlos
+        List<LineaNomina> lineas = lineaNominaRepository.findByNomina(nomina);
+
+        // reiniciamos el importe de la nómina
+        nomina.setSalario(new BigDecimal(0));
+
+        for (LineaNomina linea : lineas) {
+            nomina.setSalario(nomina.getSalario().add(linea.getImporte()));
+        }
+
+        // actualizamos la nómina
+        nominaRepository.save(nomina);
+    }
 
     // DELETE
 

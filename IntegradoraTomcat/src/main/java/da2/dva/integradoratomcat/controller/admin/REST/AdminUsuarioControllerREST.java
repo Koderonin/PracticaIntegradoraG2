@@ -1,4 +1,4 @@
-package da2.dva.integradoratomcat.controller.REST;
+package da2.dva.integradoratomcat.controller.admin.REST;
 
 import da2.dva.integradoratomcat.model.entities.Cliente;
 import da2.dva.integradoratomcat.model.entities.Usuario;

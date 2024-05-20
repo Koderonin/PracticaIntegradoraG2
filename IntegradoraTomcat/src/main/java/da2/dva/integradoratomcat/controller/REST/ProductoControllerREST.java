@@ -25,9 +25,6 @@ public class ProductoControllerREST {
     @Autowired
     private ServicioProducto servicioProducto;
 
-    @Autowired
-    private ServicioImagenes servicioImagenes;
-
     // SÓLO MÉTODOS READ, ESTO ES PARTE DE LA -API DE CLIENTE-
 
     @GetMapping("listado")
@@ -44,5 +41,4 @@ public class ProductoControllerREST {
         }
         return null;
     }
-
 }

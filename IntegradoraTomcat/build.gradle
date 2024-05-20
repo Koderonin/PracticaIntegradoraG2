@@ -12,7 +12,7 @@ bootWar {   // Para no tener que escribir la app en la URL
 }
 
 group = 'da2.dva'
-version = ''
+version = '0.8.2'
 
 java {
     sourceCompatibility = '17'

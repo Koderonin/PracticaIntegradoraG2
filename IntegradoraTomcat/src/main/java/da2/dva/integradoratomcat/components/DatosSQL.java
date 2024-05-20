@@ -2,17 +2,15 @@ package da2.dva.integradoratomcat.components;
 
 import da2.dva.integradoratomcat.model.auxiliar.Direccion;
 import da2.dva.integradoratomcat.model.collections.*;
-import da2.dva.integradoratomcat.model.entities.Cliente;
-import da2.dva.integradoratomcat.model.entities.UsuarioAdministrador;
-import da2.dva.integradoratomcat.model.entities.UsuarioCliente;
+import da2.dva.integradoratomcat.model.entities.*;
 import da2.dva.integradoratomcat.repositories.jpa.*;
-import da2.dva.integradoratomcat.services.ServicioCliente;
-import da2.dva.integradoratomcat.services.ServicioColecciones;
+import da2.dva.integradoratomcat.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Component
@@ -47,6 +45,15 @@ public class DatosSQL {
 
     @Autowired
     private ServicioColecciones servicioColecciones;
+
+    @Autowired
+    private ServicioLineaNomina servicioLineaNomina;
+
+    @Autowired
+    private ServicioUsuario servicioUsuario;
+
+    @Autowired
+    private ServicioNomina servicioNomina;
 
     @Bean
     public void insertarPaises() {
@@ -199,5 +206,35 @@ public class DatosSQL {
             e.printStackTrace();
             System.err.println("Omitida carga de datos de Direcciones Y Clientes: Datos repetidos");
         }
+    }
+
+    @Bean
+    public void insertarNominas() {
+        try{
+            Cliente cliente = servicioCliente.getClienteByEmail("cliente@integradora.jpa");
+
+            Nomina nomina = servicioNomina.crearNuevaNomina(cliente);
+            nomina.setAnio(2022L);
+            nomina.setMes(1L);
+            servicioNomina.save(nomina);
+
+            // Añadimos lineas de nomina DESPUÉS de crear la nómina, claro.
+            LineaNomina lineaNomina1 = servicioLineaNomina.nuevaLineaNomina(nomina);
+            lineaNomina1.setImporte(new BigDecimal(1080));
+            lineaNomina1.setConcepto("Base");
+            servicioLineaNomina.save(lineaNomina1);
+            LineaNomina lineaNomina2 = servicioLineaNomina.nuevaLineaNomina(nomina);
+            lineaNomina2.setImporte(new BigDecimal(120));
+            lineaNomina2.setConcepto("Bonus");
+            servicioLineaNomina.save(lineaNomina2);
+
+            // Calculo de la nómina
+            servicioNomina.setSalario(nomina);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Omitida carga de datos de Nominas: datos repetidos");
+        }
+
+
     }
 }

@@ -1,7 +1,9 @@
 package da2.dva.integradoratomcat;
 
 import da2.dva.integradoratomcat.model.auxiliar.TarjetaCredito;
+import da2.dva.integradoratomcat.model.collections.Genero;
 import da2.dva.integradoratomcat.model.collections.Pais;
+import da2.dva.integradoratomcat.model.collections.TipoDocumento;
 import da2.dva.integradoratomcat.model.entities.*;
 import da2.dva.integradoratomcat.repositories.jpa.ClienteRepository;
 import da2.dva.integradoratomcat.repositories.jpa.DireccionRepository;
@@ -111,32 +113,32 @@ public class JPATests {
 
     // TESTS CON USUARIOS Y CLIENTES
 
-//    @Test
-//    public void findClientByUser() {
-//
-//        UsuarioCliente usuarioClienteTest = new UsuarioCliente();
-//        usuarioClienteTest.setEmail("clientetest@integradora.jpa");
-//        usuarioClienteTest.setNumAccesos(2);
-//        usuarioClienteTest.setClave("ClienteT1!");
-//        usuarioClienteTest.setPreguntaRecuperacion(1L);
-//        usuarioClienteTest.setRespuestaRecuperacion("Gatito");
-//        usuarioClienteTest.setConfirmClave("ClienteT1!");
-//        UCRepository.save(usuarioClienteTest);
-//
-//        Cliente clienteTest = new Cliente();
-//        clienteTest.setUsuarioCliente(usuarioClienteTest);
-//        clienteTest.setNombre("Pepe");
-//        clienteTest.setApellidos("Test");
-//        clienteTest.setGenero("M");
-//        clienteTest.setFechaNacimiento(LocalDate.of(1980, 6, 17));
-//        clienteTest.setTipoDocumento("P");
-//        clienteTest.setDocumento("ESP123456");
-//        clienteTest.setTelefonoMovil("742344842");
-//        clienteTest.setAceptacionLicencia(true);
-//        clienteRepository.save(clienteTest);
-//
-//        assertEquals(clienteTest, servicioCliente.getClienteByUsuario(usuarioClienteTest));
-//    }
+    @Test
+    public void findClientByUser() {
+
+        UsuarioCliente usuarioClienteTest = new UsuarioCliente();
+        usuarioClienteTest.setEmail("clientetest@integradora.jpa");
+        usuarioClienteTest.setNumAccesos(2);
+        usuarioClienteTest.setClave("ClienteT1!");
+        usuarioClienteTest.setPreguntaRecuperacion(1L);
+        usuarioClienteTest.setRespuestaRecuperacion("Gatito");
+        usuarioClienteTest.setConfirmClave("ClienteT1!");
+        UCRepository.save(usuarioClienteTest);
+
+        Cliente clienteTest = new Cliente();
+        clienteTest.setUsuarioCliente(usuarioClienteTest);
+        clienteTest.setNombre("Pepe");
+        clienteTest.setApellidos("Test");
+        clienteTest.setGenero(servicioColecciones.getGeneroBySiglas("m"));
+        clienteTest.setFechaNacimiento(LocalDate.of(1980, 6, 17));
+        clienteTest.setTipoDocumento(servicioColecciones.getTipoDocumentoBySiglas("P"));
+        clienteTest.setDocumento("ESP123456");
+        clienteTest.setTelefonoMovil("742344842");
+        clienteTest.setAceptacionLicencia(true);
+        servicioCliente.actualizarCliente(clienteTest);
+
+        assertEquals(clienteTest, servicioCliente.getClienteByUsuario(usuarioClienteTest));
+    }
 
     @Test
     public void findAllClients() {
@@ -156,38 +158,38 @@ public class JPATests {
         usuarioCliente.setConfirmClave("Cliente3!");
         UCRepository.save(usuarioCliente);
 
-        Pais pais = new Pais();
-        pais.setNombrePais("España");
-        pais.setSiglasPais("es");
+        Pais pais = servicioColecciones.getPaisBySiglas("es");
+        Genero genero = servicioColecciones.getGeneroBySiglas("m");
+        TipoDocumento tipoDocumento = servicioColecciones.getTipoDocumentoBySiglas("P");
         //paisRepository.save(pais);
 
-//        Cliente cliente = new Cliente();
-//        cliente.setNombre("Trabajador");
-//        cliente.setApellidos("Mc Trabajo");
-//        cliente.setGenero(se);
-//        cliente.setFechaNacimiento(LocalDate.of(1980, 6, 17));
-//        cliente.setPaisNacimiento(pais);
-//        cliente.setTipoDocumento("P");
-//        cliente.setDocumento("ESP123456");
-//        cliente.setTelefonoMovil("742344842");
-//        cliente.setAceptacionLicencia(true);
-//        cliente.setUsuarioCliente(usuarioCliente);
-//        clienteRepository.save(cliente);
+        Cliente cliente = new Cliente();
+        cliente.setNombre("Trabajador");
+        cliente.setApellidos("Mc Trabajo");
+        cliente.setGenero(genero);
+        cliente.setFechaNacimiento(LocalDate.of(1980, 6, 17));
+        cliente.setPaisNacimiento(pais);
+        cliente.setTipoDocumento(tipoDocumento);
+        cliente.setDocumento("ESP123456");
+        cliente.setTelefonoMovil("742344842");
+        cliente.setAceptacionLicencia(true);
+        cliente.setUsuarioCliente(usuarioCliente);
+        clienteRepository.save(cliente);
 
-        // Introducimos objeto
-//        assertEquals(cliente.getNombre()+cliente.getApellidos(),
-//                servicioCliente.getClienteByNameAndSurname("Trabajador", "Mc Trabajo").getNombre()+
-//                servicioCliente.getClienteByNameAndSurname("Trabajador", "Mc Trabajo").getApellidos());
+//         Introducimos objeto
+        assertEquals(cliente.getNombre()+cliente.getApellidos(),
+                servicioCliente.getClienteByNameAndSurname("Trabajador", "Mc Trabajo").getNombre()+
+                servicioCliente.getClienteByNameAndSurname("Trabajador", "Mc Trabajo").getApellidos());
     }
 
     @Test
     public void findClientByEmail() {
-        assertEquals("Pepe", servicioCliente.getClienteByEmail("cliente1@integradora.jpa").getNombre());
+        assertEquals("Pepe", servicioCliente.getClienteByEmail("prueba1@integradora.jpa").getNombre());
     }
 
     @Test
     public void deleteClient() {
-        servicioCliente.borrarCliente(servicioCliente.getClienteByEmail("cliente1@integradora.jpa"));
+        servicioCliente.borrarCliente(servicioCliente.getClienteByEmail("prueba1@integradora.jpa"));
         assertEquals(1, clienteRepository.findAll().size());
     }
 
@@ -197,15 +199,15 @@ public class JPATests {
     public void findAllNominas() {
         servicioNomina.borrarTodasNominas();
 
-        Nomina nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("cliente1@integradora.jpa"));
+        Nomina nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("prueba1@integradora.jpa"));
         nomina.setAnio(2022L);
         nomina.setMes(1L);
         servicioNomina.save(nomina);
-        nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("cliente2@integradora.jpa"));
+        nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("prueba2@integradora.jpa"));
         nomina.setAnio(2022L);
         nomina.setMes(2L);
         servicioNomina.save(nomina);
-        nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("cliente2@integradora.jpa"));
+        nomina = servicioNomina.crearNuevaNomina(servicioCliente.getClienteByEmail("prueba2@integradora.jpa"));
         nomina.setAnio(2022L);
         nomina.setMes(3L);
         servicioNomina.save(nomina);
@@ -213,42 +215,42 @@ public class JPATests {
         assertEquals(3, servicioNomina.findAll().size());
     }
 
-//    @Test
-//    public void setSalarioCheckSalario() {
-//
-//        Cliente cliente = servicioCliente.getClienteByEmail("cliente2@integradora.jpa");
-//
-//        Nomina nomina = servicioNomina.crearNuevaNomina(cliente);
-//        nomina.setAnio(2022L);
-//        nomina.setMes(1L);
-//        servicioNomina.save(nomina);
-//
-//        // Añadimos lineas de nomina DESPUÉS de crear la nómina, claro.
-//        LineaNomina lineaNomina1 = servicioLineaNomina.nuevaLineaNomina(nomina);
-//        lineaNomina1.setImporte(new BigDecimal(1080));
-//        lineaNomina1.setConcepto("Base");
-//        servicioLineaNomina.save(lineaNomina1);
-//        LineaNomina lineaNomina2 = servicioLineaNomina.nuevaLineaNomina(nomina);
-//        lineaNomina2.setImporte(new BigDecimal(120));
-//        lineaNomina2.setConcepto("Bonus");
-//        servicioLineaNomina.save(lineaNomina2);
-//
-//        // Calculo de la nómina
-//        servicioNomina.setSalario(nomina);
-//
-//        assertEquals(new BigDecimal("1200.00"), nomina.getSalario());
-//    }
+    @Test
+    public void setSalarioCheckSalario() {
+
+        Cliente cliente = servicioCliente.getClienteByEmail("cliente1@integradora.jpa");
+
+        Nomina nomina = servicioNomina.crearNuevaNomina(cliente);
+        nomina.setAnio(2022L);
+        nomina.setMes(1L);
+        servicioNomina.save(nomina);
+
+        // Añadimos lineas de nomina DESPUÉS de crear la nómina, claro.
+        LineaNomina lineaNomina1 = servicioLineaNomina.nuevaLineaNomina(nomina);
+        lineaNomina1.setImporte(new BigDecimal(1080));
+        lineaNomina1.setConcepto("Base");
+        servicioLineaNomina.save(lineaNomina1);
+        LineaNomina lineaNomina2 = servicioLineaNomina.nuevaLineaNomina(nomina);
+        lineaNomina2.setImporte(new BigDecimal(120));
+        lineaNomina2.setConcepto("Bonus");
+        servicioLineaNomina.save(lineaNomina2);
+
+        // Calculo de la nómina
+        servicioNomina.setSalario(nomina);
+
+        assertEquals(new BigDecimal("1200.00"), nomina.getSalario());
+    }
 
     @Test
     public void probarTarjetas(){
         Cliente c = servicioCliente.getClienteByEmail("prueba1@integradora.jpa");
         TarjetaCredito tarjetaCredito = new TarjetaCredito();
-        tarjetaCredito.setCvv(123);
+        tarjetaCredito.setCvv("123");
         tarjetaCredito.setFechaVencimiento(LocalDate.of(2025, 12, 31));
         tarjetaCredito.setNumeroTarjeta(1234567890123456L);
         c.getTarjetasCredito().add(tarjetaCredito);
         servicioCliente.save(c);
-        System.out.println(c.getTarjetasCredito());
+        assertEquals(1, c.getTarjetasCredito().size());
     }
 
 }
